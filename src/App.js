@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Footer";
+import * as PagesModule from "./Components/Pages";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route exact path="/" element={<PagesModule.HomePage />} />
+        <Route
+          exact
+          path="/playingNow"
+          element={<PagesModule.MoviesNowPlayingPage />}
+        />
+        <Route
+          exact
+          path="/playingNow/:title"
+          element={<PagesModule.SingleMoviePage />}
+        />
+        <Route
+          exact
+          path="/comingSoon"
+          element={<PagesModule.MoviesComingSoonPage />}
+        />
+        <Route
+          exact
+          path="/comingSoon/:title"
+          element={<PagesModule.SingleMoviePage />}
+        />
+        <Route
+          exact
+          path="/unlimited"
+          element={<PagesModule.UnlimitedPage />}
+        />
+        <Route exact path="/giftCard" element={<PagesModule.GiftCardPage />} />
+        <Route
+          exact
+          path="/cinemaBar"
+          element={<PagesModule.CinemaBarPage />}
+        />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 
