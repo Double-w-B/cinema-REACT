@@ -1,32 +1,88 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const MoviesNowPlayingSlider = () => {
+  const [index, setIndex] = useState(0);
+  const { movies, isLoading } = useSelector((store) => store.movies);
+  const firstSixMovies = movies.slice(0, 6);
+  const imgUrl = `https://image.tmdb.org/t/p/original`;
+
+  useEffect(() => {
+    const lastIndex = firstSixMovies.length - 1;
+    index < 0 && setIndex(lastIndex);
+    index > lastIndex && setIndex(0);
+  }, [index, firstSixMovies.length]);
+
+  useEffect(() => {
+    let slider = setInterval(() => {
+      setIndex((oldIndex) => {
+        let index = oldIndex + 1;
+        if (index > firstSixMovies.length - 1) index = 0;
+        return index;
+      });
+    }, 6000);
+    return () => clearInterval(slider);
+  }, [index, firstSixMovies.length]);
+
+  const setActiveImage = () => {
+    return firstSixMovies.map((movie, movieIndex) => {
+      const { id, original_title, backdrop_path } = movie;
+
+      let position = "nextSlide";
+      if (movieIndex === index) position = "activeSlide";
+
+      if (
+        movieIndex === index - 1 ||
+        (index === 0 && movieIndex === firstSixMovies.length - 1)
+      )
+        position = "lastSlide";
+
+      return (
+        <article key={id} className={position}>
+          <img src={imgUrl + backdrop_path} alt="movie backdrop" />
+          <div className="layer"></div>
+          <div className="title">{original_title}</div>
+          <button>buy now</button>
+        </article>
+      );
+    });
+  };
+
   return (
     <StyledSection>
-      <div className="arrow left">
+      <div className="arrow left" onClick={() => setIndex(index - 1)}>
         <FaChevronLeft />
       </div>
-      <div className="arrow right">
+      <div className="arrow right" onClick={() => setIndex(index + 1)}>
         <FaChevronRight />
       </div>
-      MoviesNowPlayingSlider
+      {!isLoading && setActiveImage()}
     </StyledSection>
   );
 };
 
 const StyledSection = styled.section`
-  width: 100%;
-  height: 60vh;
-  background-color: #f0f0f0;
+  width: 95%;
+  height: 80vh;
+  margin: 1rem auto 0 auto;
   position: relative;
+  overflow: hidden;
+  display: flex;
 
   .arrow {
-    position: absolute;
     font-size: 2rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: #f12535;
     cursor: pointer;
+    display: grid;
+    place-items: center;
+    background-color: rgba(15, 12, 41, 0.5);
+    position: absolute;
+    z-index: 1;
   }
 
   .left {
@@ -41,6 +97,90 @@ const StyledSection = styled.section`
     right: 1rem;
     &:hover {
       transform: translateX(0.1rem);
+    }
+  }
+
+  article {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s linear;
+    z-index: 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    .layer {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        transparent,
+        rgba(0, 0, 0, 0.4)
+      );
+    }
+
+    &.activeSlide {
+      opacity: 1;
+      transform: translateX(0);
+
+      .title {
+        bottom: 0;
+      }
+    }
+    &.lastSlide {
+      transform: translateX(-100%);
+    }
+    &.nextSlide {
+      transform: translateX(100%);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .title {
+      color: #fff;
+      font-size: 3.5rem;
+      position: absolute;
+      transition: all 0.6s linear;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px #000;
+      bottom: -8rem;
+      left: 1rem;
+    }
+
+    button {
+      color: #fff;
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: capitalize;
+      padding: 0.5rem;
+      background-color: transparent;
+      border: 1px solid #f12535;
+      border-radius: 2px;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.3s linear;
+      opacity: 0.75;
+
+      &:hover {
+        background-color: #f12535;
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
     }
   }
 `;

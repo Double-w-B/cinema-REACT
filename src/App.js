@@ -1,9 +1,18 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Footer";
 import * as PagesModule from "./Components/Pages";
+import { useDispatch } from "react-redux";
+import { getMovies } from "./features/moviesSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getMovies());
+  });
+
   return (
     <Router>
       <Navbar />
