@@ -4,13 +4,17 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Footer";
 import * as PagesModule from "./Components/Pages";
 import { useDispatch } from "react-redux";
-import { getMovies } from "./features/moviesSlice";
+import {
+  getMoviesNowPlaying,
+  getMoviesComingSoon,
+} from "./features/moviesSlice";
 
 function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getMovies());
+    dispatch(getMoviesNowPlaying());
+    dispatch(getMoviesComingSoon());
   });
 
   return (
@@ -20,12 +24,12 @@ function App() {
         <Route exact path="/" element={<PagesModule.HomePage />} />
         <Route
           exact
-          path="/playingNow"
+          path="/nowPlaying"
           element={<PagesModule.MoviesNowPlayingPage />}
         />
         <Route
           exact
-          path="/playingNow/:title"
+          path="/nowPlaying/:title"
           element={<PagesModule.SingleMoviePage />}
         />
         <Route

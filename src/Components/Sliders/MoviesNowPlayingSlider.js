@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 
 const MoviesNowPlayingSlider = () => {
   const [index, setIndex] = useState(0);
-  const { movies, isLoading } = useSelector((store) => store.movies);
-  const firstSixMovies = movies.slice(0, 6);
-  const imgUrl = `https://image.tmdb.org/t/p/original`;
+  const { moviesNowPlaying, nowPlayingIsLoading, imgHiResUrl } = useSelector(
+    (store) => store.movies
+  );
+  const firstSixMovies = moviesNowPlaying.slice(0, 6);
 
   useEffect(() => {
     const lastIndex = firstSixMovies.length - 1;
@@ -42,7 +43,7 @@ const MoviesNowPlayingSlider = () => {
 
       return (
         <article key={id} className={position}>
-          <img src={imgUrl + backdrop_path} alt="movie backdrop" />
+          <img src={imgHiResUrl + backdrop_path} alt="movie backdrop" />
           <div className="layer"></div>
           <div className="title">{original_title}</div>
           <StyledButton className="btn-slider">buy now</StyledButton>
@@ -53,13 +54,19 @@ const MoviesNowPlayingSlider = () => {
 
   return (
     <StyledSection>
-      <div className="arrow left" onClick={() => setIndex(index - 1)}>
+      <StyledArrowContainer
+        className="left"
+        onClick={() => setIndex(index - 1)}
+      >
         <FaChevronLeft />
-      </div>
-      <div className="arrow right" onClick={() => setIndex(index + 1)}>
+      </StyledArrowContainer>
+      <StyledArrowContainer
+        className="right"
+        onClick={() => setIndex(index + 1)}
+      >
         <FaChevronRight />
-      </div>
-      {!isLoading && setActiveImage()}
+      </StyledArrowContainer>
+      {!nowPlayingIsLoading && setActiveImage()}
     </StyledSection>
   );
 };
@@ -71,34 +78,6 @@ const StyledSection = styled.section`
   position: relative;
   overflow: hidden;
   display: flex;
-
-  .arrow {
-    font-size: 2rem;
-    padding: 0.5rem;
-    border-radius: 50%;
-    color: #f12535;
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    background-color: rgba(15, 12, 41, 0.5);
-    position: absolute;
-    z-index: 1;
-  }
-
-  .left {
-    top: 50%;
-    left: 1rem;
-    &:hover {
-      transform: translateX(-0.1rem);
-    }
-  }
-  .right {
-    top: 50%;
-    right: 1rem;
-    &:hover {
-      transform: translateX(0.1rem);
-    }
-  }
 
   article {
     width: 100%;
@@ -122,7 +101,12 @@ const StyledSection = styled.section`
           transparent,
           rgba(0, 0, 0, 0.4)
         ),
-        linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent, rgba(0, 0, 0, 0.8));
+        linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.8),
+          transparent,
+          rgba(0, 0, 0, 0.8)
+        );
     }
 
     &.activeSlide {
@@ -156,6 +140,48 @@ const StyledSection = styled.section`
       text-shadow: 2px 2px #000;
       bottom: -8rem;
       left: 1rem;
+    }
+  }
+`;
+
+export const StyledArrowContainer = styled.div`
+  font-size: 2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #f12535;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  background-color: rgba(15, 12, 41, 0.5);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 1;
+
+  &.upComing {
+    background-color: rgba(15, 12, 41, 1);
+  }
+
+  &.left {
+    left: 1rem;
+    &.upComing {
+      left: 0;
+    }
+
+    &:hover {
+      transform: translate(-0.1rem, -50%);
+    }
+  }
+
+  &.right {
+    right: 1rem;
+    &.upComing {
+      right: 0;
+    }
+
+    &:hover {
+      transform: translate(0.1rem, -50%);
     }
   }
 `;

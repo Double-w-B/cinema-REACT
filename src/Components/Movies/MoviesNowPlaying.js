@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import SingleMovie from "./SingleMovie";
+import SingleMoviePoster from "./SingleMoviePoster";
 import { useSelector } from "react-redux";
 
 const MoviesNowPlaying = () => {
-  const { movies } = useSelector((store) => store.movies);
+  const { moviesNowPlaying } = useSelector((store) => store.movies);
 
   return (
     <StyledWrapper>
       <h1>now playing</h1>
       <StyledUnderline />
       <StyledMoviesContainer>
-        {movies.slice(0,12).map((movie) => {
-          return <SingleMovie key={movie.id} movieInfo={movie}/>;
+        {moviesNowPlaying.slice(0, 12).map((movie) => {
+          return <SingleMoviePoster key={movie.id} movieInfo={movie} />;
         })}
       </StyledMoviesContainer>
     </StyledWrapper>
