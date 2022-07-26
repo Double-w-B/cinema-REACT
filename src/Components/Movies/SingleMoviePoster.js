@@ -51,6 +51,7 @@ const StyledImgContainer = styled.article`
   }
   &:hover p {
     text-decoration: underline;
+    text-decoration-color: #f12535;
   }
 
   &:hover a ~ div {
@@ -63,7 +64,6 @@ const StyledImgContainer = styled.article`
   p {
     color: #fff;
     text-align: center;
-    transition: all 0.3s linear;
   }
 `;
 

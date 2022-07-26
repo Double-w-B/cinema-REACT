@@ -103,9 +103,9 @@ const StyledSection = styled.section`
         ),
         linear-gradient(
           to right,
-          rgba(0, 0, 0, 0.8),
+          rgba(0, 0, 0, 0.9),
           transparent,
-          rgba(0, 0, 0, 0.8)
+          rgba(0, 0, 0, 0.9)
         );
     }
 
@@ -152,7 +152,7 @@ export const StyledArrowContainer = styled.div`
   cursor: pointer;
   display: grid;
   place-items: center;
-  background-color: rgba(15, 12, 41, 0.5);
+  background-color: rgba(43, 52, 68, 0.2);
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -160,7 +160,7 @@ export const StyledArrowContainer = styled.div`
   z-index: 1;
 
   &.upComing {
-    background-color: rgba(15, 12, 41, 1);
+    background-color: rgba(43, 52, 68, 0.2);
   }
 
   &.left {

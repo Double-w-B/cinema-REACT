@@ -70,7 +70,7 @@ const StyledLogInContainer = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: 1.2rem;
   color: #fff;
 
@@ -80,8 +80,10 @@ const StyledLogInContainer = styled.div`
   }
 
   p {
+    transition: all 0.2s linear;
     &:hover {
       cursor: pointer;
+      color: #f12535;
     }
   }
 `;
@@ -98,14 +100,14 @@ const StyledNavContainer = styled.div`
     height: 90%;
 
     ul {
-      padding: 0.5rem;
+      padding: 1.5rem;
       width: 100%;
       height: 100%;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
 
       li {
-        border: 2px solid #fff;
+        border: 1px solid #fff;
         text-transform: capitalize;
         display: grid;
         place-items: center;
@@ -115,16 +117,18 @@ const StyledNavContainer = styled.div`
         font-weight: 500;
 
         a {
+          font-size: 1.1rem;
           color: #fff;
+          letter-spacing: 0.5px;
           transition: all 0.1s linear;
         }
 
         &:last-child {
-          border-right: 2px solid #fff;
+          border-right: 1px solid #fff;
         }
 
         &:hover a {
-          font-weight: bold;
+          color: #f12535;
         }
       }
     }
