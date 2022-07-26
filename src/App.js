@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import Footer from "./Footer";
+import Footer from "./Components/Footer/Footer";
 import * as PagesModule from "./Components/Pages";
 import { useDispatch } from "react-redux";
 import {
@@ -44,13 +44,28 @@ function App() {
         />
         <Route
           exact
+          path="/about"
+          element={<PagesModule.UnlimitedPage />}
+        />
+        <Route
+          exact
+          path="/contact_us"
+          element={<PagesModule.UnlimitedPage />}
+        />
+        <Route
+          exact
+          path="/FAQ"
+          element={<PagesModule.UnlimitedPage />}
+        />
+        <Route
+          exact
           path="/unlimited"
           element={<PagesModule.UnlimitedPage />}
         />
         <Route exact path="/giftCard" element={<PagesModule.GiftCardPage />} />
         <Route
           exact
-          path="/cinemaBar"
+          path="/cinema_bar"
           element={<PagesModule.CinemaBarPage />}
         />
       </Routes>
