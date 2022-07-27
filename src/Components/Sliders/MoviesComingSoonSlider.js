@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import { StyledUnderline } from "../Movies/MoviesNowPlaying";
 import { FaChevronLeft } from "react-icons/fa";
@@ -9,32 +9,92 @@ import { useSelector } from "react-redux";
 
 const MoviesComingSoonSlider = () => {
   const { moviesComingSoon } = useSelector((store) => store.movies);
-  const ImgContainer = useRef(null);
+  const imgContainer = React.useRef(null);
 
-  const moveRight = () => {
-    ImgContainer.current.scrollBy(216, 0);
+  const [mouseActive, setMouseActive] = React.useState(false);
+  const [startX, setStartX] = React.useState(null);
+  const [scrollLeft, setScrollLeft] = React.useState(null);
+
+  const scrollSlider = (side) => {
+    const sliderContainer = imgContainer.current;
+    side === "left"
+      ? sliderContainer.scrollBy(-216, 0)
+      : sliderContainer.scrollBy(216, 0);
   };
-  const moveLeft = () => {
-    ImgContainer.current.scrollBy(-216, 0);
-  };
+
+  React.useEffect(() => {
+    const dragContainer = imgContainer.current;
+    const changeMouseCoordinates = (e) => {
+      setMouseActive(true);
+      setStartX(e.pageX - dragContainer.offsetLeft);
+      setScrollLeft(dragContainer.scrollLeft);
+    };
+
+    dragContainer.addEventListener("mousedown", changeMouseCoordinates);
+    return () =>
+      dragContainer.removeEventListener("mousedown", changeMouseCoordinates);
+  });
+
+  React.useEffect(() => {
+    const dragContainer = imgContainer.current;
+    const changeMouseState = () => setMouseActive(false);
+
+    dragContainer.addEventListener("mouseleave", changeMouseState);
+    return () =>
+      dragContainer.removeEventListener("mouseleave", changeMouseState);
+  });
+
+  React.useEffect(() => {
+    const dragContainer = imgContainer.current;
+    const changeMouseState = () => setMouseActive(false);
+
+    dragContainer.addEventListener("mouseup", changeMouseState);
+    return () => dragContainer.removeEventListener("mouseup", changeMouseState);
+  });
+
+  React.useEffect(() => {
+    const dragContainer = imgContainer.current;
+
+    const mouseMoving = (e) => {
+      if (!mouseActive) return;
+
+      if (e.target.tagName === "DIV") {
+        e.preventDefault();
+        const x = e.pageX - imgContainer.current.offsetLeft;
+        const move = x - startX;
+        imgContainer.current.scrollLeft = scrollLeft - move;
+      }
+    };
+
+    dragContainer.addEventListener("mousemove", mouseMoving);
+    return () => dragContainer.removeEventListener("mousemove", mouseMoving);
+  });
 
   return (
-    <StyledWrapper>
+    <StyledWrapper className="no-select">
       <h1>coming soon</h1>
       <StyledUnderline />
-      <StyledContainer ref={ImgContainer}>
-        <StyledArrowContainer className="left upComing" onClick={moveLeft}>
+      <StyledContainer ref={imgContainer} mouseActive={mouseActive}>
+        <StyledArrowContainer
+          className="left upComing"
+          onClick={() => scrollSlider("left")}
+        >
           <FaChevronLeft />
         </StyledArrowContainer>
-        <StyledArrowContainer className="right upComing" onClick={moveRight}>
+        <StyledArrowContainer
+          className="right upComing"
+          onClick={() => scrollSlider("right")}
+        >
           <FaChevronRight />
         </StyledArrowContainer>
+
         {moviesComingSoon.slice(3, -1).map((movie) => {
           return (
             <SingleMoviePoster
               key={movie.id}
               movieInfo={movie}
               comingSoonClass={true}
+              mouseActive={mouseActive}
             />
           );
         })}
@@ -65,9 +125,10 @@ const StyledContainer = styled.div`
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  // background-color: #c3c3c3;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  cursor: ${(props) => props.mouseActive && "grabbing"};
+
   &::-webkit-scrollbar {
     display: none;
   }
