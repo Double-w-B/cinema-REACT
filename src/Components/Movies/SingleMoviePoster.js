@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 import { useSelector } from "react-redux";
 
-const SingleMoviePoster = ({ movieInfo, comingSoonClass }) => {
+const SingleMoviePoster = ({ movieInfo, comingSoonClass, mouseActive }) => {
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const urlMovieTitle = movieInfo.title.split(" ").join("_");
   const { poster_path, id, title } = movieInfo;
-  
+
   const setPath = () => {
     if (comingSoonClass) {
       return `/comingSoon/${urlMovieTitle}`;
@@ -18,13 +18,16 @@ const SingleMoviePoster = ({ movieInfo, comingSoonClass }) => {
   };
 
   return (
-    <StyledImgContainer comingSoonClass={comingSoonClass}>
+    <StyledImgContainer
+      comingSoonClass={comingSoonClass}
+      mouseActive={mouseActive}
+    >
       <img src={imgLowResUrl + poster_path} alt="movie poster" />
-      <Link to={setPath()} state={{ movieId: id }}>
+      <Link to={setPath()} state={{ movieId: id }} draggable="false">
         <p>{title}</p>
       </Link>
       <StyledLayer>
-        <Link to={setPath()} state={{ movieId: id }}>
+        <Link to={setPath()} state={{ movieId: id }} draggable="false">
           <StyledBtn>see more</StyledBtn>
         </Link>
       </StyledLayer>
@@ -37,6 +40,9 @@ const StyledImgContainer = styled.article`
   width: ${(props) => props.comingSoonClass && "200px"};
   height: ${(props) => props.comingSoonClass && "95%"};
   flex: ${(props) => props.comingSoonClass && "0 0 auto"};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &:last-child {
     margin-right: ${(props) => props.comingSoonClass && "150px"};
@@ -44,26 +50,48 @@ const StyledImgContainer = styled.article`
 
   img {
     width: 100%;
-    height: 90%;
+    min-height: 90%;
     object-fit: cover;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: all 0.3s linear;
+    transition: all 0.2s linear;
   }
-  &:hover p {
+
+  div:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+      rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    cursor: ${(props) => props.comingSoonClass && !props.mouseActive && "grab"};
+  }
+  div:active {
+    cursor: ${(props) => props.comingSoonClass && "grabbing"};
+  }
+
+  &:hover a p {
     text-decoration: underline;
     text-decoration-color: #f12535;
   }
 
-  &:hover a ~ div {
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-      rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  a {
+    margin-top: 0.3rem;
+    min-height: 10%;
+    display: flex;
+    align-self: center;
+
+    &:hover ~ div {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+        rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    }
   }
 
   p {
     color: #fff;
     text-align: center;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: #f12535;
+    }
   }
 `;
 
