@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const keyAPI = "18f24bc2d57d05d27034e7869d945e9f";
-const urlNowPlaying = `https://api.themoviedb.org/3/movie/now_playing?api_key=${keyAPI}&language=en-US&page=1`;
-const urlComingSoon = `https://api.themoviedb.org/3/movie/upcoming?api_key=${keyAPI}&language=en-US&page=1`;
+const urlNowPlaying = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`;
+const urlComingSoon = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`;
+
 
 const initialState = {
   moviesNowPlaying: [],

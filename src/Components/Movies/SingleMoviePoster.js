@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as SingleMovieModule from "../../features/singleMovieSlice";
 
 const SingleMoviePoster = ({ movieInfo, comingSoonClass, mouseActive }) => {
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const urlMovieTitle = movieInfo.title.split(" ").join("_");
   const { poster_path, id, title } = movieInfo;
+  const dispatch = useDispatch();
 
   const setPath = () => {
     if (comingSoonClass) {
@@ -16,6 +18,10 @@ const SingleMoviePoster = ({ movieInfo, comingSoonClass, mouseActive }) => {
       return `/nowPlaying/${urlMovieTitle}`;
     }
   };
+  const getSingleMovieData = () => {
+    dispatch(SingleMovieModule.getSingleMovieInfo(id));
+    dispatch(SingleMovieModule.getSingleMovieVideos(id));
+  };
 
   return (
     <StyledImgContainer
@@ -23,12 +29,12 @@ const SingleMoviePoster = ({ movieInfo, comingSoonClass, mouseActive }) => {
       mouseActive={mouseActive}
     >
       <img src={imgLowResUrl + poster_path} alt="movie poster" />
-      <Link to={setPath()} state={{ movieId: id }} draggable="false">
-        <p>{title}</p>
+      <Link to={setPath()} draggable="false">
+        <p onClick={getSingleMovieData}>{title}</p>
       </Link>
       <StyledLayer>
-        <Link to={setPath()} state={{ movieId: id }} draggable="false">
-          <StyledBtn>see more</StyledBtn>
+        <Link to={setPath()} draggable="false">
+          <StyledBtn onClick={getSingleMovieData}>see more</StyledBtn>
         </Link>
       </StyledLayer>
     </StyledImgContainer>
