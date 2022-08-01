@@ -3,7 +3,7 @@ import GiftCardPage from "./GiftCardPage";
 import HomePage from "./HomePage";
 import MoviesComingSoonPage from "./MoviesComingSoonPage";
 import MoviesNowPlayingPage from "./MoviesNowPlayingPage";
-import SingleMoviePage from "./SingleMoviePage";
+import SingleMoviePage from "./SingleMoviePage/SingleMoviePage";
 import UnlimitedPage from "./UnlimitedPage";
 
 export {

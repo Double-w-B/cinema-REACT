@@ -19,6 +19,7 @@ const SingleMoviePoster = ({ movieInfo, comingSoonClass, mouseActive }) => {
     }
   };
   const getSingleMovieData = () => {
+    dispatch(SingleMovieModule.removeSingleMovieData());
     dispatch(SingleMovieModule.getSingleMovieInfo(id));
     dispatch(SingleMovieModule.getSingleMovieVideos(id));
   };
