@@ -9,7 +9,7 @@ const SMPMainTitle = () => {
   return (
     <StyledTitleContainer>
       <h1>{title}</h1>
-      <div className="genres">
+      <div className="genres no-select">
         {genres?.map((genre, index) => {
           return <div key={index}>{genre.name}</div>;
         })}

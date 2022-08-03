@@ -46,7 +46,7 @@ const MoviesNowPlayingSlider = () => {
           <img src={imgHiResUrl + backdrop_path} alt="movie backdrop" />
           <div className="layer"></div>
           <div className="title">{original_title}</div>
-          <StyledButton className="btn-slider">buy now</StyledButton>
+          <StyledButton className="btn-slider">book now</StyledButton>
         </article>
       );
     });
@@ -193,13 +193,13 @@ export const StyledButton = styled.button`
   font-weight: bold;
   text-transform: capitalize;
   padding: 0.5rem;
-  background-color: transparent;
   border: 1px solid #f12535;
   border-radius: 2px;
   cursor: pointer;
   outline: none;
   transition: all 0.3s linear;
   opacity: 0.75;
+  background-color: rgba(241, 37, 53, 0.3);
 
   &:hover {
     background-color: #f12535;

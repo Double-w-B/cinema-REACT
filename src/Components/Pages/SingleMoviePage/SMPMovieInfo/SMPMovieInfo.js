@@ -24,6 +24,7 @@ const SMPMovieInfo = () => {
 
 const StyledInfoContainer = styled.article`
   width: 65%;
+  min-height: 40vh;
   color: #fff;
   display: flex;
   flex-direction: column;

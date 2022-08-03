@@ -4,23 +4,11 @@ import spinnerImg from "../../../Images/spinner.gif";
 import { useSelector } from "react-redux";
 
 const SMPPoster = () => {
-  const [imgSrc, setImgSrc] = React.useState(spinnerImg);
+  const [imgLoaded, setImgLoaded] = React.useState(false);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { release_date, runtime, poster_path } = singleMovieInfo;
 
   const posterUrl = `https://image.tmdb.org/t/p/original${poster_path}`;
-
-  const onLoad = React.useCallback(() => {
-    setTimeout(() => {
-      setImgSrc(posterUrl);
-    }, 1000);
-  }, [posterUrl]);
-
-  React.useEffect(() => {
-    const img = new Image();
-    img.src = posterUrl;
-    img.onload = onLoad();
-  }, [posterUrl, onLoad]);
 
   return (
     <StyledPosterContainer>
@@ -31,17 +19,20 @@ const SMPPoster = () => {
         </div>
         <div className="time">
           <p>Running time:</p>
-          <p>{runtime} min</p>
+          <p>{runtime > 0 ? runtime + "min" : "unknown"}</p>
         </div>
       </div>
 
-      <img
-        src={imgSrc}
-        // src={spinnerImg}
-        // src={`https://image.tmdb.org/t/p/original${poster_path}`}
-        // src={`https://image.tmdb.org/t/p/original${poster_path}`}
-        alt="poster"
-      />
+      <StyledImgContainer imgLoaded={imgLoaded}>
+        <div>
+          <img src={spinnerImg} alt="loading spinner" />
+        </div>
+        <img
+          src={posterUrl}
+          alt="poster"
+          onLoad={() => setTimeout(() => setImgLoaded(true), 500)}
+        />
+      </StyledImgContainer>
     </StyledPosterContainer>
   );
 };
@@ -53,14 +44,6 @@ const StyledPosterContainer = styled.div`
   justify-content: space-between;
   position: relative;
   padding: 0.5rem;
-
-  img {
-    width: 100%;
-    height: 90%;
-    display: block;
-    object-fit: cover;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
 
   .date-time {
     height: 10%;
@@ -77,6 +60,40 @@ const StyledPosterContainer = styled.div`
     .time p {
       text-align: right;
     }
+  }
+`;
+
+const StyledImgContainer = styled.div`
+  width: 100%;
+  height: 90%;
+  position: relative;
+  background-color: #000;
+
+  div {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    opacity: ${(props) => (props.imgLoaded ? "0" : "1")};
+    z-index: ${(props) => (props.imgLoaded ? "0" : "2")};
+
+    img {
+      width: 30%;
+      height: 30%;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 1;
   }
 `;
 

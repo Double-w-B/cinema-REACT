@@ -46,6 +46,7 @@ const StyledImgContainer = styled.article`
   position: relative;
   width: ${(props) => props.comingSoonClass && "200px"};
   height: ${(props) => props.comingSoonClass && "95%"};
+  min-height: 100px;
   flex: ${(props) => props.comingSoonClass && "0 0 auto"};
   display: flex;
   flex-direction: column;
@@ -116,9 +117,18 @@ const StyledLayer = styled.div`
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.8);
   }
+
+  a {
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const StyledBtn = styled(StyledButton)`
+  width: 100%;
   font-size: 1.2rem;
   cursor: pointer;
   top: 50%;

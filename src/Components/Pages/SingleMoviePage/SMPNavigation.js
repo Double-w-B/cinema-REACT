@@ -22,7 +22,7 @@ const SMPNavigation = (props) => {
     <StyledNavigation>
       <p>
         <Link to="/">Home &gt;</Link> <Link to={path}>{`${pathName} >`}</Link>{" "}
-        {`${props.title}`}
+        {`${props.title ? props.title : ""}`}
       </p>
     </StyledNavigation>
   );

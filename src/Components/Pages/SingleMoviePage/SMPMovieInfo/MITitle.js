@@ -11,14 +11,18 @@ const MITitle = () => {
   return (
     <StyledTitleContainer className="title-rate">
       <h2>{title}</h2>
-      {vote_average && (
-        <div className="rate">
-          <p>
-            <AiFillStar /> {vote_average?.toFixed(2)}
-          </p>
-          <p>{vote_count} voutes</p>
-        </div>
-      )}
+      <div className="rate no-select">
+        {vote_average && vote_average !== 0 ? (
+          <>
+            <p>
+              <AiFillStar /> {vote_average?.toFixed(2)}
+            </p>
+            <p>{vote_count} votes</p>
+          </>
+        ) : (
+          <p>no votes yet</p>
+        )}
+      </div>
     </StyledTitleContainer>
   );
 };
