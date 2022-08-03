@@ -29,7 +29,9 @@ export const getSingleMovieVideos = createAsyncThunk(
     try {
       const response = await fetch(url + id + "/videos" + api);
       const data = await response.json();
-      return data.results.find((video) => video.type === "Trailer");
+      const trailer = data.results.find((video) => video.type === "Trailer");
+      const teaser = data.results.find((video) => video.type === "Teaser");
+      return trailer ? trailer : teaser;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         "smth went wrong with getSingleMovieVideos"
