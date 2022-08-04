@@ -6,6 +6,7 @@ import SMPMainTitle from "./SMPMainTitle";
 import SMPTrailer from "./SMPTrailer";
 import SMPMovieInfo from "./SMPMovieInfo/SMPMovieInfo";
 import SMPPoster from "./SMPPoster";
+import SMPReviews from "./SMPReviews/SMPReviews";
 
 const SingleMoviePage = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
@@ -26,6 +27,7 @@ const SingleMoviePage = () => {
         <SMPMovieInfo />
         <SMPPoster />
       </StyledMovieInfo>
+      <SMPReviews />
     </StyledMainContainer>
   );
 };
