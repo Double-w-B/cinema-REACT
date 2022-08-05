@@ -24,7 +24,6 @@ const SMPMovieInfo = () => {
 
 const StyledInfoContainer = styled.article`
   width: 65%;
-  min-height: 40vh;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -43,6 +42,7 @@ const StyledInfoContainer = styled.article`
 
 const StyledBtn = styled(StyledButton)`
   height: 8%;
+  min-height: 3rem;
   width: 50%;
   margin: 0 auto 0.5rem auto;
   position: relative;
