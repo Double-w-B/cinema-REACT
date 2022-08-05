@@ -1,36 +1,59 @@
 import React from "react";
 import styled from "styled-components";
 import { AiFillStar } from "react-icons/ai";
+import MarkdownView from "react-showdown";
+import { useSelector } from "react-redux";
+import logoImg from "../../../../Images/Logo.png";
 
-const RSingleReview = () => {
+const RSingleReview = (props) => {
+  const { imgLowResUrl } = useSelector((store) => store.movies);
+  const [readMore, setReadMore] = React.useState(false);
+
+  const {
+    author,
+    author_details: { avatar_path, rating },
+    content,
+    created_at,
+  } = props;
+
+  const showAvatar = () => {
+    if (avatar_path === null) return logoImg;
+
+    if (avatar_path.slice(1, 6) === "https") {
+      return avatar_path.slice(1);
+    }
+
+    return imgLowResUrl + avatar_path;
+  };
+
   return (
     <StyledWrapper>
       <StyledAuthorContainer>
         <div className="avatar">
-          <img
-            src="https://www.gravatar.com/avatar/bf3b87ecb40599290d764e6d73c86319.jpg"
-            alt="avatar"
-          />
+          <img src={showAvatar()} alt="avatar" />
         </div>
         <div className="review-info">
           <div className="name-rating">
-            <p>John Doe</p>
+            <p>{author.length > 15 ? author.substring(0, 15) : author}</p>
             <p>
               <AiFillStar />
-              7.5 <span> / 10</span>
+              {rating ? rating : " - "} <span>/10</span>
             </p>
           </div>
-          <p>{new Date("2022-06-17T02:00:50.622Z").toLocaleDateString()}</p>
+          <p>{new Date(created_at).toLocaleDateString()}</p>
         </div>
       </StyledAuthorContainer>
-      <StyledReviewContainer>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et quibusdam
-          neque expedita ducimus? Laborum labore doloribus, qui ea, ab voluptate
-          velit possimus atque dolore necessitatibus amet, magnam unde
-          perferendis id!
-        </p>
-      </StyledReviewContainer>
+      <StyledContentContainer>
+        <MarkdownView
+          className="content"
+          markdown={readMore ? content : `${content.substring(0, 200)}...`}
+        />
+        {content.length > 200 && (
+          <button onClick={() => setReadMore(!readMore)}>
+            {readMore ? "show less" : "read more"}
+          </button>
+        )}
+      </StyledContentContainer>
     </StyledWrapper>
   );
 };
@@ -38,9 +61,8 @@ const RSingleReview = () => {
 const StyledWrapper = styled.article`
   width: 96%;
   padding: 0.5rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
   color: #fff;
-  //   background-color: #c3c3c3;
   display: flex;
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 `;
@@ -48,14 +70,12 @@ const StyledWrapper = styled.article`
 const StyledAuthorContainer = styled.div`
   width: 30%;
   display: flex;
-  //   background-color: tomato;
 
   .avatar {
-    width: 35%;
+    width: 30%;
     height: 100%;
     display: flex;
     justify-content: center;
-    // background-color: thistle;
 
     img {
       width: 100%;
@@ -65,28 +85,34 @@ const StyledAuthorContainer = styled.div`
       border-radius: 50%;
       object-fit: cover;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      color: transparent;
     }
   }
 
   .review-info {
-    width: 65%;
+    width: 70%;
     height: 100%;
     padding-left: 0.5rem;
 
     .name-rating {
       margin-bottom: 0.5rem;
+
       p:first-child {
         margin-bottom: 0.5rem;
         font-size: 1.2rem;
       }
+
       p:last-child {
         display: flex;
         align-items: center;
         color: #fff;
+
         svg {
           color: #f12535;
           font-size: 1.2rem;
+          margin-right: 0.2rem;
         }
+
         span {
           color: rgba(255, 255, 255, 0.3);
         }
@@ -99,12 +125,26 @@ const StyledAuthorContainer = styled.div`
   }
 `;
 
-const StyledReviewContainer = styled.div`
+const StyledContentContainer = styled.div`
   width: 70%;
-  //   background-color: steelblue;
+  text-align: justify;
 
   p {
-    text-align: justify;
+    margin: 0.3rem 0;
+  }
+
+  button {
+    display: block;
+    margin: 0 0 0 auto;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s linear;
+    &:active {
+      transform: scale(0.8);
+    }
   }
 `;
+
 export default RSingleReview;
