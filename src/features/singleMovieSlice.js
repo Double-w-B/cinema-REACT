@@ -6,6 +6,7 @@ const api = `?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
 const initialState = {
   singleMovieInfo: {},
   singleMovieVideo: {},
+  singleMovieReviews: [],
 };
 
 export const getSingleMovieInfo = createAsyncThunk(
@@ -40,6 +41,21 @@ export const getSingleMovieVideos = createAsyncThunk(
   }
 );
 
+export const getSingleMovieReviews = createAsyncThunk(
+  "movies/getSingleMovieReviews",
+  async (id, thunkAPI) => {
+    try {
+      const response = await fetch(url + id + "/reviews" + api + "&page=1");
+      const data = await response.json();
+      return data.results;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        "smth went wrong with getSingleMovieReviews"
+      );
+    }
+  }
+);
+
 const singleMovieSlice = createSlice({
   name: "singleMovie",
   initialState,
@@ -61,6 +77,11 @@ const singleMovieSlice = createSlice({
     [getSingleMovieVideos.fulfilled]: (state, action) => {
       state.singleMovieVideo = action.payload;
       //   console.log(state.singleMovieVideos);
+      //   state.nowPlayingIsLoading = false;
+    },
+    [getSingleMovieReviews.fulfilled]: (state, action) => {
+      state.singleMovieReviews = action.payload;
+      console.log(state.singleMovieReviews);
       //   state.nowPlayingIsLoading = false;
     },
   },
