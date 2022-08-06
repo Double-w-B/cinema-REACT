@@ -1,13 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import SMPNavigation from "./SMPNavigation";
-import SMPMainTitle from "./SMPMainTitle";
-import SMPTrailer from "./SMPTrailer";
-import SMPPoster from "./SMPPoster";
-import SMPMovieInfo from "./SMPMovieInfo/SMPMovieInfo";
-import SMPReviews from "./SMPReviews/SMPReviews";
 import { StyledUnderline } from "../../Movies/MoviesNowPlaying";
+import * as SingleMoviePageModule from "./index";
 
 const SingleMoviePage = () => {
   const { singleMovieInfo, singleMovieReviews } = useSelector(
@@ -24,12 +19,12 @@ const SingleMoviePage = () => {
 
   return (
     <StyledMainContainer>
-      <SMPNavigation title={title} />
-      <SMPMainTitle />
-      <SMPTrailer title={title} />
+      <SingleMoviePageModule.Navigation title={title} />
+      <SingleMoviePageModule.MainTitle />
+      <SingleMoviePageModule.Trailer title={title} />
       <StyledMovieInfo>
-        <SMPMovieInfo />
-        <SMPPoster />
+        <SingleMoviePageModule.MovieInfo />
+        <SingleMoviePageModule.Poster />
       </StyledMovieInfo>
       <StyledReviewTitle>
         <h1>
@@ -37,7 +32,7 @@ const SingleMoviePage = () => {
         </h1>
         <StyledUnderline />
       </StyledReviewTitle>
-      <SMPReviews />
+      <SingleMoviePageModule.Reviews />
     </StyledMainContainer>
   );
 };
