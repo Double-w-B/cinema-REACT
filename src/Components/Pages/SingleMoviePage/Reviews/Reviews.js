@@ -1,21 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import RSingleReview from "./RSingleReview";
 import { useSelector } from "react-redux";
-import RNoReviews from "./RNoReviews";
-import RUserReview from "./RUserReview";
+import SingleReview from "./SingleReview";
+import NoReviews from "./NoReviews";
+import UserReview from "./UserReview";
 
-const SMPReviews = () => {
+const Reviews = () => {
   const { singleMovieReviews } = useSelector((store) => store.singleMovie);
 
   return (
     <StyledWrapper>
-      <RUserReview/>
+      <UserReview/>
       {singleMovieReviews.length > 0 &&
         singleMovieReviews.map((rev, index) => (
-          <RSingleReview key={index} {...rev} />
+          <SingleReview key={index} {...rev} />
         ))}
-      {singleMovieReviews.length === 0 && <RNoReviews/>}
+      {singleMovieReviews.length === 0 && <NoReviews/>}
     </StyledWrapper>
   );
 };
@@ -27,4 +27,4 @@ const StyledWrapper = styled.section`
   background-color: rgba(43, 52, 68, 0.2);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
-export default SMPReviews;
+export default Reviews;

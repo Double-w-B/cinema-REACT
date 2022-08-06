@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-const MIShortInfo = () => {
+const ShortInfo = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const {
     original_title,
@@ -88,4 +88,4 @@ const StyledWrapper = styled.div`
   }
 `;
 
-export default MIShortInfo;
+export default ShortInfo;

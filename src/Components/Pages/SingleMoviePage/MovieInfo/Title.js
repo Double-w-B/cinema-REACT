@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { AiFillStar } from "react-icons/ai";
 
-const MITitle = () => {
+const Title = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
 
   const { title, vote_average, vote_count } = singleMovieInfo;
@@ -68,4 +68,4 @@ const StyledTitleContainer = styled.div`
   }
 `;
 
-export default MITitle;
+export default Title;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import spinnerImg from "../../../Images/spinner.gif";
 
-const SMPTrailer = ({ title }) => {
+const Trailer = ({ title }) => {
   const [showTrailerImg, setShowTrailerImg] = React.useState(true);
 
   const { singleMovieVideo } = useSelector((store) => store.singleMovie);
@@ -62,4 +62,4 @@ const StyledLayer = styled.div`
   }
 `;
 
-export default SMPTrailer;
+export default Trailer;

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { Link, useLocation } from "react-router-dom";
 
-const SMPNavigation = (props) => {
+const Navigation = (props) => {
   const location = useLocation();
 
   const [path, setPath] = React.useState("");
@@ -40,4 +40,4 @@ const StyledNavigation = styled.div`
   }
 `;
 
-export default SMPNavigation;
+export default Navigation;

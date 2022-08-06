@@ -3,7 +3,7 @@ import styled from "styled-components";
 import spinnerImg from "../../../Images/spinner.gif";
 import { useSelector } from "react-redux";
 
-const SMPPoster = () => {
+const Poster = () => {
   const [imgLoaded, setImgLoaded] = React.useState(false);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { release_date, runtime, poster_path } = singleMovieInfo;
@@ -97,4 +97,4 @@ const StyledImgContainer = styled.div`
   }
 `;
 
-export default SMPPoster;
+export default Poster;

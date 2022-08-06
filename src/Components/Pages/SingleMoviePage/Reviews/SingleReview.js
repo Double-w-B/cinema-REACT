@@ -5,7 +5,7 @@ import MarkdownView from "react-showdown";
 import { useSelector } from "react-redux";
 import logoImg from "../../../../Images/Logo.png";
 
-const RSingleReview = (props) => {
+const SingleReview = (props) => {
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const [readMore, setReadMore] = React.useState(false);
 
@@ -147,4 +147,4 @@ const StyledContentContainer = styled.div`
   }
 `;
 
-export default RSingleReview;
+export default SingleReview;

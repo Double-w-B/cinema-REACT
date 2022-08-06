@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const RNoReviews = () => {
+const NoReviews = () => {
   return (
     <StyledInfoContainer>
       <p>No reviews yet. Be the first to add a review.</p>
@@ -20,4 +20,4 @@ const StyledInfoContainer = styled.div`
   }
 `;
 
-export default RNoReviews
+export default NoReviews

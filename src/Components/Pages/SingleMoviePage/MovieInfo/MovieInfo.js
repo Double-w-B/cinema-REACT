@@ -2,17 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
-import MITitle from "./MITitle";
-import MIShortInfo from "./MIShortInfo";
+import Title from "./Title";
+import ShortInfo from "./ShortInfo";
 
-const SMPMovieInfo = () => {
+const MovieInfo = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { tagline, overview } = singleMovieInfo;
 
   return (
     <StyledInfoContainer>
-      <MITitle />
-      <MIShortInfo />
+      <Title />
+      <ShortInfo />
 
       <p className="overview">{overview}</p>
 
@@ -49,4 +49,4 @@ const StyledBtn = styled(StyledButton)`
   background-color: rgba(241, 37, 53, 0.3);
 `;
 
-export default SMPMovieInfo;
+export default MovieInfo;

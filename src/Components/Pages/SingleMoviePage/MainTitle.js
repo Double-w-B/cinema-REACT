@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-const SMPMainTitle = () => {
+const MainTitle = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title, genres } = singleMovieInfo;
 
@@ -49,4 +49,4 @@ const StyledTitleContainer = styled.div`
   }
 `;
 
-export default SMPMainTitle;
+export default MainTitle;

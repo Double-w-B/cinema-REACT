@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 
-const RUserReview = () => {
+const UserReview = () => {
   return (
     <StyledContainer>
       <div className="review">
@@ -51,4 +51,4 @@ const StyledBtn = styled(StyledButton)`
   font-size: 1rem;
   margin: 1rem 0.5rem 0 auto;
 `;
-export default RUserReview;
+export default UserReview;
