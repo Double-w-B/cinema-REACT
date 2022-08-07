@@ -1,10 +1,19 @@
+:root {
+  --primary-white-clr: #fff;
+  --primary-red-clr: #f12535;
+  --primary-grey-clr: rgba(255, 255, 255, 0.3);
+  --primary-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 html {
   scrollbar-width: thin;
   scrollbar-color: #434343 #0a0f18;
 }
+
 html::-webkit-scrollbar {
   width: 10px;
 }
+
 html::-webkit-scrollbar-track {
   background-color: #0a0f18;
 }
@@ -23,6 +32,7 @@ html::-webkit-scrollbar-thumb {
 ul {
   list-style-type: none;
 }
+
 a {
   text-decoration: none;
 }
@@ -34,19 +44,12 @@ body,
 }
 
 #root {
-  background: #080c13; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #080c13,
-    #2b3444,
-    #080c13
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #080c13,
-    #2b3444,
-    #080c13
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #080c13;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #080c13, #2b3444, #080c13);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #080c13, #2b3444, #080c13);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 header {
