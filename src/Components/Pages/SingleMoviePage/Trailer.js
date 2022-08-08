@@ -40,7 +40,7 @@ const Trailer = ({ title }) => {
 const StyledWrapper = styled.section`
   width: 100%;
   height: 70vh;
-  min-hight: 10vh;
+  min-height: 10vh;
   margin: 0 auto;
   position: relative;
 `;
