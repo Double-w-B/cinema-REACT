@@ -6,16 +6,20 @@ import NoReviews from "./NoReviews";
 import UserReview from "./UserReview";
 
 const Reviews = () => {
-  const { singleMovieReviews } = useSelector((store) => store.singleMovie);
+  const { singleMovieReviews, singleMovieInfo } = useSelector(
+    (store) => store.singleMovie
+  );
 
   return (
     <StyledWrapper>
-      <UserReview/>
+      {!singleMovieReviews.some(
+        (review) => review.id === singleMovieInfo.id
+      ) && <UserReview />}
       {singleMovieReviews.length > 0 &&
         singleMovieReviews.map((rev, index) => (
           <SingleReview key={index} {...rev} />
         ))}
-      {singleMovieReviews.length === 0 && <NoReviews/>}
+      {singleMovieReviews.length === 0 && <NoReviews />}
     </StyledWrapper>
   );
 };
