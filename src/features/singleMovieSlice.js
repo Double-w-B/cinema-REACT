@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 
 const url = "https://api.themoviedb.org/3/movie/";
 const api = `?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`;
@@ -7,6 +7,7 @@ const initialState = {
   singleMovieInfo: {},
   singleMovieVideo: {},
   singleMovieReviews: [],
+  userReviews: JSON.parse(localStorage.getItem("userReviews")) || [],
 };
 
 export const getSingleMovieInfo = createAsyncThunk(
@@ -60,9 +61,30 @@ const singleMovieSlice = createSlice({
   name: "singleMovie",
   initialState,
   reducers: {
-    removeSingleMovieData: (state, action) => {
+    removeSingleMovieData: (state) => {
       state.singleMovieInfo = {};
       state.singleMovieVideo = {};
+    },
+
+    addUserReview: (state, action) => {
+      const currentState = current(state);
+      state.userReviews = [...currentState.userReviews, action.payload];
+      state.singleMovieReviews = [
+        ...currentState.singleMovieReviews,
+        action.payload,
+      ];
+      localStorage.setItem("userReviews", JSON.stringify(state.userReviews));
+    },
+
+    removeUserReview: (state) => {
+      const currentState = current(state);
+
+      const filteredReviews = (state) =>
+        state.filter((review) => review.id !== currentState.singleMovieInfo.id);
+
+      state.userReviews = filteredReviews(state.userReviews);
+      state.singleMovieReviews = filteredReviews(state.singleMovieReviews);
+      localStorage.setItem("userReviews", JSON.stringify(state.userReviews));
     },
   },
   extraReducers: {
@@ -81,12 +103,22 @@ const singleMovieSlice = createSlice({
     },
     [getSingleMovieReviews.fulfilled]: (state, action) => {
       state.singleMovieReviews = action.payload;
-      console.log(state.singleMovieReviews);
+      const currentState = current(state);
+      const userReview = state.userReviews.find(
+        (review) => review.id === state.singleMovieInfo.id
+      );
+      if (userReview) {
+        state.singleMovieReviews = [
+          ...currentState.singleMovieReviews,
+          userReview,
+        ];
+      }
       //   state.nowPlayingIsLoading = false;
     },
   },
 });
 
-export const { removeSingleMovieData } = singleMovieSlice.actions;
+export const { removeSingleMovieData, addUserReview, removeUserReview } =
+  singleMovieSlice.actions;
 
 export default singleMovieSlice.reducer;

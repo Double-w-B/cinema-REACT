@@ -1,13 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux/es/exports";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 import { AiFillStar } from "react-icons/ai";
 import { ratesTitle } from "../../../../data";
+import { addUserReview } from "../../../../features/singleMovieSlice";
 
 const UserReview = () => {
-  const [rating, setRating] = React.useState("none");
+  const dispatch = useDispatch();
+  const { singleMovieInfo } = useSelector((store) => store.singleMovie);
+  const [rating, setRating] = React.useState("-");
   const [hover, setHover] = React.useState(0);
   const [review, setReview] = React.useState("");
+
+  const showDate = () => {
+    review.trim() &&
+      dispatch(
+        addUserReview({
+          author: "USER",
+          author_details: {
+            avatar_path: null,
+            rating: rating === "-" ? null : rating + 1,
+          },
+          content: review,
+          created_at: new Date().toISOString(),
+          id: singleMovieInfo.id,
+        })
+      );
+  };
 
   return (
     <StyledContainer>
@@ -33,13 +53,11 @@ const UserReview = () => {
           </StyledStarsContainer>
         </div>
         <textarea
-          cols="30"
-          rows="10"
           value={review}
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
       </div>
-      <StyledBtn>add review</StyledBtn>
+      <StyledBtn onClick={showDate}>add review</StyledBtn>
     </StyledContainer>
   );
 };
@@ -63,15 +81,16 @@ const StyledContainer = styled.div`
       font-style: italic;
       margin: 0 auto;
       color: rgba(255, 255, 255, 0.3);
-      /* background-color: tomato; */
     }
 
     textarea {
       width: 70%;
+      height: 170px;
       resize: none;
       outline: none;
       padding: 0.5rem;
-      color: #fff;
+      text-align: justify;
+      color: var(--primary-white-clr);
       background-color: rgba(0, 0, 0, 0.2);
       border: 2px solid rgba(255, 255, 255, 0.3);
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
