@@ -2,11 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { AiFillStar } from "react-icons/ai";
 import MarkdownView from "react-showdown";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeUserReview } from "../../../../features/singleMovieSlice";
 import logoImg from "../../../../Images/Logo.png";
 
 const SingleReview = (props) => {
+  const dispatch = useDispatch();
+
   const { imgLowResUrl } = useSelector((store) => store.movies);
+  const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const [readMore, setReadMore] = React.useState(false);
 
   const {
@@ -14,6 +18,7 @@ const SingleReview = (props) => {
     author_details: { avatar_path, rating },
     content,
     created_at,
+    id,
   } = props;
 
   const showAvatar = () => {
@@ -43,16 +48,28 @@ const SingleReview = (props) => {
           <p>{new Date(created_at).toLocaleDateString()}</p>
         </div>
       </StyledAuthorContainer>
-      <StyledContentContainer>
+      <StyledContentContainer readMore={readMore}>
         <MarkdownView
           className="content"
-          markdown={readMore ? content : `${content.substring(0, 200)}...`}
+          markdown={
+            readMore
+              ? content
+              : content.length > 200
+              ? `${content.substring(0, 200)}...`
+              : content
+          }
         />
-        {content.length > 200 && (
-          <button onClick={() => setReadMore(!readMore)}>
-            {readMore ? "show less" : "read more"}
-          </button>
-        )}
+        <div className="content_buttons">
+          {singleMovieInfo.id === id && (
+            <button onClick={() => dispatch(removeUserReview())}>remove</button>
+          )}
+
+          {content.length > 200 && (
+            <button onClick={() => setReadMore(!readMore)}>
+              {readMore ? "show less" : "read more"}
+            </button>
+          )}
+        </div>
       </StyledContentContainer>
     </StyledWrapper>
   );
@@ -127,22 +144,44 @@ const StyledAuthorContainer = styled.div`
 
 const StyledContentContainer = styled.div`
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: justify;
+  word-wrap: break-word;
 
   p {
     margin: 0.3rem 0;
   }
 
-  button {
-    display: block;
-    margin: 0 0 0 auto;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.3);
-    transition: all 0.3s linear;
-    &:active {
-      transform: scale(0.8);
+  .content_buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      display: block;
+      margin-left: 1rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.3);
+      transition: all 0.2s linear;
+
+      &:last-child {
+        color: ${(props) =>
+          props.readMore
+            ? "var(--primary-red-clr)"
+            : "rgba(255, 255, 255, 0.3)"};
+      }
+
+      &:hover {
+        color: var(--primary-red-clr);
+      }
+
+      &:active {
+        transform: scale(0.9);
+      }
     }
   }
 `;
