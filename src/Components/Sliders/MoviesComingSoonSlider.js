@@ -95,6 +95,8 @@ const MoviesComingSoonSlider = () => {
               movieInfo={movie}
               comingSoonClass={true}
               mouseActive={mouseActive}
+              movieRelease={"coming"}
+              pageTitle={"Coming Soon"}
             />
           );
         })}

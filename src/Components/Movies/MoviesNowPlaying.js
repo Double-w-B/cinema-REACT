@@ -12,7 +12,13 @@ const MoviesNowPlaying = () => {
       <StyledUnderline />
       <StyledMoviesContainer>
         {moviesNowPlaying.slice(0, 12).map((movie) => {
-          return <SingleMoviePoster key={movie.id} movieInfo={movie} />;
+          return (
+            <SingleMoviePoster
+              key={movie.id}
+              movieInfo={movie}
+              movieRelease={"playing"}
+            />
+          );
         })}
       </StyledMoviesContainer>
     </StyledWrapper>
@@ -38,9 +44,8 @@ export const StyledUnderline = styled.div`
   border-radius: 2px;
 `;
 
-const StyledMoviesContainer = styled.div`
+export const StyledMoviesContainer = styled.div`
   width: 100%;
-
   padding: 1rem 0.5rem;
   display: grid;
   grid-gap: 1rem;

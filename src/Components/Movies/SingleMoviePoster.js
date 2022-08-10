@@ -1,23 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 import { useDispatch, useSelector } from "react-redux";
+import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 import * as SingleMovieModule from "../../features/singleMovieSlice";
 
-const SingleMoviePoster = ({ movieInfo, comingSoonClass, mouseActive }) => {
+const SingleMoviePoster = ({
+  movieInfo,
+  comingSoonClass,
+  mouseActive,
+  movieRelease,
+  pageTitle,
+}) => {
   const { imgLowResUrl } = useSelector((store) => store.movies);
-  const urlMovieTitle = movieInfo.title.split(" ").join("_");
   const { poster_path, id, title } = movieInfo;
   const dispatch = useDispatch();
 
   const setPath = () => {
-    if (comingSoonClass) {
-      return `/comingSoon/${urlMovieTitle}`;
-    } else {
+    const urlMovieTitle = title.split(" ").join("_");
+    if (movieRelease === "playing") {
       return `/nowPlaying/${urlMovieTitle}`;
+    } else {
+      return `/comingSoon/${urlMovieTitle}`;
     }
   };
+
   const getSingleMovieData = () => {
     dispatch(SingleMovieModule.removeSingleMovieData());
     dispatch(SingleMovieModule.getSingleMovieInfo(id));
@@ -31,14 +38,15 @@ const SingleMoviePoster = ({ movieInfo, comingSoonClass, mouseActive }) => {
       mouseActive={mouseActive}
     >
       <img src={imgLowResUrl + poster_path} alt="movie poster" />
-      <Link to={setPath()} draggable="false">
+      <Link to={setPath()} state={{ pageTitle }} draggable="false">
         <p onClick={getSingleMovieData}>{title}</p>
       </Link>
-      <StyledLayer>
-        <Link to={setPath()} draggable="false">
+
+      <StyledBtnLayer>
+        <Link to={setPath()} state={{ pageTitle }} draggable="false">
           <StyledBtn onClick={getSingleMovieData}>see more</StyledBtn>
         </Link>
-      </StyledLayer>
+      </StyledBtnLayer>
     </StyledImgContainer>
   );
 };
@@ -47,7 +55,7 @@ const StyledImgContainer = styled.article`
   position: relative;
   width: ${(props) => props.comingSoonClass && "200px"};
   height: ${(props) => props.comingSoonClass && "95%"};
-  min-height: 100px;
+  min-height: 300px;
   flex: ${(props) => props.comingSoonClass && "0 0 auto"};
   display: flex;
   flex-direction: column;
@@ -63,6 +71,8 @@ const StyledImgContainer = styled.article`
     object-fit: cover;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: all 0.2s linear;
+    color: transparent;
+    z-index: 1;
   }
 
   div:hover {
@@ -96,6 +106,7 @@ const StyledImgContainer = styled.article`
   p {
     color: #fff;
     text-align: center;
+    z-index: 1;
 
     &:hover {
       text-decoration: underline;
@@ -104,7 +115,7 @@ const StyledImgContainer = styled.article`
   }
 `;
 
-const StyledLayer = styled.div`
+const StyledBtnLayer = styled.div`
   width: 100%;
   height: 90%;
   position: absolute;
@@ -113,6 +124,7 @@ const StyledLayer = styled.div`
   transition: all 0.3s linear;
   background-color: transparent;
   opacity: 0;
+  z-index: 1;
 
   &:hover {
     opacity: 1;
