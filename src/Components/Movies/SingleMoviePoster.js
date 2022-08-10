@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 import * as SingleMovieModule from "../../features/singleMovieSlice";
+import spinnerImg from "../../Images/spinner.gif";
 
 const SingleMoviePoster = ({
   movieInfo,
@@ -12,6 +13,7 @@ const SingleMoviePoster = ({
   movieRelease,
   pageTitle,
 }) => {
+  const [imgLoaded, setImgLoaded] = React.useState(false);
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { poster_path, id, title } = movieInfo;
   const dispatch = useDispatch();
@@ -37,16 +39,25 @@ const SingleMoviePoster = ({
       comingSoonClass={comingSoonClass}
       mouseActive={mouseActive}
     >
+      <StyledImgLayer imgLoaded={imgLoaded}>
+        <img
+          src={spinnerImg}
+          alt="loading spinner"
+          onLoad={() => setImgLoaded(true)}
+        />
+      </StyledImgLayer>
       <img src={imgLowResUrl + poster_path} alt="movie poster" />
       <Link to={setPath()} state={{ pageTitle }} draggable="false">
         <p onClick={getSingleMovieData}>{title}</p>
       </Link>
 
-      <StyledBtnLayer>
-        <Link to={setPath()} state={{ pageTitle }} draggable="false">
-          <StyledBtn onClick={getSingleMovieData}>see more</StyledBtn>
-        </Link>
-      </StyledBtnLayer>
+      {imgLoaded && (
+        <StyledBtnLayer>
+          <Link to={setPath()} state={{ pageTitle }} draggable="false">
+            <StyledBtn onClick={getSingleMovieData}>see more</StyledBtn>
+          </Link>
+        </StyledBtnLayer>
+      )}
     </StyledImgContainer>
   );
 };
@@ -112,6 +123,25 @@ const StyledImgContainer = styled.article`
       text-decoration: underline;
       text-decoration-color: #f12535;
     }
+  }
+`;
+
+const StyledImgLayer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: ${(props) => (props.imgLoaded ? "0" : "1")};
+  z-index: ${(props) => (props.imgLoaded ? "0" : "2")};
+
+  img {
+    object-fit: contain;
+    width: 80%;
+    height: 80%;
   }
 `;
 
