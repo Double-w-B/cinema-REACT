@@ -54,8 +54,8 @@ function App() {
         />
         <Route
           exact
-          path="/FAQ"
-          element={<PagesModule.UnlimitedPage />}
+          path="help/faq"
+          element={<PagesModule.FAQpage />}
         />
         <Route
           exact

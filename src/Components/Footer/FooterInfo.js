@@ -7,7 +7,7 @@ const FooterInfo = () => {
     <StyledSectionInfo>
       <Link to="/about">about</Link>
       <Link to="/contact_us">contact us</Link>
-      <Link to="/FAQ">FAQ</Link>
+      <Link to="help/faq">FAQ</Link>
       <Link to="/unlimited">unlimited</Link>
       <Link to="/cinema_bar">cinema bar</Link>
       <a
