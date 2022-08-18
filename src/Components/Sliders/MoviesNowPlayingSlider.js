@@ -30,7 +30,7 @@ const MoviesNowPlayingSlider = () => {
 
   const setActiveImage = () => {
     return firstSixMovies.map((movie, movieIndex) => {
-      const { id, original_title, backdrop_path } = movie;
+      const { id, backdrop_path, title } = movie;
 
       let position = "nextSlide";
       if (movieIndex === index) position = "activeSlide";
@@ -42,14 +42,10 @@ const MoviesNowPlayingSlider = () => {
         position = "lastSlide";
 
       return (
-        <StyledImgContainer
-          key={id}
-          className={position}
-          title={original_title}
-        >
+        <StyledImgContainer key={id} className={position} title={title}>
           <img src={imgHiResUrl + backdrop_path} alt="movie backdrop" />
           <div className="layer"></div>
-          <div className="title">{original_title}</div>
+          <div className="title">{title}</div>
           <StyledButton className="btn-slider">book now</StyledButton>
         </StyledImgContainer>
       );
