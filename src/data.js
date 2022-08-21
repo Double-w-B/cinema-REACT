@@ -11,6 +11,13 @@ export const ratesTitle = [
   "Masterpiece",
 ];
 
+export const navbarLinks = [
+  { title: "coming soon", path: "/comingSoon" },
+  { title: "unlimited", path: "/unlimited" },
+  { title: "gift card", path: "/giftCard" },
+  { title: "cinema bar", path: "/cinemaBar" },
+];
+
 export const ticketsAndPricingFaq = [
   {
     question: "Does CineMania offers a student discount?",
@@ -117,5 +124,46 @@ export const coronavirusFaq = [
     question: "Ongoing Actions",
     answer:
       "Regal continues to work closely with the relevant authorities and safety measures will be constantly monitored and adjusted according to the requirements. We have also reviewed our plans with leading infectious diseases experts, who stated that 'CineMania cinemas' reopening plan is consistent with the safety practices recommended by the Centers for Disease Control for operating public event spaces during the COVID-19 pandemic.'",
+  },
+];
+
+export const unlimitedOffers = [
+  {
+    title: "Standard \nUnlimited",
+    id: 1,
+    price: 25,
+    benefits: [
+      "Watch as many movies as you want, anytime you want.",
+      "Free unlimited access to 2D films in standard auditoriums.",
+      "Save 10% on all food and non-alcoholic drink purchases.",
+      "Celebrate with a free 1x large popcorn and soft drink on your birthday.",
+    ],
+  },
+  {
+    title: `Plus \nUnlimited`,
+    id: 2,
+    price: 35,
+    benefits: [
+      "Watch as many movies as you want, anytime you want.",
+      "Free unlimited access to 2D films in all auditoriums.",
+      "Free unlimited access to 3D films in standard auditoriums.",
+      "Save 15% on all food and non-alcoholic drink purchases.",
+      "Celebrate with a free 2x large popcorn and soft drink on your birthday.",
+      "Access to Unlimited screenings, which are previews of upcoming films.",
+    ],
+  },
+  {
+    title: "Premium \nUnlimited",
+    id: 3,
+    price: 40,
+    benefits: [
+      "Watch as many movies as you want, anytime you want.",
+      "Free unlimited access to 2D films in all auditoriums.",
+      "Free unlimited access to 3D films in all auditoriums.",
+      "Save 25% on all food and non-alcoholic drink purchases.",
+      "Celebrate with a free 3x large popcorn and soft drink on your birthday.",
+      "Access to Unlimited screenings, which are previews of upcoming films.",
+      "Free access to CineMania cinemas across the country.",
+    ],
   },
 ];

@@ -4,7 +4,7 @@ import HomePage from "./HomePage";
 import MoviesComingSoonPage from "./MoviesComingSoonPage";
 import MoviesNowPlayingPage from "./MoviesNowPlayingPage";
 import SingleMoviePage from "./SingleMoviePage/SingleMoviePage";
-import UnlimitedPage from "./UnlimitedPage";
+import UnlimitedPage from "./UnlimitedPage/UnlimitedPage";
 import FAQpage from "./FAQpage/FAQpage";
 
 export {
