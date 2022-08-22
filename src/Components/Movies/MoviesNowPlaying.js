@@ -3,11 +3,11 @@ import styled from "styled-components";
 import SingleMoviePoster from "./SingleMoviePoster";
 import { useSelector } from "react-redux";
 
-const MoviesNowPlaying = () => {
+const MoviesNowPlaying = (props) => {
   const { moviesNowPlaying } = useSelector((store) => store.movies);
 
   return (
-    <StyledWrapper>
+    <StyledWrapper ref={props.nowPlayingContainer}>
       <h1>now playing</h1>
       <StyledUnderline />
       <StyledMoviesContainer>

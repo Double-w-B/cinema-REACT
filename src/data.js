@@ -12,6 +12,7 @@ export const ratesTitle = [
 ];
 
 export const navbarLinks = [
+  { title: "now playing", path: "/" },
   { title: "coming soon", path: "/comingSoon" },
   { title: "unlimited", path: "/unlimited" },
   { title: "gift card", path: "/giftCard" },

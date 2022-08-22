@@ -1,10 +1,28 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logoImg from "../../Images/Logo.png";
 import { VscAccount } from "react-icons/vsc";
+import { navbarLinks } from "../../data";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const location = useLocation();
+
+  const handleClick = () => {
+    setTimeout(() => {
+      props.nowPlayingContainer.current.scrollIntoView({ behavior: "smooth" });
+    }, 400);
+  };
+
+  const activeLink = (path) => {
+    if (
+      (path !== "/" && location.pathname.slice(0, path.length) === path) ||
+      (path === "/" && location.pathname.slice(0, 11) === "/nowPlaying")
+    )
+      return "var(--primary-red-clr)";
+    else return "#fff";
+  };
+
   return (
     <header>
       <StyledLogoContainer>
@@ -12,24 +30,25 @@ const Navbar = () => {
           <img src={logoImg} alt="Logo" />
         </Link>
       </StyledLogoContainer>
-      <StyledNavContainer>
+      <StyledNavContainer location={location}>
         <nav>
           <ul>
-            <li>
-              <Link to="/playingNow">playing now</Link>
-            </li>
-            <li>
-              <Link to="/comingSoon">coming soon</Link>
-            </li>
-            <li>
-              <Link to="/unlimited">unlimited</Link>
-            </li>
-            <li>
-              <Link to="/giftCard">gift cards</Link>
-            </li>
-            <li>
-              <Link to="/cinemaBar">cinema bar</Link>
-            </li>
+            {navbarLinks.map((link, index) => {
+              const { title, path } = link;
+              return (
+                <li key={index}>
+                  <Link
+                    to={path}
+                    onClick={path === "/" && handleClick}
+                    style={{
+                      color: activeLink(path),
+                    }}
+                  >
+                    {title}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </StyledNavContainer>
@@ -58,6 +77,8 @@ const StyledLogoContainer = styled.div`
       height: 100%;
       object-fit: contain;
       transition: all 0.3s linear;
+      color: transparent;
+
       &:hover {
         transform: rotate(-15deg);
       }
@@ -107,28 +128,27 @@ const StyledNavContainer = styled.div`
       grid-template-columns: repeat(5, 1fr);
 
       li {
-        border: 1px solid #fff;
+        border: none;
+        border-left: 1px solid #fff;
         text-transform: capitalize;
         display: grid;
         place-items: center;
-        border-right: none;
-        border-top: none;
-        border-bottom: none;
         font-weight: 500;
+        transition: 0.3s linear;
 
         a {
           font-size: 1.1rem;
           color: #fff;
           letter-spacing: 0.5px;
           transition: all 0.1s linear;
+
+          &:hover {
+            color: #f12535 !important;
+          }
         }
 
         &:last-child {
           border-right: 1px solid #fff;
-        }
-
-        &:hover a {
-          color: #f12535;
         }
       }
     }

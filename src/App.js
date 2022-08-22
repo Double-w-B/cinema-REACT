@@ -1,31 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import * as PagesModule from "./Components/Pages";
-import { useDispatch } from "react-redux";
-import {
-  getMoviesNowPlaying,
-  getMoviesComingSoon,
-} from "./features/moviesSlice";
+import * as moviesSliceModule from "./features/moviesSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const nowPlayingContainer = React.useRef();
 
   React.useEffect(() => {
-    dispatch(getMoviesNowPlaying());
-    dispatch(getMoviesComingSoon());
+    dispatch(moviesSliceModule.getMoviesNowPlaying());
+    dispatch(moviesSliceModule.getMoviesComingSoon());
   });
 
   return (
     <Router>
-      <Navbar />
+      <Navbar nowPlayingContainer={nowPlayingContainer} />
       <Routes>
-        <Route exact path="/" element={<PagesModule.HomePage />} />
         <Route
           exact
-          path="/nowPlaying"
-          element={<PagesModule.MoviesNowPlayingPage />}
+          path="/"
+          element={
+            <PagesModule.HomePage nowPlayingContainer={nowPlayingContainer} />
+          }
         />
         <Route
           exact
@@ -42,21 +41,13 @@ function App() {
           path="/comingSoon/:title"
           element={<PagesModule.SingleMoviePage />}
         />
-        <Route
-          exact
-          path="/about"
-          element={<PagesModule.UnlimitedPage />}
-        />
+        <Route exact path="/about" element={<PagesModule.UnlimitedPage />} />
         <Route
           exact
           path="/contact_us"
           element={<PagesModule.UnlimitedPage />}
         />
-        <Route
-          exact
-          path="help/faq"
-          element={<PagesModule.FAQpage />}
-        />
+        <Route exact path="help/faq" element={<PagesModule.FAQpage />} />
         <Route
           exact
           path="/unlimited"
