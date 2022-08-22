@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 const MoviesNowPlayingSlider = () => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = React.useState(0);
   const { moviesNowPlaying, nowPlayingIsLoading, imgHiResUrl } = useSelector(
     (store) => store.movies
   );
   const firstSixMovies = moviesNowPlaying.slice(0, 6);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const lastIndex = firstSixMovies.length - 1;
     index < 0 && setIndex(lastIndex);
     index > lastIndex && setIndex(0);
   }, [index, firstSixMovies.length]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     let slider = setInterval(() => {
       setIndex((oldIndex) => {
         let index = oldIndex + 1;
@@ -74,7 +74,7 @@ const MoviesNowPlayingSlider = () => {
 const StyledSection = styled.section`
   width: 95%;
   height: 80vh;
-  margin: 1rem auto 0 auto;
+  margin: 2rem auto 0 auto;
   position: relative;
   overflow: hidden;
   display: flex;
