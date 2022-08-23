@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const NoReviews = () => {
   return (
@@ -7,8 +7,8 @@ const NoReviews = () => {
       <p>No reviews yet. Be the first to add a review.</p>
     </StyledInfoContainer>
   );
-}
-const StyledInfoContainer = styled.div`
+};
+export const StyledInfoContainer = styled.div`
   width: 96%;
   margin: 1rem auto;
 
@@ -20,4 +20,4 @@ const StyledInfoContainer = styled.div`
   }
 `;
 
-export default NoReviews
+export { NoReviews };

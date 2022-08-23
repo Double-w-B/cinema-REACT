@@ -5,6 +5,7 @@ import MarkdownView from "react-showdown";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUserReview } from "../../../../features/singleMovieSlice";
 import logoImg from "../../../../Images/Logo.png";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SingleReview = (props) => {
   const dispatch = useDispatch();
@@ -12,6 +13,9 @@ const SingleReview = (props) => {
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const [readMore, setReadMore] = React.useState(false);
+  const { user, isAuthenticated } = useAuth0();
+
+  const isUser = isAuthenticated && user;
 
   const {
     author,
@@ -22,6 +26,7 @@ const SingleReview = (props) => {
   } = props;
 
   const showAvatar = () => {
+    if (singleMovieInfo.id === id) return avatar_path || logoImg;
     if (avatar_path === null) return logoImg;
 
     if (avatar_path.slice(1, 6) === "https") {
@@ -60,7 +65,7 @@ const SingleReview = (props) => {
           }
         />
         <div className="content_buttons">
-          {singleMovieInfo.id === id && (
+          {isUser && singleMovieInfo.id === id && (
             <button onClick={() => dispatch(removeUserReview())}>remove</button>
           )}
 

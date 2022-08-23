@@ -5,6 +5,7 @@ import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 import { AiFillStar } from "react-icons/ai";
 import { ratesTitle } from "../../../../data";
 import { addUserReview } from "../../../../features/singleMovieSlice";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserReview = () => {
   const dispatch = useDispatch();
@@ -13,13 +14,15 @@ const UserReview = () => {
   const [hover, setHover] = React.useState(0);
   const [review, setReview] = React.useState("");
 
+  const { user } = useAuth0();
+
   const showDate = () => {
     review.trim() &&
       dispatch(
         addUserReview({
-          author: "USER",
+          author: user.given_name ? user.given_name : user.name.split(" ")[0],
           author_details: {
-            avatar_path: null,
+            avatar_path: user.picture,
             rating: rating === "-" ? null : rating + 1,
           },
           content: review,
