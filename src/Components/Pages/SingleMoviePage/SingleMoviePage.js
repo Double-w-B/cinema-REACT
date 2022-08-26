@@ -7,7 +7,7 @@ import * as SingleMoviePageModule from "./index";
 import Navigation from "../../Navigation";
 
 const SingleMoviePage = () => {
-  const { singleMovieInfo, singleMovieReviews } = useSelector(
+  const { singleMovieInfo, singleMovieReviews, singleMovieVideo } = useSelector(
     (store) => store.singleMovie
   );
   const { title } = singleMovieInfo;
@@ -23,8 +23,8 @@ const SingleMoviePage = () => {
     <StyledMainContainer>
       <Navigation title={title} pageTitle={pageTitle ? pageTitle : undefined} />
       <SingleMoviePageModule.MainTitle />
-      <SingleMoviePageModule.Trailer title={title} />
-      <StyledMovieInfo>
+      {singleMovieVideo && <SingleMoviePageModule.Trailer title={title} />}
+      <StyledMovieInfo trailer={singleMovieVideo}>
         <SingleMoviePageModule.MovieInfo />
         <SingleMoviePageModule.Poster />
       </StyledMovieInfo>
@@ -39,16 +39,18 @@ const SingleMoviePage = () => {
   );
 };
 
-const StyledMainContainer = styled.main`
+export const StyledMainContainer = styled.main`
   width: 70%;
   margin: 2rem auto;
+  color: var(--primary-white-clr);
   cursor: default;
 `;
 
 const StyledMovieInfo = styled.section`
   width: 100%;
   min-height: 500px;
-  margin: 2rem auto 4rem auto;
+  margin: ${(props) =>
+    props.trailer ? "2rem auto 4rem auto" : "0 auto 4rem auto"};
   display: flex;
   background-color: rgba(43, 52, 68, 0.2);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

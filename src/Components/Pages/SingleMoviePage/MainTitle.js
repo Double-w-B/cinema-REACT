@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const MainTitle = () => {
-  const { singleMovieInfo } = useSelector((store) => store.singleMovie);
+  const { singleMovieInfo, singleMovieVideo } = useSelector(
+    (store) => store.singleMovie
+  );
   const { title, genres } = singleMovieInfo;
 
   return (
-    <StyledTitleContainer>
-      <h1>{title}</h1>
+    <StyledTitleContainer trailer={singleMovieVideo}>
+      {singleMovieVideo && <h1>{title}</h1>}
       <div className="genres no-select">
         {genres?.map((genre, index) => {
           return <div key={index}>{genre.name}</div>;
@@ -30,9 +32,10 @@ const StyledTitleContainer = styled.div`
 
   .genres {
     display: flex;
+    margin: ${(props) => !props.trailer && "0 0 0 auto"};
     align-items: flex-end;
     padding-bottom: 0.5rem;
-    
+
     div {
       font-size: 1.1rem;
       color: rgba(255, 255, 255, 0.3);
