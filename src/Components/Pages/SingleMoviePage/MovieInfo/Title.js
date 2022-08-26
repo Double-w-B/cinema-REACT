@@ -9,7 +9,7 @@ const Title = () => {
   const { title, vote_average, vote_count } = singleMovieInfo;
 
   return (
-    <StyledTitleContainer className="title-rate">
+    <StyledTitleContainer>
       <h2>{title}</h2>
       <div className="rate no-select">
         {vote_average && vote_average !== 0 ? (
@@ -35,18 +35,17 @@ const StyledTitleContainer = styled.div`
   justify-content: space-between;
 
   h2 {
-    margin-left: 0.5rem;
     font-weight: bold;
     font-size: 2rem;
+    margin-right: 1rem;
   }
 
   .rate {
     width: 20%;
     height: 100%;
-    padding: 0.3rem 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-start;
 
     p {

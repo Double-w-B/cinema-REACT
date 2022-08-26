@@ -4,33 +4,37 @@ import { useSelector } from "react-redux";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 import Title from "./Title";
 import ShortInfo from "./ShortInfo";
+import { useLocation } from "react-router-dom";
 
 const MovieInfo = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { tagline, overview } = singleMovieInfo;
-
+  const location = useLocation();
+  const nowPlaying = location.pathname.slice(0, 11) === "/nowPlaying";
+  console.log(nowPlaying);
   return (
-    <StyledInfoContainer>
+    <StyledInfoContainer nowPlaying={nowPlaying}>
       <Title />
       <ShortInfo />
 
       <p className="overview">{overview}</p>
 
       {tagline && <p className="tagline">"{tagline}"</p>}
-      <StyledBtn>book now</StyledBtn>
+      {nowPlaying && <StyledBtn>book now</StyledBtn>}
     </StyledInfoContainer>
   );
 };
 
 const StyledInfoContainer = styled.article`
   width: 65%;
+  padding: ${(props) =>
+    props.nowPlaying ? "0.5rem 1rem" : "0.5rem 1rem 3rem 1rem"};
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   .overview {
-    padding: 0 0.5rem;
     text-align: justify;
   }
 
