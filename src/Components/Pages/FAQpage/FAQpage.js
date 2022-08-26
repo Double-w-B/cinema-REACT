@@ -3,13 +3,14 @@ import styled from "styled-components";
 import Navigation from "../../Navigation";
 import * as FAQmodule from "../../../data";
 import SingleQA from "./SingleQA";
+import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 
 const FAQpage = () => {
   React.useEffect(() => {
     window.scroll(0, 0);
   }, []);
   return (
-    <StyledMainContainer>
+    <StyledMain>
       <Navigation pageTitle={"FAQ"} />
       <h1>Frequently Asked Questions</h1>
 
@@ -35,16 +36,11 @@ const FAQpage = () => {
           })}
         </StyledTopic>
       </StyledFaqContainer>
-    </StyledMainContainer>
+    </StyledMain>
   );
 };
 
-const StyledMainContainer = styled.main`
-  width: 70%;
-  margin: 2rem auto;
-  color: var(--primary-white-clr);
-  cursor: default;
-`;
+const StyledMain = styled(StyledMainContainer)``;
 
 const StyledFaqContainer = styled.section`
   width: 100%;

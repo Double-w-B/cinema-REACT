@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import { StyledMoviesContainer } from "../Movies/MoviesNowPlaying";
 import SingleMoviePoster from "../Movies/SingleMoviePoster";
 import Navigation from "../Navigation";
+import { StyledMainContainer } from "./SingleMoviePage/SingleMoviePage";
 
 const MoviesComingSoonPage = () => {
   const { moviesComingSoon } = useSelector((store) => store.movies);
   console.log(moviesComingSoon);
   return (
-    <StyledMainContainer>
+    <StyledMain>
       <Navigation pageTitle={"Coming Soon"} />
       <StyledMoviesContainer>
         {moviesComingSoon.slice(4).map((movie) => {
@@ -22,13 +23,10 @@ const MoviesComingSoonPage = () => {
           );
         })}
       </StyledMoviesContainer>
-    </StyledMainContainer>
+    </StyledMain>
   );
 };
 
-const StyledMainContainer = styled.main`
-  width: 70%;
-  margin: 2rem auto;
-`;
+const StyledMain = styled(StyledMainContainer)``;
 
 export default MoviesComingSoonPage;

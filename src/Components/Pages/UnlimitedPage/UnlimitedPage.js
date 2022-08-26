@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Navigation from "../../Navigation";
 import bannerImg from "../../../Images/unlim_banner.webp";
 import Offers from "./Offers";
+import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 
 const UnlimitedPage = () => {
   React.useEffect(() => {
@@ -10,7 +11,7 @@ const UnlimitedPage = () => {
   }, []);
 
   return (
-    <StyledMainContainer>
+    <StyledMain>
       <Navigation pageTitle={"Unlimited"} />
       <h1>Unlimited Movies Card</h1>
 
@@ -33,24 +34,22 @@ const UnlimitedPage = () => {
           <p>
             Pay for your card either monthly or in one lump sum and then come to
             CineMania at any time to see as many films as you want. Getting your
-            Unlimited Movies Card can be done in minutes online and you can start using
-            it straight away.
+            Unlimited Movies Card can be done in minutes online and you can
+            start using it straight away.
           </p>
-          <p>To get more information call 04030 3030 0333 or ask for more details in CineMania.</p>
+          <p>
+            To get more information call 04030 3030 0333 or ask for more details
+            in CineMania.
+          </p>
         </StyledInfoContainer>
       </StyledContentContainer>
-    </StyledMainContainer>
+    </StyledMain>
   );
 };
 
-const StyledMainContainer = styled.main`
-  width: 70%;
-  margin: 2rem auto;
-  color: var(--primary-white-clr);
-  cursor: default;
-`;
+const StyledMain = styled(StyledMainContainer)``;
 
-const StyledContentContainer = styled.section`
+export const StyledContentContainer = styled.section`
   width: 100%;
   margin-top: 2rem;
   padding-bottom: 1rem;
@@ -75,11 +74,10 @@ const StyledInfoContainer = styled.article`
   padding: 2rem 1rem 1rem 1rem;
   font-size: 1.1rem;
 
-
   p {
     text-align: justify;
-    &:last-child{
-      margin-top:1rem;
+    &:last-child {
+      margin-top: 1rem;
     }
   }
 `;
