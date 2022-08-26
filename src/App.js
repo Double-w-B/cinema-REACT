@@ -41,11 +41,11 @@ function App() {
           path="/comingSoon/:title"
           element={<PagesModule.SingleMoviePage />}
         />
-        <Route exact path="/about" element={<PagesModule.UnlimitedPage />} />
+        <Route exact path="/about" element={<PagesModule.AboutPage />} />
         <Route
           exact
           path="/contact_us"
-          element={<PagesModule.UnlimitedPage />}
+          element={<PagesModule.ContactUsPage />}
         />
         <Route exact path="help/faq" element={<PagesModule.FAQpage />} />
         <Route

@@ -5,6 +5,8 @@ import MoviesComingSoonPage from "./MoviesComingSoonPage";
 import SingleMoviePage from "./SingleMoviePage/SingleMoviePage";
 import UnlimitedPage from "./UnlimitedPage/UnlimitedPage";
 import FAQpage from "./FAQpage/FAQpage";
+import AboutPage from "./AboutPage/AboutPage";
+import ContactUsPage from "./ContactUsPage";
 
 export {
   CinemaBarPage,
@@ -14,4 +16,6 @@ export {
   SingleMoviePage,
   UnlimitedPage,
   FAQpage,
+  AboutPage,
+  ContactUsPage,
 };
