@@ -1,3 +1,7 @@
+import { GiTicket } from "react-icons/gi";
+import { BiMoviePlay } from "react-icons/bi";
+import { FaVirus } from "react-icons/fa";
+
 export const ratesTitle = [
   "Never Again",
   "Awful",
@@ -17,6 +21,24 @@ export const navbarLinks = [
   { title: "unlimited", path: "/unlimited" },
   { title: "gift card", path: "/giftCard" },
   { title: "cinema bar", path: "/cinemaBar" },
+];
+
+export const FAQsTopics = [
+  {
+    title: "Tickets",
+    ref: "FAQsTickets",
+    icon: <GiTicket />,
+  },
+  {
+    title: "Movie",
+    ref: "FAQsMovie",
+    icon: <BiMoviePlay />,
+  },
+  {
+    title: "COVID-19",
+    ref: "FAQsCovid",
+    icon: <FaVirus />,
+  },
 ];
 
 export const ticketsAndPricingFaq = [
@@ -124,7 +146,18 @@ export const coronavirusFaq = [
   {
     question: "Ongoing Actions",
     answer:
-      "Regal continues to work closely with the relevant authorities and safety measures will be constantly monitored and adjusted according to the requirements. We have also reviewed our plans with leading infectious diseases experts, who stated that 'CineMania cinemas' reopening plan is consistent with the safety practices recommended by the Centers for Disease Control for operating public event spaces during the COVID-19 pandemic.'",
+      "CineMania continues to work closely with the relevant authorities and safety measures will be constantly monitored and adjusted according to the requirements. We have also reviewed our plans with leading infectious diseases experts, who stated that 'CineMania cinemas' reopening plan is consistent with the safety practices recommended by the Centers for Disease Control for operating public event spaces during the COVID-19 pandemic.'",
+  },
+  {
+    question: "Are the cinema bars open?",
+    answer:
+      "Yes, the cinema bars are open and the products you buy can be consumed during the movie within the movie hall.",
+  },
+  {
+    question:
+      "Will be the COVID Certificate checked before the entrance to the cinema?",
+    answer:
+      "No, it will not be checked. There is no need in a COVID Certificate before the entrance to the cinema at the moment.",
   },
 ];
 
@@ -166,5 +199,74 @@ export const unlimitedOffers = [
       "Access to Unlimited screenings, which are previews of upcoming films.",
       "Free access to CineMania cinemas across the country.",
     ],
+  },
+];
+
+export const contactFormIssues = [
+  "- Select the issue - ",
+  "Cinema experience, question or concern",
+  "Unlimited Movies Card issues",
+  "Gift Cards/Discount Tickets",
+  "Privacy Request",
+  "Donations",
+  "Cinema Bar",
+];
+
+export const contactFormInputs = [
+  {
+    title: "customer-name",
+    id: "name",
+    label: "first name",
+    type: "text",
+    input_part: "CC",
+  },
+  {
+    title: "customer-surname",
+    id: "surname",
+    label: "last name",
+    type: "text",
+    input_part: "CC",
+  },
+  {
+    title: "email",
+    id: "email",
+    label: "email address",
+    type: "text",
+    input_part: "EEPU",
+  },
+  {
+    title: "email-confirm",
+    id: "email-confirm",
+    label: "confirm email address",
+    type: "text",
+    input_part: "EEPU",
+  },
+  {
+    title: "phone",
+    id: "phone",
+    label: "phone number",
+    type: "text",
+    input_part: "EEPU",
+  },
+  {
+    title: "unlimited",
+    id: "unlimited",
+    label: "unlimited movies card number",
+    type: "text",
+    input_part: "EEPU",
+  },
+  {
+    title: "date",
+    id: "date",
+    label: "date",
+    type: "date",
+    input_part: "DT",
+  },
+  {
+    title: "time",
+    id: "time",
+    label: "time",
+    type: "time",
+    input_part: "DT",
   },
 ];
