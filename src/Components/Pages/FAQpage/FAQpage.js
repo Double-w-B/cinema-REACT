@@ -5,10 +5,11 @@ import * as FAQmodule from "../../../data";
 import SingleQA from "./SingleQA";
 import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 
-const FAQpage = () => {
+const FAQpage = (props) => {
   React.useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
   return (
     <StyledMain>
       <Navigation pageTitle={"FAQ"} />
@@ -16,21 +17,21 @@ const FAQpage = () => {
 
       <StyledFaqContainer>
         <StyledTopic>
-          <h2>Tickets and Pricing</h2>
+          <h2 ref={props.refTickets}>Tickets and Pricing</h2>
           {FAQmodule.ticketsAndPricingFaq.map((quest, index) => {
             return <SingleQA key={index} {...quest} />;
           })}
         </StyledTopic>
 
         <StyledTopic>
-          <h2>Going to the Movie</h2>
+          <h2 ref={props.refMovie}>Going to the Movie</h2>
           {FAQmodule.goingToTheMovieFaq.map((quest, index) => {
             return <SingleQA key={index} {...quest} />;
           })}
         </StyledTopic>
 
         <StyledTopic>
-          <h2>Coronavirus (COVID-19)</h2>
+          <h2 ref={props.refCovid}>Coronavirus (COVID-19)</h2>
           {FAQmodule.coronavirusFaq.map((quest, index) => {
             return <SingleQA key={index} {...quest} />;
           })}
@@ -50,7 +51,7 @@ const StyledFaqContainer = styled.section`
 const StyledTopic = styled.article`
   width: 100%;
   padding-left: 0.5rem;
-  
+
   h2 {
     color: var(--primary-red-clr);
     margin-bottom: 1rem;

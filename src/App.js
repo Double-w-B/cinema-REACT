@@ -9,6 +9,9 @@ import * as moviesSliceModule from "./features/moviesSlice";
 function App() {
   const dispatch = useDispatch();
   const nowPlayingContainer = React.useRef();
+  const FAQsTickets = React.useRef();
+  const FAQsMovie = React.useRef();
+  const FAQsCovid = React.useRef();
 
   React.useEffect(() => {
     dispatch(moviesSliceModule.getMoviesNowPlaying());
@@ -45,9 +48,25 @@ function App() {
         <Route
           exact
           path="/contact_us"
-          element={<PagesModule.ContactUsPage />}
+          element={
+            <PagesModule.ContactUsPage
+              refTickets={FAQsTickets}
+              refMovie={FAQsMovie}
+              refCovid={FAQsCovid}
+            />
+          }
         />
-        <Route exact path="help/faq" element={<PagesModule.FAQpage />} />
+        <Route
+          exact
+          path="/help/faq"
+          element={
+            <PagesModule.FAQpage
+              refTickets={FAQsTickets}
+              refMovie={FAQsMovie}
+              refCovid={FAQsCovid}
+            />
+          }
+        />
         <Route
           exact
           path="/unlimited"
