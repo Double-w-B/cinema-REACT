@@ -1,91 +1,110 @@
 import React from "react";
 import styled from "styled-components";
-import * as FormModule from "../../../data";
 import { StyledButton } from "../../Sliders/MoviesNowPlayingSlider";
-import sortIco from "../../../Images/sort-down.svg";
+import * as Input from "./FormInputs";
+import { validateInputs, checkInputsChange } from "./FormInputs/validation";
 
 const ContactForm = () => {
+  const [isError, setIsError] = React.useState(true);
+  const [form, setForm] = React.useState({
+    issue: "",
+    name: "",
+    surname: "",
+    email: "",
+    emailConfirm: "",
+    phoneNum: "",
+    cardNum: "",
+    date: "",
+    time: "",
+    message: "",
+  });
+
+  const labelIssue = React.useRef("");
+  const labelName = React.useRef("");
+  const labelSurname = React.useRef("");
+  const labelEmail = React.useRef("");
+  const labelEmailConfirm = React.useRef("");
+  const labelDate = React.useRef("");
+  const labelTime = React.useRef("");
+  const labelMessage = React.useRef("");
+
+  const refs = [
+    labelIssue,
+    labelName,
+    labelSurname,
+    labelEmail,
+    labelEmailConfirm,
+    labelDate,
+    labelTime,
+    labelMessage,
+  ];
+
+  React.useEffect(() => {
+    const { issue, name, surname, email, emailConfirm, date, time, message } =
+      form;
+
+    checkInputsChange(form, refs);
+
+    if (
+      issue &&
+      name &&
+      surname &&
+      email &&
+      emailConfirm &&
+      date &&
+      time &&
+      message &&
+      issue !== "- Select the issue -" &&
+      email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
+      emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
+      email === emailConfirm
+    ) {
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
+    // eslint-disable-next-line
+  }, [form]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    validateInputs(form, refs);
+  };
+
   return (
     <StyledContainer>
-      <StyledForm action="">
-        <div className="issues">
-          <select name="" id="issue">
-            {FormModule.contactFormIssues.map((issue, index) => {
-              return (
-                <option value="" key={index}>
-                  {issue}
-                </option>
-              );
-            })}
-          </select>
-          <label htmlFor="issue" className="no-select">
-            What can we help you with <span>*</span>
-          </label>
-        </div>
-
-        <div className="customer">
-          {FormModule.contactFormInputs
-            .filter((input) => input.input_part === "CC")
-            .map((input, index) => {
-              return (
-                <div className={input.title} key={index}>
-                  <input
-                    type={input.type}
-                    id={input.id}
-                    autocomplete="off"
-                    required
-                  />
-                  <label htmlFor={input.id} className="no-select">
-                    {input.label} <span>*</span>
-                  </label>
-                </div>
-              );
-            })}
-        </div>
-
-        {FormModule.contactFormInputs
-          .filter((input) => input.input_part === "EEPU")
-          .map((input, index) => {
-            return (
-              <div className={input.title} key={index}>
-                <input
-                  type={input.type}
-                  id={input.id}
-                  autocomplete="off"
-                  required
-                />
-                <label htmlFor={input.id} className="no-select">
-                  {input.label}{" "}
-                  {input.id !== "phone" && input.id !== "unlimited" && (
-                    <span>*</span>
-                  )}
-                </label>
-              </div>
-            );
-          })}
-
-        <div className="date-time">
-          {FormModule.contactFormInputs
-            .filter((input) => input.input_part === "DT")
-            .map((input, index) => {
-              return (
-                <div className={input.title} key={index}>
-                  <input type={input.type} id={input.id} required />
-                  <label htmlFor={input.id} className="no-select">
-                    {input.label} <span>*</span>
-                  </label>
-                </div>
-              );
-            })}
-        </div>
-
-        <div className="message">
-          <textarea id="message" required></textarea>
-          <label htmlFor="message" className="no-select">
-            Describe your issue or question <span>*</span>
-          </label>
-        </div>
-        <StyledBtn>SEND</StyledBtn>
+      <StyledForm action="" email={form.email} emailConfirm={form.emailConfirm}>
+        <Input.SelectIssue
+          form={form}
+          setForm={setForm}
+          refIssue={labelIssue}
+        />
+        <Input.FullName
+          form={form}
+          setForm={setForm}
+          refName={labelName}
+          refSurname={labelSurname}
+        />
+        <Input.Contacts
+          form={form}
+          setForm={setForm}
+          refEmail={labelEmail}
+          refEmailConfirm={labelEmailConfirm}
+        />
+        <Input.DateTime
+          form={form}
+          setForm={setForm}
+          refDate={labelDate}
+          refTime={labelTime}
+        />
+        <Input.Message
+          form={form}
+          setForm={setForm}
+          refMessage={labelMessage}
+        />
+        <StyledBtn onClick={(e) => handleClick(e)} isError={isError}>
+          SEND
+        </StyledBtn>
       </StyledForm>
     </StyledContainer>
   );
@@ -112,10 +131,14 @@ const StyledForm = styled.form`
   label {
     text-transform: uppercase;
     font-size: 1.1rem;
+    opacity: 0.7;
 
-    &:not(.issues label) {
-      opacity: 0.7;
+    &.error {
+      color: var(--primary-red-clr);
     }
+  }
+  .issues label {
+    opacity: 1;
   }
 
   input {
@@ -142,8 +165,7 @@ const StyledForm = styled.form`
   .email-confirm,
   .date-time,
   .phone,
-  .unlimited,
-  .message {
+  .unlimited {
     width: 100%;
     height: 60px;
     display: flex;
@@ -161,6 +183,27 @@ const StyledForm = styled.form`
         opacity: 1;
       }
     }
+  }
+
+  .email-confirm {
+    position: relative;
+
+    svg {
+      font-size: 1.25rem;
+      color: ${(props) =>
+        props.email === props.emailConfirm
+          ? "green"
+          : "var(--primary-red-clr)"};
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.7rem;
+      transition: 0.2s linear;
+    }
+  }
+
+  #email,
+  #email-confirm {
+    text-transform: lowercase;
   }
 
   select,
@@ -197,71 +240,17 @@ const StyledForm = styled.form`
     }
   }
 
-  .message {
-    height: 180px;
-
-    &:hover {
-      & label,
-      & textarea {
-        opacity: 1;
-      }
-    }
-
-    textarea {
-      width: 100%;
-      height: 155px;
-      resize: none;
-      padding: 0.5rem;
-      font-size: 1.2rem;
-      text-align: justify;
-      opacity: 0.7;
-
-      &:focus,
-      &:valid {
-        opacity: 1;
-        & + label,
-        & + label {
-          opacity: 1;
-        }
-      }
-    }
-  }
-
-  select,
   .date input,
   .time input {
     font-size: 1.1rem;
     cursor: pointer;
   }
-
-  select {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    opacity: 1;
-    cursor: pointer;
-    display: block;
-    padding-left: 0.5rem;
-    font-size: 1.2rem;
-    border: none;
-    outline: none;
-    border-radius: 2px;
-    background-color: #fff;
-    background-image: url(${sortIco}),
-      linear-gradient(to bottom, #ffffff 0%, #e5e5e55d 100%);
-    background-repeat: no-repeat;
-    background-position: right 0.7em top 5%, 0 0;
-    background-size: 1.1em auto, 100%;
-    transition: 0.3s linear;
-
-    &:active {
-      background-size: 0.9em auto, 100%;
-    }
-  }
 `;
+
 const StyledBtn = styled(StyledButton)`
   position: relative;
+  background-color: ${(props) => !props.isError && "var(--primary-red-clr)"};
+  opacity: ${(props) => !props.isError && "0.9"};
 `;
 
 export default ContactForm;
