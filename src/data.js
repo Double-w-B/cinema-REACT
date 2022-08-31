@@ -203,7 +203,7 @@ export const unlimitedOffers = [
 ];
 
 export const contactFormIssues = [
-  "- Select the issue - ",
+  "- Select the issue -",
   "Cinema experience, question or concern",
   "Unlimited Movies Card issues",
   "Gift Cards/Discount Tickets",
@@ -213,60 +213,63 @@ export const contactFormIssues = [
 ];
 
 export const contactFormInputs = [
+  /* NS - name, surname  */
   {
     title: "customer-name",
     id: "name",
     label: "first name",
     type: "text",
-    input_part: "CC",
+    inputsSection: "NS",
   },
   {
     title: "customer-surname",
     id: "surname",
     label: "last name",
     type: "text",
-    input_part: "CC",
+    inputsSection: "NS",
   },
+  /* EEPU - email, email-confirm, phone, unlimited  */
   {
     title: "email",
     id: "email",
     label: "email address",
     type: "text",
-    input_part: "EEPU",
+    inputsSection: "EEPU",
   },
   {
     title: "email-confirm",
     id: "email-confirm",
     label: "confirm email address",
     type: "text",
-    input_part: "EEPU",
+    inputsSection: "EEPU",
   },
   {
     title: "phone",
     id: "phone",
     label: "phone number",
     type: "text",
-    input_part: "EEPU",
+    inputsSection: "EEPU",
   },
   {
     title: "unlimited",
     id: "unlimited",
     label: "unlimited movies card number",
     type: "text",
-    input_part: "EEPU",
+    inputsSection: "EEPU",
   },
+  /* DT - date, time  */
   {
     title: "date",
     id: "date",
     label: "date",
     type: "date",
-    input_part: "DT",
+    inputsSection: "DT",
   },
   {
     title: "time",
     id: "time",
     label: "time",
     type: "time",
-    input_part: "DT",
+    inputsSection: "DT",
   },
 ];
