@@ -1,3 +1,25 @@
+
+export const validationSuccess = (form) =>{
+  const { issue, name, surname, email, emailConfirm, date, time, message } =
+    form;
+
+  const success =
+    issue &&
+    name &&
+    surname &&
+    email &&
+    emailConfirm &&
+    date &&
+    time &&
+    message &&
+    issue !== "- Select the issue -" &&
+    email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
+    emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
+    email === emailConfirm;
+
+    return success;
+}
+
 export const validateInputs = (form, refs) => {
   const { issue, name, surname, email, emailConfirm, date, time, message } =
     form;
@@ -46,6 +68,8 @@ export const validateInputs = (form, refs) => {
   if (!message) {
     labelMessage.current.classList.add("error");
   }
+
+  return validationSuccess(form);
 };
 
 export const checkInputsChange = (form, refs) => {
@@ -96,5 +120,64 @@ export const checkInputsChange = (form, refs) => {
 
   if (message) {
     labelMessage.current.classList.remove("error");
+  }
+};
+
+export const showError = (form, refs) => {
+  const { issue, name, surname, email, emailConfirm, date, time, message } =
+    form;
+  const [
+    labelIssue,
+    labelName,
+    labelSurname,
+    labelEmail,
+    labelEmailConfirm,
+    labelDate,
+    labelTime,
+    labelMessage,
+  ] = refs;
+
+  if (!issue || issue === "- Select the issue -") {
+    labelIssue.current.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (!name) {
+    labelName.current.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (!surname) {
+    labelSurname.current.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (!email || !email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)) {
+    labelEmail.current.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (
+    !emailConfirm ||
+    !emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) ||
+    email !== emailConfirm
+  ) {
+    labelEmailConfirm.current.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (!date) {
+    labelDate.current.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (!time) {
+    labelTime.current.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  if (!message) {
+    labelMessage.current.scrollIntoView({ behavior: "smooth" });
+    return;
   }
 };
