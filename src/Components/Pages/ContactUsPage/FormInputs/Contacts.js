@@ -12,8 +12,9 @@ const Contacts = (props) => {
   const { form, setForm } = props;
 
   const handleSetFn = (e) => {
-    e.target.id === "email" && setEmail(e.target.value);
-    e.target.id === "email-confirm" && setEmailConfirm(e.target.value);
+    e.target.id === "email" && setEmail(e.target.value.toLocaleLowerCase());
+    e.target.id === "email-confirm" &&
+      setEmailConfirm(e.target.value.toLocaleLowerCase());
     e.target.id === "phone" &&
       setPhoneNum(e.target.value.replace(/[^0-9.]/g, ""));
     e.target.id === "unlimited" && setCardNum(e.target.value);
@@ -43,6 +44,12 @@ const Contacts = (props) => {
     return null;
   };
 
+  const handleOnPaste = (e, id) => {
+    if (id === "email-confirm") {
+      e.preventDefault();
+      return false;
+    }
+  };
   return (
     <>
       {contactFormInputs
@@ -56,6 +63,7 @@ const Contacts = (props) => {
                 value={values[index]}
                 onChange={(e) => handleSetFn(e)}
                 autoComplete="off"
+                onPaste={(e) => handleOnPaste(e, input.id)}
                 required
               />
               <label
