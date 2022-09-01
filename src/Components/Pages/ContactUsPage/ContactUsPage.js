@@ -55,15 +55,8 @@ const ContactUsPage = (props) => {
             (<span>*</span> required fields)
           </span>
         </h2>
-        {/* <p>Thank you for contacting CineMania!</p> */}
-        {/* <p>
-          To help us address your concern, please provide any pertinent account
-          details associated with your inquiry. Additionally, you can reach out
-          to us privately on our social media platforms such as Facebook or
-          Instagram.
-        </p> */}
-        {/* <p>Inquiries are responded to within 24-48 business hours.</p> */}
-        <ContactForm />
+       
+        <ContactForm setIsModal={props.setIsModal} />
       </StyledSection>
     </StyledMain>
   );

@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { StyledButton } from "../../Sliders/MoviesNowPlayingSlider";
 import * as Input from "./FormInputs";
-import { validateInputs, checkInputsChange } from "./FormInputs/validation";
+import * as Validation from "./FormInputs/validation.js";
 
-const ContactForm = () => {
+const ContactForm = (props) => {
   const [isError, setIsError] = React.useState(true);
   const [form, setForm] = React.useState({
     issue: "",
@@ -40,35 +40,15 @@ const ContactForm = () => {
   ];
 
   React.useEffect(() => {
-    const { issue, name, surname, email, emailConfirm, date, time, message } =
-      form;
-
-    checkInputsChange(form, refs);
-
-    if (
-      issue &&
-      name &&
-      surname &&
-      email &&
-      emailConfirm &&
-      date &&
-      time &&
-      message &&
-      issue !== "- Select the issue -" &&
-      email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
-      emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
-      email === emailConfirm
-    ) {
-      setIsError(false);
-    } else {
-      setIsError(true);
-    }
+    Validation.checkInputsChange(form, refs);
+    Validation.validationSuccess(form) ? setIsError(false) : setIsError(true);
     // eslint-disable-next-line
   }, [form]);
 
   const handleClick = (e) => {
     e.preventDefault();
-    validateInputs(form, refs);
+    Validation.validateInputs(form, refs) && props.setIsModal(true);
+    Validation.showError(form, refs);
   };
 
   return (
@@ -250,7 +230,6 @@ const StyledForm = styled.form`
 const StyledBtn = styled(StyledButton)`
   position: relative;
   background-color: ${(props) => !props.isError && "var(--primary-red-clr)"};
-  opacity: ${(props) => !props.isError && "0.9"};
 `;
 
 export default ContactForm;

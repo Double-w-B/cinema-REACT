@@ -7,6 +7,7 @@ import UnlimitedPage from "./UnlimitedPage/UnlimitedPage";
 import FAQpage from "./FAQpage/FAQpage";
 import AboutPage from "./AboutPage/AboutPage";
 import ContactUsPage from "./ContactUsPage/ContactUsPage";
+import ContactUsModal from "./ContactUsPage/ContactUsModal";
 
 export {
   CinemaBarPage,
@@ -18,4 +19,5 @@ export {
   FAQpage,
   AboutPage,
   ContactUsPage,
+  ContactUsModal,
 };
