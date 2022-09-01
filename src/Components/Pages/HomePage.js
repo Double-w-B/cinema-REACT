@@ -4,8 +4,10 @@ import MoviesComingSoonSlider from "../Sliders/MoviesComingSoonSlider";
 import MoviesNowPlaying from "../Movies/MoviesNowPlaying";
 
 const HomePage = (props) => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  console.log(props.nowPlayingContainer);
   return (
     <main>
       <MoviesNowPlayingSlider />
