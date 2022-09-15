@@ -1,6 +1,34 @@
 import { GiTicket } from "react-icons/gi";
 import { BiMoviePlay } from "react-icons/bi";
 import { FaVirus } from "react-icons/fa";
+import drinksIco from "./Images/icons/drinks.png";
+import popcornIco from "./Images/icons/popcorn.png";
+import chipsIco from "./Images/icons/chips.png";
+import hotDogIco from "./Images/icons/hotDog.png";
+import pizzaIco from "./Images/icons/pizza.png";
+
+export const barOffers = [
+  {
+    title: "Popcorn",
+    src: `${popcornIco}`,
+  },
+  {
+    title: "Chips",
+    src: `${chipsIco}`,
+  },
+  {
+    title: "Hot Dog",
+    src: `${hotDogIco}`,
+  },
+  {
+    title: "Pizza",
+    src: `${pizzaIco}`,
+  },
+  {
+    title: "Drinks",
+    src: `${drinksIco}`,
+  },
+];
 
 export const ratesTitle = [
   "Never Again",
