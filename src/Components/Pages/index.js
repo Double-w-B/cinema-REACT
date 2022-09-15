@@ -1,4 +1,4 @@
-import CinemaBarPage from "./CinemaBarPage";
+import CinemaBarPage from "./CinemaBar/CinemaBarPage";
 import GiftCardPage from "./GiftCardPage";
 import HomePage from "./HomePage";
 import MoviesComingSoonPage from "./MoviesComingSoonPage";
