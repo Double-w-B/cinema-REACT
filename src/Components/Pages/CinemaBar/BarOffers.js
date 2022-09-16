@@ -2,18 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { barOffers } from "../../../data";
 
-const BarOffers = () => {
-  const [index, setIndex] = React.useState(0);
+const BarOffers = (props) => {
+  const { index, setIndex, setShowDesc } = props;
 
   React.useEffect(() => {
     const lastIndex = barOffers.length - 1;
     index < 0 && setIndex(lastIndex);
     index > lastIndex && setIndex(0);
-  }, [index]);
+  }, [index, setIndex]);
 
   const handleClick = (position) => {
-    position === "nextIcon" && setIndex(index + 1);
-    position === "lastIcon" && setIndex(index - 1);
+    if (position === "nextIcon") {
+      setShowDesc(false);
+      setIndex(index + 1);
+    }
+    if (position === "lastIcon") {
+      setShowDesc(false);
+      setIndex(index - 1);
+    }
   };
 
   const setActiveIcon = () => {
@@ -60,7 +66,18 @@ const BarOffers = () => {
 
   return (
     <StyledContainer>
-      <StyledIconsWrapper>{setActiveIcon()}</StyledIconsWrapper>
+      <StyledIconsWrapper>
+        {setActiveIcon()}
+        {barOffers.map((offer, offerIndex) => {
+          let showItem = "";
+          if (offerIndex === index) showItem = "show";
+          return (
+            <p key={offerIndex} className={showItem}>
+              {offer.title}
+            </p>
+          );
+        })}
+      </StyledIconsWrapper>
     </StyledContainer>
   );
 };
@@ -72,10 +89,27 @@ const StyledContainer = styled.section`
 `;
 
 const StyledIconsWrapper = styled.div`
-  width: 50%;
+  width: 40%;
   height: 100%;
   margin: 0 auto;
   position: relative;
+
+  && p {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    bottom: -2rem;
+    left: 50%;
+    margin: 0;
+    transform: translateX(-50%);
+    position: absolute;
+    opacity: 0;
+    transition-delay: 0.3s;
+    transition: 0.3s ease-in;
+
+    &.show {
+      opacity: 1;
+    }
+  }
 `;
 
 const StyledImg = styled.article`
@@ -89,6 +123,7 @@ const StyledImg = styled.article`
   opacity: 0.6;
   transition: 0.7s linear;
   background-color: transparent;
+  /* background-color: #c3c3c3; */
 
   img {
     width: 90%;

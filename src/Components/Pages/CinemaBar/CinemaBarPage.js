@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import Navigation from "../../Navigation";
 import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
-import { StyledContentContainer } from "../UnlimitedPage/UnlimitedPage";
-import { StyledBannerImg } from "../UnlimitedPage/UnlimitedPage";
+import {
+  StyledContentContainer,
+  StyledBannerImg,
+} from "../UnlimitedPage/UnlimitedPage";
 import bannerImg from "../../../Images/cinemaBar.jpg";
 import BarOffers from "./BarOffers";
+import OffersDescription from "./OffersDescription";
 
 const CinemaBarPage = () => {
+  const [index, setIndex] = React.useState(0);
+  const [showDesc, setShowDesc] = React.useState(true);
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -33,7 +38,16 @@ const CinemaBarPage = () => {
           range of coffees, teas, cold drinks and freshly squeezed juices,
           served with ice cream, pastries and snacks.
         </p>
-        <BarOffers />
+        <BarOffers
+          index={index}
+          setIndex={setIndex}
+          setShowDesc={setShowDesc}
+        />
+        <OffersDescription
+          index={index}
+          showDesc={showDesc}
+          setShowDesc={setShowDesc}
+        />
       </StyledContainer>
     </StyledMain>
   );
