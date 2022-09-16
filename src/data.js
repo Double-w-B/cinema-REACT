@@ -9,24 +9,34 @@ import pizzaIco from "./Images/icons/pizza.png";
 
 export const barOffers = [
   {
+    id: 0,
     title: "Popcorn",
     src: `${popcornIco}`,
+    desc: "Enjoy a movie with friends with delicious tasting popcorn. This simple snack can enhance the fun of any party and acts as a time-pass food you can munch on. Made from corn kernels, it is rich in protein and fibre, apart from being crunchy.There are several flavour options available, and you can choose from butter, tomato chilli, pepper, tandoori, peri-peri, cheese, barbeque, and many other options.Flavours like chocolate, caramel, and mocha walnut can be ideal for someone who has a sweet tooth.",
   },
   {
+    id: 1,
     title: "Chips",
     src: `${chipsIco}`,
+    desc: "When it comes to movie nights with your sweetheart, solo binge-watch sessions, and game nights with friends, Chips are the best companion that you can buy in CineManiBar. Whether you love Bingo, Parle, Kurkure, Lays, Doritos, or the classic Uncle Chipps, your cinema is the best place to find all the varieties of chips.",
   },
   {
+    id: 2,
     title: "Hot Dog",
     src: `${hotDogIco}`,
+    desc: "Our hot dogs are made from a combination of beef, pork, and chicken. This mix of meats gives the hot dogs a unique flavor that is appealing to many moviegoers. They're salty, slightly greasy, and oh-so-snackable. So, if you're ever in the mood for a hot dog at the cinema, you can rest assured that you're getting a quality product.",
   },
   {
+    id: 3,
     title: "Pizza",
     src: `${pizzaIco}`,
+    desc: "Eating pizza is more than an obsession, it's a lifestyle. It can either be eaten with or without cutleries, alone or with other foods. You will find one of the world's most popular foods also in CineMania! We have 20 types of pizza for you and your friends. Watch a movie while having a pizza!",
   },
   {
+    id: 4,
     title: "Drinks",
     src: `${drinksIco}`,
+    desc: "Aerated drinks such as Pepsi, Coca Cola, Thumbs Up, Mirinda, and more not only quench your thirst but also contain a sense of nostalgia. When you hear the pop of a can, you’re automatically transported to hot and humid summers of endless fun with your friends. A great variety of drinks waiting for you in CineMania Bar!",
   },
 ];
 
@@ -48,7 +58,7 @@ export const navbarLinks = [
   { title: "coming soon", path: "/comingSoon" },
   { title: "unlimited", path: "/unlimited" },
   { title: "gift card", path: "/giftCard" },
-  { title: "cinema bar", path: "/cinemaBar" },
+  { title: "cinema bar", path: "/cinema_bar" },
 ];
 
 export const FAQsTopics = [
