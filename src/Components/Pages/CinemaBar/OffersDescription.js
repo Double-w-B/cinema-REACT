@@ -24,8 +24,10 @@ const OffersDescription = (props) => {
 };
 
 const StyledContainer = styled.div`
-  width: 80%;
+  width: 75%;
+  min-height: 180px;
   margin: 4.5rem auto 0 auto;
+  /* background-color: tomato; */
 
   && p {
     transition: 0.4s ease-in;

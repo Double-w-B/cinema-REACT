@@ -23,7 +23,7 @@ const CinemaBarPage = () => {
       <h1>CineMania Bar</h1>
       <StyledContainer>
         <StyledBanner>
-          <img src={bannerImg} alt="" />
+          <img src={bannerImg} alt="banner" />
         </StyledBanner>
         <p>
           Whether you're thirsting for a Frappuccino to enjoy alongside popcorn,
@@ -48,6 +48,16 @@ const CinemaBarPage = () => {
           showDesc={showDesc}
           setShowDesc={setShowDesc}
         />
+
+        <p>
+          Aromatic, freshly brewed coffee, frozen tea, tasty dessert, nutritious
+          sandwich, hot dog or even a pizza! All in a particularly
+          climate-friendly place away from the hustle and bustle. CineMania Bar
+          is a place to relax, socialize or talk to business. Unlimited wireless
+          internet access will let you forget about coffee and ice. CineMania
+          Bar is a unique pleasure and a moment of relaxation, not just before
+          the movie but also after the movie and just to meet with your friends!
+        </p>
       </StyledContainer>
     </StyledMain>
   );
@@ -55,9 +65,13 @@ const CinemaBarPage = () => {
 
 const StyledMain = styled(StyledMainContainer)``;
 const StyledContainer = styled(StyledContentContainer)`
-  min-height: 120vh;
+  min-height: 125vh;
 
   p {
+    &:nth-child(2) {
+      margin-top: 2rem;
+    }
+
     font-size: 1.1rem;
     margin: 1rem 2rem;
     text-align: justify;
