@@ -9,7 +9,7 @@ const FooterInfo = () => {
       <Link to="/contact_us">contact us</Link>
       <Link to="help/faq">FAQ</Link>
       <Link to="/unlimited">unlimited</Link>
-      <Link to="/cinema_bar">cinema bar</Link>
+      <Link to="/cinema_cafe">cinema cafe</Link>
       <a
         href="https://facebook.com"
         target="_blank"

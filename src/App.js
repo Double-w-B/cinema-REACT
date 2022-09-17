@@ -74,7 +74,7 @@ function App() {
         />
         <Route exact path="/unlimited" element={<Pages.UnlimitedPage />} />
         <Route exact path="/giftCard" element={<Pages.GiftCardPage />} />
-        <Route exact path="/cinema_bar" element={<Pages.CinemaBarPage />} />
+        <Route exact path="/cinema_cafe" element={<Pages.CinemaCafePage />} />
       </Routes>
       <Footer />
     </Router>

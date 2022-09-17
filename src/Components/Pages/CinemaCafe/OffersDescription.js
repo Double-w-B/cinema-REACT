@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { barOffers } from "../../../data";
+import { cafeOffers } from "../../../data";
 
 const OffersDescription = (props) => {
   const { index, showDesc, setShowDesc } = props;
@@ -16,7 +16,7 @@ const OffersDescription = (props) => {
 
   return (
     <StyledContainer showDesc={showDesc}>
-      {barOffers.map((offer) => {
+      {cafeOffers.map((offer) => {
         if (offer.id === index) return <p>{offer.desc}</p>;
       })}
     </StyledContainer>

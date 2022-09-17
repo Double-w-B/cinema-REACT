@@ -1,4 +1,4 @@
-import CinemaBarPage from "./CinemaBar/CinemaBarPage";
+import CinemaCafePage from "./CinemaCafe/CinemaCafePage";
 import GiftCardPage from "./GiftCardPage";
 import HomePage from "./HomePage";
 import MoviesComingSoonPage from "./MoviesComingSoonPage";
@@ -10,7 +10,7 @@ import ContactUsPage from "./ContactUsPage/ContactUsPage";
 import ContactUsModal from "./ContactUsPage/ContactUsModal";
 
 export {
-  CinemaBarPage,
+  CinemaCafePage,
   GiftCardPage,
   HomePage,
   MoviesComingSoonPage,
