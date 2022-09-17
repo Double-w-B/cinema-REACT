@@ -7,18 +7,18 @@ import chipsIco from "./Images/icons/chips.png";
 import hotDogIco from "./Images/icons/hotDog.png";
 import pizzaIco from "./Images/icons/pizza.png";
 
-export const barOffers = [
+export const cafeOffers = [
   {
     id: 0,
     title: "Popcorn",
     src: `${popcornIco}`,
-    desc: "Enjoy a movie with friends with delicious tasting popcorn. This simple snack can enhance the fun of any party and acts as a time-pass food you can munch on. Made from corn kernels, it is rich in protein and fibre, apart from being crunchy.There are several flavour options available, and you can choose from butter, tomato chilli, pepper, tandoori, peri-peri, cheese, barbeque, and many other options.Flavours like chocolate, caramel, and mocha walnut can be ideal for someone who has a sweet tooth.",
+    desc: "Enjoy a movie with friends with delicious tasting popcorn. Made from corn kernels, it is rich in protein and fibre, apart from being crunchy. There are several flavour options available, and you can choose from butter, tomato chilli, pepper, tandoori, peri-peri, cheese, barbeque, and many other options. Flavours like chocolate, caramel, and mocha walnut can be ideal for someone who has a sweet tooth.",
   },
   {
     id: 1,
     title: "Chips",
     src: `${chipsIco}`,
-    desc: "When it comes to movie nights with your sweetheart, solo binge-watch sessions, and game nights with friends, Chips are the best companion that you can buy in CineManiBar. Whether you love Bingo, Parle, Kurkure, Lays, Doritos, or the classic Uncle Chipps, your cinema is the best place to find all the varieties of chips.",
+    desc: "When it comes to movie nights with your sweetheart, solo binge-watch sessions, and game nights with friends, Chips are the best companion that you can buy in CineMania Bar. Whether you love Bingo, Parle, Kurkure, Lays, Doritos, or the classic Uncle Chipps, your cinema is the best place to find all the varieties of chips.",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ export const barOffers = [
     id: 4,
     title: "Drinks",
     src: `${drinksIco}`,
-    desc: "Aerated drinks such as Pepsi, Coca Cola, Thumbs Up, Mirinda, and more not only quench your thirst but also contain a sense of nostalgia. When you hear the pop of a can, you’re automatically transported to hot and humid summers of endless fun with your friends. A great variety of drinks waiting for you in CineMania Bar!",
+    desc: "Aerated drinks such as Pepsi, Coca Cola, Thumbs Up, Mirinda, and more not only quench your thirst but also contain a sense of nostalgia. When you hear the pop of a can, you're automatically transported to hot and humid summers of endless fun with your friends. A great variety of drinks waiting for you in CineMania Bar!",
   },
 ];
 
