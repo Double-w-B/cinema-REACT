@@ -9,21 +9,17 @@ import spinnerImg from "../../../src/Images/spinner_2.gif";
 
 const Navbar = (props) => {
   const location = useLocation();
-  const {
-    loginWithRedirect,
-    isAuthenticated,
-    logout,
-    user,
-    isLoading,
-  } = useAuth0();
-
+  const { loginWithRedirect, isAuthenticated, logout, user, isLoading } =
+    useAuth0();
   const isUser = isAuthenticated && user;
 
   const handleClick = () => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       props.nowPlayingContainer.current.scrollIntoView({ behavior: "smooth" });
     }, 400);
+    return () => clearTimeout(timeout);
   };
+
   const logoutUser = () => {
     logout({ returnTo: window.location.origin });
   };
