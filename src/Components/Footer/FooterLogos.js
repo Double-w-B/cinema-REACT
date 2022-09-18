@@ -8,16 +8,16 @@ const FooterLogos = () => {
   return (
     <StyledSectionLogos>
       <div>
-        <img src={LogoImg1} alt="" draggable="false"/>
+        <img src={LogoImg1} alt="" draggable="false" />
       </div>
       <div>
-        <img src={LogoImg2} alt="" draggable="false"/>
+        <img src={LogoImg2} alt="" draggable="false" />
       </div>
       <div>
-        <img src={LogoImg3} alt="" draggable="false"/>
+        <img src={LogoImg3} alt="" draggable="false" />
       </div>
       <div>
-        <img src={LogoImg4} alt="" draggable="false"/>
+        <img src={LogoImg4} alt="" draggable="false" />
       </div>
     </StyledSectionLogos>
   );
@@ -116,8 +116,6 @@ const StyledSectionLogos = styled.section`
   grid-template-columns: repeat(auto-fit, minmax(20px, 100px));
   align-items: center;
   justify-content: space-around;
-  //   background-color: green;
-  //   opacity: 0.5;
 
   img {
     width: 100%;
@@ -129,7 +127,7 @@ const StyledSectionLogos = styled.section`
   }
 
   & div:nth-child(1) img {
-    -webkit-animation: ${fade1}7.5s infinite linear;
+    -webkit-animation: ${fade1} 7.5s infinite linear;
     -moz-animation: ${fade1} 7.5s infinite linear;
     -o-animation: ${fade1} 7.5s infinite linear;
     animation: ${fade1} 7.5s infinite linear;

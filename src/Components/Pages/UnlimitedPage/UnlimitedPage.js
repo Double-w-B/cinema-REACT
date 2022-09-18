@@ -57,7 +57,7 @@ export const StyledContentContainer = styled.section`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const StyledBannerImg = styled.div`
+export const StyledBannerImg = styled.div`
   width: 100%;
 
   img {

@@ -85,7 +85,8 @@ const StyledImgContainer = styled.article`
   height: 100%;
   top: 0;
   left: 0;
-  opacity: 0;
+  visibility: hidden;
+
   position: absolute;
   transition: all 0.5s linear;
   z-index: 0;
@@ -111,7 +112,7 @@ const StyledImgContainer = styled.article`
   }
 
   &.activeSlide {
-    opacity: 1;
+    visibility: visible;
     transform: translateX(0);
 
     .title {

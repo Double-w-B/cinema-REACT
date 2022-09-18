@@ -6,6 +6,7 @@
 }
 
 html {
+  width: 100vw;
   scrollbar-width: thin;
   scrollbar-color: #434343 #0a0f18;
 }

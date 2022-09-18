@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 const FooterRights = () => {
   return (
     <StyledSectionRights>
@@ -19,8 +19,7 @@ const FooterRights = () => {
       </p>
     </StyledSectionRights>
   );
-}
-
+};
 
 const StyledSectionRights = styled.section`
   width: 100%;
@@ -30,12 +29,8 @@ const StyledSectionRights = styled.section`
   display: grid;
   place-items: center;
 
-  //   background-color: green;
-  //   opacity: 0.3;
-  
-a{
+  a {
     color: #fff;
-}
-
+  }
 `;
-export default FooterRights
+export default FooterRights;

@@ -14,7 +14,7 @@ const Banner = () => {
         if (index === 0) return banners.length - 1;
         if (index === banners.length - 1) return 0;
       });
-    }, 6000);
+    }, 4500);
     return () => clearInterval(slider);
   }, [index, banners.length]);
 
@@ -57,7 +57,6 @@ const StyledContainer = styled.div`
   position: relative;
   overflow: hidden;
   display: flex;
-  /* margin-bottom: 2rem; */
   box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
 
   .layer {

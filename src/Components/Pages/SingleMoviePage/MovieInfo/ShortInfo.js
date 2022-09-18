@@ -61,7 +61,6 @@ const ShortInfo = () => {
 const StyledWrapper = styled.div`
   width: 100%;
   padding-left: 2rem;
-  /* padding: 0 0.5rem; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;

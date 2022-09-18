@@ -10,18 +10,10 @@ const FooterInfo = () => {
       <Link to="help/faq">FAQ</Link>
       <Link to="/unlimited">unlimited</Link>
       <Link to="/cinema_cafe">cinema cafe</Link>
-      <a
-        href="https://facebook.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
         <span className="fb">facebook</span>
       </a>
-      <a
-        href="https://instagram.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
         <span className="ig">instagram</span>
       </a>
     </StyledSectionInfo>
@@ -31,8 +23,6 @@ const StyledSectionInfo = styled.section`
   width: 80%;
   height: 30%;
   margin: 0 auto;
-  //   background-color: green;
-//   opacity: 0.7;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -46,7 +36,7 @@ const StyledSectionInfo = styled.section`
     transition: all 0.3s linear;
 
     .fb {
-        color: #3b5998;
+      color: #3b5998;
     }
 
     .ig {
