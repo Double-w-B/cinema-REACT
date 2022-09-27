@@ -8,6 +8,7 @@ import FAQpage from "./FAQpage/FAQpage";
 import AboutPage from "./AboutPage/AboutPage";
 import ContactUsPage from "./ContactUsPage/ContactUsPage";
 import ContactUsModal from "./ContactUsPage/ContactUsModal";
+import Booking from "./Booking/Booking";
 
 export {
   CinemaCafePage,
@@ -20,4 +21,5 @@ export {
   AboutPage,
   ContactUsPage,
   ContactUsModal,
+  Booking,
 };

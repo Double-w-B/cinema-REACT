@@ -18,7 +18,7 @@ function App() {
     dispatch(moviesSliceModule.getMoviesNowPlaying());
     dispatch(moviesSliceModule.getMoviesComingSoon());
   });
-  
+
   isModal
     ? document.body.classList.add("no-scrolling")
     : document.body.classList.remove("no-scrolling");
@@ -37,6 +37,11 @@ function App() {
           exact
           path="/nowPlaying/:title"
           element={<Pages.SingleMoviePage />}
+        />
+        <Route
+          exact
+          path="/nowPlaying/:title/booking"
+          element={<Pages.Booking />}
         />
         <Route
           exact
