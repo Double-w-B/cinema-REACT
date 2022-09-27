@@ -59,6 +59,7 @@ export const StyledContentContainer = styled.section`
 
 export const StyledBannerImg = styled.div`
   width: 100%;
+  min-height: 100px;
 
   img {
     width: 100%;
