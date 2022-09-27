@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { FaChevronLeft } from "react-icons/fa";
-import { FaChevronRight } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import * as SingleMovie from "../../features/singleMovieSlice";
 
 const MoviesNowPlayingSlider = () => {
   const [index, setIndex] = React.useState(0);
+  const dispatch = useDispatch();
+
   const { moviesNowPlaying, nowPlayingIsLoading, imgHiResUrl } = useSelector(
     (store) => store.movies
   );
@@ -32,6 +35,16 @@ const MoviesNowPlayingSlider = () => {
     return firstSixMovies.map((movie, movieIndex) => {
       const { id, backdrop_path, title } = movie;
 
+      const setPath = () => {
+        const urlMovieTitle = title.split(" ").join("_");
+        return `/nowPlaying/${urlMovieTitle}/booking`;
+      };
+
+      const handleClick = () => {
+        dispatch(SingleMovie.getSingleMovieInfo(id));
+        dispatch(SingleMovie.getSingleMovieVideos(id));
+      };
+
       let position = "nextSlide";
       if (movieIndex === index) position = "activeSlide";
 
@@ -46,7 +59,9 @@ const MoviesNowPlayingSlider = () => {
           <img src={imgHiResUrl + backdrop_path} alt="movie backdrop" />
           <div className="layer"></div>
           <div className="title">{title}</div>
-          <StyledButton className="btn-slider">book now</StyledButton>
+          <Link to={setPath()} onClick={handleClick}>
+            <StyledButton className="btn-slider">book now</StyledButton>
+          </Link>
         </StyledImgContainer>
       );
     });

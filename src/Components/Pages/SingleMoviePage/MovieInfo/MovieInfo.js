@@ -4,14 +4,18 @@ import { useSelector } from "react-redux";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 import Title from "./Title";
 import ShortInfo from "./ShortInfo";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const MovieInfo = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
-  const { tagline, overview } = singleMovieInfo;
+  const { tagline, overview, title } = singleMovieInfo;
   const location = useLocation();
   const nowPlaying = location.pathname.slice(0, 11) === "/nowPlaying";
-  console.log(nowPlaying);
+  const setTitle = () => {
+    const urlMovieTitle = title?.split(" ").join("_");
+    return urlMovieTitle;
+  };
+
   return (
     <StyledInfoContainer nowPlaying={nowPlaying}>
       <Title />
@@ -20,7 +24,13 @@ const MovieInfo = () => {
       <p className="overview">{overview}</p>
 
       {tagline && <p className="tagline">"{tagline}"</p>}
-      {nowPlaying && <StyledBtn>book now</StyledBtn>}
+      {nowPlaying && (
+        <StyledBtnContainer>
+          <Link to={`/nowPlaying/${setTitle()}/booking`}>
+            <StyledBtn>book now</StyledBtn>
+          </Link>
+        </StyledBtnContainer>
+      )}
     </StyledInfoContainer>
   );
 };
@@ -44,11 +54,15 @@ const StyledInfoContainer = styled.article`
   }
 `;
 
-const StyledBtn = styled(StyledButton)`
+const StyledBtnContainer = styled.div`
   height: 8%;
-  min-height: 3rem;
-  width: 50%;
+  width: 45%;
   margin: 0 auto 0.5rem auto;
+`;
+
+const StyledBtn = styled(StyledButton)`
+  width: 100%;
+  height: 100%;
   position: relative;
   background-color: rgba(241, 37, 53, 0.3);
 `;

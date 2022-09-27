@@ -13,7 +13,7 @@ const SingleMoviePage = () => {
   const { title } = singleMovieInfo;
 
   const location = useLocation();
-  const pageTitle = location.state.pageTitle;
+  const pageTitle = location.state?.pageTitle;
 
   React.useEffect(() => {
     window.scroll(0, 0);
