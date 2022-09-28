@@ -4,14 +4,21 @@ import { useSelector } from "react-redux";
 import spinnerImg from "../../../Images/spinner.gif";
 
 const Trailer = ({ title }) => {
-  const [showTrailerImg, setShowTrailerImg] = React.useState(true);
+  const [showLoadingImg, setShowLoadingImg] = React.useState(true);
 
   const { singleMovieVideo } = useSelector((store) => store.singleMovie);
   const { key } = singleMovieVideo;
 
+  const handleOnLoad = () => {
+    const timeout = setTimeout(() => {
+      setShowLoadingImg(false);
+      return () => clearTimeout(timeout);
+    }, 400);
+  };
+
   return (
     <StyledWrapper>
-      <StyledLayer showTrailerImg={showTrailerImg}>
+      <StyledLayer showLoadingImg={showLoadingImg}>
         <img src={spinnerImg} alt="poster" />
       </StyledLayer>
       {key && (
@@ -30,7 +37,7 @@ const Trailer = ({ title }) => {
           frameBorder="0"
           allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowFullScreen
-          onLoad={() => setTimeout(() => setShowTrailerImg(false), 400)}
+          onLoad={handleOnLoad}
         ></iframe>
       )}
     </StyledWrapper>
@@ -54,8 +61,8 @@ const StyledLayer = styled.div`
   left: 0;
   position: absolute;
   background-color: #000;
-  opacity: ${(props) => (props.showTrailerImg ? "1" : "0")};
-  z-index: ${(props) => (props.showTrailerImg ? "2" : "0")};
+  opacity: ${(props) => (props.showLoadingImg ? "1" : "0")};
+  z-index: ${(props) => (props.showLoadingImg ? "2" : "0")};
 
   img {
     background-color: #000;
