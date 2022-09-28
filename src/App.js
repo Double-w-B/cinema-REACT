@@ -9,6 +9,8 @@ import * as moviesSliceModule from "./features/moviesSlice";
 function App() {
   const dispatch = useDispatch();
   const [isModal, setIsModal] = React.useState(false);
+  const [isFormValid, setIsFormValid] = React.useState(false);
+  const [isMovieTrailer, setIsMovieTrailer] = React.useState(false);
   const nowPlayingContainer = React.useRef();
   const FAQsTickets = React.useRef();
   const FAQsMovie = React.useRef();
@@ -25,7 +27,19 @@ function App() {
 
   return (
     <Router>
-      {isModal && <Pages.ContactUsModal setIsModal={setIsModal} />}
+      {isModal && isFormValid && (
+        <Pages.ContactUsModal
+          setIsModal={setIsModal}
+          setIsFormValid={setIsFormValid}
+        />
+      )}
+      {isModal && isMovieTrailer && (
+        <Pages.MovieTrailerModal
+          setIsModal={setIsModal}
+          setIsMovieTrailer={setIsMovieTrailer}
+          isMovieTrailer={isMovieTrailer}
+        />
+      )}
       <Navbar nowPlayingContainer={nowPlayingContainer} />
       <Routes>
         <Route
@@ -41,7 +55,12 @@ function App() {
         <Route
           exact
           path="/nowPlaying/:title/booking"
-          element={<Pages.Booking />}
+          element={
+            <Pages.BookingPage
+              setIsModal={setIsModal}
+              setIsMovieTrailer={setIsMovieTrailer}
+            />
+          }
         />
         <Route
           exact
@@ -63,6 +82,7 @@ function App() {
               refMovie={FAQsMovie}
               refCovid={FAQsCovid}
               setIsModal={setIsModal}
+              setIsFormValid={setIsFormValid}
             />
           }
         />

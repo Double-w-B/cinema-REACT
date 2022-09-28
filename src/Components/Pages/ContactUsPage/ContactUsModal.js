@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 import { StyledButton } from "../../Sliders/MoviesNowPlayingSlider";
 
 const ContactUsModal = (props) => {
+  const handleClick = () => {
+    props.setIsModal(false);
+    props.setIsFormValid(false);
+  };
+
   return (
     <Modal>
       <StyledContainer>
@@ -14,7 +19,7 @@ const ContactUsModal = (props) => {
             Inquiries are responded to within 24-48 business hours.
             Additionally, you can reach out to us on Facebook or Instagram.
           </p>{" "}
-          <Link to="/" onClick={() => props.setIsModal(false)}>
+          <Link to="/" onClick={handleClick}>
             <StyledBtn>OK</StyledBtn>
           </Link>
         </div>

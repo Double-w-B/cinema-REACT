@@ -41,6 +41,7 @@ const MoviesNowPlayingSlider = () => {
       };
 
       const handleClick = () => {
+        dispatch(SingleMovie.removeSingleMovieData());
         dispatch(SingleMovie.getSingleMovieInfo(id));
         dispatch(SingleMovie.getSingleMovieVideos(id));
       };

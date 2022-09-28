@@ -47,7 +47,10 @@ const ContactForm = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    Validation.validateInputs(form, refs) && props.setIsModal(true);
+    if (Validation.validateInputs(form, refs)) {
+      props.setIsModal(true);
+      props.setIsFormValid(true);
+    }
     Validation.showError(form, refs);
   };
 

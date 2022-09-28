@@ -13,6 +13,13 @@ const ContactUsPage = (props) => {
     window.scrollTo(0, 0);
   }, []);
 
+  React.useEffect(() => {
+    window.onpopstate = () => {
+      props.setIsModal(false);
+      props.setIsFormValid(false);
+    };
+  });
+
   const handleClick = (ref) => {
     let refElement;
     if (ref === "FAQsTickets") refElement = props.refTickets;
@@ -55,8 +62,11 @@ const ContactUsPage = (props) => {
             (<span>*</span> required fields)
           </span>
         </h2>
-       
-        <ContactForm setIsModal={props.setIsModal} />
+
+        <ContactForm
+          setIsModal={props.setIsModal}
+          setIsFormValid={props.setIsFormValid}
+        />
       </StyledSection>
     </StyledMain>
   );
