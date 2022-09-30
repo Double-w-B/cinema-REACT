@@ -9,7 +9,7 @@ import AboutPage from "./AboutPage/AboutPage";
 import ContactUsPage from "./ContactUsPage/ContactUsPage";
 import ContactUsModal from "./ContactUsPage/ContactUsModal";
 import BookingPage from "./Booking/BookingPage";
-import MovieTrailerModal from "./Booking/MovieTrailerModal";
+import MovieTrailerModal from "./Booking/ScheduleSection/MovieTrailerModal";
 
 export {
   CinemaCafePage,

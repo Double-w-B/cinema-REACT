@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "../../Modal/Modal";
+import Modal from "../../../Modal/Modal";
 import { useSelector } from "react-redux";
-import spinnerImg from "../../../Images/spinner.gif";
+import spinnerImg from "../../../../Images/spinner.gif";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const TrailerModal = (props) => {
   const [isShowLoadingImg, setIsShowLoadingImg] = React.useState(true);
@@ -12,25 +13,17 @@ const TrailerModal = (props) => {
   const { key } = singleMovieVideo;
   const { title } = singleMovieInfo;
 
-  const handleClick = () => {
-    props.setIsModal(false);
-    props.setIsMovieTrailer(false);
-  };
-
   const handleOnLoad = () => {
     const timeout = setTimeout(() => setIsShowLoadingImg(false), 400);
     return () => clearTimeout(timeout);
   };
   return (
-    <Modal
-      setIsModal={props.setIsModal}
-      isMovieTrailer={props.isMovieTrailer}
-      setIsMovieTrailer={props.setIsMovieTrailer}
-    >
+    <Modal {...props}>
       <StyledContainer>
         <StyledLayer showLoadingImg={isShowLoadingImg}>
           <img src={spinnerImg} alt="poster" />
         </StyledLayer>
+        <AiOutlineCloseCircle />
         {key && (
           <iframe
             width="100%"
@@ -45,13 +38,11 @@ const TrailerModal = (props) => {
             src={`https://www.youtube.com/embed/${key}?autoplay=0&controls=1&modestbranding=1`}
             title={`${title} trailer`}
             frameBorder="0"
-            allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
             allowFullScreen
             onLoad={handleOnLoad}
           ></iframe>
         )}
       </StyledContainer>
-      {/* <button onClick={handleClick}>close modal</button> */}
     </Modal>
   );
 };
@@ -77,8 +68,36 @@ const StyledContainer = styled.div`
   width: 60vw;
   height: 70vh;
   background-color: black;
-  color: black;
   position: relative;
+  &:hover {
+    svg {
+      top: 2rem;
+      &:hover {
+        top: -4rem;
+      }
+    }
+  }
+
+  svg {
+    font-size: 3rem;
+    border-radius: 50%;
+    top: -4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    cursor: pointer;
+    transition: 0.3s linear;
+    color: rgba(255, 255, 255, 0.3);
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:active {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export default TrailerModal;

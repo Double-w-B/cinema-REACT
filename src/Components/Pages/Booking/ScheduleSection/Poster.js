@@ -1,65 +1,50 @@
 import React from "react";
-import styled from "styled-components";
-import { StyledContentContainer } from "../UnlimitedPage/UnlimitedPage";
 import { useSelector } from "react-redux";
 import { BsPlayCircle } from "react-icons/bs";
 
-const Schedule = (props) => {
-  const { singleMovieInfo, singleMovieVideo } = useSelector(
-    (store) => store.singleMovie
-  );
-  const { key } = singleMovieVideo;
+import styled from "styled-components";
+
+const Poster = (props) => {
+  const { singleMovieVideo } = useSelector((store) => store.singleMovie);
   const { imgLowResUrl } = useSelector((store) => store.movies);
-  const { poster_path, genres } = singleMovieInfo;
-  console.log(singleMovieInfo.genres);
+
+  const { poster_path, genres } = props;
+  const { key } = singleMovieVideo;
 
   const abbreviation = (title) => {
     if (title === "Science Fiction") return "Sci-Fi";
     return title;
   };
+
   const handleClick = () => {
     props.setIsModal(true);
     props.setIsMovieTrailer(true);
   };
 
   return (
-    <StyledSection>
-      <StyledScheduleContainer></StyledScheduleContainer>
-      <StyledPosterContainer>
-        <div className="poster">
-          <img src={`${imgLowResUrl}${poster_path}`} alt="" />
-          {key && (
-            <div className="trailer-cta">
-              <BsPlayCircle onClick={handleClick} />
-            </div>
-          )}
-        </div>
-        {genres && (
-          <div className="genres no-select">
-            {genres.slice(0, 3).map((genre) => {
-              return <div key={genre.id}>{abbreviation(genre.name)}</div>;
-            })}
+    <StyledPosterContainer>
+      <div className="poster">
+        <img src={`${imgLowResUrl}${poster_path}`} alt="" />
+        {key && (
+          <div className="trailer-cta">
+            <BsPlayCircle onClick={handleClick} />
           </div>
         )}
-      </StyledPosterContainer>
-    </StyledSection>
+      </div>
+      {genres && (
+        <div className="genres no-select">
+          {genres.slice(0, 3).map((genre) => {
+            return <div key={genre.id}>{abbreviation(genre.name)}</div>;
+          })}
+        </div>
+      )}
+    </StyledPosterContainer>
   );
 };
 
-const StyledSection = styled(StyledContentContainer)`
-  padding: 1rem 0 1rem 2rem;
-  display: flex;
-`;
-
-const StyledScheduleContainer = styled.div`
-  width: 65%;
-  height: 60vh;
-  background-color: tomato;
-`;
 const StyledPosterContainer = styled.div`
   width: 35%;
   height: 60vh;
-  /* background-color: forestgreen; */
 
   .poster {
     width: 76%;
@@ -68,7 +53,6 @@ const StyledPosterContainer = styled.div`
     min-height: 400px;
     margin: 0 auto;
     position: relative;
-    /* background-color: white; */
     img {
       width: 100%;
       height: 100%;
@@ -80,7 +64,6 @@ const StyledPosterContainer = styled.div`
     .trailer-cta {
       width: 100%;
       height: 100%;
-      /* background-color: rgba(0, 0, 0, 0.1); */
       display: grid;
       place-items: center;
       position: absolute;
@@ -93,7 +76,6 @@ const StyledPosterContainer = styled.div`
 
         svg {
           font-size: 5rem;
-          /* color: var(--primary-red-clr); */
           color: var(--primary-white-clr);
         }
       }
@@ -119,8 +101,6 @@ const StyledPosterContainer = styled.div`
     display: flex;
     justify-content: center;
 
-    /* background-color: white; */
-
     div {
       font-size: 1.1rem;
       display: grid;
@@ -131,7 +111,6 @@ const StyledPosterContainer = styled.div`
       border-bottom: none;
       border-right: none;
       padding: 0 0.5rem;
-      /* background-color: black; */
 
       &:first-child {
         border-left: none;
@@ -140,4 +119,4 @@ const StyledPosterContainer = styled.div`
   }
 `;
 
-export default Schedule;
+export default Poster;
