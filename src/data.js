@@ -330,3 +330,11 @@ export const movieScreenings = [
   // other genres
   ["12:30", "15:45", "17:40", "20:00"],
 ];
+
+export const movieTickets = [
+  { category: "Adult", price: "20" },
+  { category: "Child", price: "14" },
+  { category: "Senior", price: "12" },
+];
+
+export const promoCodes = ["cinemania", "react", "frontend"];

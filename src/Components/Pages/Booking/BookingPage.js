@@ -4,7 +4,7 @@ import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 import { useSelector } from "react-redux";
 import Navigation from "../../Navigation";
 import Schedule from "./ScheduleSection/Schedule";
-
+import Tickets from "./TicketsSection/Tickets";
 const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
@@ -30,6 +30,7 @@ const Booking = (props) => {
         setIsModal={props.setIsModal}
         setIsMovieTrailer={props.setIsMovieTrailer}
       />
+      <Tickets />
     </StyledMain>
   );
 };
