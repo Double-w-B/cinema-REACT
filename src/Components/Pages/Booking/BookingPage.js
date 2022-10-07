@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import Navigation from "../../Navigation";
 import Schedule from "./ScheduleSection/Schedule";
 import Tickets from "./TicketsSection/Tickets";
+import Seats from "./SeatsSection/Seats";
+
 const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
@@ -31,6 +33,7 @@ const Booking = (props) => {
         setIsMovieTrailer={props.setIsMovieTrailer}
       />
       <Tickets />
+      <Seats />
     </StyledMain>
   );
 };
