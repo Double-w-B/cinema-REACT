@@ -1,21 +1,47 @@
 import React from "react";
 import styled from "styled-components";
+import { BsArrowDown } from "react-icons/bs";
 
 const SeatsMap = () => {
   const rowsLetters = ["a", "b", "c", "d", "e", "f", "g", "h"];
+  const numberOfSeats = 2;
+  const seats = [];
 
   const rowSeats = (letter) => {
+    const handleClick = (e) => {
+      const seat = e.target;
+      const seatId = e.target.id;
+      seat.classList.add("active");
+
+      if (seats.length < numberOfSeats && !seats.includes(seatId)) {
+        seats.unshift(seatId);
+      }
+      if (seats.length === numberOfSeats && !seats.includes(seatId)) {
+        const lastSeat = document.getElementById(seats[seats.length - 1]);
+        lastSeat.classList.remove("active");
+        seats.pop();
+        seats.unshift(seatId);
+      }
+    };
+
+    const showExit = (row, index) => {
+      if (row === "e" && (index === 0 || index === 10)) {
+        return (
+          <div className="direction">
+            <BsArrowDown />
+            <p>Exit</p>
+          </div>
+        );
+      }
+    };
+
     return Array(11)
       .fill("")
       .map((seat, seatIndex) => {
         if (letter === "f" || letter === "g" || letter === "h") {
           /* stairs */
           if (seatIndex === 5) {
-            return (
-              <div key={seatIndex} className="seat stairs">
-                {seatIndex}
-              </div>
-            );
+            return <div key={seatIndex} className="seat stairs"></div>;
           }
 
           return (
@@ -23,6 +49,7 @@ const SeatsMap = () => {
               key={seatIndex}
               id={seatIndex < 6 ? seatIndex + 1 + letter : seatIndex + letter}
               className="seat"
+              onClick={(e) => handleClick(e)}
             >
               {seatIndex < 6 ? seatIndex + 1 : seatIndex}
             </div>
@@ -32,17 +59,13 @@ const SeatsMap = () => {
           if (seatIndex === 0 || seatIndex === 10) {
             return (
               <div key={seatIndex} className="seat exit">
-                {seatIndex}
+                {showExit(letter, seatIndex)}
               </div>
             );
           }
           /* stairs */
           if (seatIndex === 5) {
-            return (
-              <div key={seatIndex} className="seat stairs">
-                {seatIndex}
-              </div>
-            );
+            return <div key={seatIndex} className="seat stairs"></div>;
           }
 
           return (
@@ -50,6 +73,7 @@ const SeatsMap = () => {
               key={seatIndex}
               id={seatIndex < 6 ? seatIndex + letter : seatIndex - 1 + letter}
               className="seat"
+              onClick={(e) => handleClick(e)}
             >
               {seatIndex < 6 ? seatIndex : seatIndex - 1}
             </div>
@@ -88,7 +112,6 @@ const StyledContainer = styled.div`
   width: 55vw;
   height: 70vh;
   margin: 0 auto;
-  /* background-color: tomato; */
 `;
 
 const StyledScreenContainer = styled.div`
@@ -98,7 +121,6 @@ const StyledScreenContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  /* background-color: steelblue; */
 
   .screen {
     width: 80%;
@@ -137,20 +159,17 @@ const StyledSeats = styled.div`
   display: grid;
   grid-gap: 0.5rem;
   grid-template-rows: repeat(8, 1fr);
-  /* background-color: greenyellow; */
 
   .row {
     display: flex;
     gap: 0.5rem;
     position: relative;
-    /* background-color: black; */
 
     .letter {
       position: absolute;
       top: 50%;
       left: -1.5rem;
       transform: translateY(-50%);
-      /* color: var(--primary-grey-clr); */
       color: var(--primary-red-clr);
       opacity: 0.5;
     }
@@ -160,26 +179,54 @@ const StyledSeats = styled.div`
       height: 100%;
       display: grid;
       place-items: center;
-      /* background-color: #c3c3c3; */
       border-radius: 0.3rem;
       background-color: var(--primary-grey-clr);
       opacity: 0.7;
       cursor: pointer;
       transition: 0.3s linear;
-      /* border: 1px solid var(--primary-red-clr); */
 
       &:hover {
         opacity: 1;
+        .exit {
+          opacity: 0.7;
+        }
+      }
+      &.active {
+        background-color: yellow;
       }
 
       &.stairs {
         width: calc(100% / 35);
         visibility: hidden;
+        background-color: transparent;
         pointer-events: none;
       }
       &.exit {
         visibility: hidden;
         pointer-events: none;
+        position: relative;
+
+        .direction {
+          width: 70%;
+          color: var(--primary-red-clr);
+          text-transform: uppercase;
+          font-size: 0.8rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          border-bottom: 1px solid var(--primary-red-clr);
+          bottom: 20%;
+          left: 50%;
+          position: absolute;
+          transform: translateX(-50%);
+          transition: 0.3s linear;
+          opacity: 0.7;
+          visibility: visible;
+
+          svg {
+            margin-bottom: 0.5rem;
+          }
+        }
       }
     }
   }
