@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 import { AiFillStar } from "react-icons/ai";
 import { ratesTitle } from "../../../../data";
-import { addUserReview } from "../../../../features/singleMovieSlice";
+import { addUserReview } from "../../../../features/movies/singleMovieSlice";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const UserReview = () => {

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import * as Pages from "./Components/Pages";
-import * as moviesSliceModule from "./features/moviesSlice";
+import * as moviesSliceModule from "./features/movies/allMoviesSlice";
 
 function App() {
   const dispatch = useDispatch();

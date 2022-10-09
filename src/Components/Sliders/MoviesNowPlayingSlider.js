@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import * as SingleMovie from "../../features/singleMovieSlice";
+import * as SingleMovie from "../../features/movies/singleMovieSlice";
 
 const MoviesNowPlayingSlider = () => {
   const [index, setIndex] = React.useState(0);

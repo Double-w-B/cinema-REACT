@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
-import * as SingleMovieModule from "../../features/singleMovieSlice";
+import * as SingleMovieModule from "../../features/movies/singleMovieSlice";
 import spinnerImg from "../../Images/spinner.gif";
 
 const SingleMoviePoster = ({

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { AiFillStar } from "react-icons/ai";
 import MarkdownView from "react-showdown";
 import { useSelector, useDispatch } from "react-redux";
-import { removeUserReview } from "../../../../features/singleMovieSlice";
+import { removeUserReview } from "../../../../features/movies/singleMovieSlice";
 import logoImg from "../../../../Images/Logo.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
