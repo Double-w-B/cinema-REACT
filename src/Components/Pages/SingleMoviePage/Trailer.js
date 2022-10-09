@@ -35,7 +35,6 @@ const Trailer = ({ title }) => {
           src={`https://www.youtube.com/embed/${key}?autoplay=0&controls=1&modestbranding=1`}
           title={`${title} trailer`}
           frameBorder="0"
-          allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowFullScreen
           onLoad={handleOnLoad}
         ></iframe>
