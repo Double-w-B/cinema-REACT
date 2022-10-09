@@ -20,4 +20,4 @@ export const StyledInfoContainer = styled.div`
   }
 `;
 
-export { NoReviews };
+export default NoReviews;

@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import SingleReview from "./SingleReview";
-import UserReview from "./UserReview";
-import * as noReviewsModule from "./NoReviews";
+import * as Components from "./index";
 import { useAuth0 } from "@auth0/auth0-react";
+import { StyledInfoContainer } from "./NoReviews";
 
 const Reviews = () => {
   const { singleMovieReviews, singleMovieInfo } = useSelector(
@@ -29,12 +28,12 @@ const Reviews = () => {
       {isUser &&
         !singleMovieReviews.some(
           (review) => review.id === singleMovieInfo.id
-        ) && <UserReview />}
+        ) && <Components.UserReview />}
       {singleMovieReviews.length > 0 &&
         singleMovieReviews.map((rev, index) => (
-          <SingleReview key={index} {...rev} />
+          <Components.SingleReview key={index} {...rev} />
         ))}
-      {singleMovieReviews.length === 0 && <noReviewsModule.NoReviews />}
+      {singleMovieReviews.length === 0 && <Components.NoReviews />}
     </StyledWrapper>
   );
 };
@@ -47,7 +46,7 @@ const StyledWrapper = styled.section`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const StyledLogInInfo = styled(noReviewsModule.StyledInfoContainer)`
+const StyledLogInInfo = styled(StyledInfoContainer)`
   margin: 2rem auto;
 
   button {
