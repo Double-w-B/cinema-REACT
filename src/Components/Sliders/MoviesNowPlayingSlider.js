@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import * as SingleMovie from "../../features/movies/singleMovieSlice";
+import * as Booking from "../../features/booking/bookingSlice";
 
 const MoviesNowPlayingSlider = () => {
   const [index, setIndex] = React.useState(0);
@@ -44,6 +45,8 @@ const MoviesNowPlayingSlider = () => {
         dispatch(SingleMovie.removeSingleMovieData());
         dispatch(SingleMovie.getSingleMovieInfo(id));
         dispatch(SingleMovie.getSingleMovieVideos(id));
+        dispatch(Booking.addBookingMovieId(id));
+        dispatch(Booking.addBookingMovieTitle(title));
       };
 
       let position = "nextSlide";

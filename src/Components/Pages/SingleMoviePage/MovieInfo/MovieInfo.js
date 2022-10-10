@@ -1,32 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
-import Title from "./Title";
-import ShortInfo from "./ShortInfo";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
+import * as Components from "./index";
+import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
+import * as Booking from "../../../../features/booking/bookingSlice";
 
 const MovieInfo = () => {
-  const { singleMovieInfo } = useSelector((store) => store.singleMovie);
-  const { tagline, overview, title } = singleMovieInfo;
+  const dispatch = useDispatch();
   const location = useLocation();
   const nowPlaying = location.pathname.slice(0, 11) === "/nowPlaying";
+
+  const { singleMovieInfo } = useSelector((store) => store.singleMovie);
+  const { tagline, overview, title, id } = singleMovieInfo;
+
   const setTitle = () => {
     const urlMovieTitle = title?.split(" ").join("_");
     return urlMovieTitle;
   };
 
+  const handleClick = () => {
+    dispatch(Booking.addBookingMovieId(id));
+    dispatch(Booking.addBookingMovieTitle(title));
+  };
+
   return (
     <StyledInfoContainer nowPlaying={nowPlaying}>
-      <Title />
-      <ShortInfo />
+      <Components.Title />
+      <Components.ShortInfo />
 
       <p className="overview">{overview}</p>
 
       {tagline && <p className="tagline">"{tagline}"</p>}
       {nowPlaying && (
         <StyledBtnContainer>
-          <Link to={`/nowPlaying/${setTitle()}/booking`}>
+          <Link to={`/nowPlaying/${setTitle()}/booking`} onClick={handleClick}>
             <StyledBtn>book now</StyledBtn>
           </Link>
         </StyledBtnContainer>
@@ -65,6 +73,9 @@ const StyledBtn = styled(StyledButton)`
   height: 100%;
   position: relative;
   background-color: rgba(241, 37, 53, 0.3);
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 export default MovieInfo;
