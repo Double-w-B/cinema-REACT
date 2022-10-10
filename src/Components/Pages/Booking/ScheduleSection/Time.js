@@ -1,27 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import { movieScreenings } from "../../../../data";
+import { useDispatch } from "react-redux";
+import { addBookingTime } from "../../../../features/booking/bookingSlice";
 
 const Time = (props) => {
+  const dispatch = useDispatch();
   const { day } = props;
   const { genres } = props.singleMovieInfo;
   const { screeningTime, setScreeningTime } = props;
-  console.log(props);
 
   React.useEffect(() => {
     setScreeningTime("");
     // eslint-disable-next-line
   }, [day]);
 
+  React.useEffect(() => {
+    dispatch(addBookingTime(screeningTime));
+    // eslint-disable-next-line
+  }, [screeningTime]);
+
   const findMovieScreenings = () => {
     const currentMovieGenres = genres.map((genre) => genre.name.toLowerCase());
+
     const currentDayMovieScreenings =
       new window.Date(day).getDay() % 2 === 0
         ? movieScreenings[0]
         : movieScreenings[1];
+
     const foundGenre = currentMovieGenres.find((genre) =>
       Object.keys(currentDayMovieScreenings).includes(genre)
     );
+
     if (foundGenre) {
       return currentDayMovieScreenings[foundGenre];
     } else {

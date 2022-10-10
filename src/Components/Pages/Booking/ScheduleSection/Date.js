@@ -1,9 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addBookingDay } from "../../../../features/booking/bookingSlice";
 
 const Date = (props) => {
+  const dispatch = useDispatch();
+
   const { day, setDay } = props;
   const [activeDay, setActiveDay] = React.useState(0);
+
+  React.useEffect(() => {
+    dispatch(addBookingDay(showFullDate(day)));
+    // eslint-disable-next-line
+  }, [day]);
 
   function showFullDate(date) {
     return new window.Date(date).toLocaleDateString("en-us", {
