@@ -4,7 +4,7 @@ import { StyledContentContainer } from "../../UnlimitedPage/UnlimitedPage";
 import { movieTickets } from "../../../../data";
 import * as Components from "./index";
 
-const Tickets = () => {
+const Tickets = (props) => {
   const [adultTickets, setAdultTickets] = React.useState(0);
   const [adultTotal, setAdultTotal] = React.useState(0);
   const [childTickets, setChildTickets] = React.useState(0);
@@ -40,7 +40,7 @@ const Tickets = () => {
   }, [adultTickets, childTickets, seniorTickets]);
 
   return (
-    <StyledContainer>
+    <StyledContainer ref={props.ticketsContainer}>
       <h2>Tickets</h2>
       <Components.Separator {...initialState} />
       <div className="summary">

@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { StyledContentContainer } from "../../UnlimitedPage/UnlimitedPage";
 import SeatsMap from "./SeatsMap";
-const Seats = () => {
+
+const Seats = (props) => {
   return (
     <StyledContainer>
       <h2>Seats</h2>
-      <SeatsMap />
+      <SeatsMap {...props} />
     </StyledContainer>
   );
 };

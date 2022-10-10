@@ -8,6 +8,7 @@ const Schedule = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const [day, setDay] = React.useState(new window.Date().getTime());
   const [screeningTime, setScreeningTime] = React.useState("");
+
   const initialState = {
     day,
     setDay,
@@ -15,6 +16,7 @@ const Schedule = (props) => {
     setScreeningTime,
     singleMovieInfo,
   };
+
   return (
     <StyledContainer>
       <StyledSection>

@@ -1,26 +1,46 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 import { BsArrowDown } from "react-icons/bs";
+import * as Booking from "../../../../features/booking/bookingSlice";
 
-const SeatsMap = () => {
+const SeatsMap = (props) => {
+  const dispatch = useDispatch();
+  const { bookingNumberOfTickets: tickets, bookingSeats } = useSelector(
+    (store) => store.bookingTickets
+  );
   const rowsLetters = ["a", "b", "c", "d", "e", "f", "g", "h"];
-  const numberOfSeats = 2;
-  const seats = [];
 
   const rowSeats = (letter) => {
     const handleClick = (e) => {
-      const seat = e.target;
       const seatId = e.target.id;
-      seat.classList.add("active");
 
-      if (seats.length < numberOfSeats && !seats.includes(seatId)) {
-        seats.unshift(seatId);
+      if (tickets > 0) {
+        if (bookingSeats.length < tickets && !bookingSeats.includes(seatId)) {
+          dispatch(Booking.addBookingSeats(seatId));
+        }
+
+        if (bookingSeats.length === tickets && !bookingSeats.includes(seatId)) {
+          dispatch(Booking.replaceBookingSeat(seatId));
+        }
+      } else {
+        props.ticketsContainer.current.scrollIntoView({ behavior: "smooth" });
       }
-      if (seats.length === numberOfSeats && !seats.includes(seatId)) {
-        const lastSeat = document.getElementById(seats[seats.length - 1]);
-        lastSeat.classList.remove("active");
-        seats.pop();
-        seats.unshift(seatId);
+    };
+
+    const setElementID = (row, index, lastRows) => {
+      if (lastRows) {
+        if (index < 6) {
+          return index + 1 + row;
+        } else {
+          return index + row;
+        }
+      } else {
+        if (index < 6) {
+          return index + row;
+        } else {
+          return index - 1 + row;
+        }
       }
     };
 
@@ -47,8 +67,12 @@ const SeatsMap = () => {
           return (
             <div
               key={seatIndex}
-              id={seatIndex < 6 ? seatIndex + 1 + letter : seatIndex + letter}
-              className="seat"
+              id={setElementID(letter, seatIndex, true)}
+              className={
+                bookingSeats.includes(setElementID(letter, seatIndex, true))
+                  ? "seat active"
+                  : "seat"
+              }
               onClick={(e) => handleClick(e)}
             >
               {seatIndex < 6 ? seatIndex + 1 : seatIndex}
@@ -71,8 +95,12 @@ const SeatsMap = () => {
           return (
             <div
               key={seatIndex}
-              id={seatIndex < 6 ? seatIndex + letter : seatIndex - 1 + letter}
-              className="seat"
+              id={setElementID(letter, seatIndex, false)}
+              className={
+                bookingSeats.includes(setElementID(letter, seatIndex, false))
+                  ? "seat active"
+                  : "seat"
+              }
               onClick={(e) => handleClick(e)}
             >
               {seatIndex < 6 ? seatIndex : seatIndex - 1}
@@ -191,8 +219,10 @@ const StyledSeats = styled.div`
           opacity: 0.7;
         }
       }
+
       &.active {
-        background-color: yellow;
+        background-color: var(--primary-red-clr);
+        opacity: 0.7;
       }
 
       &.stairs {
@@ -201,6 +231,7 @@ const StyledSeats = styled.div`
         background-color: transparent;
         pointer-events: none;
       }
+
       &.exit {
         visibility: hidden;
         pointer-events: none;

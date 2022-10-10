@@ -11,8 +11,7 @@ const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
 
-  // console.log(singleMovieInfo);
-
+  const ticketsContainer = React.useRef("");
   React.useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -32,8 +31,8 @@ const Booking = (props) => {
         setIsModal={props.setIsModal}
         setIsMovieTrailer={props.setIsMovieTrailer}
       />
-      <Tickets />
-      <Seats />
+      <Tickets ticketsContainer={ticketsContainer} />
+      <Seats ticketsContainer={ticketsContainer} />
     </StyledMain>
   );
 };
