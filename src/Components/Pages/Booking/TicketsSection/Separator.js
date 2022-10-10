@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { movieTickets } from "../../../../data";
+import { useDispatch } from "react-redux";
+import * as Booking from "../../../../features/booking/bookingSlice";
 
 const Separator = (props) => {
+  const dispatch = useDispatch();
   const {
     adultTickets,
     setAdultTickets,
@@ -12,6 +15,16 @@ const Separator = (props) => {
     setSeniorTickets,
   } = props;
   const categories = [adultTickets, childTickets, seniorTickets];
+
+  React.useEffect(() => {
+    dispatch(Booking.removeBookingSeats());
+    dispatch(
+      Booking.addBookingNumberOfTickets(
+        adultTickets + childTickets + seniorTickets
+      )
+    );
+    // eslint-disable-next-line
+  }, [adultTickets, childTickets, seniorTickets]);
 
   const handleMinusBtn = (category, price) => {
     if (category === "Adult") {
