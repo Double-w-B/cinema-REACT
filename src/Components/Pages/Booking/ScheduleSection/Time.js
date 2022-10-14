@@ -41,10 +41,28 @@ const Time = (props) => {
 
   const showMovieScreenings = () => {
     return findMovieScreenings().map((time, index) => {
+      const setClassName = (time) => {
+        const date = new window.Date();
+
+        if (
+          date.getDate() === new window.Date(day).getDate() &&
+          date.getHours().toString() >= time.slice(0, 2) &&
+          date.getMinutes() >= Number(time.slice(-2) - 15)
+        ) {
+          return "inactive";
+        } else {
+          if (screeningTime === time) {
+            return "active";
+          } else {
+            return "";
+          }
+        }
+      };
+
       return (
         <div
           key={index}
-          className={screeningTime === time ? "active" : ""}
+          className={setClassName(time)}
           onClick={() => setScreeningTime(time)}
         >
           <p>{time}</p>
@@ -101,6 +119,10 @@ const StyledTimeScreenings = styled.div`
     cursor: pointer;
     opacity: 0.7;
 
+    &:hover {
+      opacity: 1;
+    }
+
     &.active {
       color: var(--primary-white-clr);
       border: 1px solid var(--primary-white-clr);
@@ -108,8 +130,9 @@ const StyledTimeScreenings = styled.div`
       opacity: 1;
     }
 
-    &:hover {
-      opacity: 1;
+    &.inactive {
+      opacity: 0.7;
+      pointer-events: none;
     }
   }
 `;
