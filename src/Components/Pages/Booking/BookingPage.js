@@ -26,7 +26,7 @@ const Booking = (props) => {
   return (
     <StyledMain>
       <Navigation title={"Tickets"} pageTitle={title} booking={true} />
-      <h1>Select Tickets</h1>
+      <h1>Booking</h1>
       <Schedule
         setIsModal={props.setIsModal}
         setIsMovieTrailer={props.setIsMovieTrailer}
