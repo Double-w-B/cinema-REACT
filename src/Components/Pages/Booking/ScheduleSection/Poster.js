@@ -25,11 +25,7 @@ const Poster = (props) => {
     <StyledPosterContainer>
       <div className="poster">
         <img src={`${imgLowResUrl}${poster_path}`} alt="" />
-        {key && (
-          <div className="trailer-cta">
-            <BsPlayCircle onClick={handleClick} />
-          </div>
-        )}
+        {key && <BsPlayCircle onClick={handleClick} />}
       </div>
       {genres && (
         <div className="genres no-select">
@@ -49,47 +45,52 @@ const StyledPosterContainer = styled.div`
   .poster {
     width: 76%;
     height: 92.5%;
-    min-width: 275px;
-    min-height: 400px;
     margin: 0 auto;
     position: relative;
+    transition: 0.5s linear;
+
+    &:hover {
+      & img {
+        filter: brightness(70%) drop-shadow(0px 5px 15px black);
+      }
+
+      & svg {
+        font-size: 5rem;
+        color: var(--primary-white-clr);
+      }
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 4rem;
+      color: rgba(255, 255, 255, 0.3);
+      transition: 0.3s linear;
+      cursor: pointer;
+
+      &:hover {
+        font-size: 5rem;
+        color: var(--primary-white-clr);
+      }
+
+      &:active {
+        transition: font-size 0.5s linear;
+        font-size: 3rem;
+      }
+    }
+
     img {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: contain;
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    }
-
-    .trailer-cta {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: 0.3s linear;
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.3);
-
-        svg {
-          font-size: 5rem;
-          color: var(--primary-white-clr);
-        }
-      }
-
-      svg {
-        font-size: 4rem;
-        color: rgba(255, 255, 255, 0.3);
-        transition: 0.3s linear;
-        cursor: pointer;
-
-        &:active {
-          transform: scale(0.85);
-        }
-      }
+      transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter,
+        filter;
+      transition-duration: 0.3s;
+      -webkit-filter: drop-shadow(0px 5px 15px black);
+      filter: brightness(100%) drop-shadow(0px 5px 15px black);
     }
   }
 
