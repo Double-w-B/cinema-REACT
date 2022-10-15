@@ -3,15 +3,26 @@ import styled from "styled-components";
 import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 import { useSelector } from "react-redux";
 import Navigation from "../../Navigation";
-import Schedule from "./ScheduleSection/Schedule";
-import Tickets from "./TicketsSection/Tickets";
-import Seats from "./SeatsSection/Seats";
+import * as Component from "./index";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
+  const { setIsModal, setIsAuthModal } = props;
+  const { isAuthenticated, user } = useAuth0();
+  const isUser = isAuthenticated && user;
 
   const ticketsContainer = React.useRef("");
+
+  React.useEffect(() => {
+    if (!isUser) {
+      setIsModal(true);
+      setIsAuthModal(true);
+    }
+    // eslint-disable-next-line
+  }, []);
+
   React.useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -20,6 +31,7 @@ const Booking = (props) => {
     window.onpopstate = () => {
       props.setIsModal(false);
       props.setIsFormValid(false);
+      props.setIsAuthModal(false);
     };
   });
 
@@ -27,12 +39,12 @@ const Booking = (props) => {
     <StyledMain>
       <Navigation title={"Tickets"} pageTitle={title} booking={true} />
       <h1>Booking</h1>
-      <Schedule
+      <Component.Schedule
         setIsModal={props.setIsModal}
         setIsMovieTrailer={props.setIsMovieTrailer}
       />
-      <Tickets ticketsContainer={ticketsContainer} />
-      <Seats ticketsContainer={ticketsContainer} />
+      <Component.Tickets ticketsContainer={ticketsContainer} />
+      <Component.Seats ticketsContainer={ticketsContainer} />
     </StyledMain>
   );
 };

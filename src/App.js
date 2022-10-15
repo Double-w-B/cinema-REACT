@@ -11,6 +11,7 @@ function App() {
   const [isModal, setIsModal] = React.useState(false);
   const [isFormValid, setIsFormValid] = React.useState(false);
   const [isMovieTrailer, setIsMovieTrailer] = React.useState(false);
+  const [isAuthModal, setIsAuthModal] = React.useState(false);
   const nowPlayingContainer = React.useRef();
   const FAQsTickets = React.useRef();
   const FAQsMovie = React.useRef();
@@ -40,6 +41,12 @@ function App() {
           isMovieTrailer={isMovieTrailer}
         />
       )}
+      {isModal && isAuthModal && (
+        <Pages.AuthModal
+          setIsModal={setIsModal}
+          setIsAuthModal={setIsAuthModal}
+        />
+      )}
       <Navbar nowPlayingContainer={nowPlayingContainer} />
       <Routes>
         <Route
@@ -59,6 +66,7 @@ function App() {
             <Pages.BookingPage
               setIsModal={setIsModal}
               setIsMovieTrailer={setIsMovieTrailer}
+              setIsAuthModal={setIsAuthModal}
             />
           }
         />
