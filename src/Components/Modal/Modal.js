@@ -8,13 +8,7 @@ const Modal = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <ModalOverlay
-          isMovieTrailer={props.isMovieTrailer}
-          setIsModal={props.setIsModal}
-          setIsMovieTrailer={props.setIsMovieTrailer}
-        >
-          {props.children}
-        </ModalOverlay>,
+        <ModalOverlay {...props}>{props.children}</ModalOverlay>,
         portalElement
       )}
     </>

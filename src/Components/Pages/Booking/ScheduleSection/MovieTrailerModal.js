@@ -17,13 +17,19 @@ const TrailerModal = (props) => {
     const timeout = setTimeout(() => setIsShowLoadingImg(false), 400);
     return () => clearTimeout(timeout);
   };
+
+  const handleClick = () => {
+    props.setIsModal(false);
+    props.setIsMovieTrailer(false);
+  };
+
   return (
     <Modal {...props}>
       <StyledContainer>
         <StyledLayer showLoadingImg={isShowLoadingImg}>
           <img src={spinnerImg} alt="poster" />
         </StyledLayer>
-        <AiOutlineCloseCircle />
+        <AiOutlineCloseCircle onClick={handleClick} />
         {key && (
           <iframe
             width="100%"
