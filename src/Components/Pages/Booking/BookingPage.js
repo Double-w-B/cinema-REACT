@@ -45,6 +45,7 @@ const Booking = (props) => {
       />
       <Component.Tickets ticketsContainer={ticketsContainer} />
       <Component.Seats ticketsContainer={ticketsContainer} />
+      <Component.BookingSummary />
     </StyledMain>
   );
 };

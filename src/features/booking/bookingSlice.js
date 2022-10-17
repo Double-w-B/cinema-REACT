@@ -5,8 +5,11 @@ const initialState = {
   bookingMovieTitle: "",
   bookingDay: "",
   bookingTime: "",
-  bookingNumberOfTickets: "",
-  bookingTotalPrice: "",
+  bookingNumberOfTickets: 0,
+  bookingAdultTickets: 0,
+  bookingChildTickets: 0,
+  bookingSeniorTickets: 0,
+  bookingTotalPrice: 0,
   bookingSeats: [],
 };
 
@@ -28,6 +31,15 @@ const bookingTicketsSlice = createSlice({
     },
     addBookingNumberOfTickets: (state, action) => {
       state.bookingNumberOfTickets = action.payload;
+    },
+    addBookingAdultTicketsNumber: (state, action) => {
+      state.bookingAdultTickets = action.payload;
+    },
+    addBookingChildTicketsNumber: (state, action) => {
+      state.bookingChildTickets = action.payload;
+    },
+    addBookingSeniorTicketsNumber: (state, action) => {
+      state.bookingSeniorTickets = action.payload;
     },
     addBookingSeats: (state, action) => {
       state.bookingSeats = [action.payload, ...state.bookingSeats];
@@ -57,6 +69,9 @@ export const {
   addBookingSeats,
   replaceBookingSeat,
   removeBookingSeats,
+  addBookingAdultTicketsNumber,
+  addBookingChildTicketsNumber,
+  addBookingSeniorTicketsNumber,
 } = bookingTicketsSlice.actions;
 
 export default bookingTicketsSlice.reducer;

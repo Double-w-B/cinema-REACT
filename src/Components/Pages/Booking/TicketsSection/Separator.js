@@ -23,6 +23,9 @@ const Separator = (props) => {
         adultTickets + childTickets + seniorTickets
       )
     );
+    dispatch(Booking.addBookingAdultTicketsNumber(adultTickets));
+    dispatch(Booking.addBookingChildTicketsNumber(childTickets));
+    dispatch(Booking.addBookingSeniorTicketsNumber(seniorTickets));
     // eslint-disable-next-line
   }, [adultTickets, childTickets, seniorTickets]);
 
