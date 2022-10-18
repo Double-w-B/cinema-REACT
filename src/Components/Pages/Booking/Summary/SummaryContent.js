@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import { shake } from "./SummaryPayment";
 
-const SummaryContent = () => {
+const SummaryContent = (props) => {
   const {
     bookingMovieTitle,
     bookingDay,
@@ -22,6 +23,7 @@ const SummaryContent = () => {
   const numberOfTickets = () => {
     const allGroups = [adultTickets, childTickets, seniorTickets];
     const filteredGroup = allGroups
+      // eslint-disable-next-line
       .map((tickets, index) => {
         if (tickets > 0 && index === 0) {
           return `Adult x${tickets}`;
@@ -40,7 +42,10 @@ const SummaryContent = () => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      shakeEmail={props.isShakeEmail}
+      guestEmail={props.guestEmail}
+    >
       <h2>{bookingMovieTitle}</h2>
       <p>
         <span>Tickets:</span>{" "}
@@ -61,7 +66,13 @@ const SummaryContent = () => {
       </p>
       {!isUser && (
         <label>
-          Email address: <input type="email" required />
+          Email address:{" "}
+          <input
+            type="email"
+            required
+            value={props.guestEmail}
+            onChange={(e) => props.setGuestEmail(e.target.value)}
+          />
         </label>
       )}
     </StyledContainer>
@@ -90,6 +101,11 @@ const StyledContainer = styled.div`
 
   label {
     color: var(--primary-grey-clr);
+    -webkit-animation: ${(props) => props.shakeEmail && shake};
+    -moz-animation: ${(props) => props.shakeEmail && shake};
+    -o-animation: ${(props) => props.shakeEmail && shake};
+    animation: ${(props) => props.shakeEmail && shake};
+    animation-duration: 5.72s;
 
     input {
       width: 60%;
@@ -98,9 +114,13 @@ const StyledContainer = styled.div`
       padding-left: 0.5rem;
       font-size: 1.05rem;
       border-radius: 2px;
+      text-transform: lowercase;
       transition: 0.3s linear;
       background-color: transparent;
-      border: 1px solid var(--primary-grey-clr);
+      border: ${(props) =>
+        props.guestEmail.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)
+          ? "1px solid transparent"
+          : "1px solid var(--primary-grey-clr)"};
       color: var(--primary-white-clr);
 
       &:hover {

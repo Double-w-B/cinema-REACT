@@ -1,16 +1,73 @@
 import React from "react";
-import styled from "styled-components";
-import payPalLogo from "../../../../Images/payPal.png";
-import visaLogo from "../../../../Images/visa.png";
-import gPayLogo from "../../../../Images/gPay.png";
-import applePayLogo from "../../../../Images/applePay.png";
+import styled, { keyframes } from "styled-components";
+import payPalLogo from "../../../../Images/payPal.webp";
+import visaLogo from "../../../../Images/visa.webp";
+import gPayLogo from "../../../../Images/gPay.webp";
+import applePayLogo from "../../../../Images/applePay.webp";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
+import { useSelector } from "react-redux";
 
-const SummaryPayment = () => {
+const SummaryPayment = (props) => {
+  const [paymentMethod, setPaymentMethod] = React.useState(null);
+  const [isShakeMsg, setIsShakeMsg] = React.useState(false);
+  const summaryContainer = React.useRef("");
+
   const logos = [payPalLogo, visaLogo, gPayLogo, applePayLogo];
-  const [paymentMethod, setPaymentMethod] = React.useState("");
+  const { bookingTime, bookingSeats, bookingNumberOfTickets } = useSelector(
+    (store) => store.bookingTickets
+  );
+  const {
+    scheduleContainer,
+    ticketsContainer,
+    seatsContainer,
+    guestEmail,
+    isShakeEmail,
+    setIsShakeEmail,
+  } = props;
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsShakeMsg(false);
+      setIsShakeEmail(false);
+    }, 350);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line
+  }, [isShakeMsg, isShakeEmail]);
+
+  const handleClick = () => {
+    const showErrorContainer = (element) => {
+      window.scrollTo({
+        top: element.current.offsetTop - 10,
+        behavior: "smooth",
+      });
+    };
+
+    if (!bookingTime) {
+      showErrorContainer(scheduleContainer);
+      return;
+    }
+    if (!bookingNumberOfTickets) {
+      showErrorContainer(ticketsContainer);
+      return;
+    }
+    if (bookingSeats.length < 1) {
+      showErrorContainer(seatsContainer);
+      return;
+    }
+    if (!guestEmail.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)) {
+      showErrorContainer(summaryContainer);
+      setIsShakeEmail(true);
+      return;
+    }
+    if (paymentMethod == null) {
+      showErrorContainer(summaryContainer);
+      setIsShakeMsg(true);
+      return;
+    }
+  };
+
   return (
-    <StyledContainer>
+    <StyledContainer isShakeMsg={isShakeMsg} ref={summaryContainer}>
       <p>Select a payment method</p>
       <div className="summary-payment-method">
         {logos.map((logo, index) => {
@@ -25,10 +82,38 @@ const SummaryPayment = () => {
           );
         })}
       </div>
-      <StyledBtn>Complete booking</StyledBtn>
+      <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>
     </StyledContainer>
   );
 };
+
+export const shake = keyframes`
+  0% {
+    transform: translate(0, 0);
+  }
+  1.78571% {
+    transform: translate(8px, 0);
+  }
+  3.57143% {
+    transform: translate(0, 0);
+  }
+  5.35714% {
+    transform: translate(8px, 0);
+  }
+  7.14286% {
+    transform: translate(0, 0);
+  }
+  8.92857% {
+    transform: translate(8px, 0);
+  }
+  10.71429% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+
+`;
 
 const StyledContainer = styled.div`
   width: 35%;
@@ -42,6 +127,11 @@ const StyledContainer = styled.div`
     text-align: center;
     font-style: italic;
     color: var(--primary-grey-clr);
+    -webkit-animation: ${(props) => props.isShakeMsg && shake};
+    -moz-animation: ${(props) => props.isShakeMsg && shake};
+    -o-animation: ${(props) => props.isShakeMsg && shake};
+    animation: ${(props) => props.isShakeMsg && shake};
+    animation-duration: 5.72s;
   }
 
   .summary-payment-method {
@@ -75,7 +165,7 @@ const StyledContainer = styled.div`
       img {
         width: 100%;
         height: 100%;
-        padding: 0.5rem;
+        padding: 0.8rem;
         object-fit: contain;
         color: transparent;
       }
@@ -85,5 +175,9 @@ const StyledContainer = styled.div`
 
 const StyledBtn = styled(StyledButton)`
   position: relative;
+
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 export default SummaryPayment;

@@ -5,7 +5,7 @@ import SeatsMap from "./SeatsMap";
 
 const Seats = (props) => {
   return (
-    <StyledContainer>
+    <StyledContainer ref={props.seatsContainer}>
       <h2>Seats</h2>
       <SeatsMap {...props} />
     </StyledContainer>

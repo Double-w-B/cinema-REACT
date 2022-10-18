@@ -18,7 +18,10 @@ const Schedule = (props) => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      onDragOver={(e) => e.preventDefault()}
+      ref={props.scheduleContainer}
+    >
       <h2>Date</h2>
       <StyledWrapper>
         <StyledSection>

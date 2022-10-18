@@ -13,7 +13,9 @@ const Booking = (props) => {
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
 
+  const scheduleContainer = React.useRef("");
   const ticketsContainer = React.useRef("");
+  const seatsContainer = React.useRef("");
 
   React.useEffect(() => {
     if (!isUser) {
@@ -42,10 +44,18 @@ const Booking = (props) => {
       <Component.Schedule
         setIsModal={props.setIsModal}
         setIsMovieTrailer={props.setIsMovieTrailer}
+        scheduleContainer={scheduleContainer}
       />
       <Component.Tickets ticketsContainer={ticketsContainer} />
-      <Component.Seats ticketsContainer={ticketsContainer} />
-      <Component.BookingSummary />
+      <Component.Seats
+        ticketsContainer={ticketsContainer}
+        seatsContainer={seatsContainer}
+      />
+      <Component.BookingSummary
+        ticketsContainer={ticketsContainer}
+        seatsContainer={seatsContainer}
+        scheduleContainer={scheduleContainer}
+      />
     </StyledMain>
   );
 };

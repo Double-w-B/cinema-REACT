@@ -5,12 +5,20 @@ import { useSelector } from "react-redux";
 import SummaryPayment from "./SummaryPayment";
 import SummaryContent from "./SummaryContent";
 
-const BookingSummary = () => {
+const BookingSummary = (props) => {
+  const [guestEmail, setGuestEmail] = React.useState("");
+  const [isShakeEmail, setIsShakeEmail] = React.useState(false);
+
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
-
   const { poster_path } = singleMovieInfo;
 
+  const emailState = {
+    guestEmail,
+    setGuestEmail,
+    isShakeEmail,
+    setIsShakeEmail,
+  };
   return (
     <StyledContainer>
       <h2>Booking Summary</h2>
@@ -18,8 +26,8 @@ const BookingSummary = () => {
         <div className="summary-img">
           <img src={`${imgLowResUrl}${poster_path}`} alt="poster" />
         </div>
-        <SummaryContent />
-        <SummaryPayment />
+        <SummaryContent {...emailState} />
+        <SummaryPayment {...props} {...emailState} />
       </StyledWrapper>
     </StyledContainer>
   );
