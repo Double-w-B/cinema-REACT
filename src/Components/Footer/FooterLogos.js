@@ -1,9 +1,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import LogoImg1 from "../../Images/TechLogo1.png";
-import LogoImg2 from "../../Images/TechLogo2.png";
-import LogoImg3 from "../../Images/TechLogo3.png";
-import LogoImg4 from "../../Images/TechLogo4.png";
+import LogoImg1 from "../../Images/TechLogo1.webp";
+import LogoImg2 from "../../Images/TechLogo2.webp";
+import LogoImg3 from "../../Images/TechLogo3.webp";
+import LogoImg4 from "../../Images/TechLogo4.webp";
 const FooterLogos = () => {
   return (
     <StyledSectionLogos>
