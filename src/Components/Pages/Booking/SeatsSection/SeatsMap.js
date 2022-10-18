@@ -9,7 +9,8 @@ const SeatsMap = (props) => {
   const { bookingNumberOfTickets: tickets, bookingSeats } = useSelector(
     (store) => store.bookingTickets
   );
-  const rowsLetters = ["a", "b", "c", "d", "e", "f", "g", "h"];
+
+  const rowsLetters = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
   const rowSeats = (letter) => {
     const handleClick = (e) => {
@@ -24,7 +25,9 @@ const SeatsMap = (props) => {
           dispatch(Booking.replaceBookingSeat(seatId));
         }
       } else {
-        props.ticketsContainer.current.scrollIntoView({ behavior: "smooth" });
+        const ticketsContainerTop =
+          props.ticketsContainer.current.offsetTop - 10;
+        window.scrollTo({ top: ticketsContainerTop, behavior: "smooth" });
       }
     };
 
@@ -58,7 +61,7 @@ const SeatsMap = (props) => {
     return Array(11)
       .fill("")
       .map((seat, seatIndex) => {
-        if (letter === "f" || letter === "g" || letter === "h") {
+        if (letter === "F" || letter === "G" || letter === "H") {
           /* stairs */
           if (seatIndex === 5) {
             return <div key={seatIndex} className="seat stairs"></div>;
