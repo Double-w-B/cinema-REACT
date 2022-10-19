@@ -48,7 +48,7 @@ const SeatsMap = (props) => {
     };
 
     const showExit = (row, index) => {
-      if (row === "e" && (index === 0 || index === 10)) {
+      if (row === "E" && (index === 0 || index === 10)) {
         return (
           <div className="direction">
             <BsArrowDown />
@@ -120,7 +120,10 @@ const SeatsMap = (props) => {
         return (
           <div key={rowIndex} id={rowsLetters[rowIndex]} className="row">
             {rowSeats(rowsLetters[rowIndex])}
-            <p className="letter">{rowsLetters[rowIndex].toUpperCase()}</p>
+            <p className="letter left">{rowsLetters[rowIndex].toUpperCase()}</p>
+            <p className="letter right">
+              {rowsLetters[rowIndex].toUpperCase()}
+            </p>
           </div>
         );
       });
@@ -199,10 +202,17 @@ const StyledSeats = styled.div`
     .letter {
       position: absolute;
       top: 50%;
-      left: -1.5rem;
       transform: translateY(-50%);
       color: var(--primary-red-clr);
-      opacity: 0.5;
+      opacity: 0.4;
+
+      &.left {
+        left: -1.5rem;
+      }
+
+      &.right {
+        right: -1.5rem;
+      }
     }
 
     .seat {
