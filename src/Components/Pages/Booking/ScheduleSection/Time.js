@@ -42,13 +42,15 @@ const Time = (props) => {
   const showMovieScreenings = () => {
     return findMovieScreenings().map((time, index) => {
       const setClassName = (time) => {
-        const date = new window.Date();
+        const currentDateAndTime = new window.Date();
+        const bookingDate = new window.Date(day);
+        const bookingHour = bookingDate.setHours(time.slice(0, 2));
+        const bookingHourAndMinutes = new window.Date(bookingHour).setMinutes(
+          time.slice(-2) - 15
+        );
+        const fullBookingDateAndTime = new window.Date(bookingHourAndMinutes);
 
-        if (
-          date.getDate() === new window.Date(day).getDate() &&
-          date.getHours().toString() >= time.slice(0, 2) &&
-          date.getMinutes() >= Number(time.slice(-2) - 15)
-        ) {
+        if (currentDateAndTime > fullBookingDateAndTime) {
           return "inactive";
         } else {
           if (screeningTime === time) {
@@ -72,7 +74,7 @@ const Time = (props) => {
   };
 
   return (
-    <StyledTimeContainer>
+    <StyledTimeContainer className="no-select">
       <h3>
         Available <br />
         movie screenings:
@@ -121,6 +123,7 @@ const StyledTimeScreenings = styled.div`
 
     &:hover {
       opacity: 1;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
     &.active {
@@ -131,7 +134,7 @@ const StyledTimeScreenings = styled.div`
     }
 
     &.inactive {
-      opacity: 0.7;
+      opacity: 0.4;
       pointer-events: none;
     }
   }
