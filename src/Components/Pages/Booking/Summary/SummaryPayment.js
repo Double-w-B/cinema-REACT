@@ -1,18 +1,14 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import payPalLogo from "../../../../Images/payPal.webp";
-import visaLogo from "../../../../Images/visa.webp";
-import gPayLogo from "../../../../Images/gPay.webp";
-import applePayLogo from "../../../../Images/applePay.webp";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 import { useSelector } from "react-redux";
+import { paymentMethods } from "../../../../data";
 
 const SummaryPayment = (props) => {
   const [paymentMethod, setPaymentMethod] = React.useState(null);
   const [isShakeMsg, setIsShakeMsg] = React.useState(false);
   const summaryContainer = React.useRef("");
 
-  const logos = [payPalLogo, visaLogo, gPayLogo, applePayLogo];
   const { bookingTime, bookingSeats, bookingNumberOfTickets } = useSelector(
     (store) => store.bookingTickets
   );
@@ -76,23 +72,48 @@ const SummaryPayment = (props) => {
     }
   };
 
+  const dynamicCompleteBtn = () => {
+    const dynamicLink = () => {
+      return paymentMethods.find((method) => method.name === paymentMethod)
+        .link;
+    };
+
+    if (
+      bookingTime &&
+      bookingNumberOfTickets &&
+      bookingSeats.length > 0 &&
+      bookingSeats.length === bookingNumberOfTickets &&
+      paymentMethod &&
+      paymentMethod !== "VisaMastercard" &&
+      guestEmail.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)
+    ) {
+      return (
+        <a href={dynamicLink()} target="_blank" rel="noreferrer">
+          <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>{" "}
+        </a>
+      );
+    } else {
+      return <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>;
+    }
+  };
+
   return (
     <StyledContainer isShakeMsg={isShakeMsg} ref={summaryContainer}>
       <p>Select a payment method</p>
       <div className="summary-payment-method">
-        {logos.map((logo, index) => {
+        {paymentMethods.map((method, index) => {
           return (
             <div
               key={index}
-              className={paymentMethod === index ? "active" : ""}
-              onClick={() => setPaymentMethod(index)}
+              className={paymentMethod === method.name ? "active" : ""}
+              onClick={() => setPaymentMethod(method.name)}
             >
-              <img src={logo} alt="" />
+              <img src={method.img} alt="" />
             </div>
           );
         })}
       </div>
-      <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>
+      {dynamicCompleteBtn()}
     </StyledContainer>
   );
 };
@@ -181,10 +202,15 @@ const StyledContainer = styled.div`
       }
     }
   }
+
+  a {
+    width: 100%;
+  }
 `;
 
 const StyledBtn = styled(StyledButton)`
   position: relative;
+  width: 100%;
 
   &:active {
     transform: scale(0.9);

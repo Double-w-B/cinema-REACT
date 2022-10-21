@@ -6,6 +6,10 @@ import popcornIco from "./Images/icons/popcorn.png";
 import chipsIco from "./Images/icons/chips.png";
 import hotDogIco from "./Images/icons/hotDog.png";
 import pizzaIco from "./Images/icons/pizza.png";
+import payPalLogo from "./Images/payPal.webp";
+import visaLogo from "./Images/visa.webp";
+import gPayLogo from "./Images/gPay.webp";
+import applePayLogo from "./Images/applePay.webp";
 
 export const cafeOffers = [
   {
@@ -338,3 +342,25 @@ export const movieTickets = [
 ];
 
 export const promoCodes = ["cinemania", "react", "frontend"];
+
+export const paymentMethods = [
+  {
+    name: "PayPal",
+    img: payPalLogo,
+    link: "https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fpaypalme&state=%2Fmy%2Fprofile%3Flocale.x%3Den_US%26country.x%3DUS",
+  },
+  {
+    name: "VisaMastercard",
+    img: visaLogo,
+  },
+  {
+    name: "GPay",
+    img: gPayLogo,
+    link: "https://pay.google.com/payments/home?utm_source=googlepay&utm_medium=website&utm_campaign=sign-in",
+  },
+  {
+    name: "APay",
+    img: applePayLogo,
+    link: "https://secure4.store.apple.com/pl/shop/signIn?ssi=1AAABg_wyNjQgjQ-xOmyWxAFn87Q76pUI48-QxyuXwYzyFNThLL8MT8UAAABIaHR0cHM6Ly93d3cuYXBwbGUuY29tL3BsL2FwcGxlLXBheS98aHR0cHM6Ly93d3cuYXBwbGUuY29tL3BsL2FwcGxlLXBheS98AAIBIBuNSswPpBRq388VSkwBbCeL4ZFy107-L5IdEpSEEcY",
+  },
+];
