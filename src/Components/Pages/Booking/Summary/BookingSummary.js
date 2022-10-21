@@ -8,16 +8,20 @@ import SummaryContent from "./SummaryContent";
 const BookingSummary = (props) => {
   const [guestEmail, setGuestEmail] = React.useState("");
   const [isShakeEmail, setIsShakeEmail] = React.useState(false);
+  const [isSeatsEqTicketsAmount, setIsSeatsEqTicketsAmount] =
+    React.useState(false);
 
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { poster_path } = singleMovieInfo;
 
-  const emailState = {
+  const initialState = {
     guestEmail,
     setGuestEmail,
     isShakeEmail,
     setIsShakeEmail,
+    isSeatsEqTicketsAmount,
+    setIsSeatsEqTicketsAmount,
   };
   return (
     <StyledContainer>
@@ -26,8 +30,8 @@ const BookingSummary = (props) => {
         <div className="summary-img">
           <img src={`${imgLowResUrl}${poster_path}`} alt="poster" />
         </div>
-        <SummaryContent {...emailState} />
-        <SummaryPayment {...props} {...emailState} />
+        <SummaryContent {...initialState} />
+        <SummaryPayment {...props} {...initialState} />
       </StyledWrapper>
     </StyledContainer>
   );

@@ -23,17 +23,21 @@ const SummaryPayment = (props) => {
     guestEmail,
     isShakeEmail,
     setIsShakeEmail,
+    isSeatsEqTicketsAmount,
+    setIsSeatsEqTicketsAmount,
   } = props;
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setIsShakeMsg(false);
       setIsShakeEmail(false);
+      setIsSeatsEqTicketsAmount(false);
     }, 350);
     return () => clearTimeout(timer);
     // eslint-disable-next-line
-  }, [isShakeMsg, isShakeEmail]);
+  }, [isShakeMsg, isShakeEmail, isSeatsEqTicketsAmount]);
 
+  /* Validation logic of the booking content */
   const handleClick = () => {
     const showErrorContainer = (element) => {
       window.scrollTo({
@@ -54,6 +58,12 @@ const SummaryPayment = (props) => {
       showErrorContainer(seatsContainer);
       return;
     }
+
+    if (bookingSeats.length !== bookingNumberOfTickets) {
+      setIsSeatsEqTicketsAmount(true);
+      return;
+    }
+
     if (!guestEmail.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)) {
       showErrorContainer(summaryContainer);
       setIsShakeEmail(true);

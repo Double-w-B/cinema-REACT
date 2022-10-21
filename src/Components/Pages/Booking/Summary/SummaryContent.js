@@ -45,6 +45,7 @@ const SummaryContent = (props) => {
     <StyledContainer
       shakeEmail={props.isShakeEmail}
       guestEmail={props.guestEmail}
+      shakeSeatsAndTickets={props.isSeatsEqTicketsAmount}
     >
       <h2>{bookingMovieTitle}</h2>
       <p>
@@ -93,6 +94,14 @@ const StyledContainer = styled.div`
 
   p {
     font-size: 1.1rem;
+    &:nth-child(2),
+    &:nth-child(5) {
+      -webkit-animation: ${(props) => props.shakeSeatsAndTickets && shake};
+      -moz-animation: ${(props) => props.shakeSeatsAndTickets && shake};
+      -o-animation: ${(props) => props.shakeSeatsAndTickets && shake};
+      animation: ${(props) => props.shakeSeatsAndTickets && shake};
+      animation-duration: 5.72s;
+    }
 
     span {
       color: var(--primary-grey-clr);
