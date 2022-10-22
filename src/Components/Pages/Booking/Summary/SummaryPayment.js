@@ -21,6 +21,8 @@ const SummaryPayment = (props) => {
     setIsShakeEmail,
     isSeatsEqTicketsAmount,
     setIsSeatsEqTicketsAmount,
+    setIsModal,
+    setIsCardPaymentModal,
   } = props;
 
   React.useEffect(() => {
@@ -69,6 +71,11 @@ const SummaryPayment = (props) => {
       showErrorContainer(summaryContainer);
       setIsShakeMsg(true);
       return;
+    }
+
+    if (paymentMethod === "VisaMastercard") {
+      setIsModal(true);
+      setIsCardPaymentModal(true);
     }
   };
 

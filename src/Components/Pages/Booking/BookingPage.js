@@ -55,6 +55,8 @@ const Booking = (props) => {
         ticketsContainer={ticketsContainer}
         seatsContainer={seatsContainer}
         scheduleContainer={scheduleContainer}
+        setIsModal={props.setIsModal}
+        setIsCardPaymentModal={props.setIsCardPaymentModal}
       />
     </StyledMain>
   );
