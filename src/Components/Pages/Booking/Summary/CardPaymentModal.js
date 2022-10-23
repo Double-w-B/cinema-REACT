@@ -13,7 +13,7 @@ const CardPaymentModal = (props) => {
   const [isValidThruError, setIsValidThruError] = React.useState(false);
   const [isCvvError, setIsCvvError] = React.useState(false);
 
-  const { setIsModal, setIsCardPaymentModal } = props;
+  const { setIsModal, setIsCardPaymentModal, setIsLoadingModal } = props;
 
   const errorsInitialState = {
     isValidThruError,
@@ -71,8 +71,8 @@ const CardPaymentModal = (props) => {
       return;
     }
 
-    setIsModal(false);
     setIsCardPaymentModal(false);
+    setIsLoadingModal(true);
   };
 
   const handleCancelBtn = () => {

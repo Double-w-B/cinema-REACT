@@ -13,10 +13,12 @@ function App() {
   const [isMovieTrailer, setIsMovieTrailer] = React.useState(false);
   const [isAuthModal, setIsAuthModal] = React.useState(false);
   const [isCardPaymentModal, setIsCardPaymentModal] = React.useState(false);
-  const nowPlayingContainer = React.useRef();
-  const FAQsTickets = React.useRef();
-  const FAQsMovie = React.useRef();
-  const FAQsCovid = React.useRef();
+  const [isLoadingModal, setIsLoadingModal] = React.useState(false);
+
+  const nowPlayingContainer = React.useRef(null);
+  const FAQsTickets = React.useRef(null);
+  const FAQsMovie = React.useRef(null);
+  const FAQsCovid = React.useRef(null);
 
   React.useEffect(() => {
     dispatch(moviesSliceModule.getMoviesNowPlaying());
@@ -52,6 +54,13 @@ function App() {
         <Pages.CardPaymentModal
           setIsModal={setIsModal}
           setIsCardPaymentModal={setIsCardPaymentModal}
+          setIsLoadingModal={setIsLoadingModal}
+        />
+      )}
+      {isModal && isLoadingModal && (
+        <Pages.LoadingModal
+          setIsModal={setIsModal}
+          setIsLoadingModal={setIsLoadingModal}
         />
       )}
 
@@ -76,6 +85,7 @@ function App() {
               setIsMovieTrailer={setIsMovieTrailer}
               setIsAuthModal={setIsAuthModal}
               setIsCardPaymentModal={setIsCardPaymentModal}
+              setIsFormValid={setIsFormValid}
             />
           }
         />
