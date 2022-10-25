@@ -11,6 +11,7 @@ const initialState = {
   bookingSeniorTickets: 0,
   bookingTotalPrice: 0,
   bookingSeats: [],
+  bookingEmail: "",
 };
 
 const bookingTicketsSlice = createSlice({
@@ -56,6 +57,9 @@ const bookingTicketsSlice = createSlice({
     addBookingTotalPrice: (state, action) => {
       state.bookingTotalPrice = action.payload;
     },
+    addBookingEmail: (state, action) => {
+      state.bookingEmail = action.payload;
+    },
   },
 });
 
@@ -72,6 +76,7 @@ export const {
   addBookingAdultTicketsNumber,
   addBookingChildTicketsNumber,
   addBookingSeniorTicketsNumber,
+  addBookingEmail,
 } = bookingTicketsSlice.actions;
 
 export default bookingTicketsSlice.reducer;

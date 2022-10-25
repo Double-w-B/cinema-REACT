@@ -44,7 +44,7 @@ const SummaryContent = (props) => {
   return (
     <StyledContainer
       shakeEmail={props.isShakeEmail}
-      guestEmail={props.guestEmail}
+      userEmail={props.userEmail}
       shakeSeatsAndTickets={props.isSeatsEqTicketsAmount}
     >
       <h2>{bookingMovieTitle}</h2>
@@ -65,14 +65,14 @@ const SummaryContent = (props) => {
       <p>
         <span>Total:</span> ${bookingTotalPrice}
       </p>
-      {!isUser && (
+      {(!isUser || user.email == null) && (
         <label>
           Email address:{" "}
           <input
             type="email"
             required
-            value={props.guestEmail}
-            onChange={(e) => props.setGuestEmail(e.target.value)}
+            value={props.userEmail}
+            onChange={(e) => props.setUserEmail(e.target.value.toLowerCase())}
           />
         </label>
       )}
@@ -127,7 +127,8 @@ const StyledContainer = styled.div`
       transition: 0.3s linear;
       background-color: transparent;
       border: ${(props) =>
-        props.guestEmail.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)
+        // props.userEmail?.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)
+        /^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(props.userEmail)
           ? "1px solid transparent"
           : "1px solid var(--primary-grey-clr)"};
       color: var(--primary-white-clr);

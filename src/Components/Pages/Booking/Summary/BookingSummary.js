@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { StyledContentContainer } from "../../UnlimitedPage/UnlimitedPage";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addBookingEmail } from "../../../../features/booking/bookingSlice";
 import SummaryPayment from "./SummaryPayment";
 import SummaryContent from "./SummaryContent";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const BookingSummary = (props) => {
-  const [guestEmail, setGuestEmail] = React.useState("");
+  const dispatch = useDispatch();
+  const [userEmail, setUserEmail] = React.useState("");
   const [isShakeEmail, setIsShakeEmail] = React.useState(false);
   const [isSeatsEqTicketsAmount, setIsSeatsEqTicketsAmount] =
     React.useState(false);
@@ -16,13 +19,27 @@ const BookingSummary = (props) => {
   const { poster_path } = singleMovieInfo;
 
   const initialState = {
-    guestEmail,
-    setGuestEmail,
+    userEmail,
+    setUserEmail,
     isShakeEmail,
     setIsShakeEmail,
     isSeatsEqTicketsAmount,
     setIsSeatsEqTicketsAmount,
   };
+
+  const { user } = useAuth0();
+
+  React.useEffect(() => {
+    if (user && user.email !== null) {
+      setUserEmail(user.email);
+    }
+  }, [user]);
+
+  React.useEffect(() => {
+    dispatch(addBookingEmail(userEmail));
+    // eslint-disable-next-line
+  }, [userEmail]);
+
   return (
     <StyledContainer>
       <h2>Booking Summary</h2>
