@@ -14,6 +14,8 @@ function App() {
   const [isAuthModal, setIsAuthModal] = React.useState(false);
   const [isCardPaymentModal, setIsCardPaymentModal] = React.useState(false);
   const [isLoadingModal, setIsLoadingModal] = React.useState(false);
+  const [isBookingSummaryModal, setIsBookingSummaryModal] =
+    React.useState(false);
 
   const nowPlayingContainer = React.useRef(null);
   const FAQsTickets = React.useRef(null);
@@ -55,12 +57,19 @@ function App() {
           setIsModal={setIsModal}
           setIsCardPaymentModal={setIsCardPaymentModal}
           setIsLoadingModal={setIsLoadingModal}
+          setIsBookingSummaryModal={setIsBookingSummaryModal}
         />
       )}
       {isModal && isLoadingModal && (
         <Pages.LoadingModal
           setIsModal={setIsModal}
           setIsLoadingModal={setIsLoadingModal}
+        />
+      )}
+      {isModal && isBookingSummaryModal && (
+        <Pages.BookingSummaryModal
+          setIsModal={setIsModal}
+          setIsBookingSummaryModal={setIsBookingSummaryModal}
         />
       )}
 
@@ -86,6 +95,8 @@ function App() {
               setIsAuthModal={setIsAuthModal}
               setIsCardPaymentModal={setIsCardPaymentModal}
               setIsFormValid={setIsFormValid}
+              setIsLoadingModal={setIsLoadingModal}
+              setIsBookingSummaryModal={setIsBookingSummaryModal}
             />
           }
         />

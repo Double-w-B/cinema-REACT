@@ -9,20 +9,21 @@ const SummaryPayment = (props) => {
   const [isShakeMsg, setIsShakeMsg] = React.useState(false);
   const summaryContainer = React.useRef("");
 
-  const { bookingTime, bookingSeats, bookingNumberOfTickets } = useSelector(
-    (store) => store.bookingTickets
-  );
+  const { bookingTime, bookingSeats, bookingNumberOfTickets, bookingEmail } =
+    useSelector((store) => store.bookingTickets);
   const {
     scheduleContainer,
     ticketsContainer,
     seatsContainer,
-    guestEmail,
+    userEmail,
     isShakeEmail,
     setIsShakeEmail,
     isSeatsEqTicketsAmount,
     setIsSeatsEqTicketsAmount,
     setIsModal,
     setIsCardPaymentModal,
+    setIsLoadingModal,
+    setIsBookingSummaryModal,
   } = props;
 
   React.useEffect(() => {
@@ -37,11 +38,17 @@ const SummaryPayment = (props) => {
 
   /* Validation logic of the booking content */
   const handleClick = () => {
+    const emailRegExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
     const showErrorContainer = (element) => {
       window.scrollTo({
         top: element.current.offsetTop - 10,
         behavior: "smooth",
       });
+    };
+
+    const dynamicLink = () => {
+      return paymentMethods.find((method) => method.name === paymentMethod)
+        .link;
     };
 
     if (!bookingTime) {
@@ -62,7 +69,7 @@ const SummaryPayment = (props) => {
       return;
     }
 
-    if (!guestEmail.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)) {
+    if (!bookingEmail?.match(emailRegExp) || !userEmail?.match(emailRegExp)) {
       showErrorContainer(summaryContainer);
       setIsShakeEmail(true);
       return;
@@ -76,31 +83,15 @@ const SummaryPayment = (props) => {
     if (paymentMethod === "VisaMastercard") {
       setIsModal(true);
       setIsCardPaymentModal(true);
-    }
-  };
-
-  const dynamicCompleteBtn = () => {
-    const dynamicLink = () => {
-      return paymentMethods.find((method) => method.name === paymentMethod)
-        .link;
-    };
-
-    if (
-      bookingTime &&
-      bookingNumberOfTickets &&
-      bookingSeats.length > 0 &&
-      bookingSeats.length === bookingNumberOfTickets &&
-      paymentMethod &&
-      paymentMethod !== "VisaMastercard" &&
-      guestEmail.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)
-    ) {
-      return (
-        <a href={dynamicLink()} target="_blank" rel="noreferrer">
-          <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>{" "}
-        </a>
-      );
     } else {
-      return <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>;
+      setIsModal(true);
+      setIsLoadingModal(true);
+      const timer = setTimeout(() => {
+        window.open(dynamicLink(), "_blank").focus();
+        setIsModal(true);
+        setIsBookingSummaryModal(true);
+      }, 3600);
+      return () => clearTimeout(timer);
     }
   };
 
@@ -120,7 +111,7 @@ const SummaryPayment = (props) => {
           );
         })}
       </div>
-      {dynamicCompleteBtn()}
+      <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>
     </StyledContainer>
   );
 };

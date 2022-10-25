@@ -13,7 +13,12 @@ const CardPaymentModal = (props) => {
   const [isValidThruError, setIsValidThruError] = React.useState(false);
   const [isCvvError, setIsCvvError] = React.useState(false);
 
-  const { setIsModal, setIsCardPaymentModal, setIsLoadingModal } = props;
+  const {
+    setIsModal,
+    setIsCardPaymentModal,
+    setIsLoadingModal,
+    setIsBookingSummaryModal,
+  } = props;
 
   const errorsInitialState = {
     isValidThruError,
@@ -30,7 +35,7 @@ const CardPaymentModal = (props) => {
       setIsCvvError(false);
     }, 1500);
     return () => clearTimeout(timer);
-  }, [isValidThruError, isCardNumberError, isCardholderName]);
+  }, [isValidThruError, isCardNumberError, isCardholderName, isCvvError]);
 
   const handlePayBtn = () => {
     const date = new window.Date();
@@ -73,6 +78,12 @@ const CardPaymentModal = (props) => {
 
     setIsCardPaymentModal(false);
     setIsLoadingModal(true);
+
+    const timer = setTimeout(() => {
+      setIsModal(true);
+      setIsBookingSummaryModal(true);
+    }, 3600);
+    return () => clearTimeout(timer);
   };
 
   const handleCancelBtn = () => {
@@ -341,6 +352,13 @@ const StyledContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    transition: 0.25s linear;
+
+    button {
+      &:active {
+        transform: scale(0.9);
+      }
+    }
   }
 `;
 

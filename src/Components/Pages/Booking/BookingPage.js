@@ -41,11 +41,7 @@ const Booking = (props) => {
     <StyledMain>
       <Navigation title={"Tickets"} pageTitle={title} booking={true} />
       <h1>Booking</h1>
-      <Component.Schedule
-        setIsModal={props.setIsModal}
-        setIsMovieTrailer={props.setIsMovieTrailer}
-        scheduleContainer={scheduleContainer}
-      />
+      <Component.Schedule scheduleContainer={scheduleContainer} {...props} />
       <Component.Tickets ticketsContainer={ticketsContainer} />
       <Component.Seats
         ticketsContainer={ticketsContainer}
@@ -55,8 +51,7 @@ const Booking = (props) => {
         ticketsContainer={ticketsContainer}
         seatsContainer={seatsContainer}
         scheduleContainer={scheduleContainer}
-        setIsModal={props.setIsModal}
-        setIsCardPaymentModal={props.setIsCardPaymentModal}
+        {...props}
       />
     </StyledMain>
   );

@@ -13,6 +13,7 @@ import MovieTrailerModal from "./Booking/ScheduleSection/MovieTrailerModal";
 import AuthModal from "./Booking/AuthModal";
 import CardPaymentModal from "./Booking/Summary/CardPaymentModal";
 import LoadingModal from "./Booking/Summary/LoadingModal";
+import BookingSummaryModal from "./Booking/Summary/BookingSummaryModal";
 
 export {
   CinemaCafePage,
@@ -30,4 +31,5 @@ export {
   AuthModal,
   CardPaymentModal,
   LoadingModal,
+  BookingSummaryModal,
 };
