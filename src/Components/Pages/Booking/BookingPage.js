@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 import Navigation from "../../Navigation";
 import * as Component from "./index";
 import { useAuth0 } from "@auth0/auth0-react";
+import BookingTimer from "./BookingTimer";
+import { RiTimerLine } from "react-icons/ri";
 
 const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
-  const { setIsModal, setIsAuthModal } = props;
+  const { setIsModal, setIsAuthModal, setIsFormValid } = props;
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
 
@@ -31,16 +33,19 @@ const Booking = (props) => {
 
   React.useEffect(() => {
     window.onpopstate = () => {
-      props.setIsModal(false);
-      props.setIsFormValid(false);
-      props.setIsAuthModal(false);
+      setIsModal(false);
+      setIsFormValid(false);
+      setIsAuthModal(false);
     };
   });
 
   return (
     <StyledMain>
       <Navigation title={"Tickets"} pageTitle={title} booking={true} />
-      <h1>Booking</h1>
+      <h1>
+        Booking <RiTimerLine />
+        <BookingTimer {...props} />
+      </h1>
       <Component.Schedule scheduleContainer={scheduleContainer} {...props} />
       <Component.Tickets ticketsContainer={ticketsContainer} />
       <Component.Seats
@@ -56,6 +61,17 @@ const Booking = (props) => {
     </StyledMain>
   );
 };
-const StyledMain = styled(StyledMainContainer)``;
+const StyledMain = styled(StyledMainContainer)`
+  position: relative;
+  h1 {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-left: 1rem;
+      font-size: 1.2rem;
+    }
+  }
+`;
 
 export default Booking;
