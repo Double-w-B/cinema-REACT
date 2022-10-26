@@ -11,7 +11,17 @@ import { RiTimerLine } from "react-icons/ri";
 const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
-  const { setIsModal, setIsAuthModal, setIsFormValid } = props;
+  const {
+    setIsModal,
+    setIsAuthModal,
+    setIsFormValid,
+    setIsBookingSummaryModal,
+    setIsLoadingModal,
+    setIsBookingExpiredModal,
+    setIsMovieTrailer,
+    setIsCardPaymentModal,
+  } = props;
+
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
 
@@ -36,6 +46,11 @@ const Booking = (props) => {
       setIsModal(false);
       setIsFormValid(false);
       setIsAuthModal(false);
+      setIsMovieTrailer(false);
+      setIsCardPaymentModal(false);
+      setIsBookingSummaryModal(false);
+      setIsLoadingModal(false);
+      setIsBookingExpiredModal(false);
     };
   });
 

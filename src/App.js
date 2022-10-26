@@ -16,6 +16,8 @@ function App() {
   const [isLoadingModal, setIsLoadingModal] = React.useState(false);
   const [isBookingSummaryModal, setIsBookingSummaryModal] =
     React.useState(false);
+  const [isBookingExpiredModal, setIsBookingExpiredModal] =
+    React.useState(false);
 
   const nowPlayingContainer = React.useRef(null);
   const FAQsTickets = React.useRef(null);
@@ -72,6 +74,12 @@ function App() {
           setIsBookingSummaryModal={setIsBookingSummaryModal}
         />
       )}
+      {isModal && isBookingExpiredModal && (
+        <Pages.BookingExpiredModal
+          setIsModal={setIsModal}
+          setIsBookingExpiredModal={setIsBookingExpiredModal}
+        />
+      )}
 
       <Navbar nowPlayingContainer={nowPlayingContainer} />
       <Routes>
@@ -96,7 +104,10 @@ function App() {
               setIsCardPaymentModal={setIsCardPaymentModal}
               setIsFormValid={setIsFormValid}
               setIsLoadingModal={setIsLoadingModal}
+              isBookingSummaryModal={isBookingSummaryModal}
               setIsBookingSummaryModal={setIsBookingSummaryModal}
+              setIsBookingExpiredModal={setIsBookingExpiredModal}
+              isAuthModal={isAuthModal}
             />
           }
         />

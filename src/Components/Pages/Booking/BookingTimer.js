@@ -1,27 +1,36 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 
-const BookingTimer = () => {
+const BookingTimer = (props) => {
   const [minutes, setMinutes] = React.useState(5);
   const [seconds, setSeconds] = React.useState(59);
+  const {
+    setIsModal,
+    setIsAuthModal,
+    setIsBookingExpiredModal,
+    isBookingSummaryModal,
+    isLoadingModal,
+  } = props;
 
   React.useEffect(() => {
-    let myInterval = setInterval(() => {
+    let interval = setInterval(() => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
-      if (minutes < 1) {
-      }
+
       if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(myInterval);
+        if (minutes === 0 && !isLoadingModal && !isBookingSummaryModal) {
+          clearInterval(interval);
+          setIsModal(true);
+          setIsAuthModal(false);
+          setIsBookingExpiredModal(true);
         } else {
           setMinutes(minutes - 1);
           setSeconds(59);
         }
       }
     }, 1000);
-    return () => clearInterval(myInterval);
+    return () => clearInterval(interval);
   });
 
   return (
