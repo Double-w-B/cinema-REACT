@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "../../../Modal/Modal";
-import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
+import Modal from "./Modal";
+import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 
 const CardPaymentModal = (props) => {
   const [cardholderName, setCardholderName] = React.useState("");

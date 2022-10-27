@@ -1,8 +1,8 @@
 import React from "react";
-import Modal from "../../Modal/Modal";
+import Modal from "./Modal";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../../Sliders/MoviesNowPlayingSlider";
+import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 
 const ContactUsModal = (props) => {
   const handleClick = () => {

@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import * as Pages from "./Components/Pages";
-import * as moviesSliceModule from "./features/movies/allMoviesSlice";
+import * as Modals from "./Components/Modal";
+import * as moviesSlice from "./features/movies/allMoviesSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,8 +26,8 @@ function App() {
   const FAQsCovid = React.useRef(null);
 
   React.useEffect(() => {
-    dispatch(moviesSliceModule.getMoviesNowPlaying());
-    dispatch(moviesSliceModule.getMoviesComingSoon());
+    dispatch(moviesSlice.getMoviesNowPlaying());
+    dispatch(moviesSlice.getMoviesComingSoon());
   });
 
   isModal
@@ -36,26 +37,26 @@ function App() {
   return (
     <Router>
       {isModal && isFormValid && (
-        <Pages.ContactUsModal
+        <Modals.ContactUsModal
           setIsModal={setIsModal}
           setIsFormValid={setIsFormValid}
         />
       )}
       {isModal && isMovieTrailer && (
-        <Pages.MovieTrailerModal
+        <Modals.MovieTrailerModal
           setIsModal={setIsModal}
           setIsMovieTrailer={setIsMovieTrailer}
           isMovieTrailer={isMovieTrailer}
         />
       )}
       {isModal && isAuthModal && (
-        <Pages.AuthModal
+        <Modals.AuthModal
           setIsModal={setIsModal}
           setIsAuthModal={setIsAuthModal}
         />
       )}
       {isModal && isCardPaymentModal && (
-        <Pages.CardPaymentModal
+        <Modals.CardPaymentModal
           setIsModal={setIsModal}
           setIsCardPaymentModal={setIsCardPaymentModal}
           setIsLoadingModal={setIsLoadingModal}
@@ -63,19 +64,19 @@ function App() {
         />
       )}
       {isModal && isLoadingModal && (
-        <Pages.LoadingModal
+        <Modals.LoadingModal
           setIsModal={setIsModal}
           setIsLoadingModal={setIsLoadingModal}
         />
       )}
       {isModal && isBookingSummaryModal && (
-        <Pages.BookingSummaryModal
+        <Modals.BookingSummaryModal
           setIsModal={setIsModal}
           setIsBookingSummaryModal={setIsBookingSummaryModal}
         />
       )}
       {isModal && isBookingExpiredModal && (
-        <Pages.BookingExpiredModal
+        <Modals.BookingExpiredModal
           setIsModal={setIsModal}
           setIsBookingExpiredModal={setIsBookingExpiredModal}
         />

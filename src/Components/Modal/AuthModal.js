@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "../../Modal/Modal";
-import { StyledButton } from "../../Sliders/MoviesNowPlayingSlider";
+import Modal from "./Modal";
+import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const AuthModal = (props) => {

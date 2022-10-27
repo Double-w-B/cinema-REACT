@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "../../../Modal/Modal";
+import Modal from "./Modal";
 import { useSelector } from "react-redux";
-import spinnerImg from "../../../../Images/spinner.gif";
+import spinnerImg from "../../Images/spinner.gif";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const TrailerModal = (props) => {

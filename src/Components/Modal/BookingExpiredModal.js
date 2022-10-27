@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "../../Modal/Modal";
+import Modal from "./Modal";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../../Sliders/MoviesNowPlayingSlider";
+import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 
 const BookingExpiredModal = (props) => {
   const { setIsModal, setIsBookingExpiredModal } = props;
@@ -14,11 +14,11 @@ const BookingExpiredModal = (props) => {
 
   return (
     <Modal>
-      <StyledContainer>
+      <StyledContainer className="no-select">
         <h1>Expired Booking</h1>
         <p>Your booking has expired. Try again.</p>
         <Link to="/">
-          <StyledBtn onClick={handleClick}>Ok</StyledBtn>
+          <StyledBtn onClick={handleClick}>OK</StyledBtn>
         </Link>
       </StyledContainer>
     </Modal>
@@ -55,6 +55,10 @@ const StyledContainer = styled.div`
 const StyledBtn = styled(StyledButton)`
   width: 100%;
   position: relative;
+
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 export default BookingExpiredModal;

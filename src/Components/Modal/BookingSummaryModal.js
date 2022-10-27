@@ -2,14 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Modal from "../../../Modal/Modal";
-import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
+import Modal from "./Modal";
+import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 
 const BookingSummaryModal = (props) => {
   const { setIsModal, setIsBookingSummaryModal } = props;
   const { bookingEmail, bookingMovieTitle } = useSelector(
     (store) => store.bookingTickets
   );
+
   const handleClick = () => {
     setIsModal(false);
     setIsBookingSummaryModal(false);
