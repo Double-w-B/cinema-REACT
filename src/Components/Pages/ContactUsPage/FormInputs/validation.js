@@ -1,5 +1,6 @@
+const emailCheckRexExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
-export const validationSuccess = (form) =>{
+export const validationSuccess = (form) => {
   const { issue, name, surname, email, emailConfirm, date, time, message } =
     form;
 
@@ -13,16 +14,17 @@ export const validationSuccess = (form) =>{
     time &&
     message &&
     issue !== "- Select the issue -" &&
-    email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
-    emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
+    email.match(emailCheckRexExp) &&
+    emailConfirm.match(emailCheckRexExp) &&
     email === emailConfirm;
 
-    return success;
-}
+  return success;
+};
 
 export const validateInputs = (form, refs) => {
   const { issue, name, surname, email, emailConfirm, date, time, message } =
     form;
+
   const [
     labelIssue,
     labelName,
@@ -45,13 +47,13 @@ export const validateInputs = (form, refs) => {
     labelSurname.current.classList.add("error");
   }
 
-  if (!email || !email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)) {
+  if (!email || !email.match(emailCheckRexExp)) {
     labelEmail.current.classList.add("error");
   }
 
   if (
     !emailConfirm ||
-    !emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) ||
+    !emailConfirm.match(emailCheckRexExp) ||
     email !== emailConfirm
   ) {
     labelEmailConfirm.current.classList.add("error");
@@ -75,6 +77,7 @@ export const validateInputs = (form, refs) => {
 export const checkInputsChange = (form, refs) => {
   const { issue, name, surname, email, emailConfirm, date, time, message } =
     form;
+
   const [
     labelIssue,
     labelName,
@@ -98,13 +101,13 @@ export const checkInputsChange = (form, refs) => {
     labelSurname.current.classList.remove("error");
   }
 
-  if (email && email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)) {
+  if (email && email.match(emailCheckRexExp)) {
     labelEmail.current.classList.remove("error");
   }
 
   if (
     emailConfirm &&
-    emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) &&
+    emailConfirm.match(emailCheckRexExp) &&
     email === emailConfirm
   ) {
     labelEmailConfirm.current.classList.remove("error");
@@ -152,14 +155,14 @@ export const showError = (form, refs) => {
     return;
   }
 
-  if (!email || !email.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)) {
+  if (!email || !email.match(emailCheckRexExp)) {
     labelEmail.current.scrollIntoView({ behavior: "smooth" });
     return;
   }
 
   if (
     !emailConfirm ||
-    !emailConfirm.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/) ||
+    !emailConfirm.match(emailCheckRexExp) ||
     email !== emailConfirm
   ) {
     labelEmailConfirm.current.scrollIntoView({ behavior: "smooth" });

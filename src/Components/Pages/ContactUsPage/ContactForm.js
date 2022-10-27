@@ -28,6 +28,7 @@ const ContactForm = (props) => {
   const labelTime = React.useRef("");
   const labelMessage = React.useRef("");
 
+  const { setIsModal, setIsLoadingModal, setIsFormValid } = props;
   const refs = [
     labelIssue,
     labelName,
@@ -47,16 +48,22 @@ const ContactForm = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault();
+
     if (Validation.validateInputs(form, refs)) {
-      props.setIsModal(true);
-      props.setIsFormValid(true);
+      setIsModal(true);
+      setIsLoadingModal(true);
+      const timer = setTimeout(() => {
+        setIsModal(true);
+        setIsFormValid(true);
+      }, 3600);
+      return () => clearTimeout(timer);
     }
     Validation.showError(form, refs);
   };
 
   return (
     <StyledContainer>
-      <StyledForm action="" email={form.email} emailConfirm={form.emailConfirm}>
+      <StyledForm email={form.email} emailConfirm={form.emailConfirm}>
         <Input.SelectIssue
           form={form}
           setForm={setForm}
