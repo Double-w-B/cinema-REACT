@@ -30,56 +30,46 @@ function App() {
     dispatch(moviesSlice.getMoviesComingSoon());
   });
 
+  const modalsInitialState = {
+    setIsModal,
+    setIsFormValid,
+    isAuthModal,
+    setIsAuthModal,
+    isMovieTrailer,
+    setIsMovieTrailer,
+    setIsCardPaymentModal,
+    setIsLoadingModal,
+    isBookingSummaryModal,
+    setIsBookingSummaryModal,
+    setIsBookingExpiredModal,
+  };
+
   isModal
     ? document.body.classList.add("no-scrolling")
     : document.body.classList.remove("no-scrolling");
 
   return (
     <Router>
+      {/* Modals */}
+
       {isModal && isFormValid && (
-        <Modals.ContactUsModal
-          setIsModal={setIsModal}
-          setIsFormValid={setIsFormValid}
-        />
+        <Modals.ContactUsModal {...modalsInitialState} />
       )}
       {isModal && isMovieTrailer && (
-        <Modals.MovieTrailerModal
-          setIsModal={setIsModal}
-          setIsMovieTrailer={setIsMovieTrailer}
-          isMovieTrailer={isMovieTrailer}
-        />
+        <Modals.MovieTrailerModal {...modalsInitialState} />
       )}
-      {isModal && isAuthModal && (
-        <Modals.AuthModal
-          setIsModal={setIsModal}
-          setIsAuthModal={setIsAuthModal}
-        />
-      )}
+      {isModal && isAuthModal && <Modals.AuthModal {...modalsInitialState} />}
       {isModal && isCardPaymentModal && (
-        <Modals.CardPaymentModal
-          setIsModal={setIsModal}
-          setIsCardPaymentModal={setIsCardPaymentModal}
-          setIsLoadingModal={setIsLoadingModal}
-          setIsBookingSummaryModal={setIsBookingSummaryModal}
-        />
+        <Modals.CardPaymentModal {...modalsInitialState} />
       )}
       {isModal && isLoadingModal && (
-        <Modals.LoadingModal
-          setIsModal={setIsModal}
-          setIsLoadingModal={setIsLoadingModal}
-        />
+        <Modals.LoadingModal {...modalsInitialState} />
       )}
       {isModal && isBookingSummaryModal && (
-        <Modals.BookingSummaryModal
-          setIsModal={setIsModal}
-          setIsBookingSummaryModal={setIsBookingSummaryModal}
-        />
+        <Modals.BookingSummaryModal {...modalsInitialState} />
       )}
       {isModal && isBookingExpiredModal && (
-        <Modals.BookingExpiredModal
-          setIsModal={setIsModal}
-          setIsBookingExpiredModal={setIsBookingExpiredModal}
-        />
+        <Modals.BookingExpiredModal {...modalsInitialState} />
       )}
 
       <Navbar nowPlayingContainer={nowPlayingContainer} />
@@ -97,20 +87,7 @@ function App() {
         <Route
           exact
           path="/nowPlaying/:title/booking"
-          element={
-            <Pages.BookingPage
-              setIsModal={setIsModal}
-              setIsMovieTrailer={setIsMovieTrailer}
-              setIsAuthModal={setIsAuthModal}
-              setIsCardPaymentModal={setIsCardPaymentModal}
-              setIsFormValid={setIsFormValid}
-              setIsLoadingModal={setIsLoadingModal}
-              isBookingSummaryModal={isBookingSummaryModal}
-              setIsBookingSummaryModal={setIsBookingSummaryModal}
-              setIsBookingExpiredModal={setIsBookingExpiredModal}
-              isAuthModal={isAuthModal}
-            />
-          }
+          element={<Pages.BookingPage {...modalsInitialState} />}
         />
         <Route
           exact
@@ -131,8 +108,7 @@ function App() {
               refTickets={FAQsTickets}
               refMovie={FAQsMovie}
               refCovid={FAQsCovid}
-              setIsModal={setIsModal}
-              setIsFormValid={setIsFormValid}
+              {...modalsInitialState}
             />
           }
         />
