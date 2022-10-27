@@ -10,19 +10,27 @@ const BookingTimer = (props) => {
     setIsBookingExpiredModal,
     isBookingSummaryModal,
     isLoadingModal,
+    isAuthModal,
+    setIsCardPaymentModal,
   } = props;
 
   React.useEffect(() => {
     let interval = setInterval(() => {
+      if (isLoadingModal || isBookingSummaryModal || isAuthModal) {
+        clearInterval(interval);
+        return;
+      }
+
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
 
       if (seconds === 0) {
-        if (minutes === 0 && !isLoadingModal && !isBookingSummaryModal) {
+        if (minutes === 0) {
           clearInterval(interval);
-          setIsModal(true);
           setIsAuthModal(false);
+          setIsCardPaymentModal(false);
+          setIsModal(true);
           setIsBookingExpiredModal(true);
         } else {
           setMinutes(minutes - 1);
@@ -34,7 +42,7 @@ const BookingTimer = (props) => {
   });
 
   return (
-    <StyledContainer min={minutes}>
+    <StyledContainer className="no-select" min={minutes}>
       {"0" + minutes}:{seconds < 10 ? "0" + seconds : seconds}
     </StyledContainer>
   );
