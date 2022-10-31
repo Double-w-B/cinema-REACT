@@ -18,6 +18,7 @@ const Navbar = (props) => {
     </StyledHeader>
   );
 };
+
 const StyledHeader = styled.header`
   height: 12vh;
   min-height: 90px;
