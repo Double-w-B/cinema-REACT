@@ -30,6 +30,13 @@ function App() {
     dispatch(moviesSlice.getMoviesComingSoon());
   });
 
+  const refs = {
+    nowPlayingContainer,
+    FAQsTickets,
+    FAQsMovie,
+    FAQsCovid,
+  };
+
   const modalsInitialState = {
     setIsModal,
     setIsFormValid,
@@ -72,7 +79,7 @@ function App() {
         <Modals.BookingExpiredModal {...modalsInitialState} />
       )}
 
-      <Navbar nowPlayingContainer={nowPlayingContainer} />
+      <Navbar {...refs} {...modalsInitialState} />
       <Routes>
         <Route
           exact
@@ -103,14 +110,7 @@ function App() {
         <Route
           exact
           path="/contact_us"
-          element={
-            <Pages.ContactUsPage
-              refTickets={FAQsTickets}
-              refMovie={FAQsMovie}
-              refCovid={FAQsCovid}
-              {...modalsInitialState}
-            />
-          }
+          element={<Pages.ContactUsPage {...refs} {...modalsInitialState} />}
         />
         <Route
           exact
@@ -124,7 +124,11 @@ function App() {
           }
         />
         <Route exact path="/unlimited" element={<Pages.UnlimitedPage />} />
-        <Route exact path="/giftCard" element={<Pages.GiftCardPage />} />
+        <Route
+          exact
+          path="/myAccount"
+          element={<Pages.UserAccountPage {...modalsInitialState} />}
+        />
         <Route exact path="/cinema_cafe" element={<Pages.CinemaCafePage />} />
       </Routes>
       <Footer />

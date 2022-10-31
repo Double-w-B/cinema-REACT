@@ -22,9 +22,9 @@ const ContactUsPage = (props) => {
 
   const handleClick = (ref) => {
     let refElement;
-    if (ref === "FAQsTickets") refElement = props.refTickets;
-    if (ref === "FAQsMovie") refElement = props.refMovie;
-    if (ref === "FAQsCovid") refElement = props.refCovid;
+    if (ref === "FAQsTickets") refElement = props.FAQsTickets;
+    if (ref === "FAQsMovie") refElement = props.FAQsMovie;
+    if (ref === "FAQsCovid") refElement = props.FAQsCovid;
 
     const timeout = setTimeout(() => {
       refElement.current.scrollIntoView({ behavior: "smooth" });
@@ -63,10 +63,7 @@ const ContactUsPage = (props) => {
           </span>
         </h2>
 
-        <ContactForm
-          setIsModal={props.setIsModal}
-          setIsFormValid={props.setIsFormValid}
-        />
+        <ContactForm {...props} />
       </StyledSection>
     </StyledMain>
   );

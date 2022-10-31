@@ -61,8 +61,8 @@ export const navbarLinks = [
   { title: "now playing", path: "/" },
   { title: "coming soon", path: "/comingSoon" },
   { title: "unlimited", path: "/unlimited" },
-  { title: "gift card", path: "/giftCard" },
   { title: "cinema cafe", path: "/cinema_cafe" },
+  { title: "my account", path: "/myAccount" },
 ];
 
 export const FAQsTopics = [
@@ -109,10 +109,6 @@ export const ticketsAndPricingFaq = [
     answer:
       "We want to offer customers a great cinema experience and good value for money. Our prices vary depending on the day and time of the performance, the format of the screening, seating type and from one cinema to another. We regularly review our prices so that we can continue to provide customers with a great choice of films and invest in the latest cinema technology",
   },
-  // {
-  //   question: "",
-  //   answer: "",
-  // },
 ];
 
 export const goingToTheMovieFaq = [
