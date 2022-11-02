@@ -8,6 +8,7 @@ import MoviesComingSoonPage from "./MoviesComingSoonPage";
 import SingleMoviePage from "./SingleMoviePage/SingleMoviePage";
 import UnlimitedPage from "./UnlimitedPage/UnlimitedPage";
 import UserAccountPage from "./UserAccount/UserAccountPage";
+import ErrorPage from "./ErrorPage/ErrorPage";
 
 export {
   AboutPage,
@@ -20,4 +21,5 @@ export {
   SingleMoviePage,
   UnlimitedPage,
   UserAccountPage,
+  ErrorPage,
 };

@@ -130,6 +130,7 @@ function App() {
           element={<Pages.UserAccountPage {...modalsInitialState} />}
         />
         <Route exact path="/cinema_cafe" element={<Pages.CinemaCafePage />} />
+        <Route path="*" element={<Pages.ErrorPage />} />
       </Routes>
       <Footer />
     </Router>
