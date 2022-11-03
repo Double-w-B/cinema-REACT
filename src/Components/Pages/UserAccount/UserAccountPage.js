@@ -5,7 +5,7 @@ import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 import * as Styles from "../UnlimitedPage/UnlimitedPage";
 import UserData from "./UserData";
 import AccountNav from "./AccountNav";
-import AccountSections from "./AccountSections";
+import AccountSections from "./AccountSections/AccountSections";
 
 const UserAccountPage = (props) => {
   const [activeSection, setActiveSection] = React.useState(0);
