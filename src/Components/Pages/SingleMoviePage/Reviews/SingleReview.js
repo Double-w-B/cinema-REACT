@@ -9,6 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const SingleReview = (props) => {
   const dispatch = useDispatch();
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
@@ -19,13 +20,19 @@ const SingleReview = (props) => {
 
   const {
     author,
-    author_details: { avatar_path, rating },
+    author_details: { avatar_path, rating, id: authorId },
     content,
     created_at,
     id,
   } = props;
 
   const showAvatar = () => {
+    const loggedUserId = user?.sub.split("|")[1];
+
+    if (singleMovieInfo.id === id && loggedUserId === authorId) {
+      return storedUserData.avatar || user?.picture;
+    }
+
     if (singleMovieInfo.id === id) return avatar_path || logoImg;
     if (avatar_path === null) return logoImg;
 
@@ -36,6 +43,17 @@ const SingleReview = (props) => {
     return imgLowResUrl + avatar_path;
   };
 
+  const showName = () => {
+    const loggedUserId = user?.sub.split("|")[1];
+
+    if (singleMovieInfo.id === id && loggedUserId === authorId) {
+      const authorName = storedUserData?.name || user?.name.split(" ")[0];
+      return authorName.length > 15 ? authorName.substring(0, 15) : authorName;
+    }
+
+    return author.length > 15 ? author.substring(0, 15) : author;
+  };
+
   return (
     <StyledWrapper>
       <StyledAuthorContainer>
@@ -44,7 +62,7 @@ const SingleReview = (props) => {
         </div>
         <div className="review-info">
           <div className="name-rating">
-            <p>{author.length > 15 ? author.substring(0, 15) : author}</p>
+            <p>{showName()}</p>
             <p>
               <AiFillStar />
               {rating ? rating : " - "} <span>/10</span>

@@ -9,21 +9,43 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const UserReview = () => {
   const dispatch = useDispatch();
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
+
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const [rating, setRating] = React.useState("-");
   const [hover, setHover] = React.useState(0);
   const [review, setReview] = React.useState("");
 
   const { user } = useAuth0();
+  const { picture, given_name, name, sub: id } = user;
+
+  const checkAvatar = () => {
+    if (storedUserData?.avatar) {
+      return storedUserData.avatar;
+    }
+    return picture;
+  };
+
+  const checkName = () => {
+    if (storedUserData?.name) {
+      return storedUserData.name;
+    }
+    if (given_name) {
+      return given_name;
+    } else {
+      return name.split(" ")[0];
+    }
+  };
 
   const showDate = () => {
     review.trim() &&
       dispatch(
         addUserReview({
-          author: user.given_name ? user.given_name : user.name.split(" ")[0],
+          author: checkName(),
           author_details: {
-            avatar_path: user.picture,
+            avatar_path: checkAvatar(),
             rating: rating === "-" ? null : rating + 1,
+            id: id.split("|")[1],
           },
           content: review,
           created_at: new Date().toISOString(),

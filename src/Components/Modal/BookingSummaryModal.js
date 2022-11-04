@@ -6,6 +6,7 @@ import Modal from "./Modal";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 
 const BookingSummaryModal = (props) => {
+  const { email: userEmail } = useSelector((store) => store.userData);
   const { setIsModal, setIsBookingSummaryModal } = props;
   const { bookingEmail, bookingMovieTitle } = useSelector(
     (store) => store.bookingTickets
@@ -24,7 +25,7 @@ const BookingSummaryModal = (props) => {
         <p>
           Your booking has been submitted successfully! Please check the status
           of your booking tickets. The confirmation email will be sent shortly
-          to <span>{bookingEmail}</span>
+          to <span>{userEmail || bookingEmail}</span>
         </p>
 
         <p>

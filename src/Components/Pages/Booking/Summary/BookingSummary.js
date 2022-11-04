@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { addBookingEmail } from "../../../../features/booking/bookingSlice";
 import SummaryPayment from "./SummaryPayment";
 import SummaryContent from "./SummaryContent";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const BookingSummary = (props) => {
   const dispatch = useDispatch();
@@ -13,10 +12,10 @@ const BookingSummary = (props) => {
   const [isShakeEmail, setIsShakeEmail] = React.useState(false);
   const [isSeatsEqTicketsAmount, setIsSeatsEqTicketsAmount] =
     React.useState(false);
-
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { poster_path } = singleMovieInfo;
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
   const initialState = {
     userEmail,
@@ -27,13 +26,10 @@ const BookingSummary = (props) => {
     setIsSeatsEqTicketsAmount,
   };
 
-  const { user } = useAuth0();
-
   React.useEffect(() => {
-    if (user && user.email !== null) {
-      setUserEmail(user.email);
-    }
-  }, [user]);
+    setUserEmail(storedUserData.email);
+    // eslint-disable-next-line
+  }, []);
 
   React.useEffect(() => {
     dispatch(addBookingEmail(userEmail));

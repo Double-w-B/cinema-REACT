@@ -4,6 +4,7 @@ const initialState = {
   name: "",
   email: "",
   avatar: "",
+  id: "",
   orders: "",
   paymentMethod: "",
 };
@@ -12,9 +13,15 @@ const userSlice = createSlice({
   name: "userData",
   initialState,
   reducers: {
-    changeName: (state, action) => {},
-    changeEmail: (state, action) => {},
-    changeAvatar: (state, action) => {},
+    changeName: (state, action) => {
+      state.name = action.payload;
+    },
+    changeEmail: (state, action) => {
+      state.email = action.payload;
+    },
+    changeAvatar: (state, action) => {
+      state.avatar = action.payload;
+    },
     setOrders: (state, action) => {},
     setPaymentMethod: (state, action) => {},
   },

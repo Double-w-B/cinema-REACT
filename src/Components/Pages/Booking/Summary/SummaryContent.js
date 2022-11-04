@@ -17,6 +17,7 @@ const SummaryContent = (props) => {
     bookingSeniorTickets: seniorTickets,
   } = useSelector((store) => store.bookingTickets);
 
+  const { email: storedUserEmail } = useSelector((store) => store.userData);
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
 
@@ -65,7 +66,7 @@ const SummaryContent = (props) => {
       <p>
         <span>Total:</span> ${bookingTotalPrice}
       </p>
-      {(!isUser || user.email == null) && (
+      {(!isUser || !storedUserEmail) && (
         <label>
           Email address:{" "}
           <input
@@ -127,7 +128,6 @@ const StyledContainer = styled.div`
       transition: 0.3s linear;
       background-color: transparent;
       border: ${(props) =>
-        // props.userEmail?.match(/^[^ ]+@[^ ]+\.[a-z]{2,3}$/)
         /^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(props.userEmail)
           ? "1px solid transparent"
           : "1px solid var(--primary-grey-clr)"};

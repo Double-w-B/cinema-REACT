@@ -1,16 +1,69 @@
 import React from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
 const UserData = () => {
+  const {
+    name: userName,
+    email: userEmail,
+    avatar: userAvatar,
+  } = useSelector((store) => store.userData);
+
   const { user } = useAuth0();
   const { email, picture, given_name, name, sub: id } = user;
+  const storedUserData = JSON.parse(localStorage.getItem("userData"));
+  const [storedName, setStoredName] = React.useState("");
+  const [storedEmail, setStoredEmail] = React.useState("");
+  const [storedAvatar, setStoredAvatar] = React.useState("");
+
+  React.useEffect(() => {
+    setStoredName(userName);
+    setStoredEmail(userEmail);
+    setStoredAvatar(userAvatar);
+  }, [userName, userEmail, userAvatar]);
+
+  const checkAvatar = () => {
+    if (storedAvatar) {
+      return storedAvatar;
+    }
+    return picture;
+  };
+
+  const checkName = () => {
+    if (storedName) return storedName;
+    if (given_name) {
+      return given_name;
+    } else {
+      return name.split(" ")[0];
+    }
+  };
+
+  const checkEmail = () => {
+    const emailCheckRexExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if (storedEmail && storedEmail.match(emailCheckRexExp)) return storedEmail;
+    if (!storedEmail) return "no email";
+    if (email) {
+      return email;
+    } else {
+      return "no email";
+    }
+  };
+  const setEmailClass = () => {
+    if ((!email || email) && !storedEmail) return "empty";
+    return "";
+  };
 
   return (
     <StyledContainer>
-      <StyledImageContainer email={user?.email}>
+      <StyledImageContainer
+        email={user?.email}
+        storedAvatar={storedAvatar}
+        storedEmail={storedEmail}
+      >
         <div className="img">
-          <img src={picture} alt="" />
+          <img src={checkAvatar()} alt="" />
         </div>
       </StyledImageContainer>
       <StyledDataContainer>
@@ -21,8 +74,8 @@ const UserData = () => {
           <p>Orders:</p>
         </div>
         <div className="user-data">
-          <p>{given_name ? given_name : name.split(" ")[0]}</p>
-          <p className={!email ? "empty" : ""}>{email ? email : "no email"}</p>
+          <p>{checkName()}</p>
+          <p className={setEmailClass()}>{checkEmail()}</p>
           <p>{id.split("|")[1]}</p>
           <p>0</p>
         </div>
@@ -60,6 +113,7 @@ const StyledImageContainer = styled.div`
       color: transparent;
       transform: ${(props) =>
         props.email?.split("@")[1].slice(0, 5) === "gmail" &&
+        !props.storedAvatar &&
         "translateY(-1.5px)"};
       border-radius: 50%;
     }
