@@ -12,7 +12,6 @@ const UserData = () => {
 
   const { user } = useAuth0();
   const { email, picture, given_name, name, sub: id } = user;
-  const storedUserData = JSON.parse(localStorage.getItem("userData"));
   const [storedName, setStoredName] = React.useState("");
   const [storedEmail, setStoredEmail] = React.useState("");
   const [storedAvatar, setStoredAvatar] = React.useState("");

@@ -6,7 +6,7 @@ import OrdersSection from "./OrdersSection";
 import PaymentMethodSection from "./PaymentMethodSection";
 
 const AccountSections = (props) => {
-  const sections = ["Orders", "Edit Account", "Payment Methods"];
+  const sections = ["Orders", "Edit Account", "Payment Method"];
 
   const setActive = (index) => {
     let position = "next";
@@ -22,7 +22,7 @@ const AccountSections = (props) => {
   const showSection = (sectionName) => {
     if (sectionName === "Orders") return <OrdersSection />;
     if (sectionName === "Edit Account") return <DataSection />;
-    if (sectionName === "Payment Methods") return <PaymentMethodSection />;
+    if (sectionName === "Payment Method") return <PaymentMethodSection />;
   };
 
   return (
@@ -64,10 +64,10 @@ const StyledSingleSection = styled.div`
   transition: all 0.4s linear;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: rgba(43, 52, 68, 0.2);
-  display: grid;
+  /* display: grid;
   place-items: center;
   font-size: 2rem;
-  color: black;
+  color: black; */
 
   &.active {
     visibility: visible;

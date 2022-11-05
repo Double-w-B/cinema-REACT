@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as Styles from "../UnlimitedPage/UnlimitedPage";
 
 const AccountNav = (props) => {
-  const sections = ["Orders", "Edit Account", "Payment Methods"];
+  const sections = ["Orders", "Edit Account", "Payment Method"];
   const { activeSection, setActiveSection } = props;
 
   const checkIndex = (index) => {
