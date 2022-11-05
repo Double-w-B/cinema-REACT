@@ -49,6 +49,7 @@ const StyledLogoContainer = styled.div`
       display: block;
       transition: all 0.3s linear;
       color: transparent;
+      filter: drop-shadow(0px 0px 10px #0a0f18);
 
       &:hover {
         transform: rotate(-15deg);

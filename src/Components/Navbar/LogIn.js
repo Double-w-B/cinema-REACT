@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import spinnerImg from "../../../src/Images/spinner_2.gif";
 import { useDispatch, useSelector } from "react-redux";
 import * as userDataSlice from "../../features/user/userSlice";
+
 const LogIn = () => {
   const dispatch = useDispatch();
   const { name: userName, avatar: userAvatar } = useSelector(
@@ -71,20 +72,34 @@ const LogIn = () => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      email={user?.email}
+      avatar={userAvatar}
+      className="no-select"
+    >
       {isUser && !isLoading ? (
         <div className="isLogged">
-          <img src={checkAvatar()} alt="" />
-          <div>
+          <div className="avatar">
+            <img src={checkAvatar()} alt="" draggable="false" />
+          </div>
+          <div className="user">
+            {/* <p> */}
             <p>
-              Hi, <strong>{checkName()}</strong>
+              Hi,{" "}
+              <strong
+                style={{ fontSize: `${checkName().length > 13 && "0.9rem"}` }}
+              >
+                {checkName()}
+              </strong>
             </p>
             <button onClick={handleLogOut}>Log out</button>
           </div>
         </div>
       ) : isLoading ? (
         <div className="isLogged">
-          <img src={spinnerImg} alt="spinner" />
+          <div className="avatar">
+            <img src={spinnerImg} alt="spinner" />
+          </div>
         </div>
       ) : (
         <>
@@ -99,7 +114,7 @@ const LogIn = () => {
 const StyledContainer = styled.div`
   width: 20%;
   height: 100%;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -138,25 +153,45 @@ const StyledContainer = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
-    img {
-      width: 45px;
-      height: 45px;
-      margin-right: 0.5rem;
-      color: transparent;
+    .avatar {
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      border: 1px solid var(--primary-grey-clr);
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      overflow: hidden;
+      border: 2px solid var(--primary-grey-clr);
+      box-shadow: 0px 0px 10px #0a0f18;
+
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        transition: all 0.3s linear;
+        transform: ${(props) =>
+          props.email?.split("@")[1].slice(0, 5) === "gmail" &&
+          !props.avatar &&
+          "translateY(-0.5px)"};
+      }
     }
 
-    div {
+    .user {
+      width: calc(100% - 60px);
+      height: 100%;
+      display: flex;
+      align-items: center;
       position: relative;
       color: var(--primary-white-clr);
+
+      p {
+        word-break: break-all;
+      }
       button {
         font-size: 1rem;
         position: absolute;
-        bottom: -1.5rem;
-        right: 0;
+        bottom: 0.5rem;
+        right: 2.5rem;
       }
     }
   }
