@@ -96,7 +96,11 @@ const SummaryPayment = (props) => {
   };
 
   return (
-    <StyledContainer isShakeMsg={isShakeMsg} ref={summaryContainer}>
+    <StyledContainer
+      className="no-select"
+      isShakeMsg={isShakeMsg}
+      ref={summaryContainer}
+    >
       <p>Select a payment method</p>
       <div className="summary-payment-method">
         {paymentMethods.map((method, index) => {

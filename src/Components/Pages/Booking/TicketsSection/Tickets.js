@@ -40,7 +40,7 @@ const Tickets = (props) => {
   }, [adultTickets, childTickets, seniorTickets]);
 
   return (
-    <StyledContainer ref={props.ticketsContainer}>
+    <StyledContainer className="no-select" ref={props.ticketsContainer}>
       <h2>Tickets</h2>
       <Components.Separator {...initialState} />
       <div className="summary">

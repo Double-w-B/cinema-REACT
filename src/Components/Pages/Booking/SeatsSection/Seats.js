@@ -5,7 +5,7 @@ import SeatsMap from "./SeatsMap";
 
 const Seats = (props) => {
   return (
-    <StyledContainer ref={props.seatsContainer}>
+    <StyledContainer ref={props.seatsContainer} className="no-select">
       <h2>Seats</h2>
       <SeatsMap {...props} />
     </StyledContainer>

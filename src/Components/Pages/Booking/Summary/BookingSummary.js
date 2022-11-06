@@ -38,9 +38,9 @@ const BookingSummary = (props) => {
 
   return (
     <StyledContainer>
-      <h2>Booking Summary</h2>
+      <h2 className="no-select">Booking Summary</h2>
       <StyledWrapper>
-        <div className="summary-img">
+        <div className="summary-img no-select">
           <img src={`${imgLowResUrl}${poster_path}`} alt="poster" />
         </div>
         <SummaryContent {...initialState} />

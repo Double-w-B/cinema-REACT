@@ -105,7 +105,6 @@ const StyledImgContainer = styled.article`
   top: 0;
   left: 0;
   visibility: hidden;
-
   position: absolute;
   transition: all 0.5s linear;
   z-index: 0;

@@ -22,7 +22,7 @@ const Schedule = (props) => {
       onDragOver={(e) => e.preventDefault()}
       ref={props.scheduleContainer}
     >
-      <h2>Date</h2>
+      <h2 className="no-select">Date</h2>
       <StyledWrapper>
         <StyledSection>
           <Components.Date {...initialState} />

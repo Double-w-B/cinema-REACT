@@ -24,9 +24,9 @@ const Offers = () => {
         })}
       </StyledCardsContainer>
       <StyledBenefitsContainer>
-        {selectedOffer.benefits.map((benefit) => {
+        {selectedOffer.benefits.map((benefit, index) => {
           return (
-            <p>
+            <p key={index}>
               <FaChevronCircleRight />
               {benefit}
             </p>

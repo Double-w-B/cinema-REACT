@@ -56,7 +56,7 @@ const Date = (props) => {
   };
 
   return (
-    <StyledDateContainer>
+    <StyledDateContainer className="no-select">
       <div className="days">{getDays()}</div>
       <p>{showFullDate(day)}</p>
     </StyledDateContainer>

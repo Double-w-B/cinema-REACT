@@ -22,7 +22,7 @@ const Poster = (props) => {
   };
 
   return (
-    <StyledPosterContainer>
+    <StyledPosterContainer className="no-select">
       <div className="poster">
         <img src={`${imgLowResUrl}${poster_path}`} alt="" />
         {key && <BsPlayCircle onClick={handleClick} />}

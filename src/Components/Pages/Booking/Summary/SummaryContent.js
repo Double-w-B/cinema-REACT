@@ -72,7 +72,7 @@ const SummaryContent = (props) => {
           <input
             type="email"
             required
-            value={props.userEmail}
+            value={props.userEmail || ""}
             onChange={(e) => props.setUserEmail(e.target.value.toLowerCase())}
           />
         </label>

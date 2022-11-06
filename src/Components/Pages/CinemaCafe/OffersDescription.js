@@ -16,9 +16,12 @@ const OffersDescription = (props) => {
 
   return (
     <StyledContainer showDesc={showDesc}>
-      {cafeOffers.map((offer) => {
-        if (offer.id === index) return <p>{offer.desc}</p>;
-      })}
+      {
+        // eslint-disable-next-line
+        cafeOffers.map((offer, idx) => {
+          if (offer.id === index) return <p key={idx}>{offer.desc}</p>;
+        })
+      }
     </StyledContainer>
   );
 };
