@@ -2,12 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
+import { useSelector } from "react-redux";
 
 const CardPaymentModal = (props) => {
-  const [cardholderName, setCardholderName] = React.useState("");
-  const [cardNumber, setCardNumber] = React.useState("");
-  const [cardValidThru, setCardValidThru] = React.useState("");
-  const [cvv, setCvv] = React.useState("");
+  const {
+    paymentMethod: {
+      cardholderName: name,
+      cardNumber: number,
+      cardValidThru: date,
+      cvv: cardCvv,
+    },
+  } = useSelector((store) => store.userData);
+
+  const [cardholderName, setCardholderName] = React.useState(name || "");
+  const [cardNumber, setCardNumber] = React.useState(number || "");
+  const [cardValidThru, setCardValidThru] = React.useState(date || "");
+  const [cvv, setCvv] = React.useState(cardCvv || "");
+
   const [isCardholderName, setIsCardholderName] = React.useState(false);
   const [isCardNumberError, setIsCardNumberError] = React.useState(false);
   const [isValidThruError, setIsValidThruError] = React.useState(false);
@@ -64,8 +75,8 @@ const CardPaymentModal = (props) => {
       !cardValidThru ||
       /[a-zA-Z]/.test(cardValidThru) ||
       cardValidThruMonth > 12 ||
-      cardValidThruMonth < currentMonth ||
-      cardValidThruYear < currentYear
+      cardValidThruYear < currentYear ||
+      (cardValidThruMonth < currentMonth && cardValidThruYear <= currentYear)
     ) {
       setIsValidThruError(true);
       return;
@@ -120,7 +131,7 @@ const CardPaymentModal = (props) => {
             <input
               type="text"
               autoComplete="off"
-              autoFocus="true"
+              autoFocus={!cardholderName ? true : false}
               required
               value={cardholderName}
               placeholder="John Doe"
@@ -150,6 +161,7 @@ const CardPaymentModal = (props) => {
             <label>Card Number</label>
             <p>invalid card number</p>
           </div>
+
           <div className="card-validation">
             <div className="valid-thru">
               <input
@@ -169,6 +181,7 @@ const CardPaymentModal = (props) => {
               <label>Valid Thru</label>
               <p>invalid date</p>
             </div>
+
             <div className="cvv">
               <input
                 type="text"
@@ -189,6 +202,7 @@ const CardPaymentModal = (props) => {
             </div>
           </div>
         </form>
+
         <div className="buttons">
           <StyledBtn onClick={handlePayBtn}>Pay</StyledBtn>
           <StyledBtn onClick={handleCancelBtn}>Cancel</StyledBtn>
@@ -337,6 +351,7 @@ const StyledContainer = styled.div`
       }
     }
   }
+
   p {
     font-size: 0.9rem;
     position: absolute;

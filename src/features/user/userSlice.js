@@ -23,7 +23,9 @@ const userSlice = createSlice({
       state.avatar = action.payload;
     },
     setOrders: (state, action) => {},
-    setPaymentMethod: (state, action) => {},
+    setPaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
+    },
   },
 });
 
