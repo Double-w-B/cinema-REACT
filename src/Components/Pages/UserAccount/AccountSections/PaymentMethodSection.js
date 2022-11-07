@@ -104,9 +104,6 @@ const PaymentMethodSection = () => {
     dispatch(
       setPaymentMethod({ cardholderName, cardNumber, cardValidThru, cvv })
     );
-    // const cardData = { cardholderName, cardNumber, cardValidThru, cvv };
-    // const userData = JSON.parse(localStorage.getItem("userData"));
-    // localStorage.setItem("userData", JSON.stringify({ ...userData, cardData }));
   };
 
   const handleRemoveBtn = () => {

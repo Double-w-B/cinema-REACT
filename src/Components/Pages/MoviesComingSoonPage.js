@@ -8,7 +8,7 @@ import { StyledMainContainer } from "./SingleMoviePage/SingleMoviePage";
 
 const MoviesComingSoonPage = () => {
   const { moviesComingSoon } = useSelector((store) => store.movies);
-  console.log(moviesComingSoon);
+
   return (
     <StyledMain>
       <Navigation pageTitle={"Coming Soon"} />

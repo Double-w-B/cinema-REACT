@@ -40,7 +40,7 @@ const LogIn = () => {
       )
     );
     dispatch(userDataSlice.changeEmail(user?.email));
-    localStorage.setItem("userData", JSON.stringify(userData));
+    // eslint-disable-next-line
   }, [userData]);
 
   const checkAvatar = () => {
@@ -83,7 +83,6 @@ const LogIn = () => {
             <img src={checkAvatar()} alt="" draggable="false" />
           </div>
           <div className="user">
-            {/* <p> */}
             <p>
               Hi,{" "}
               <strong
@@ -167,7 +166,8 @@ const StyledContainer = styled.div`
         width: 100%;
         height: 100%;
         display: block;
-        object-fit: contain;
+        object-fit: cover;
+        border-radius: 50%;
         transition: all 0.3s linear;
         transform: ${(props) =>
           props.email?.split("@")[1].slice(0, 5) === "gmail" &&

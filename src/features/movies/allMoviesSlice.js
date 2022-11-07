@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const urlNowPlaying = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`;
 const urlComingSoon = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`;
 
-
 const initialState = {
   moviesNowPlaying: [],
   moviesComingSoon: [],
@@ -49,7 +48,6 @@ const moviesSlice = createSlice({
     },
     [getMoviesNowPlaying.fulfilled]: (state, action) => {
       state.moviesNowPlaying = action.payload;
-      console.log(state.moviesNowPlaying);
       state.nowPlayingIsLoading = false;
     },
     [getMoviesComingSoon.pending]: (state) => {
@@ -57,7 +55,6 @@ const moviesSlice = createSlice({
     },
     [getMoviesComingSoon.fulfilled]: (state, action) => {
       state.moviesComingSoon = action.payload;
-      console.log(state.moviesComingSoon);
       state.comingSoonIsLoading = false;
     },
   },
