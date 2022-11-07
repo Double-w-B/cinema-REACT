@@ -2,9 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import Modal from "./Modal";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setOrder } from "../../features/user/userSlice";
 
 const CardPaymentModal = (props) => {
+  const dispatch = useDispatch();
+
+  const {
+    singleMovieInfo: { poster_path },
+    singleMovieVideo: { key },
+  } = useSelector((store) => store.singleMovie);
+
   const {
     paymentMethod: {
       cardholderName: name,
@@ -13,6 +21,18 @@ const CardPaymentModal = (props) => {
       cvv: cardCvv,
     },
   } = useSelector((store) => store.userData);
+
+  const {
+    bookingMovieTitle,
+    bookingMovieId,
+    bookingDay,
+    bookingTime,
+    bookingSeats,
+    bookingNumberOfTickets,
+    bookingAdultTickets,
+    bookingChildTickets,
+    bookingSeniorTickets,
+  } = useSelector((store) => store.bookingTickets);
 
   const [cardholderName, setCardholderName] = React.useState(name || "");
   const [cardNumber, setCardNumber] = React.useState(number || "");
@@ -36,6 +56,23 @@ const CardPaymentModal = (props) => {
     isCardNumberError,
     isCardholderName,
     isCvvError,
+  };
+
+  const newOrder = {
+    title: bookingMovieTitle,
+    movieId: bookingMovieId,
+    poster: poster_path,
+    trailerKey: key,
+    date: bookingDay,
+    time: bookingTime,
+    seats: bookingSeats,
+    tickets: {
+      total: bookingNumberOfTickets,
+      adult: bookingAdultTickets,
+      child: bookingChildTickets,
+      senior: bookingSeniorTickets,
+    },
+    payment: true,
   };
 
   React.useEffect(() => {
@@ -93,6 +130,7 @@ const CardPaymentModal = (props) => {
     const timer = setTimeout(() => {
       setIsModal(true);
       setIsBookingSummaryModal(true);
+      dispatch(setOrder(newOrder));
     }, 3600);
     return () => clearTimeout(timer);
   };

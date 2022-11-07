@@ -8,6 +8,7 @@ const UserData = () => {
     name: userName,
     email: userEmail,
     avatar: userAvatar,
+    orders,
   } = useSelector((store) => store.userData);
 
   const { user } = useAuth0();
@@ -76,7 +77,7 @@ const UserData = () => {
           <p>{checkName()}</p>
           <p className={setEmailClass()}>{checkEmail()}</p>
           <p>{id.split("|")[1]}</p>
-          <p>0</p>
+          <p>{orders.length}</p>
         </div>
       </StyledDataContainer>
     </StyledContainer>
@@ -100,14 +101,15 @@ const StyledImageContainer = styled.div`
   .img {
     width: 120px;
     height: 120px;
-    display: grid;
-    place-items: center;
     border-radius: 50%;
+    overflow: hidden;
     border: 2px solid var(--primary-grey-clr);
+    filter: drop-shadow(0px 0px 10px black);
 
     img {
       width: 100%;
       height: 100%;
+      display: block;
       object-fit: cover;
       color: transparent;
       transform: ${(props) =>

@@ -1,16 +1,34 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { paymentMethods } from "../../../../data";
+import { setOrder } from "../../../../features/user/userSlice";
 
 const SummaryPayment = (props) => {
+  const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = React.useState(null);
   const [isShakeMsg, setIsShakeMsg] = React.useState(false);
   const summaryContainer = React.useRef("");
 
-  const { bookingTime, bookingSeats, bookingNumberOfTickets, bookingEmail } =
-    useSelector((store) => store.bookingTickets);
+  const {
+    singleMovieInfo: { poster_path },
+    singleMovieVideo: { key },
+  } = useSelector((store) => store.singleMovie);
+
+  const {
+    bookingMovieTitle,
+    bookingMovieId,
+    bookingDay,
+    bookingTime,
+    bookingSeats,
+    bookingEmail,
+    bookingNumberOfTickets,
+    bookingAdultTickets,
+    bookingChildTickets,
+    bookingSeniorTickets,
+  } = useSelector((store) => store.bookingTickets);
+
   const {
     scheduleContainer,
     ticketsContainer,
@@ -25,6 +43,23 @@ const SummaryPayment = (props) => {
     setIsLoadingModal,
     setIsBookingSummaryModal,
   } = props;
+
+  const newOrder = {
+    title: bookingMovieTitle,
+    movieId: bookingMovieId,
+    poster: poster_path,
+    trailerKey: key,
+    date: bookingDay,
+    time: bookingTime,
+    seats: bookingSeats,
+    tickets: {
+      total: bookingNumberOfTickets,
+      adult: bookingAdultTickets,
+      child: bookingChildTickets,
+      senior: bookingSeniorTickets,
+    },
+    payment: false,
+  };
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -86,10 +121,12 @@ const SummaryPayment = (props) => {
     } else {
       setIsModal(true);
       setIsLoadingModal(true);
+
       const timer = setTimeout(() => {
         window.open(dynamicLink(), "_blank").focus();
         setIsModal(true);
         setIsBookingSummaryModal(true);
+        dispatch(setOrder(newOrder));
       }, 3600);
       return () => clearTimeout(timer);
     }

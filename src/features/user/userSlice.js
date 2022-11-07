@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "",
   email: "",
   avatar: "",
   id: "",
-  orders: "",
+  orders: [],
   paymentMethod: "",
 };
 
@@ -22,7 +22,10 @@ const userSlice = createSlice({
     changeAvatar: (state, action) => {
       state.avatar = action.payload;
     },
-    setOrders: (state, action) => {},
+    setOrder: (state, action) => {
+      const currentState = current(state);
+      state.orders = [...currentState.orders, action.payload];
+    },
     setPaymentMethod: (state, action) => {
       state.paymentMethod = action.payload;
     },
@@ -33,7 +36,7 @@ export const {
   changeName,
   changeEmail,
   changeAvatar,
-  setOrders,
+  setOrder,
   setPaymentMethod,
 } = userSlice.actions;
 
