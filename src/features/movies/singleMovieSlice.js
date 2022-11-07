@@ -66,6 +66,10 @@ const singleMovieSlice = createSlice({
       state.singleMovieVideo = {};
     },
 
+    setSingleMovieVideoKey: (state, action) => {
+      state.singleMovieVideo = action.payload;
+    },
+
     addUserReview: (state, action) => {
       const currentState = current(state);
       state.userReviews = [...currentState.userReviews, action.payload];
@@ -88,18 +92,12 @@ const singleMovieSlice = createSlice({
     },
   },
   extraReducers: {
-    [getSingleMovieInfo.pending]: (state) => {
-      //   state.nowPlayingIsLoading = true;
-    },
+    [getSingleMovieInfo.pending]: (state) => {},
     [getSingleMovieInfo.fulfilled]: (state, action) => {
       state.singleMovieInfo = action.payload;
-      //   console.log(state.singleMovieInfo);
-      //   state.nowPlayingIsLoading = false;
     },
     [getSingleMovieVideos.fulfilled]: (state, action) => {
       state.singleMovieVideo = action.payload;
-      //   console.log(state.singleMovieVideos);
-      //   state.nowPlayingIsLoading = false;
     },
     [getSingleMovieReviews.fulfilled]: (state, action) => {
       state.singleMovieReviews = action.payload;
@@ -113,12 +111,15 @@ const singleMovieSlice = createSlice({
           userReview,
         ];
       }
-      //   state.nowPlayingIsLoading = false;
     },
   },
 });
 
-export const { removeSingleMovieData, addUserReview, removeUserReview } =
-  singleMovieSlice.actions;
+export const {
+  removeSingleMovieData,
+  addUserReview,
+  removeUserReview,
+  setSingleMovieVideoKey,
+} = singleMovieSlice.actions;
 
 export default singleMovieSlice.reducer;

@@ -9,23 +9,11 @@ import AccountSections from "./AccountSections/AccountSections";
 
 const UserAccountPage = (props) => {
   const [activeSection, setActiveSection] = React.useState(0);
-  const { setIsModal, setIsLoadingModal } = props;
 
   const sectionInitialState = {
     activeSection,
     setActiveSection,
   };
-
-  React.useEffect(() => {
-    setIsModal(true);
-    setIsLoadingModal(true);
-    const timer = setTimeout(() => {
-      setIsModal(false);
-      setIsLoadingModal(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <StyledMain>
@@ -34,7 +22,7 @@ const UserAccountPage = (props) => {
       <StyledContainer>
         <UserData />
         <AccountNav {...sectionInitialState} />
-        <AccountSections {...sectionInitialState} />
+        <AccountSections {...sectionInitialState} {...props} />
       </StyledContainer>
     </StyledMain>
   );

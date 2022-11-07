@@ -20,7 +20,7 @@ const AccountSections = (props) => {
   };
 
   const showSection = (sectionName) => {
-    if (sectionName === "Orders") return <OrdersSection />;
+    if (sectionName === "Orders") return <OrdersSection {...props} />;
     if (sectionName === "Edit Account") return <DataSection />;
     if (sectionName === "Payment Method") return <PaymentMethodSection />;
   };
@@ -64,10 +64,6 @@ const StyledSingleSection = styled.div`
   transition: all 0.4s linear;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: rgba(43, 52, 68, 0.2);
-  /* display: grid;
-  place-items: center;
-  font-size: 2rem;
-  color: black; */
 
   &.active {
     visibility: visible;
