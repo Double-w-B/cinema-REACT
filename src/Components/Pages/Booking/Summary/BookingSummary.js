@@ -14,8 +14,8 @@ const BookingSummary = (props) => {
     React.useState(false);
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
+  const { email: storedEmail } = useSelector((store) => store.userData);
   const { poster_path } = singleMovieInfo;
-  const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
   const initialState = {
     userEmail,
@@ -27,7 +27,7 @@ const BookingSummary = (props) => {
   };
 
   React.useEffect(() => {
-    setUserEmail(storedUserData.email);
+    setUserEmail(storedEmail);
     // eslint-disable-next-line
   }, []);
 
@@ -58,9 +58,10 @@ const StyledWrapper = styled.div`
   height: 30vh;
   margin: 2rem auto;
   display: flex;
+  justify-content: space-between;
 
   .summary-img {
-    width: 20%;
+    width: 160px;
     height: 100%;
 
     img {

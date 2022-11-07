@@ -9,8 +9,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const UserReview = () => {
   const dispatch = useDispatch();
-  const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
+  const { name: userName, avatar: userAvatar } = useSelector(
+    (store) => store.singleMovie
+  );
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const [rating, setRating] = React.useState("-");
   const [hover, setHover] = React.useState(0);
@@ -20,16 +22,15 @@ const UserReview = () => {
   const { picture, given_name, name, sub: id } = user;
 
   const checkAvatar = () => {
-    if (storedUserData?.avatar) {
-      return storedUserData.avatar;
+    if (userName) {
+      return userName;
     }
     return picture;
   };
 
   const checkName = () => {
-    if (storedUserData?.name) {
-      return storedUserData.name;
-    }
+    if (userAvatar) return userAvatar;
+
     if (given_name) {
       return given_name;
     } else {

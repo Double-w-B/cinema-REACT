@@ -9,8 +9,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const SingleReview = (props) => {
   const dispatch = useDispatch();
-  const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
+  const { name: userName, avatar: userAvatar } = useSelector(
+    (store) => store.userData
+  );
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const [readMore, setReadMore] = React.useState(false);
@@ -20,20 +22,16 @@ const SingleReview = (props) => {
 
   const {
     author,
-    author_details: { avatar_path, rating, id: authorId },
+    author_details: { avatar_path, rating },
     content,
     created_at,
     id,
   } = props;
 
   const showAvatar = () => {
-    const loggedUserId = user?.sub.split("|")[1];
-
-    if (singleMovieInfo.id === id && loggedUserId === authorId) {
-      return storedUserData.avatar || user?.picture;
+    if (singleMovieInfo.id === id) {
+      return userAvatar || user?.picture || avatar_path || logoImg;
     }
-
-    if (singleMovieInfo.id === id) return avatar_path || logoImg;
     if (avatar_path === null) return logoImg;
 
     if (avatar_path.slice(1, 6) === "https") {
@@ -44,10 +42,8 @@ const SingleReview = (props) => {
   };
 
   const showName = () => {
-    const loggedUserId = user?.sub.split("|")[1];
-
-    if (singleMovieInfo.id === id && loggedUserId === authorId) {
-      const authorName = storedUserData?.name || user?.name.split(" ")[0];
+    if (singleMovieInfo.id === id) {
+      const authorName = userName || user?.name.split(" ")[0];
       return authorName.length > 15 ? authorName.substring(0, 15) : authorName;
     }
 

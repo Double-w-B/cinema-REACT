@@ -2,17 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as userDataSlice from "../../../../features/user/userSlice";
 import { shake } from "../../Booking/Summary/SummaryPayment";
 
 const DataSection = () => {
   const dispatch = useDispatch();
-  const storedUserData = JSON.parse(localStorage.getItem("userData"));
+  const {
+    name: storedName,
+    email: storedEmail,
+    avatar: storedAvatar,
+  } = useSelector((store) => store.userData);
   const emailCheckRexExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
   const checkName = () => {
-    if (storedUserData) return storedUserData.name;
+    if (storedName) return storedName;
     if (given_name) {
       return given_name;
     } else {
@@ -21,7 +25,7 @@ const DataSection = () => {
   };
 
   const checkEmail = () => {
-    if (storedUserData) return storedUserData.email;
+    if (storedEmail) return storedEmail;
     if (email) {
       return email;
     } else {
@@ -30,14 +34,11 @@ const DataSection = () => {
   };
 
   const { user } = useAuth0();
-  const { given_name, name, email, sub: id } = user;
+  const { given_name, name, email } = user;
 
-  const [userData, setUserData] = React.useState("");
   const [userName, setUserName] = React.useState(checkName());
   const [userEmail, setUserEmail] = React.useState(checkEmail());
-  const [userAvatar, setUserAvatar] = React.useState(
-    storedUserData?.avatar || ""
-  );
+  const [userAvatar, setUserAvatar] = React.useState(storedAvatar || "");
   const [imageName, setImageName] = React.useState("No image selected");
   const [isEmailError, setIsEmailError] = React.useState(false);
 
@@ -48,20 +49,10 @@ const DataSection = () => {
     return () => clearInterval(timer);
   }, [isEmailError]);
 
-  React.useEffect(() => {
-    setUserData({
-      name: userName,
-      email: userEmail,
-      avatar: userAvatar,
-      id: id.split("|")[1],
-    });
-  }, [userName, userEmail, userAvatar, id]);
-
   const handleNameChange = () => {
     if (userName.length < 1) return;
 
     dispatch(userDataSlice.changeName(userName));
-    localStorage.setItem("userData", JSON.stringify(userData));
   };
 
   const handleEmailChange = () => {
@@ -71,14 +62,12 @@ const DataSection = () => {
     }
 
     dispatch(userDataSlice.changeEmail(userEmail));
-    localStorage.setItem("userData", JSON.stringify(userData));
   };
 
   const handleAvatarChange = () => {
     if (!userAvatar) return;
 
     dispatch(userDataSlice.changeAvatar(userAvatar));
-    localStorage.setItem("userData", JSON.stringify(userData));
 
     if (userAvatar) {
       setImageName("Image uploaded!");
