@@ -20,7 +20,13 @@ const SingleOrder = (props) => {
     payment,
   } = props;
 
-  const orderId = movieId.toString().concat(seats[0]);
+  const screeningMonth = new window.Date(date).getMonth() + 1;
+  const screeningDate = new window.Date(date).getDate();
+  const screeningTime = time.slice(0, 2) + time.slice(-2);
+
+  const orderId = screeningMonth
+    .toString()
+    .concat(screeningDate, screeningTime, seats[0]);
 
   const handleClick = () => {
     dispatch(setSingleMovieVideoKey({ key }));
@@ -50,7 +56,7 @@ const SingleOrder = (props) => {
   };
 
   return (
-    <StyledContainer id={orderId}>
+    <StyledContainer id={orderId} data-id={movieId}>
       <StyledImgContainer>
         <img src={imgLowResUrl + poster} alt="" />
         <BsPlayCircle onClick={handleClick} />
