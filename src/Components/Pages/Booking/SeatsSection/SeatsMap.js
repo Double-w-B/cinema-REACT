@@ -6,10 +6,25 @@ import * as Booking from "../../../../features/booking/bookingSlice";
 
 const SeatsMap = (props) => {
   const dispatch = useDispatch();
-  const { bookingNumberOfTickets: tickets, bookingSeats } = useSelector(
-    (store) => store.bookingTickets
+  const {
+    bookingNumberOfTickets: tickets,
+    bookingSeats,
+    bookingMovieId,
+    bookingDay,
+    bookingTime,
+  } = useSelector((store) => store.bookingTickets);
+  const { orders } = useSelector((store) => store.userData);
+
+  const sameMovieOrders = orders.filter(
+    (order) =>
+      // checking the id, date & time of the screening movie
+      order.movieId === bookingMovieId &&
+      order.date === bookingDay &&
+      order.time === bookingTime
   );
 
+  const reservedSeats = sameMovieOrders.map((movie) => movie.seats).flat();
+  console.log(reservedSeats);
   const rowsLetters = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
   const rowSeats = (letter) => {
@@ -58,6 +73,20 @@ const SeatsMap = (props) => {
       }
     };
 
+    const checkSeats = (letter, seatIndex, boolean) => {
+      const element = setElementID(letter, seatIndex, boolean);
+
+      if (reservedSeats.includes(element)) {
+        return "seat reserved";
+      } else {
+        if (bookingSeats.includes(element)) {
+          return "seat active";
+        } else {
+          return "seat";
+        }
+      }
+    };
+
     return Array(11)
       .fill("")
       .map((seat, seatIndex) => {
@@ -71,11 +100,7 @@ const SeatsMap = (props) => {
             <div
               key={seatIndex}
               id={setElementID(letter, seatIndex, true)}
-              className={
-                bookingSeats.includes(setElementID(letter, seatIndex, true))
-                  ? "seat active"
-                  : "seat"
-              }
+              className={checkSeats(letter, seatIndex, true)}
               onClick={(e) => handleClick(e)}
             >
               {seatIndex < 6 ? seatIndex + 1 : seatIndex}
@@ -99,11 +124,7 @@ const SeatsMap = (props) => {
             <div
               key={seatIndex}
               id={setElementID(letter, seatIndex, false)}
-              className={
-                bookingSeats.includes(setElementID(letter, seatIndex, false))
-                  ? "seat active"
-                  : "seat"
-              }
+              className={checkSeats(letter, seatIndex, false)}
               onClick={(e) => handleClick(e)}
             >
               {seatIndex < 6 ? seatIndex : seatIndex - 1}
@@ -146,6 +167,7 @@ const StyledContainer = styled.div`
   width: 55vw;
   height: 70vh;
   margin: 0 auto;
+  /* background-color: tomato; */
 `;
 
 const StyledScreenContainer = styled.div`
@@ -236,6 +258,12 @@ const StyledSeats = styled.div`
       &.active {
         background-color: var(--primary-red-clr);
         opacity: 0.7;
+      }
+
+      &.reserved {
+        background-color: #343c4a;
+        color: transparent;
+        pointer-events: none;
       }
 
       &.stairs {
