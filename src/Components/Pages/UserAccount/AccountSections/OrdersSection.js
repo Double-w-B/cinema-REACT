@@ -6,14 +6,16 @@ import spinnerImg from "../../../../Images/spinner_3.gif";
 
 const OrdersSection = (props) => {
   const { orders } = useSelector((store) => store.userData);
-  const container = React.useRef(null);
   const [isLoading, setIsLoading] = React.useState(true);
+  const container = React.useRef(null);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      container.current.scrollTo(0, 0);
-    }, 350);
-    return () => clearTimeout(timer);
+    if (container) {
+      const timer = setTimeout(() => {
+        container.current?.scrollTo(0, 0);
+      }, 350);
+      return () => clearTimeout(timer);
+    }
   });
 
   React.useEffect(() => {

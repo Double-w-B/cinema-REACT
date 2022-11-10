@@ -29,28 +29,30 @@ const Separator = (props) => {
     // eslint-disable-next-line
   }, [adultTickets, childTickets, seniorTickets]);
 
-  const handleMinusBtn = (category, price) => {
-    if (category === "Adult") {
-      adultTickets > 0 && setAdultTickets(adultTickets - 1);
+  const handleMinusBtn = (category) => {
+    if (category === "Adult" && adultTickets > 0) {
+      setAdultTickets(adultTickets - 1);
     }
-    if (category === "Child") {
-      childTickets > 0 && setChildTickets(childTickets - 1);
+    if (category === "Child" && childTickets > 0) {
+      setChildTickets(childTickets - 1);
     }
-    if (category === "Senior") {
-      seniorTickets > 0 && setSeniorTickets(seniorTickets - 1);
-    }
-  };
-  const handlePlusBtn = (category, price) => {
-    if (category === "Adult") {
-      adultTickets < 10 && setAdultTickets(adultTickets + 1);
-    }
-    if (category === "Child") {
-      childTickets < 10 && setChildTickets(childTickets + 1);
-    }
-    if (category === "Senior") {
-      seniorTickets < 10 && setSeniorTickets(seniorTickets + 1);
+    if (category === "Senior" && seniorTickets > 0) {
+      setSeniorTickets(seniorTickets - 1);
     }
   };
+
+  const handlePlusBtn = (category) => {
+    if (category === "Adult" && adultTickets < 10) {
+      setAdultTickets(adultTickets + 1);
+    }
+    if (category === "Child" && childTickets < 10) {
+      setChildTickets(childTickets + 1);
+    }
+    if (category === "Senior" && seniorTickets < 10) {
+      setSeniorTickets(seniorTickets + 1);
+    }
+  };
+
   return (
     <StyledContainer>
       {movieTickets.map((categoryTicket, index) => {
@@ -66,15 +68,12 @@ const Separator = (props) => {
             <div className="number">
               <button
                 className="minus"
-                onClick={() => handleMinusBtn(category, price)}
+                onClick={() => handleMinusBtn(category)}
               >
                 -
               </button>
               <p>{categories[index]}</p>
-              <button
-                className="plus"
-                onClick={() => handlePlusBtn(category, price)}
-              >
+              <button className="plus" onClick={() => handlePlusBtn(category)}>
                 +
               </button>
             </div>
