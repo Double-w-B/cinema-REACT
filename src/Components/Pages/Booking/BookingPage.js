@@ -11,16 +11,6 @@ import { RiTimerLine } from "react-icons/ri";
 const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
-  const {
-    setIsModal,
-    setIsAuthModal,
-    setIsFormValid,
-    setIsBookingSummaryModal,
-    setIsLoadingModal,
-    setIsBookingExpiredModal,
-    setIsMovieTrailer,
-    setIsCardPaymentModal,
-  } = props;
 
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
@@ -29,10 +19,16 @@ const Booking = (props) => {
   const ticketsContainer = React.useRef("");
   const seatsContainer = React.useRef("");
 
+  const refs = {
+    scheduleContainer,
+    ticketsContainer,
+    seatsContainer,
+  };
+
   React.useEffect(() => {
     if (!isUser) {
-      setIsModal(true);
-      setIsAuthModal(true);
+      props.setIsModal(true);
+      props.setIsAuthModal(true);
     }
     // eslint-disable-next-line
   }, []);
@@ -43,14 +39,14 @@ const Booking = (props) => {
 
   React.useEffect(() => {
     window.onpopstate = () => {
-      setIsModal(false);
-      setIsFormValid(false);
-      setIsAuthModal(false);
-      setIsMovieTrailer(false);
-      setIsCardPaymentModal(false);
-      setIsBookingSummaryModal(false);
-      setIsLoadingModal(false);
-      setIsBookingExpiredModal(false);
+      props.setIsModal(false);
+      props.setIsFormValid(false);
+      props.setIsAuthModal(false);
+      props.setIsMovieTrailer(false);
+      props.setIsCardPaymentModal(false);
+      props.setIsBookingSummaryModal(false);
+      props.setIsLoadingModal(false);
+      props.setIsBookingExpiredModal(false);
     };
   });
 
@@ -61,18 +57,10 @@ const Booking = (props) => {
         Booking <RiTimerLine />
         <BookingTimer {...props} />
       </h1>
-      <Component.Schedule scheduleContainer={scheduleContainer} {...props} />
-      <Component.Tickets ticketsContainer={ticketsContainer} />
-      <Component.Seats
-        ticketsContainer={ticketsContainer}
-        seatsContainer={seatsContainer}
-      />
-      <Component.BookingSummary
-        ticketsContainer={ticketsContainer}
-        seatsContainer={seatsContainer}
-        scheduleContainer={scheduleContainer}
-        {...props}
-      />
+      <Component.Schedule {...refs} {...props} />
+      <Component.Tickets {...refs} />
+      <Component.Seats {...refs} />
+      <Component.BookingSummary {...refs} {...props} />
     </StyledMain>
   );
 };

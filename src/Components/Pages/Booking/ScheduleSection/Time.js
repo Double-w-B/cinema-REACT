@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { movieScreenings } from "../../../../data";
 import { useDispatch } from "react-redux";
 import { addBookingTime } from "../../../../features/booking/bookingSlice";
+import { removeBookingSeats } from "../../../../features/booking/bookingSlice";
 
 const Time = (props) => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Time = (props) => {
 
   React.useEffect(() => {
     dispatch(addBookingTime(screeningTime));
+    dispatch(removeBookingSeats());
     // eslint-disable-next-line
   }, [screeningTime]);
 

@@ -6,6 +6,8 @@ import * as Booking from "../../../../features/booking/bookingSlice";
 
 const SeatsMap = (props) => {
   const dispatch = useDispatch();
+  const { scheduleContainer, ticketsContainer } = props;
+
   const {
     bookingNumberOfTickets: tickets,
     bookingSeats,
@@ -13,6 +15,7 @@ const SeatsMap = (props) => {
     bookingDay,
     bookingTime,
   } = useSelector((store) => store.bookingTickets);
+
   const { orders } = useSelector((store) => store.userData);
 
   const sameMovieOrders = orders.filter(
@@ -24,12 +27,24 @@ const SeatsMap = (props) => {
   );
 
   const reservedSeats = sameMovieOrders.map((movie) => movie.seats).flat();
-  console.log(reservedSeats);
+
   const rowsLetters = ["A", "B", "C", "D", "E", "F", "G", "H"];
+
+  const showErrorContainer = (element) => {
+    window.scrollTo({
+      top: element.current.offsetTop - 10,
+      behavior: "smooth",
+    });
+  };
 
   const rowSeats = (letter) => {
     const handleClick = (e) => {
       const seatId = e.target.id;
+
+      if (!bookingTime) {
+        showErrorContainer(scheduleContainer);
+        return;
+      }
 
       if (tickets > 0) {
         if (bookingSeats.length < tickets && !bookingSeats.includes(seatId)) {
@@ -40,25 +55,17 @@ const SeatsMap = (props) => {
           dispatch(Booking.replaceBookingSeat(seatId));
         }
       } else {
-        const ticketsContainerTop =
-          props.ticketsContainer.current.offsetTop - 10;
-        window.scrollTo({ top: ticketsContainerTop, behavior: "smooth" });
+        showErrorContainer(ticketsContainer);
       }
     };
 
     const setElementID = (row, index, lastRows) => {
       if (lastRows) {
-        if (index < 6) {
-          return index + 1 + row;
-        } else {
-          return index + row;
-        }
+        if (index < 6) return index + 1 + row;
+        return index + row;
       } else {
-        if (index < 6) {
-          return index + row;
-        } else {
-          return index - 1 + row;
-        }
+        if (index < 6) return index + row;
+        return index - 1 + row;
       }
     };
 
@@ -76,15 +83,10 @@ const SeatsMap = (props) => {
     const checkSeats = (letter, seatIndex, boolean) => {
       const element = setElementID(letter, seatIndex, boolean);
 
-      if (reservedSeats.includes(element)) {
-        return "seat reserved";
-      } else {
-        if (bookingSeats.includes(element)) {
-          return "seat active";
-        } else {
-          return "seat";
-        }
-      }
+      if (reservedSeats.includes(element)) return "seat reserved";
+      if (bookingSeats.includes(element)) return "seat active";
+
+      return "seat";
     };
 
     return Array(11)
@@ -115,6 +117,7 @@ const SeatsMap = (props) => {
               </div>
             );
           }
+
           /* stairs */
           if (seatIndex === 5) {
             return <div key={seatIndex} className="seat stairs"></div>;
@@ -167,7 +170,6 @@ const StyledContainer = styled.div`
   width: 55vw;
   height: 70vh;
   margin: 0 auto;
-  /* background-color: tomato; */
 `;
 
 const StyledScreenContainer = styled.div`

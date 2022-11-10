@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { addBookingDay } from "../../../../features/booking/bookingSlice";
+import { removeBookingSeats } from "../../../../features/booking/bookingSlice";
 
 const Date = (props) => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Date = (props) => {
   const handleClick = (date, index) => {
     setDay(date);
     setActiveDay(index);
+    dispatch(removeBookingSeats());
   };
 
   const getDays = () => {
