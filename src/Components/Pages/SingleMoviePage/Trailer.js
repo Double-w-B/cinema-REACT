@@ -5,9 +5,13 @@ import spinnerImg from "../../../Images/spinner.gif";
 
 const Trailer = ({ title }) => {
   const [showLoadingImg, setShowLoadingImg] = React.useState(true);
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
 
   const { singleMovieVideo } = useSelector((store) => store.singleMovie);
   const { key } = singleMovieVideo;
+
+  const trailerKey = storedData?.trailer?.key || key;
+  const trailerTitle = storedData?.title || title;
 
   const handleOnLoad = () => {
     const timeout = setTimeout(() => {
@@ -21,7 +25,7 @@ const Trailer = ({ title }) => {
       <StyledLayer showLoadingImg={showLoadingImg}>
         <img src={spinnerImg} alt="poster" />
       </StyledLayer>
-      {key && (
+      {trailerKey && (
         <iframe
           width="100%"
           height="100%"
@@ -32,8 +36,8 @@ const Trailer = ({ title }) => {
             zIndex: "1",
             position: "relative",
           }}
-          src={`https://www.youtube.com/embed/${key}?autoplay=0&controls=1&modestbranding=1`}
-          title={`${title} trailer`}
+          src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0&controls=1&modestbranding=1`}
+          title={`${trailerTitle} trailer`}
           frameBorder="0"
           allowFullScreen
           onLoad={handleOnLoad}

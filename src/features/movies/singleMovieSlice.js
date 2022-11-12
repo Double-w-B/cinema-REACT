@@ -95,9 +95,16 @@ const singleMovieSlice = createSlice({
     [getSingleMovieInfo.pending]: (state) => {},
     [getSingleMovieInfo.fulfilled]: (state, action) => {
       state.singleMovieInfo = action.payload;
+      sessionStorage.setItem("single_movie", JSON.stringify(action.payload));
     },
     [getSingleMovieVideos.fulfilled]: (state, action) => {
       state.singleMovieVideo = action.payload;
+      const userData = JSON.parse(sessionStorage.getItem("single_movie"));
+
+      sessionStorage.setItem(
+        "single_movie",
+        JSON.stringify({ ...userData, trailer: { ...action.payload } })
+      );
     },
     [getSingleMovieReviews.fulfilled]: (state, action) => {
       state.singleMovieReviews = action.payload;

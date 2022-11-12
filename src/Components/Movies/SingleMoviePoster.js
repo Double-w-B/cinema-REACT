@@ -28,6 +28,7 @@ const SingleMoviePoster = ({
   };
 
   const getSingleMovieData = () => {
+    sessionStorage.removeItem("single_movie");
     dispatch(SingleMovieModule.removeSingleMovieData());
     dispatch(SingleMovieModule.getSingleMovieInfo(id));
     dispatch(SingleMovieModule.getSingleMovieVideos(id));

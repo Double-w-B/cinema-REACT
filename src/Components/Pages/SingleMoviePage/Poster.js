@@ -7,19 +7,25 @@ const Poster = () => {
   const [imgLoaded, setImgLoaded] = React.useState(false);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { release_date, runtime, poster_path } = singleMovieInfo;
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
 
-  const posterUrl = `https://image.tmdb.org/t/p/original${poster_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/original${
+    storedData?.poster_path || poster_path
+  }`;
+
+  const date = storedData?.release_date || release_date;
+  const time = storedData?.runtime || runtime;
 
   return (
     <StyledPosterContainer>
       <div className="date-time">
         <div className="date">
           <p>Release date:</p>
-          <p>{release_date}</p>
+          <p>{date}</p>
         </div>
         <div className="time">
           <p>Running time:</p>
-          <p>{runtime > 0 ? runtime + "min" : "unknown"}</p>
+          <p>{time > 0 ? time + "min" : "unknown"}</p>
         </div>
       </div>
 
@@ -92,8 +98,8 @@ const StyledImgContainer = styled.div`
     height: 100%;
     display: block;
     object-fit: cover;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     z-index: 1;
+    filter: drop-shadow(0px 3px 10px #0a0f18);
   }
 `;
 

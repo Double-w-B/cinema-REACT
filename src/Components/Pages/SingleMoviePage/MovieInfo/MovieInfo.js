@@ -11,17 +11,23 @@ const MovieInfo = () => {
   const location = useLocation();
   const nowPlaying = location.pathname.slice(0, 11) === "/nowPlaying";
 
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { tagline, overview, title, id } = singleMovieInfo;
 
+  const slogan = storedData?.tagline || tagline;
+  const movieOverview = storedData?.overview || overview;
+  const movieTitle = storedData?.title || title;
+  const movieId = storedData?.id || id;
+
   const setTitle = () => {
-    const urlMovieTitle = title?.split(" ").join("_");
+    const urlMovieTitle = movieTitle?.split(" ").join("_");
     return urlMovieTitle;
   };
 
   const handleClick = () => {
-    dispatch(Booking.addBookingMovieId(id));
-    dispatch(Booking.addBookingMovieTitle(title));
+    dispatch(Booking.addBookingMovieId(movieId));
+    dispatch(Booking.addBookingMovieTitle(movieTitle));
   };
 
   return (
@@ -29,9 +35,9 @@ const MovieInfo = () => {
       <Components.Title />
       <Components.ShortInfo />
 
-      <p className="overview">{overview}</p>
+      <p className="overview">{movieOverview}</p>
 
-      {tagline && <p className="tagline">"{tagline}"</p>}
+      {tagline && <p className="tagline">"{slogan}"</p>}
       {nowPlaying && (
         <StyledBtnContainer>
           <Link to={`/nowPlaying/${setTitle()}/booking`} onClick={handleClick}>

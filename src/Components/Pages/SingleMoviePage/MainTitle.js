@@ -3,16 +3,22 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const MainTitle = () => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieInfo, singleMovieVideo } = useSelector(
     (store) => store.singleMovie
   );
+
   const { title, genres } = singleMovieInfo;
 
+  const movieGenres = storedData?.genres || genres;
+  const movieTrailer = storedData?.trailer || singleMovieVideo;
+  const movieTitle = storedData?.title || title;
+
   return (
-    <StyledTitleContainer trailer={singleMovieVideo}>
-      {singleMovieVideo && <h1>{title}</h1>}
+    <StyledTitleContainer trailer={movieTrailer}>
+      {movieTrailer && <h1>{movieTitle}</h1>}
       <div className="genres no-select">
-        {genres?.map((genre, index) => {
+        {movieGenres?.map((genre, index) => {
           return <div key={index}>{genre.name}</div>;
         })}
       </div>

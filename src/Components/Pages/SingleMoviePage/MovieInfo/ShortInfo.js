@@ -4,13 +4,21 @@ import { useSelector } from "react-redux";
 
 const ShortInfo = () => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
+
   const {
     original_title,
     spoken_languages,
     production_countries,
-    homepage,
+    homepage: link,
     production_companies,
   } = singleMovieInfo;
+
+  const originalTitle = storedData?.original_title || original_title;
+  const languages = storedData?.spoken_languages || spoken_languages;
+  const countries = storedData?.production_countries || production_countries;
+  const homepage = storedData?.homepage || link;
+  const companies = storedData?.production_companies || production_companies;
 
   const checkHomePage = () => {
     if (homepage.length > 38) {
@@ -24,20 +32,18 @@ const ShortInfo = () => {
     <StyledWrapper>
       <div className="orig_title">
         <p>Original title:</p>
-        <p>"{original_title}"</p>
+        <p>"{originalTitle}"</p>
       </div>
-      {spoken_languages && (
+      {languages && (
         <div className="lang">
-          <p>{spoken_languages.length > 1 ? "Languages:" : "Language:"}</p>
-          <p>{spoken_languages.map((lang) => lang.english_name).join(", ")}</p>
+          <p>{languages.length > 1 ? "Languages:" : "Language:"}</p>
+          <p>{languages.map((lang) => lang.english_name).join(", ")}</p>
         </div>
       )}
-      {production_countries && (
+      {countries && (
         <div className="prod_countries">
-          <p>{production_countries.length > 1 ? "Countries:" : "Country:"}</p>
-          <p>
-            {production_countries.map((country) => country.name).join(", ")}
-          </p>
+          <p>{countries.length > 1 ? "Countries:" : "Country:"}</p>
+          <p>{countries.map((country) => country.name).join(", ")}</p>
         </div>
       )}
       {homepage && (
@@ -48,10 +54,10 @@ const ShortInfo = () => {
           </a>
         </div>
       )}
-      {production_companies && (
+      {companies && (
         <div className="prod_companies">
           <p>Production:</p>
-          <p>{production_companies.map((comp) => comp.name).join(", ")}</p>
+          <p>{companies.map((comp) => comp.name).join(", ")}</p>
         </div>
       )}
     </StyledWrapper>

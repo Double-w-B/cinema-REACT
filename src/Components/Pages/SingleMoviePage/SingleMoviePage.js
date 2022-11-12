@@ -3,17 +3,19 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { StyledUnderline } from "../../Movies/MoviesNowPlaying";
-import * as SingleMoviePageModule from "./index";
+import * as SingleMovie from "./index";
 import Navigation from "../../Navigation";
 
 const SingleMoviePage = () => {
+  const location = useLocation();
+
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieInfo, singleMovieReviews, singleMovieVideo } = useSelector(
     (store) => store.singleMovie
   );
   const { title } = singleMovieInfo;
-
-  const location = useLocation();
   const pageTitle = location.state?.pageTitle;
+  const movieTitle = storedData?.title || title;
 
   React.useEffect(() => {
     window.scroll(0, 0);
@@ -21,12 +23,15 @@ const SingleMoviePage = () => {
 
   return (
     <StyledMainContainer>
-      <Navigation title={title} pageTitle={pageTitle ? pageTitle : undefined} />
-      <SingleMoviePageModule.MainTitle />
-      {singleMovieVideo && <SingleMoviePageModule.Trailer title={title} />}
+      <Navigation
+        title={movieTitle}
+        pageTitle={pageTitle ? pageTitle : undefined}
+      />
+      <SingleMovie.MainTitle />
+      {singleMovieVideo && <SingleMovie.Trailer title={title} />}
       <StyledMovieInfo trailer={singleMovieVideo}>
-        <SingleMoviePageModule.MovieInfo />
-        <SingleMoviePageModule.Poster />
+        <SingleMovie.MovieInfo />
+        <SingleMovie.Poster />
       </StyledMovieInfo>
       <StyledReviewTitle>
         <h1>
@@ -34,7 +39,7 @@ const SingleMoviePage = () => {
         </h1>
         <StyledUnderline />
       </StyledReviewTitle>
-      <SingleMoviePageModule.Reviews />
+      <SingleMovie.Reviews />
     </StyledMainContainer>
   );
 };
