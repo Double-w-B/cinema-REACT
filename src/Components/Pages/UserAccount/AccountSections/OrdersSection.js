@@ -5,9 +5,12 @@ import SingleOrder from "./SingleOrder";
 import spinnerImg from "../../../../Images/spinner_3.gif";
 
 const OrdersSection = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("bookings"));
   const { orders } = useSelector((store) => store.userData);
   const [isLoading, setIsLoading] = React.useState(true);
   const container = React.useRef(null);
+
+  const userOrders = storedData || orders;
 
   React.useEffect(() => {
     if (container) {
@@ -33,7 +36,7 @@ const OrdersSection = (props) => {
     );
   }
 
-  if (orders.length === 0) {
+  if (userOrders.length === 0) {
     return (
       <StyledContainer className="center">
         <h2>No orders found</h2>
@@ -44,7 +47,7 @@ const OrdersSection = (props) => {
 
   return (
     <StyledContainer ref={container}>
-      {orders.map((order, index) => {
+      {userOrders.map((order, index) => {
         return <SingleOrder {...order} key={index} {...props} />;
       })}
     </StyledContainer>

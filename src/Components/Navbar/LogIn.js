@@ -67,8 +67,6 @@ const LogIn = () => {
 
   const handleLogOut = () => {
     logoutUser();
-    localStorage.removeItem("userReviews");
-    localStorage.removeItem("userData");
   };
 
   return (

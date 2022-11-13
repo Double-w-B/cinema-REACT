@@ -15,6 +15,8 @@ const UserAccountPage = (props) => {
     setActiveSection,
   };
 
+  sessionStorage.removeItem("single_movie");
+
   return (
     <StyledMain>
       <Navigation pageTitle={"Account"} />

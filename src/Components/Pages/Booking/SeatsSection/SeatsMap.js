@@ -7,6 +7,7 @@ import * as Booking from "../../../../features/booking/bookingSlice";
 const SeatsMap = (props) => {
   const dispatch = useDispatch();
   const { scheduleContainer, ticketsContainer } = props;
+  const storedData = JSON.parse(sessionStorage.getItem("bookings"));
 
   const {
     bookingNumberOfTickets: tickets,
@@ -18,7 +19,9 @@ const SeatsMap = (props) => {
 
   const { orders } = useSelector((store) => store.userData);
 
-  const sameMovieOrders = orders.filter(
+  const movieOrders = storedData || orders;
+
+  const sameMovieOrders = movieOrders.filter(
     (order) =>
       // checking the id, date & time of the screening movie
       order.movieId === bookingMovieId &&

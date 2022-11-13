@@ -10,6 +10,8 @@ const UserData = () => {
     avatar: userAvatar,
     orders,
   } = useSelector((store) => store.userData);
+  const storedData = JSON.parse(sessionStorage.getItem("bookings"));
+  const userOrders = storedData || orders;
 
   const { user } = useAuth0();
   const { email, picture, given_name, name, sub: id } = user;
@@ -77,7 +79,7 @@ const UserData = () => {
           <p>{checkName()}</p>
           <p className={setEmailClass()}>{checkEmail()}</p>
           <p>{id.split("|")[1]}</p>
-          <p>{orders.length}</p>
+          <p>{userOrders.length}</p>
         </div>
       </StyledDataContainer>
     </StyledContainer>

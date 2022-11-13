@@ -6,6 +6,8 @@ import { paymentMethods } from "../../../../data";
 import { setOrder } from "../../../../features/user/userSlice";
 
 const SummaryPayment = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("bookings"));
+
   const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = React.useState(null);
   const [isShakeMsg, setIsShakeMsg] = React.useState(false);
@@ -127,6 +129,14 @@ const SummaryPayment = (props) => {
         setIsModal(true);
         setIsBookingSummaryModal(true);
         dispatch(setOrder(newOrder));
+        if (!storedData) {
+          sessionStorage.setItem("bookings", JSON.stringify([newOrder]));
+        } else {
+          sessionStorage.setItem(
+            "bookings",
+            JSON.stringify([...storedData, newOrder])
+          );
+        }
       }, 3600);
       return () => clearTimeout(timer);
     }

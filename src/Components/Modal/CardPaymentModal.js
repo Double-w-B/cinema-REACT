@@ -7,6 +7,7 @@ import { setOrder } from "../../features/user/userSlice";
 
 const CardPaymentModal = (props) => {
   const dispatch = useDispatch();
+  const storedData = JSON.parse(sessionStorage.getItem("bookings"));
 
   const {
     singleMovieInfo: { poster_path },
@@ -131,6 +132,14 @@ const CardPaymentModal = (props) => {
       setIsModal(true);
       setIsBookingSummaryModal(true);
       dispatch(setOrder(newOrder));
+      if (!storedData) {
+        sessionStorage.setItem("bookings", JSON.stringify([newOrder]));
+      } else {
+        sessionStorage.setItem(
+          "bookings",
+          JSON.stringify([...storedData, newOrder])
+        );
+      }
     }, 3600);
     return () => clearTimeout(timer);
   };
