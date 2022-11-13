@@ -57,6 +57,22 @@ export const getSingleMovieReviews = createAsyncThunk(
   }
 );
 
+const saveDataToStorage = (section, data) => {
+  const userData = JSON.parse(sessionStorage.getItem("single_movie"));
+  let storageData = {};
+
+  if (section) {
+    if (section === "trailer") {
+      storageData = { ...userData, [section]: { ...data } };
+    } else {
+      storageData = { ...userData, [section]: [...data] };
+    }
+    return sessionStorage.setItem("single_movie", JSON.stringify(storageData));
+  }
+
+  sessionStorage.setItem("single_movie", JSON.stringify(data));
+};
+
 const singleMovieSlice = createSlice({
   name: "singleMovie",
   initialState,
@@ -72,52 +88,56 @@ const singleMovieSlice = createSlice({
 
     addUserReview: (state, action) => {
       const currentState = current(state);
+
       state.userReviews = [...currentState.userReviews, action.payload];
+      saveDataToStorage("userReviews", state.userReviews);
+
       state.singleMovieReviews = [
         ...currentState.singleMovieReviews,
         action.payload,
       ];
-      localStorage.setItem("userReviews", JSON.stringify(state.userReviews));
+      saveDataToStorage("reviews", state.singleMovieReviews);
     },
 
     removeUserReview: (state) => {
       const currentState = current(state);
-
       const filteredReviews = (state) =>
         state.filter((review) => review.id !== currentState.singleMovieInfo.id);
 
       state.userReviews = filteredReviews(state.userReviews);
+      saveDataToStorage("userReviews", state.userReviews);
+
       state.singleMovieReviews = filteredReviews(state.singleMovieReviews);
-      localStorage.setItem("userReviews", JSON.stringify(state.userReviews));
+      saveDataToStorage("reviews", state.singleMovieReviews);
     },
   },
   extraReducers: {
     [getSingleMovieInfo.pending]: (state) => {},
     [getSingleMovieInfo.fulfilled]: (state, action) => {
       state.singleMovieInfo = action.payload;
-      sessionStorage.setItem("single_movie", JSON.stringify(action.payload));
+      saveDataToStorage("", action.payload);
     },
+
     [getSingleMovieVideos.fulfilled]: (state, action) => {
       state.singleMovieVideo = action.payload;
-      const userData = JSON.parse(sessionStorage.getItem("single_movie"));
-
-      sessionStorage.setItem(
-        "single_movie",
-        JSON.stringify({ ...userData, trailer: { ...action.payload } })
-      );
+      saveDataToStorage("trailer", action.payload);
     },
+
     [getSingleMovieReviews.fulfilled]: (state, action) => {
       state.singleMovieReviews = action.payload;
       const currentState = current(state);
+
       const userReview = state.userReviews.find(
         (review) => review.id === state.singleMovieInfo.id
       );
+
       if (userReview) {
         state.singleMovieReviews = [
           ...currentState.singleMovieReviews,
           userReview,
         ];
       }
+      saveDataToStorage("reviews", state.singleMovieReviews);
     },
   },
 });

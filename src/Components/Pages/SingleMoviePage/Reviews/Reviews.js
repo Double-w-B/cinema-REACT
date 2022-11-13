@@ -6,9 +6,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { StyledInfoContainer } from "./NoReviews";
 
 const Reviews = () => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
+
   const { singleMovieReviews, singleMovieInfo } = useSelector(
     (store) => store.singleMovie
   );
+
+  const movieId = storedData?.id || singleMovieInfo.id;
+  const movieReviews = storedData?.reviews || singleMovieReviews;
 
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
 
@@ -25,15 +30,14 @@ const Reviews = () => {
           </p>
         </StyledLogInInfo>
       )}
-      {isUser &&
-        !singleMovieReviews.some(
-          (review) => review.id === singleMovieInfo.id
-        ) && <Components.UserReview />}
-      {singleMovieReviews.length > 0 &&
-        singleMovieReviews.map((rev, index) => (
+      {isUser && !movieReviews.some((review) => review.id === movieId) && (
+        <Components.UserReview />
+      )}
+      {movieReviews.length > 0 &&
+        movieReviews.map((rev, index) => (
           <Components.SingleReview key={index} {...rev} />
         ))}
-      {singleMovieReviews.length === 0 && <Components.NoReviews />}
+      {movieReviews.length === 0 && <Components.NoReviews />}
     </StyledWrapper>
   );
 };

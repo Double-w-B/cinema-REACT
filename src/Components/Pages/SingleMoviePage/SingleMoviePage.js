@@ -16,6 +16,7 @@ const SingleMoviePage = () => {
   const { title } = singleMovieInfo;
   const pageTitle = location.state?.pageTitle;
   const movieTitle = storedData?.title || title;
+  const movieReviews = storedData?.reviews || singleMovieReviews;
 
   React.useEffect(() => {
     window.scroll(0, 0);
@@ -35,7 +36,7 @@ const SingleMoviePage = () => {
       </StyledMovieInfo>
       <StyledReviewTitle>
         <h1>
-          Reviews <span>({singleMovieReviews.length})</span>
+          Reviews <span>({movieReviews.length})</span>
         </h1>
         <StyledUnderline />
       </StyledReviewTitle>

@@ -9,6 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const SingleReview = (props) => {
   const dispatch = useDispatch();
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
 
   const { name: userName, avatar: userAvatar } = useSelector(
     (store) => store.userData
@@ -19,6 +20,7 @@ const SingleReview = (props) => {
   const { user, isAuthenticated } = useAuth0();
 
   const isUser = isAuthenticated && user;
+  const movieId = storedData?.id || singleMovieInfo.id;
 
   const {
     author,
@@ -29,7 +31,7 @@ const SingleReview = (props) => {
   } = props;
 
   const showAvatar = () => {
-    if (singleMovieInfo.id === id) {
+    if (movieId === id) {
       return userAvatar || user?.picture || avatar_path || logoImg;
     }
     if (avatar_path === null) return logoImg;
@@ -42,9 +44,9 @@ const SingleReview = (props) => {
   };
 
   const showName = () => {
-    if (singleMovieInfo.id === id) {
-      const authorName = userName || user?.name.split(" ")[0];
-      return authorName.length > 15 ? authorName.substring(0, 15) : authorName;
+    if (movieId === id) {
+      const authorName = userName || user?.name.split(" ")[0] || author;
+      return authorName?.length > 15 ? authorName.substring(0, 15) : authorName;
     }
 
     return author.length > 15 ? author.substring(0, 15) : author;
@@ -79,7 +81,7 @@ const SingleReview = (props) => {
           }
         />
         <div className="content_buttons">
-          {isUser && singleMovieInfo.id === id && (
+          {isUser && movieId === id && (
             <button onClick={() => dispatch(removeUserReview())}>remove</button>
           )}
 
