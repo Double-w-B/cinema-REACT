@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { BsPlayCircle } from "react-icons/bs";
 import { setSingleMovieVideoKey } from "../../../../features/movies/singleMovieSlice";
 import { GrStatusGoodSmall } from "react-icons/gr";
+import { Link } from "react-router-dom";
+import * as SingleMovie from "../../../../features/movies/singleMovieSlice";
 
 const SingleOrder = (props) => {
   const dispatch = useDispatch();
@@ -28,7 +30,7 @@ const SingleOrder = (props) => {
     .toString()
     .concat(screeningDate, screeningTime, seats[0]);
 
-  const handleClick = () => {
+  const handleIconClick = () => {
     dispatch(setSingleMovieVideoKey({ key }));
     props.setIsModal(true);
     props.setIsMovieTrailer(true);
@@ -55,14 +57,31 @@ const SingleOrder = (props) => {
     return filteredGroup;
   };
 
+  const handleTitleClick = () => {
+    sessionStorage.removeItem("single_movie");
+    dispatch(SingleMovie.removeSingleMovieData());
+    dispatch(SingleMovie.getSingleMovieInfo(movieId));
+    dispatch(SingleMovie.getSingleMovieVideos(movieId));
+    dispatch(SingleMovie.getSingleMovieReviews(movieId));
+  };
+
+  const setPath = () => {
+    return `/nowPlaying/${title.split(" ").join("_")}`;
+  };
+
   return (
-    <StyledContainer id={orderId} data-id={movieId}>
+    <StyledContainer id={orderId}>
       <StyledImgContainer>
         <img src={imgLowResUrl + poster} alt="" />
-        <BsPlayCircle onClick={handleClick} />
+        <BsPlayCircle onClick={handleIconClick} />
       </StyledImgContainer>
       <StyledInfoContainer status={payment}>
-        <h2>{title}</h2>
+        <h2>
+          <Link to={setPath()} onClick={handleTitleClick}>
+            {title}
+          </Link>
+        </h2>
+
         <div className="info">
           <div className="info__details">
             <div className="info__details_labels">
@@ -101,7 +120,7 @@ const SingleOrder = (props) => {
 const StyledContainer = styled.div`
   width: 100%;
   height: 180px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   padding: 0.5rem;
   display: flex;
   background-color: rgba(43, 52, 68, 0.2);
@@ -123,7 +142,12 @@ const StyledImgContainer = styled.div`
     & img {
       filter: brightness(70%) drop-shadow(0px 5px 15px black);
     }
+    & svg {
+      font-size: 3rem;
+      opacity: 1;
+    }
   }
+
   img {
     width: 100%;
     height: 100%;
@@ -138,7 +162,7 @@ const StyledImgContainer = styled.div`
   }
 
   svg {
-    font-size: 3rem;
+    font-size: 2rem;
     top: 50%;
     left: 50%;
     position: absolute;
@@ -146,11 +170,11 @@ const StyledImgContainer = styled.div`
     cursor: pointer;
     opacity: 0.75;
     transition: 0.3s linear;
+    color: var(--primary-white-clr);
 
     &:hover {
-      font-size: 4rem;
+      font-size: 3rem;
       opacity: 1;
-      color: var(--primary-white-clr);
     }
 
     &:active {
@@ -166,6 +190,15 @@ const StyledInfoContainer = styled.div`
 
   h2 {
     margin-left: 1.3rem;
+
+    a {
+      color: var(--primary-white-clr);
+      transition: 0.3s linear;
+
+      &:hover {
+        color: var(--primary-red-clr);
+      }
+    }
   }
   .info {
     width: 100%;
