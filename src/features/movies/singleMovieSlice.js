@@ -7,7 +7,7 @@ const initialState = {
   singleMovieInfo: {},
   singleMovieVideo: {},
   singleMovieReviews: [],
-  userReviews: JSON.parse(localStorage.getItem("userReviews")) || [],
+  userReviews: [],
 };
 
 export const getSingleMovieInfo = createAsyncThunk(
@@ -58,14 +58,14 @@ export const getSingleMovieReviews = createAsyncThunk(
 );
 
 const saveDataToStorage = (section, data) => {
-  const userData = JSON.parse(sessionStorage.getItem("single_movie"));
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   let storageData = {};
 
   if (section) {
     if (section === "trailer") {
-      storageData = { ...userData, [section]: { ...data } };
+      storageData = { ...storedData, [section]: { ...data } };
     } else {
-      storageData = { ...userData, [section]: [...data] };
+      storageData = { ...storedData, [section]: [...data] };
     }
     return sessionStorage.setItem("single_movie", JSON.stringify(storageData));
   }

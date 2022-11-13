@@ -6,10 +6,14 @@ import { addBookingTime } from "../../../../features/booking/bookingSlice";
 import { removeBookingSeats } from "../../../../features/booking/bookingSlice";
 
 const Time = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
+
   const dispatch = useDispatch();
   const { day } = props;
   const { genres } = props.singleMovieInfo;
   const { screeningTime, setScreeningTime } = props;
+
+  const movieGenres = storedData?.genres || genres;
 
   React.useEffect(() => {
     setScreeningTime("");
@@ -23,7 +27,9 @@ const Time = (props) => {
   }, [screeningTime]);
 
   const findMovieScreenings = () => {
-    const currentMovieGenres = genres.map((genre) => genre.name.toLowerCase());
+    const currentMovieGenres = movieGenres.map((genre) =>
+      genre.name.toLowerCase()
+    );
 
     const currentDayMovieScreenings =
       new window.Date(day).getDay() % 2 === 0
@@ -82,7 +88,7 @@ const Time = (props) => {
         movie screenings:
       </h3>
       <StyledTimeScreenings>
-        {genres && showMovieScreenings()}
+        {movieGenres && showMovieScreenings()}
       </StyledTimeScreenings>
     </StyledTimeContainer>
   );
@@ -121,17 +127,17 @@ const StyledTimeScreenings = styled.div`
     border: 1px solid var(--primary-grey-clr);
     transition: 0.3s linear;
     cursor: pointer;
-    opacity: 0.7;
+    opacity: 0.65;
 
     &:hover {
       opacity: 1;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 10px;
     }
 
     &.active {
       color: var(--primary-white-clr);
       border: 1px solid var(--primary-white-clr);
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 15px;
       opacity: 1;
     }
 

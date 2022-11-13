@@ -37,7 +37,7 @@ const MovieInfo = () => {
 
       <p className="overview">{movieOverview}</p>
 
-      {tagline && <p className="tagline">"{slogan}"</p>}
+      {slogan && <p className="tagline">"{slogan}"</p>}
       {nowPlaying && (
         <StyledBtnContainer>
           <Link to={`/nowPlaying/${setTitle()}/booking`} onClick={handleClick}>

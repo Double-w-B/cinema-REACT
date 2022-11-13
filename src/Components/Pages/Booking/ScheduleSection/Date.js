@@ -88,11 +88,14 @@ const StyledDateContainer = styled.div`
       cursor: pointer;
       color: var(--primary-grey-clr);
       transition: 0.3s linear;
-      opacity: 0.7;
+      opacity: 0.65;
+      border: 1px solid var(--primary-grey-clr);
 
       &:hover {
         opacity: 1;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 10px;
       }
+
       &.active {
         opacity: 1;
         border: 1px solid var(--primary-white-clr);

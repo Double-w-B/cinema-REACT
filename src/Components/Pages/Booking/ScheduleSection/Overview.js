@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 const Overview = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { overview } = props.singleMovieInfo;
+  const movieOverview = storedData?.overview || overview;
 
   return (
     <StyledOverviewContainer>
-      <p>{overview}</p>
+      <p>{movieOverview}</p>
     </StyledOverviewContainer>
   );
 };

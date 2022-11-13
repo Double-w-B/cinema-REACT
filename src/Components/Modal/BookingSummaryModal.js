@@ -6,11 +6,14 @@ import Modal from "./Modal";
 import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
 
 const BookingSummaryModal = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { email: userEmail } = useSelector((store) => store.userData);
   const { setIsModal, setIsBookingSummaryModal } = props;
   const { bookingEmail, bookingMovieTitle } = useSelector(
     (store) => store.bookingTickets
   );
+
+  const movieTitle = storedData?.title || bookingMovieTitle;
 
   const handleClick = () => {
     setIsModal(false);
@@ -29,8 +32,8 @@ const BookingSummaryModal = (props) => {
         </p>
 
         <p>
-          We hope you will enjoy the <span>{bookingMovieTitle}</span> movie.
-          Look forward to seeing you!
+          We hope you will enjoy the <span>{movieTitle}</span> movie. Look
+          forward to seeing you!
         </p>
         <Link to="/">
           <StyledBtn onClick={handleClick}>OK</StyledBtn>

@@ -6,12 +6,16 @@ import spinnerImg from "../../Images/spinner.gif";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const TrailerModal = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const [isShowLoadingImg, setIsShowLoadingImg] = React.useState(true);
   const { singleMovieVideo, singleMovieInfo } = useSelector(
     (store) => store.singleMovie
   );
   const { key } = singleMovieVideo;
   const { title } = singleMovieInfo;
+
+  const movieTitle = storedData?.title || title;
+  const trailerKey = storedData?.trailer?.key || key;
 
   const handleOnLoad = () => {
     const timeout = setTimeout(() => setIsShowLoadingImg(false), 400);
@@ -30,7 +34,7 @@ const TrailerModal = (props) => {
           <img src={spinnerImg} alt="poster" />
         </StyledLayer>
         <AiOutlineCloseCircle onClick={handleClick} />
-        {key && (
+        {trailerKey && (
           <iframe
             width="100%"
             height="100%"
@@ -41,8 +45,8 @@ const TrailerModal = (props) => {
               zIndex: "1",
               position: "relative",
             }}
-            src={`https://www.youtube.com/embed/${key}?autoplay=0&controls=1&modestbranding=1`}
-            title={`${title} trailer`}
+            src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0&controls=1&modestbranding=1`}
+            title={`${movieTitle} trailer`}
             frameBorder="0"
             allowFullScreen
             onLoad={handleOnLoad}

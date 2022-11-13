@@ -42,9 +42,11 @@ const MoviesNowPlayingSlider = () => {
       };
 
       const handleClick = () => {
+        sessionStorage.removeItem("single_movie");
         dispatch(SingleMovie.removeSingleMovieData());
         dispatch(SingleMovie.getSingleMovieInfo(id));
         dispatch(SingleMovie.getSingleMovieVideos(id));
+        dispatch(SingleMovie.getSingleMovieReviews(id));
         dispatch(Booking.addBookingMovieId(id));
         dispatch(Booking.addBookingMovieTitle(title));
       };

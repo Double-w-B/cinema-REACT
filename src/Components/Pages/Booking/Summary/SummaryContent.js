@@ -17,9 +17,13 @@ const SummaryContent = (props) => {
     bookingSeniorTickets: seniorTickets,
   } = useSelector((store) => store.bookingTickets);
 
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
+
   const { email: storedUserEmail } = useSelector((store) => store.userData);
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
+
+  const movieTitle = storedData?.title || bookingMovieTitle;
 
   const numberOfTickets = () => {
     const allGroups = [adultTickets, childTickets, seniorTickets];
@@ -48,7 +52,7 @@ const SummaryContent = (props) => {
       userEmail={props.userEmail}
       shakeSeatsAndTickets={props.isSeatsEqTicketsAmount}
     >
-      <h2>{bookingMovieTitle}</h2>
+      <h2>{movieTitle}</h2>
 
       <div className="info">
         <div className="info__labels">

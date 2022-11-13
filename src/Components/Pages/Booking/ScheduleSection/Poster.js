@@ -1,15 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { BsPlayCircle } from "react-icons/bs";
-
 import styled from "styled-components";
 
 const Poster = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieVideo } = useSelector((store) => store.singleMovie);
   const { imgLowResUrl } = useSelector((store) => store.movies);
-
   const { poster_path, genres } = props;
   const { key } = singleMovieVideo;
+
+  const movieGenres = storedData?.genres || genres;
+  const moviePoster = storedData?.poster_path || poster_path;
+  const movieTrailer = storedData?.trailer?.key || key;
 
   const abbreviation = (title) => {
     if (title === "Science Fiction") return "Sci-Fi";
@@ -24,12 +27,12 @@ const Poster = (props) => {
   return (
     <StyledPosterContainer className="no-select">
       <div className="poster">
-        <img src={`${imgLowResUrl}${poster_path}`} alt="" />
-        {key && <BsPlayCircle onClick={handleClick} />}
+        <img src={`${imgLowResUrl}${moviePoster}`} alt="" />
+        {movieTrailer && <BsPlayCircle onClick={handleClick} />}
       </div>
-      {genres && (
+      {movieGenres && (
         <div className="genres no-select">
-          {genres.slice(0, 3).map((genre) => {
+          {movieGenres.slice(0, 3).map((genre) => {
             return <div key={genre.id}>{abbreviation(genre.name)}</div>;
           })}
         </div>

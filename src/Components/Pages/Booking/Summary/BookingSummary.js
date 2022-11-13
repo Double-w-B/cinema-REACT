@@ -15,7 +15,10 @@ const BookingSummary = (props) => {
   const { imgLowResUrl } = useSelector((store) => store.movies);
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { email: storedEmail } = useSelector((store) => store.userData);
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
+
   const { poster_path } = singleMovieInfo;
+  const moviePoster = storedData?.poster_path || poster_path;
 
   const initialState = {
     userEmail,
@@ -41,7 +44,7 @@ const BookingSummary = (props) => {
       <h2 className="no-select">Booking Summary</h2>
       <StyledWrapper>
         <div className="summary-img no-select">
-          <img src={`${imgLowResUrl}${poster_path}`} alt="poster" />
+          <img src={`${imgLowResUrl}${moviePoster}`} alt="poster" />
         </div>
         <SummaryContent {...initialState} />
         <SummaryPayment {...props} {...initialState} />

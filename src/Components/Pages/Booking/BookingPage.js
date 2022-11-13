@@ -9,11 +9,14 @@ import BookingTimer from "./BookingTimer";
 import { RiTimerLine } from "react-icons/ri";
 
 const Booking = (props) => {
+  const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
 
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
+
+  const movieTitle = storedData?.title || title;
 
   const scheduleContainer = React.useRef("");
   const ticketsContainer = React.useRef("");
@@ -52,7 +55,7 @@ const Booking = (props) => {
 
   return (
     <StyledMain>
-      <Navigation title={"Tickets"} pageTitle={title} booking={true} />
+      <Navigation title={"Tickets"} pageTitle={movieTitle} booking={true} />
       <h1>
         Booking <RiTimerLine />
         <BookingTimer {...props} />
@@ -64,6 +67,7 @@ const Booking = (props) => {
     </StyledMain>
   );
 };
+
 const StyledMain = styled(StyledMainContainer)`
   position: relative;
   h1 {
