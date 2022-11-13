@@ -3,17 +3,23 @@ import styled from "styled-components";
 import Navigation from "../../Navigation";
 import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 import * as Styles from "../UnlimitedPage/UnlimitedPage";
-import UserData from "./UserData";
-import AccountNav from "./AccountNav";
-import AccountSections from "./AccountSections/AccountSections";
+import * as Component from "./index";
+import ErrorPage from "../ErrorPage/ErrorPage";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserAccountPage = (props) => {
   const [activeSection, setActiveSection] = React.useState(0);
+  const { isAuthenticated, user } = useAuth0();
+  const isUser = isAuthenticated && user;
 
   const sectionInitialState = {
     activeSection,
     setActiveSection,
   };
+
+  if (!isUser) {
+    return <ErrorPage />;
+  }
 
   sessionStorage.removeItem("single_movie");
 
@@ -22,9 +28,9 @@ const UserAccountPage = (props) => {
       <Navigation pageTitle={"Account"} />
       <h1>Nice to See you </h1>
       <StyledContainer>
-        <UserData />
-        <AccountNav {...sectionInitialState} />
-        <AccountSections {...sectionInitialState} {...props} />
+        <Component.UserData />
+        <Component.AccountNav {...sectionInitialState} />
+        <Component.AccountSections {...sectionInitialState} {...props} />
       </StyledContainer>
     </StyledMain>
   );
