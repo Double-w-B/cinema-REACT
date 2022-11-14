@@ -6,7 +6,8 @@ import { paymentMethods } from "../../../../data";
 import { setOrder } from "../../../../features/user/userSlice";
 
 const SummaryPayment = (props) => {
-  const storedData = JSON.parse(sessionStorage.getItem("bookings"));
+  const storedBookingsData = JSON.parse(sessionStorage.getItem("bookings"));
+  const storedMovieData = JSON.parse(sessionStorage.getItem("single_movie"));
 
   const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = React.useState(null);
@@ -46,11 +47,17 @@ const SummaryPayment = (props) => {
     setIsBookingSummaryModal,
   } = props;
 
+  /* check for stored data if booking page was refreshed */
+  const movieTitle = storedMovieData?.title || bookingMovieTitle;
+  const movieID = storedMovieData?.id || bookingMovieId;
+  const moviePoster = storedMovieData?.poster_path || poster_path;
+  const trailerKey = storedMovieData?.trailer?.key || key;
+
   const newOrder = {
-    title: bookingMovieTitle,
-    movieId: bookingMovieId,
-    poster: poster_path,
-    trailerKey: key,
+    title: movieTitle,
+    movieId: movieID,
+    poster: moviePoster,
+    trailerKey: trailerKey,
     date: bookingDay,
     time: bookingTime,
     seats: bookingSeats,
@@ -106,11 +113,12 @@ const SummaryPayment = (props) => {
       return;
     }
 
-    if (!bookingEmail?.match(emailRegExp) || !userEmail?.match(emailRegExp)) {
+    if (!userEmail?.match(emailRegExp) || !bookingEmail?.match(emailRegExp)) {
       showErrorContainer(summaryContainer);
       setIsShakeEmail(true);
       return;
     }
+
     if (paymentMethod == null) {
       showErrorContainer(summaryContainer);
       setIsShakeMsg(true);
@@ -129,12 +137,12 @@ const SummaryPayment = (props) => {
         setIsModal(true);
         setIsBookingSummaryModal(true);
         dispatch(setOrder(newOrder));
-        if (!storedData) {
+        if (!storedBookingsData) {
           sessionStorage.setItem("bookings", JSON.stringify([newOrder]));
         } else {
           sessionStorage.setItem(
             "bookings",
-            JSON.stringify([...storedData, newOrder])
+            JSON.stringify([...storedBookingsData, newOrder])
           );
         }
       }, 3600);

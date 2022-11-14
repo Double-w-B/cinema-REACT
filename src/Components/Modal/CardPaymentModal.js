@@ -8,6 +8,7 @@ import { setOrder } from "../../features/user/userSlice";
 const CardPaymentModal = (props) => {
   const dispatch = useDispatch();
   const storedData = JSON.parse(sessionStorage.getItem("bookings"));
+  const storedMovieData = JSON.parse(sessionStorage.getItem("single_movie"));
 
   const {
     singleMovieInfo: { poster_path },
@@ -59,11 +60,17 @@ const CardPaymentModal = (props) => {
     isCvvError,
   };
 
+  /* check for stored data if booking page was refreshed */
+  const movieTitle = storedMovieData?.title || bookingMovieTitle;
+  const movieID = storedMovieData?.id || bookingMovieId;
+  const moviePoster = storedMovieData?.poster_path || poster_path;
+  const trailerKey = storedMovieData?.trailer?.key || key;
+
   const newOrder = {
-    title: bookingMovieTitle,
-    movieId: bookingMovieId,
-    poster: poster_path,
-    trailerKey: key,
+    title: movieTitle,
+    movieId: movieID,
+    poster: moviePoster,
+    trailerKey: trailerKey,
     date: bookingDay,
     time: bookingTime,
     seats: bookingSeats,
