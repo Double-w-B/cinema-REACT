@@ -95,7 +95,7 @@ const LogIn = () => {
       ) : isLoading ? (
         <div className="isLogged">
           <div className="avatar">
-            <img src={spinnerImg} alt="spinner" />
+            <img src={spinnerImg} alt="" />
           </div>
         </div>
       ) : (

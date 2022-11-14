@@ -31,7 +31,7 @@ const Poster = () => {
 
       <StyledImgContainer imgLoaded={imgLoaded}>
         <div>
-          <img src={spinnerImg} alt="loading spinner" />
+          <img src={spinnerImg} alt="" />
         </div>
         <img
           src={posterUrl}

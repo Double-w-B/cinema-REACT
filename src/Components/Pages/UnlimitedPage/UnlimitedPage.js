@@ -17,7 +17,7 @@ const UnlimitedPage = () => {
 
       <StyledContentContainer>
         <StyledBannerImg>
-          <img src={bannerImg} alt="banner" />
+          <img src={bannerImg} alt="" />
         </StyledBannerImg>
 
         <StyledInfoContainer>

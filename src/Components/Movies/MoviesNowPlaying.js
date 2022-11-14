@@ -10,7 +10,7 @@ const MoviesNowPlaying = (props) => {
     <StyledWrapper ref={props.nowPlayingContainer}>
       <h1>now playing</h1>
       <StyledUnderline />
-      <StyledMoviesContainer>
+      <StyledMoviesContainer draggable="false">
         {moviesNowPlaying.slice(0, 12).map((movie) => {
           return (
             <SingleMoviePoster

@@ -43,16 +43,12 @@ const moviesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getMoviesNowPlaying.pending]: (state) => {
-      state.nowPlayingIsLoading = true;
-    },
+    [getMoviesNowPlaying.pending]: (state) => {},
     [getMoviesNowPlaying.fulfilled]: (state, action) => {
       state.moviesNowPlaying = action.payload;
       state.nowPlayingIsLoading = false;
     },
-    [getMoviesComingSoon.pending]: (state) => {
-      state.comingSoonIsLoading = true;
-    },
+    [getMoviesComingSoon.pending]: (state) => {},
     [getMoviesComingSoon.fulfilled]: (state, action) => {
       state.moviesComingSoon = action.payload;
       state.comingSoonIsLoading = false;

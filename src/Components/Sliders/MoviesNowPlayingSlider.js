@@ -62,10 +62,10 @@ const MoviesNowPlayingSlider = () => {
 
       return (
         <StyledImgContainer key={id} className={position} title={title}>
-          <img src={imgHiResUrl + backdrop_path} alt="movie backdrop" />
+          <img src={imgHiResUrl + backdrop_path} alt="" />
           <div className="layer"></div>
           <div className="title">{title}</div>
-          <Link to={setPath()} onClick={handleClick}>
+          <Link to={setPath()} onClick={handleClick} draggable="false">
             <StyledButton className="btn-slider">book now</StyledButton>
           </Link>
         </StyledImgContainer>
@@ -74,7 +74,7 @@ const MoviesNowPlayingSlider = () => {
   };
 
   return (
-    <StyledSection>
+    <StyledSection className="no-select">
       <StyledArrowContainer
         className="left"
         onClick={() => setIndex(index - 1)}
@@ -101,7 +101,7 @@ const StyledSection = styled.section`
   display: flex;
 `;
 
-const StyledImgContainer = styled.article`
+const StyledImgContainer = styled.div`
   width: 100%;
   height: 100%;
   top: 0;
@@ -186,6 +186,7 @@ export const StyledArrowContainer = styled.div`
 
   &.left {
     left: 1rem;
+
     &.upComing {
       left: 0;
     }
@@ -197,6 +198,7 @@ export const StyledArrowContainer = styled.div`
 
   &.right {
     right: 1rem;
+
     &.upComing {
       right: 0;
     }

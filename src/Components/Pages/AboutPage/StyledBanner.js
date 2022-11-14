@@ -28,7 +28,7 @@ const Banner = () => {
 
         return (
           <StyledImg className={position} key={imgIndex}>
-            <img src={link} alt="banner" />;
+            <img src={link} alt="" />;
           </StyledImg>
         );
       })}

@@ -19,7 +19,7 @@ const HomePage = (props) => {
   return (
     <main>
       <MoviesNowPlayingSlider />
-      <MoviesNowPlaying nowPlayingContainer={props.nowPlayingContainer} />
+      <MoviesNowPlaying {...props} />
       <MoviesComingSoonSlider />
     </main>
   );

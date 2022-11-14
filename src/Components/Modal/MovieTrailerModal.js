@@ -31,7 +31,7 @@ const TrailerModal = (props) => {
     <Modal {...props}>
       <StyledContainer>
         <StyledLayer showLoadingImg={isShowLoadingImg}>
-          <img src={spinnerImg} alt="poster" />
+          <img src={spinnerImg} alt="" />
         </StyledLayer>
         <AiOutlineCloseCircle onClick={handleClick} />
         {trailerKey && (

@@ -120,15 +120,16 @@ const SingleOrder = (props) => {
 const StyledContainer = styled.div`
   width: 100%;
   height: 180px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   padding: 0.5rem;
   display: flex;
   background-color: rgba(43, 52, 68, 0.2);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: all 0.1s linear;
+  transform: scale(0.995);
 
   &:hover {
-    transform: scale(1.005);
+    transform: scale(1);
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
   }
 `;
@@ -140,7 +141,8 @@ const StyledImgContainer = styled.div`
 
   &:hover {
     & img {
-      filter: brightness(70%) drop-shadow(0px 5px 15px black);
+      filter: brightness(70%);
+      box-shadow: 0px 5px 10px black;
     }
     & svg {
       font-size: 3rem;
@@ -151,13 +153,15 @@ const StyledImgContainer = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
     transition: 0.3s linear;
-    filter: brightness(100%) drop-shadow(0px 5px 10px black);
+    box-shadow: 0px 5px 8px black;
+    filter: brightness(100%);
 
     &:hover {
-      filter: brightness(70%) drop-shadow(0px 5px 15px black);
+      filter: brightness(70%);
+      box-shadow: 0px 5px 10px black;
     }
   }
 
@@ -168,7 +172,7 @@ const StyledImgContainer = styled.div`
     position: absolute;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    opacity: 0.75;
+    opacity: 0.3;
     transition: 0.3s linear;
     color: var(--primary-white-clr);
 

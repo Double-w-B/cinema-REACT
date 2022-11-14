@@ -23,7 +23,7 @@ const Trailer = ({ title }) => {
   return (
     <StyledWrapper>
       <StyledLayer showLoadingImg={showLoadingImg}>
-        <img src={spinnerImg} alt="poster" />
+        <img src={spinnerImg} alt="" />
       </StyledLayer>
       {trailerKey && (
         <iframe

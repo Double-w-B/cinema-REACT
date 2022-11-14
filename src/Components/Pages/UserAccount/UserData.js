@@ -65,7 +65,7 @@ const UserData = () => {
         storedEmail={storedEmail}
       >
         <div className="img">
-          <img src={checkAvatar()} alt="" />
+          <img src={checkAvatar()} alt="avatar" />
         </div>
       </StyledImageContainer>
       <StyledDataContainer>

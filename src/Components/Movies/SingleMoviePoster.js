@@ -37,17 +37,15 @@ const SingleMoviePoster = ({
 
   return (
     <StyledImgContainer
+      className="no-select"
       comingSoonClass={comingSoonClass}
       mouseActive={mouseActive}
+      draggable="false"
     >
       <StyledImgLayer imgLoaded={imgLoaded}>
-        <img
-          src={spinnerImg}
-          alt="loading spinner"
-          onLoad={() => setImgLoaded(true)}
-        />
+        <img src={spinnerImg} alt="" onLoad={() => setImgLoaded(true)} />
       </StyledImgLayer>
-      <img src={imgLowResUrl + poster_path} alt="movie poster" />
+      <img src={imgLowResUrl + poster_path} alt="" />
       <Link to={setPath()} state={{ pageTitle }} draggable="false">
         <p onClick={getSingleMovieData}>{title}</p>
       </Link>
@@ -92,6 +90,7 @@ const StyledImgContainer = styled.article`
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
     cursor: ${(props) => props.comingSoonClass && !props.mouseActive && "grab"};
   }
+
   div:active {
     cursor: ${(props) => props.comingSoonClass && "grabbing"};
   }
@@ -123,6 +122,7 @@ const StyledImgContainer = styled.article`
     &:hover {
       text-decoration: underline;
       text-decoration-color: #f12535;
+      -webkit-text-decoration-color: #f12535;
     }
   }
 `;

@@ -20,7 +20,7 @@ const CinemaCafePage = () => {
       <h1>CineMania Cafe</h1>
       <StyledContainer>
         <StyledBanner>
-          <img src={bannerImg} alt="banner" />
+          <img src={bannerImg} alt="" />
         </StyledBanner>
         <p>
           Whether you're thirsting for a Frappuccino to enjoy alongside popcorn,
