@@ -13,7 +13,7 @@ const Booking = (props) => {
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
 
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, isLoading } = useAuth0();
   const isUser = isAuthenticated && user;
 
   const movieTitle = storedData?.title || title;
@@ -29,7 +29,7 @@ const Booking = (props) => {
   };
 
   React.useEffect(() => {
-    if (!isUser) {
+    if (!isLoading && !isUser) {
       props.setIsModal(true);
       props.setIsAuthModal(true);
     }

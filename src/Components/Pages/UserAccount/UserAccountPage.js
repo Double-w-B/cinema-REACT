@@ -6,10 +6,11 @@ import * as Styles from "../UnlimitedPage/UnlimitedPage";
 import * as Component from "./index";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 const UserAccountPage = (props) => {
   const [activeSection, setActiveSection] = React.useState(0);
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, isLoading } = useAuth0();
   const isUser = isAuthenticated && user;
 
   const sectionInitialState = {
@@ -17,7 +18,11 @@ const UserAccountPage = (props) => {
     setActiveSection,
   };
 
-  if (!isUser) {
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  if (!isLoading && !isUser) {
     return <ErrorPage />;
   }
 

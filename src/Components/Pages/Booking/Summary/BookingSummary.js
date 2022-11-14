@@ -5,9 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { addBookingEmail } from "../../../../features/booking/bookingSlice";
 import SummaryPayment from "./SummaryPayment";
 import SummaryContent from "./SummaryContent";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const BookingSummary = (props) => {
   const dispatch = useDispatch();
+  const { user } = useAuth0();
+
   const [userEmail, setUserEmail] = React.useState("");
   const [isShakeEmail, setIsShakeEmail] = React.useState(false);
   const [isSeatsEqTicketsAmount, setIsSeatsEqTicketsAmount] =
@@ -35,6 +38,10 @@ const BookingSummary = (props) => {
   }, []);
 
   React.useEffect(() => {
+    setUserEmail(user?.email);
+  }, [user]);
+
+  React.useEffect(() => {
     dispatch(addBookingEmail(userEmail));
     // eslint-disable-next-line
   }, [userEmail]);
@@ -44,7 +51,7 @@ const BookingSummary = (props) => {
       <h2 className="no-select">Booking Summary</h2>
       <StyledWrapper>
         <div className="summary-img no-select">
-          <img src={`${imgLowResUrl}${moviePoster}`} alt="poster" />
+          <img src={`${imgLowResUrl}${moviePoster}`} alt="" />
         </div>
         <SummaryContent {...initialState} />
         <SummaryPayment {...props} {...initialState} />
