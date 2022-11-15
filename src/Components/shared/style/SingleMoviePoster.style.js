@@ -1,67 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { StyledButton } from "../Sliders/MoviesNowPlayingSlider";
-import * as SingleMovieModule from "../../features/movies/singleMovieSlice";
-import spinnerImg from "../../Images/spinner.gif";
+import { SharedButton } from "../../../style/shared";
 
-const SingleMoviePoster = ({
-  movieInfo,
-  comingSoonClass,
-  mouseActive,
-  movieRelease,
-  pageTitle,
-}) => {
-  const [imgLoaded, setImgLoaded] = React.useState(false);
-  const { imgLowResUrl } = useSelector((store) => store.movies);
-  const { poster_path, id, title } = movieInfo;
-  const dispatch = useDispatch();
-
-  const setPath = () => {
-    const urlMovieTitle = title.split(" ").join("_");
-    if (movieRelease === "playing") {
-      return `/nowPlaying/${urlMovieTitle}`;
-    } else {
-      return `/comingSoon/${urlMovieTitle}`;
-    }
-  };
-
-  const getSingleMovieData = () => {
-    sessionStorage.removeItem("single_movie");
-    dispatch(SingleMovieModule.removeSingleMovieData());
-    dispatch(SingleMovieModule.getSingleMovieInfo(id));
-    dispatch(SingleMovieModule.getSingleMovieVideos(id));
-    dispatch(SingleMovieModule.getSingleMovieReviews(id));
-  };
-
-  return (
-    <StyledImgContainer
-      className="no-select"
-      comingSoonClass={comingSoonClass}
-      mouseActive={mouseActive}
-      draggable="false"
-    >
-      <StyledImgLayer imgLoaded={imgLoaded}>
-        <img src={spinnerImg} alt="" onLoad={() => setImgLoaded(true)} />
-      </StyledImgLayer>
-      <img src={imgLowResUrl + poster_path} alt="" />
-      <Link to={setPath()} state={{ pageTitle }} draggable="false">
-        <p onClick={getSingleMovieData}>{title}</p>
-      </Link>
-
-      {imgLoaded && (
-        <StyledBtnLayer>
-          <Link to={setPath()} state={{ pageTitle }} draggable="false">
-            <StyledBtn onClick={getSingleMovieData}>see more</StyledBtn>
-          </Link>
-        </StyledBtnLayer>
-      )}
-    </StyledImgContainer>
-  );
-};
-
-const StyledImgContainer = styled.article`
+const StyledSinglePoster = styled.div`
   position: relative;
   width: ${(props) => props.comingSoonClass && "200px"};
   height: ${(props) => props.comingSoonClass && "95%"};
@@ -127,7 +67,7 @@ const StyledImgContainer = styled.article`
   }
 `;
 
-const StyledImgLayer = styled.div`
+const ImgLayer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
@@ -146,7 +86,7 @@ const StyledImgLayer = styled.div`
   }
 `;
 
-const StyledBtnLayer = styled.div`
+const ButtonLayer = styled.div`
   width: 100%;
   height: 90%;
   position: absolute;
@@ -171,7 +111,7 @@ const StyledBtnLayer = styled.div`
   }
 `;
 
-const StyledBtn = styled(StyledButton)`
+const Button = styled(SharedButton)`
   width: 100%;
   font-size: 1.2rem;
   cursor: pointer;
@@ -183,4 +123,9 @@ const StyledBtn = styled(StyledButton)`
     transform: translate(-50%, -50%) scale(0.9);
   }
 `;
-export default SingleMoviePoster;
+
+StyledSinglePoster.ImgLayer = ImgLayer;
+StyledSinglePoster.ButtonLayer = ButtonLayer;
+StyledSinglePoster.Button = Button;
+
+export default StyledSinglePoster;

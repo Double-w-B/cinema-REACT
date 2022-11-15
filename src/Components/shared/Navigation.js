@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import StyledNavigation from "./style/Navigation.style";
 import { Link } from "react-router-dom";
 
 const Navigation = ({ title, pageTitle, booking }) => {
@@ -28,20 +28,5 @@ const Navigation = ({ title, pageTitle, booking }) => {
     </StyledNavigation>
   );
 };
-
-const StyledNavigation = styled.nav`
-  width: 100%;
-  margin-bottom: 2rem;
-  color: #fff;
-
-  a {
-    color: #fff;
-  }
-
-  p {
-    color: #f12535;
-    cursor: default;
-  }
-`;
 
 export default Navigation;
