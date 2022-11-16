@@ -1,9 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import Navigation from "../../Navigation";
-import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
-import { StyledContentContainer } from "../UnlimitedPage/UnlimitedPage";
-import Banner from "./StyledBanner";
+import StyledAbout from "./style";
+import Navigation from "../../shared/Navigation";
+import Banner from "./Banner";
 
 const AboutPage = () => {
   React.useEffect(() => {
@@ -11,10 +9,10 @@ const AboutPage = () => {
   });
 
   return (
-    <StyledMain>
+    <StyledAbout>
       <Navigation pageTitle={"About"} />
       <h1>About CineMania</h1>
-      <StyledSection>
+      <StyledAbout.Section>
         <Banner />
 
         <p>
@@ -44,21 +42,9 @@ const AboutPage = () => {
           European markets (winner of the 2014 ECA Awards). We are committed to
           being "The Best Place to Watch a Movie!".
         </p>
-      </StyledSection>
-    </StyledMain>
+      </StyledAbout.Section>
+    </StyledAbout>
   );
 };
-
-const StyledMain = styled(StyledMainContainer)``;
-
-const StyledSection = styled(StyledContentContainer)`
-  padding-bottom: 2rem;
-  font-size: 1.1rem;
-
-  & > p {
-    margin: 2rem 1rem 0 1rem;
-    text-align: justify;
-  }
-`;
 
 export default AboutPage;

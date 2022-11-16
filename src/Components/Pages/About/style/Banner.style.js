@@ -1,57 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import banner_1 from "../../../Images/about_banner_1.webp";
-import banner_2 from "../../../Images/about_banner_2.webp";
 
-const Banner = () => {
-  const [index, setIndex] = React.useState(0);
-
-  const banners = [banner_1, banner_2];
-
-  React.useEffect(() => {
-    let slider = setInterval(() => {
-      setIndex(() => {
-        if (index === 0) return banners.length - 1;
-        if (index === banners.length - 1) return 0;
-      });
-    }, 4500);
-    return () => clearInterval(slider);
-  }, [index, banners.length]);
-
-  return (
-    <StyledContainer>
-      {banners.map((link, imgIndex) => {
-        let position = "nextSlide";
-        if (imgIndex === index) position = "activeSlide";
-        if (imgIndex === index + 1) position = "nextSlide";
-        if (imgIndex === index - 1) position = "lastSlide";
-
-        return (
-          <StyledImg className={position} key={imgIndex}>
-            <img src={link} alt="" />;
-          </StyledImg>
-        );
-      })}
-      <div className="layer"></div>
-
-      <StyledTitle className="img1" index={index}>
-        <div className="underline"></div>
-        <p>
-          Best place to watch <br /> a movie
-        </p>
-      </StyledTitle>
-      <StyledTitle className="img2" index={index}>
-        <div className="underline"></div>
-        <p>
-          Best place to spend
-          <br /> time together
-        </p>
-      </StyledTitle>
-    </StyledContainer>
-  );
-};
-
-const StyledContainer = styled.div`
+export const Banner = styled.div`
   width: 100%;
   height: 60vh;
   position: relative;
@@ -75,7 +24,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledTitle = styled.div`
+export const Title = styled.div`
   width: 350px;
   height: 200px;
   position: absolute;
@@ -115,7 +64,7 @@ const StyledTitle = styled.div`
   }
 `;
 
-const StyledImg = styled.div`
+export const ImgContainer = styled.div`
   width: 100%;
   height: 100%;
   width: 100%;
@@ -146,5 +95,3 @@ const StyledImg = styled.div`
     object-fit: cover;
   }
 `;
-
-export default Banner;
