@@ -1,27 +1,25 @@
 import React from "react";
-import styled from "styled-components";
-import Navigation from "../../Navigation";
-import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
-import * as Styles from "../UnlimitedPage/UnlimitedPage";
+import StyledCinemaCafe from "./style";
+import Navigation from "../../shared/Navigation";
 import bannerImg from "../../../Images/cafeBanner.webp";
-import CafeOffers from "./CafeOffers";
-import OffersDescription from "./OffersDescription";
+import * as Component from "./index";
 
 const CinemaCafePage = () => {
   const [index, setIndex] = React.useState(0);
   const [showDesc, setShowDesc] = React.useState(true);
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <StyledMain>
+    <StyledCinemaCafe>
       <Navigation pageTitle={"Cinema Cafe"} />
       <h1>CineMania Cafe</h1>
-      <StyledContainer>
-        <StyledBanner>
+      <StyledCinemaCafe.Container>
+        <StyledCinemaCafe.Banner>
           <img src={bannerImg} alt="" />
-        </StyledBanner>
+        </StyledCinemaCafe.Banner>
         <p>
           Whether you're thirsting for a Frappuccino to enjoy alongside popcorn,
           looking for a place to relax and share the excitement with friends
@@ -35,12 +33,12 @@ const CinemaCafePage = () => {
           range of coffees, teas, cold drinks and freshly squeezed juices,
           served with ice cream, pastries and snacks.
         </p>
-        <CafeOffers
+        <Component.Offers
           index={index}
           setIndex={setIndex}
           setShowDesc={setShowDesc}
         />
-        <OffersDescription
+        <Component.OffersDescription
           index={index}
           showDesc={showDesc}
           setShowDesc={setShowDesc}
@@ -55,28 +53,9 @@ const CinemaCafePage = () => {
           Cafe is a unique pleasure and a moment of relaxation, not just before
           the movie but also after the movie and just to meet with your friends!
         </p>
-      </StyledContainer>
-    </StyledMain>
+      </StyledCinemaCafe.Container>
+    </StyledCinemaCafe>
   );
 };
-
-const StyledMain = styled(StyledMainContainer)``;
-const StyledContainer = styled(Styles.StyledContentContainer)`
-  min-height: 125vh;
-
-  p {
-    &:nth-child(2) {
-      margin-top: 2rem;
-    }
-
-    font-size: 1.1rem;
-    margin: 1rem 2rem;
-    text-align: justify;
-  }
-`;
-
-const StyledBanner = styled(Styles.StyledBannerImg)`
-  height: 30vh;
-`;
 
 export default CinemaCafePage;
