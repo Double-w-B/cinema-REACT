@@ -1,13 +1,11 @@
 import React from "react";
-import styled from "styled-components";
-import { StyledContentContainer } from "../../UnlimitedPage/UnlimitedPage";
+import StyledSummary from "./style";
 import { useSelector, useDispatch } from "react-redux";
-import { addBookingEmail } from "../../../../features/booking/bookingSlice";
-import SummaryPayment from "./SummaryPayment";
-import SummaryContent from "./SummaryContent";
+import { addBookingEmail } from "../../../../redux/features/booking/bookingSlice";
 import { useAuth0 } from "@auth0/auth0-react";
+import * as Component from "./index";
 
-const BookingSummary = (props) => {
+const Summary = (props) => {
   const dispatch = useDispatch();
   const { user } = useAuth0();
 
@@ -47,41 +45,17 @@ const BookingSummary = (props) => {
   }, [userEmail]);
 
   return (
-    <StyledContainer>
+    <StyledSummary>
       <h2 className="no-select">Booking Summary</h2>
-      <StyledWrapper>
+      <StyledSummary.Container>
         <div className="summary-img no-select">
           <img src={`${imgLowResUrl}${moviePoster}`} alt="" />
         </div>
-        <SummaryContent {...initialState} />
-        <SummaryPayment {...props} {...initialState} />
-      </StyledWrapper>
-    </StyledContainer>
+        <Component.Order {...initialState} />
+        <Component.PaymentMethod {...props} {...initialState} />
+      </StyledSummary.Container>
+    </StyledSummary>
   );
 };
 
-const StyledContainer = styled(StyledContentContainer)`
-  padding: 1rem;
-`;
-const StyledWrapper = styled.div`
-  width: 95%;
-  height: 30vh;
-  margin: 2rem auto;
-  display: flex;
-  justify-content: space-between;
-
-  .summary-img {
-    width: 160px;
-    height: 100%;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      color: transparent;
-      filter: drop-shadow(0px 5px 15px black);
-    }
-  }
-`;
-
-export default BookingSummary;
+export default Summary;

@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import { StyledContentContainer } from "../../UnlimitedPage/UnlimitedPage";
+import StyledTickets from "./style";
 import { movieTickets } from "../../../../data";
-import * as Components from "./index";
+import * as Component from "./index";
 
 const Tickets = (props) => {
   const [adultTickets, setAdultTickets] = React.useState(0);
@@ -40,24 +39,15 @@ const Tickets = (props) => {
   }, [adultTickets, childTickets, seniorTickets]);
 
   return (
-    <StyledContainer className="no-select" ref={props.ticketsContainer}>
+    <StyledTickets className="no-select" ref={props.ticketsContainer}>
       <h2>Tickets</h2>
-      <Components.Separator {...initialState} />
+      <Component.Separator {...initialState} />
       <div className="summary">
-        <Components.Promo {...initialStatePromo} />
-        <Components.Total {...initialState} isPromoCode={isPromoCode} />
+        <Component.Promo {...initialStatePromo} />
+        <Component.Total {...initialState} isPromoCode={isPromoCode} />
       </div>
-    </StyledContainer>
+    </StyledTickets>
   );
 };
-const StyledContainer = styled(StyledContentContainer)`
-  padding: 1rem;
 
-  .summary {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    height: 12vh;
-  }
-`;
 export default Tickets;

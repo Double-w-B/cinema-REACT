@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { keyframes, css } from "styled-components";
+import StyledBookingPage from "./style";
 
-const BookingTimer = (props) => {
+const Timer = (props) => {
   const [minutes, setMinutes] = React.useState(5);
   const [seconds, setSeconds] = React.useState(59);
   const {
@@ -42,40 +42,10 @@ const BookingTimer = (props) => {
   });
 
   return (
-    <StyledContainer className="no-select" min={minutes}>
+    <StyledBookingPage.Timer className="no-select" min={minutes}>
       {"0" + minutes}:{seconds < 10 ? "0" + seconds : seconds}
-    </StyledContainer>
+    </StyledBookingPage.Timer>
   );
 };
 
-const scale = keyframes`
-  0% {
-        transform: scale(1.0);
-        color: var(--primary-white-clr);
-
-    }
-    50%{
-        transform: scale(1.1);
-        color: var(--primary-red-clr);
-    }
-    100% {
-        transform: scale(1.0);
-        color: var(--primary-white-clr);
-    }
-`;
-
-const StyledContainer = styled.span`
-  font-size: 1.2rem;
-  margin-left: 0.2rem;
-  font-weight: 400;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  animation: ${(props) =>
-    props.min < 1 &&
-    css`
-      ${scale} 1.2s infinite linear
-    `};
-`;
-
-export default BookingTimer;
+export default Timer;

@@ -1,11 +1,10 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
-import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
+import StyledSummary from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { paymentMethods } from "../../../../data";
-import { setOrder } from "../../../../features/user/userSlice";
+import { setOrder } from "../../../../redux/features/user/userSlice";
 
-const SummaryPayment = (props) => {
+const PaymentMethod = (props) => {
   const storedBookingsData = JSON.parse(sessionStorage.getItem("bookings"));
   const storedMovieData = JSON.parse(sessionStorage.getItem("single_movie"));
 
@@ -151,7 +150,7 @@ const SummaryPayment = (props) => {
   };
 
   return (
-    <StyledContainer
+    <StyledSummary.PaymentMethod
       className="no-select"
       isShakeMsg={isShakeMsg}
       ref={summaryContainer}
@@ -170,107 +169,11 @@ const SummaryPayment = (props) => {
           );
         })}
       </div>
-      <StyledBtn onClick={handleClick}>Complete booking</StyledBtn>
-    </StyledContainer>
+      <StyledSummary.Button onClick={handleClick}>
+        Complete booking
+      </StyledSummary.Button>
+    </StyledSummary.PaymentMethod>
   );
 };
 
-export const shake = keyframes`
-  0% {
-    transform: translate(0, 0);
-  }
-  1.78571% {
-    transform: translate(8px, 0);
-  }
-  3.57143% {
-    transform: translate(0, 0);
-  }
-  5.35714% {
-    transform: translate(8px, 0);
-  }
-  7.14286% {
-    transform: translate(0, 0);
-  }
-  8.92857% {
-    transform: translate(8px, 0);
-  }
-  10.71429% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-
-`;
-
-const StyledContainer = styled.div`
-  width: 35%;
-  height: 100%;
-  padding-left: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  p {
-    text-align: center;
-    font-style: italic;
-    color: var(--primary-grey-clr);
-    -webkit-animation: ${(props) => props.isShakeMsg && shake};
-    -moz-animation: ${(props) => props.isShakeMsg && shake};
-    -o-animation: ${(props) => props.isShakeMsg && shake};
-    animation: ${(props) => props.isShakeMsg && shake};
-    animation-duration: 5.72s;
-  }
-
-  .summary-payment-method {
-    width: 100%;
-    height: 60%;
-    display: grid;
-    grid-template-columns: repeat(2, 48%);
-    grid-template-rows: repeat(2, 48%);
-    justify-content: space-between;
-    gap: 0.5rem;
-
-    div {
-      border: 1px solid var(--primary-grey-clr);
-      border-radius: 0.3rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      transition: 0.3s linear;
-      opacity: 0.7;
-      cursor: pointer;
-
-      &:hover {
-        opacity: 1;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-      }
-
-      &.active {
-        opacity: 1;
-        border: 1px solid var(--primary-white-clr);
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        padding: 0.8rem;
-        object-fit: contain;
-        color: transparent;
-      }
-    }
-  }
-
-  a {
-    width: 100%;
-  }
-`;
-
-const StyledBtn = styled(StyledButton)`
-  position: relative;
-  width: 100%;
-
-  &:active {
-    transform: scale(0.9);
-  }
-`;
-export default SummaryPayment;
+export default PaymentMethod;

@@ -1,14 +1,12 @@
 import React from "react";
-import styled from "styled-components";
-import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
+import StyledBookingPage from "./style";
 import { useSelector } from "react-redux";
-import Navigation from "../../Navigation";
+import Navigation from "../../shared/Navigation";
 import * as Component from "./index";
 import { useAuth0 } from "@auth0/auth0-react";
-import BookingTimer from "./BookingTimer";
 import { RiTimerLine } from "react-icons/ri";
 
-const Booking = (props) => {
+const BookingPage = (props) => {
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
@@ -54,31 +52,18 @@ const Booking = (props) => {
   });
 
   return (
-    <StyledMain>
+    <StyledBookingPage>
       <Navigation title={"Tickets"} pageTitle={movieTitle} booking={true} />
       <h1>
         Booking <RiTimerLine />
-        <BookingTimer {...props} />
+        <Component.Timer {...props} />
       </h1>
       <Component.Schedule {...refs} {...props} />
       <Component.Tickets {...refs} />
       <Component.Seats {...refs} />
-      <Component.BookingSummary {...refs} {...props} />
-    </StyledMain>
+      <Component.Summary {...refs} {...props} />
+    </StyledBookingPage>
   );
 };
 
-const StyledMain = styled(StyledMainContainer)`
-  position: relative;
-  h1 {
-    display: flex;
-    align-items: center;
-
-    svg {
-      margin-left: 1rem;
-      font-size: 1.2rem;
-    }
-  }
-`;
-
-export default Booking;
+export default BookingPage;

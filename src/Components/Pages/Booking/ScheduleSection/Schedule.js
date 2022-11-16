@@ -1,7 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { StyledContentContainer } from "../../UnlimitedPage/UnlimitedPage";
 import { useSelector } from "react-redux";
+import StyledSchedule from "./style";
 import * as Components from "./index";
 
 const Schedule = (props) => {
@@ -18,37 +17,21 @@ const Schedule = (props) => {
   };
 
   return (
-    <StyledContainer
+    <StyledSchedule
       onDragOver={(e) => e.preventDefault()}
       ref={props.scheduleContainer}
     >
       <h2 className="no-select">Date</h2>
-      <StyledWrapper>
-        <StyledSection>
+      <StyledSchedule.Container>
+        <StyledSchedule.Section>
           <Components.Date {...initialState} />
           <Components.Time {...initialState} />
           <Components.Overview {...initialState} />
-        </StyledSection>
+        </StyledSchedule.Section>
         <Components.Poster {...props} {...singleMovieInfo} />
-      </StyledWrapper>
-    </StyledContainer>
+      </StyledSchedule.Container>
+    </StyledSchedule>
   );
 };
-
-const StyledContainer = styled(StyledContentContainer)`
-  padding: 1rem 0 1rem 1rem;
-`;
-
-const StyledSection = styled.section`
-  width: 65%;
-  height: 60vh;
-  padding-left: 2rem;
-`;
-
-const StyledWrapper = styled.div`
-  width: 100%;
-  margin-top: 1rem;
-  display: flex;
-`;
 
 export default Schedule;

@@ -1,9 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { movieScreenings } from "../../../../data";
+import StyledSchedule from "./style";
 import { useDispatch } from "react-redux";
-import { addBookingTime } from "../../../../features/booking/bookingSlice";
-import { removeBookingSeats } from "../../../../features/booking/bookingSlice";
+import { movieScreenings } from "../../../../data";
+import * as BookingSlice from "../../../../redux/features/booking/bookingSlice";
 
 const Time = (props) => {
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
@@ -21,8 +20,8 @@ const Time = (props) => {
   }, [day]);
 
   React.useEffect(() => {
-    dispatch(addBookingTime(screeningTime));
-    dispatch(removeBookingSeats());
+    dispatch(BookingSlice.addBookingTime(screeningTime));
+    dispatch(BookingSlice.removeBookingSeats());
     // eslint-disable-next-line
   }, [screeningTime]);
 
@@ -82,70 +81,16 @@ const Time = (props) => {
   };
 
   return (
-    <StyledTimeContainer className="no-select">
+    <StyledSchedule.TimeContainer className="no-select">
       <h3>
         Available <br />
         movie screenings:
       </h3>
-      <StyledTimeScreenings>
+      <StyledSchedule.Screenings>
         {movieGenres && showMovieScreenings()}
-      </StyledTimeScreenings>
-    </StyledTimeContainer>
+      </StyledSchedule.Screenings>
+    </StyledSchedule.TimeContainer>
   );
 };
-
-const StyledTimeContainer = styled.div`
-  width: 100%;
-  height: 35%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h3 {
-    text-align: center;
-    margin: 0 auto;
-  }
-`;
-
-const StyledTimeScreenings = styled.div`
-  width: 60%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
-  div {
-    width: calc(100% / 5);
-    height: 80px;
-    width: 80px;
-    display: grid;
-    place-items: center;
-    font-size: 1.3rem;
-    font-weight: bold;
-    border-radius: 0.3rem;
-    color: var(--primary-grey-clr);
-    border: 1px solid var(--primary-grey-clr);
-    transition: 0.3s linear;
-    cursor: pointer;
-    opacity: 0.65;
-
-    &:hover {
-      opacity: 1;
-      box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 10px;
-    }
-
-    &.active {
-      color: var(--primary-white-clr);
-      border: 1px solid var(--primary-white-clr);
-      box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 15px;
-      opacity: 1;
-    }
-
-    &.inactive {
-      opacity: 0.4;
-      pointer-events: none;
-    }
-  }
-`;
 
 export default Time;
