@@ -5,6 +5,7 @@ import { SharedSection } from "./SharedSection.style";
 import { SharedUnderline } from "./SharedUnderline.style";
 import { SharedArrowContainer } from "./SharedArrowContainer.style";
 import { SharedBanner } from "./SharedBanner.style";
+import { SharedReviewsInfo } from "./SharedReviewsInfo.style";
 import * as SharedKeyframes from "./SharedKeyframes.style";
 
 export {
@@ -15,5 +16,6 @@ export {
   SharedUnderline,
   SharedArrowContainer,
   SharedBanner,
+  SharedReviewsInfo,
   SharedKeyframes,
 };

@@ -22,6 +22,7 @@ export const SharedButton = styled.button`
   &.btn-slider {
     bottom: 1rem;
     right: 1rem;
+
     &:active {
       transform: scale(0.9);
     }
