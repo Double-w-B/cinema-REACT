@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import * as Pages from "./Components/Pages";
 import * as Modals from "./Components/Modal";
-import * as moviesSlice from "./features/movies/allMoviesSlice";
+import * as moviesSlice from "./redux/features/movies/allMoviesSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -96,11 +96,7 @@ function App() {
           path="/nowPlaying/:title/booking"
           element={<Pages.BookingPage {...modalsInitialState} />}
         />
-        <Route
-          exact
-          path="/comingSoon"
-          element={<Pages.MoviesComingSoonPage />}
-        />
+        <Route exact path="/comingSoon" element={<Pages.ComingSoonPage />} />
         <Route
           exact
           path="/comingSoon/:title"
@@ -130,7 +126,7 @@ function App() {
           element={<Pages.UserAccountPage {...modalsInitialState} />}
         />
         <Route exact path="/cinema_cafe" element={<Pages.CinemaCafePage />} />
-        <Route path="*" element={<Pages.ErrorPage />} />
+        <Route path="*" element={<Pages.Error />} />
       </Routes>
       <Footer />
     </Router>
