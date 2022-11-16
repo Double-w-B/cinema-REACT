@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import StyledSingleMovie from "./style";
 import { useSelector } from "react-redux";
 import spinnerImg from "../../../Images/spinner.gif";
 
@@ -8,9 +8,8 @@ const Trailer = ({ title }) => {
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
 
   const { singleMovieVideo } = useSelector((store) => store.singleMovie);
-  const { key } = singleMovieVideo;
 
-  const trailerKey = storedData?.trailer?.key || key;
+  const trailerKey = storedData?.trailer?.key || singleMovieVideo?.key;
   const trailerTitle = storedData?.title || title;
 
   const handleOnLoad = () => {
@@ -21,10 +20,10 @@ const Trailer = ({ title }) => {
   };
 
   return (
-    <StyledWrapper>
-      <StyledLayer showLoadingImg={showLoadingImg}>
+    <StyledSingleMovie.Trailer>
+      <StyledSingleMovie.Layer showLoadingImg={showLoadingImg}>
         <img src={spinnerImg} alt="" />
-      </StyledLayer>
+      </StyledSingleMovie.Layer>
       {trailerKey && (
         <iframe
           width="100%"
@@ -43,33 +42,8 @@ const Trailer = ({ title }) => {
           onLoad={handleOnLoad}
         ></iframe>
       )}
-    </StyledWrapper>
+    </StyledSingleMovie.Trailer>
   );
 };
-
-const StyledWrapper = styled.section`
-  width: 100%;
-  height: 70vh;
-  min-height: 10vh;
-  margin: 0 auto;
-  position: relative;
-`;
-
-const StyledLayer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  top: 0;
-  left: 0;
-  position: absolute;
-  background-color: #000;
-  opacity: ${(props) => (props.showLoadingImg ? "1" : "0")};
-  z-index: ${(props) => (props.showLoadingImg ? "2" : "0")};
-
-  img {
-    background-color: #000;
-  }
-`;
 
 export default Trailer;

@@ -1,9 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import StyledReviews from "./style";
 import { useSelector } from "react-redux";
-import * as Components from "./index";
+import * as Component from "./index";
 import { useAuth0 } from "@auth0/auth0-react";
-import { StyledInfoContainer } from "./NoReviews";
 
 const Reviews = () => {
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
@@ -20,55 +19,26 @@ const Reviews = () => {
   const isUser = isAuthenticated && user;
 
   return (
-    <StyledWrapper>
+    <StyledReviews>
       {!isUser && (
-        <StyledLogInInfo className="no-select">
+        <StyledReviews.LogInInfo className="no-select">
           <p>
             Only logged users could add reviews. Please{" "}
             <button onClick={loginWithRedirect}>Log in</button> or{" "}
             <button onClick={loginWithRedirect}>Sign up</button>.
           </p>
-        </StyledLogInInfo>
+        </StyledReviews.LogInInfo>
       )}
       {isUser && !movieReviews.some((review) => review.id === movieId) && (
-        <Components.UserReview />
+        <Component.UserReview />
       )}
       {movieReviews.length > 0 &&
         movieReviews.map((rev, index) => (
-          <Components.SingleReview key={index} {...rev} />
+          <Component.SingleReview key={index} {...rev} />
         ))}
-      {movieReviews.length === 0 && <Components.NoReviews />}
-    </StyledWrapper>
+      {movieReviews.length === 0 && <Component.NoReviews />}
+    </StyledReviews>
   );
 };
 
-const StyledWrapper = styled.section`
-  width: 100%;
-  margin: 2rem auto;
-  padding: 1rem 0 2rem 0;
-  background-color: rgba(43, 52, 68, 0.2);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-`;
-
-const StyledLogInInfo = styled(StyledInfoContainer)`
-  margin: 2rem auto;
-
-  button {
-    color: var(--primary-white-clr);
-    background-color: transparent;
-    border: none;
-    font-size: inherit;
-    font-style: inherit;
-    cursor: pointer;
-    transition: 0.3s linear;
-    opacity: 0.8;
-
-    &:hover {
-      opacity: 1;
-    }
-    &:active {
-      transform: scale(0.8);
-    }
-  }
-`;
 export default Reviews;
