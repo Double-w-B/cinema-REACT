@@ -1,8 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-const FooterRights = () => {
+import StyledFooter from "./style";
+
+const Copyright = () => {
   return (
-    <StyledSectionRights>
+    <StyledFooter.Copyright>
       <p>
         Copyright &copy; {new Date().getFullYear()} CineMania. All rights
         reserved.
@@ -17,20 +18,8 @@ const FooterRights = () => {
           <span>Władysław Balandin</span>
         </a>
       </p>
-    </StyledSectionRights>
+    </StyledFooter.Copyright>
   );
 };
 
-const StyledSectionRights = styled.section`
-  width: 100%;
-  height: 30%;
-  padding: 0.2rem;
-  font-size: 0.9rem;
-  display: grid;
-  place-items: center;
-
-  a {
-    color: #fff;
-  }
-`;
-export default FooterRights;
+export default Copyright;
