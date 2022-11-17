@@ -1,25 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import { FaChevronCircleDown } from "react-icons/fa";
 
-const SingleQA = (props) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const { question, answer } = props;
-  return (
-    <StyledArticle isOpen={isOpen} isCloseAll={props.isCloseAll}>
-      <div className="title">
-        <h3>{question}</h3>
-        <FaChevronCircleDown onClick={() => setIsOpen(!isOpen)} />
-      </div>
-      <div className="answer">
-        <p>{answer}</p>
-      </div>
-    </StyledArticle>
-  );
-};
-
-const StyledArticle = styled.article`
+export const SingleQA = styled.article`
   width: 100%;
   margin-bottom: 1rem;
   padding: 1rem 1rem 0.5rem 1rem;
@@ -70,4 +51,3 @@ const StyledArticle = styled.article`
     }
   }
 `;
-export default SingleQA;

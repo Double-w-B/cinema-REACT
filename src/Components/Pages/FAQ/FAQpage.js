@@ -1,9 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import Navigation from "../../Navigation";
+import StyledFAQ from "./style";
+import Navigation from "../../shared/Navigation";
 import * as FAQmodule from "../../../data";
 import SingleQA from "./SingleQA";
-import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
 
 const FAQpage = (props) => {
   React.useEffect(() => {
@@ -11,51 +10,34 @@ const FAQpage = (props) => {
   }, []);
 
   return (
-    <StyledMain>
+    <StyledFAQ>
       <Navigation pageTitle={"FAQ"} />
       <h1>Frequently Asked Questions</h1>
 
-      <StyledFaqContainer>
-        <StyledTopic>
+      <StyledFAQ.Container>
+        <StyledFAQ.Topic>
           <h2 ref={props.refTickets}>Tickets and Pricing</h2>
           {FAQmodule.ticketsAndPricingFaq.map((quest, index) => {
             return <SingleQA key={index} {...quest} />;
           })}
-        </StyledTopic>
+        </StyledFAQ.Topic>
 
-        <StyledTopic>
+        <StyledFAQ.Topic>
           <h2 ref={props.refMovie}>Going to the Movie</h2>
           {FAQmodule.goingToTheMovieFaq.map((quest, index) => {
             return <SingleQA key={index} {...quest} />;
           })}
-        </StyledTopic>
+        </StyledFAQ.Topic>
 
-        <StyledTopic>
+        <StyledFAQ.Topic>
           <h2 ref={props.refCovid}>Coronavirus (COVID-19)</h2>
           {FAQmodule.coronavirusFaq.map((quest, index) => {
             return <SingleQA key={index} {...quest} />;
           })}
-        </StyledTopic>
-      </StyledFaqContainer>
-    </StyledMain>
+        </StyledFAQ.Topic>
+      </StyledFAQ.Container>
+    </StyledFAQ>
   );
 };
-
-const StyledMain = styled(StyledMainContainer)``;
-
-const StyledFaqContainer = styled.section`
-  width: 100%;
-  margin-top: 2rem;
-`;
-
-const StyledTopic = styled.article`
-  width: 100%;
-  padding-left: 0.5rem;
-
-  h2 {
-    color: var(--primary-red-clr);
-    margin-bottom: 1rem;
-  }
-`;
 
 export default FAQpage;
