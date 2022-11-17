@@ -1,5 +1,5 @@
-import AccountNav from "./AccountNav";
-import AccountSections from "./AccountSections/AccountSections";
 import UserData from "./UserData";
+import AccountNavbar from "./AccountNavbar";
+import AccountSections from "./AccountSections/AccountSections";
 
-export { AccountNav, AccountSections, UserData };
+export { AccountNavbar, AccountSections, UserData };

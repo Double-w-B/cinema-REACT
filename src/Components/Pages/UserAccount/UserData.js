@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
+import StyledUserAccount from "./style";
 import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserData = () => {
   const {
@@ -58,8 +58,8 @@ const UserData = () => {
   };
 
   return (
-    <StyledContainer>
-      <StyledImageContainer
+    <StyledUserAccount.UserData>
+      <StyledUserAccount.ImgContainer
         email={user?.email}
         storedAvatar={storedAvatar}
         storedEmail={storedEmail}
@@ -67,8 +67,8 @@ const UserData = () => {
         <div className="img">
           <img src={checkAvatar()} alt="avatar" />
         </div>
-      </StyledImageContainer>
-      <StyledDataContainer>
+      </StyledUserAccount.ImgContainer>
+      <StyledUserAccount.DataContainer>
         <div className="structure no-select">
           <p>Name:</p>
           <p>Email:</p>
@@ -81,82 +81,9 @@ const UserData = () => {
           <p>{id.split("|")[1]}</p>
           <p>{userOrders.length}</p>
         </div>
-      </StyledDataContainer>
-    </StyledContainer>
+      </StyledUserAccount.DataContainer>
+    </StyledUserAccount.UserData>
   );
 };
-
-const StyledContainer = styled.div`
-  height: 20vh;
-  display: flex;
-  margin-bottom: 1rem;
-  background-color: rgba(43, 52, 68, 0.2);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-`;
-
-const StyledImageContainer = styled.div`
-  width: 25%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-
-  .img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid var(--primary-grey-clr);
-    filter: drop-shadow(0px 0px 10px black);
-
-    img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      color: transparent;
-      transform: ${(props) =>
-        props.email?.split("@")[1].slice(0, 5) === "gmail" &&
-        !props.storedAvatar &&
-        "translateY(-1.5px)"};
-      border-radius: 50%;
-    }
-  }
-`;
-
-const StyledDataContainer = styled.div`
-  width: 75%;
-  height: 100%;
-  display: flex;
-  padding: 1rem 0;
-
-  p {
-    font-size: 1.2rem;
-  }
-
-  .structure,
-  .user-data {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    p {
-      color: var(--primary-grey-clr);
-    }
-  }
-  .structure {
-    margin-right: 1.2rem;
-  }
-  .user-data {
-    p {
-      color: var(--primary-white-clr);
-
-      &.empty {
-        color: var(--primary-grey-clr);
-        font-style: italic;
-      }
-    }
-  }
-`;
 
 export default UserData;

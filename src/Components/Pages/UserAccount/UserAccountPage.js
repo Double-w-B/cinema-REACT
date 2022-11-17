@@ -1,12 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-import Navigation from "../../Navigation";
-import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
-import * as Styles from "../UnlimitedPage/UnlimitedPage";
 import * as Component from "./index";
-import ErrorPage from "../ErrorPage/ErrorPage";
+import Error from "../../shared/Error";
+import StyledUserAccount from "./style";
+import Loading from "../../shared/Loading";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoadingPage from "../LoadingPage/LoadingPage";
+import Navigation from "../../shared/Navigation";
 
 const UserAccountPage = (props) => {
   const [activeSection, setActiveSection] = React.useState(0);
@@ -19,33 +17,26 @@ const UserAccountPage = (props) => {
   };
 
   if (isLoading) {
-    return <LoadingPage />;
+    return <Loading />;
   }
 
   if (!isLoading && !isUser) {
-    return <ErrorPage />;
+    return <Error />;
   }
 
   sessionStorage.removeItem("single_movie");
 
   return (
-    <StyledMain>
+    <StyledUserAccount>
       <Navigation pageTitle={"Account"} />
       <h1>Nice to See you </h1>
-      <StyledContainer>
+      <StyledUserAccount.Container>
         <Component.UserData />
-        <Component.AccountNav {...sectionInitialState} />
+        <Component.AccountNavbar {...sectionInitialState} />
         <Component.AccountSections {...sectionInitialState} {...props} />
-      </StyledContainer>
-    </StyledMain>
+      </StyledUserAccount.Container>
+    </StyledUserAccount>
   );
 };
-
-const StyledMain = styled(StyledMainContainer)``;
-
-const StyledContainer = styled(Styles.StyledContentContainer)`
-  background-color: transparent;
-  box-shadow: none;
-`;
 
 export default UserAccountPage;

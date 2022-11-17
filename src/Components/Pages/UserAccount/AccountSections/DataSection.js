@@ -1,10 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import StyledAccountSections from "./style";
 import { useAuth0 } from "@auth0/auth0-react";
-import { StyledButton } from "../../../Sliders/MoviesNowPlayingSlider";
 import { useDispatch, useSelector } from "react-redux";
-import * as userDataSlice from "../../../../features/user/userSlice";
-import { shake } from "../../Booking/Summary/SummaryPayment";
+import * as userDataSlice from "../../../../redux/features/user/userSlice";
 
 const DataSection = () => {
   const dispatch = useDispatch();
@@ -91,7 +89,7 @@ const DataSection = () => {
   };
 
   return (
-    <StyledContainer emailError={isEmailError}>
+    <StyledAccountSections.DataSection emailError={isEmailError}>
       {new Array(2).fill("").map((_, index) => {
         return (
           <div key={index} className={index === 0 ? "name" : "email"}>
@@ -105,11 +103,11 @@ const DataSection = () => {
                   : setUserEmail(e.target.value)
               }
             />
-            <StyledBtn
+            <StyledAccountSections.DataButton
               onClick={index === 0 ? handleNameChange : handleEmailChange}
             >
               Change
-            </StyledBtn>
+            </StyledAccountSections.DataButton>
           </div>
         );
       })}
@@ -132,95 +130,12 @@ const DataSection = () => {
           </p>
         </div>
 
-        <StyledBtn onClick={handleAvatarChange}>Change</StyledBtn>
+        <StyledAccountSections.DataButton onClick={handleAvatarChange}>
+          Change
+        </StyledAccountSections.DataButton>
       </div>
-    </StyledContainer>
+    </StyledAccountSections.DataSection>
   );
 };
-
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-
-  .name,
-  .email,
-  .avatar {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: calc(100% / 3);
-
-    label,
-    p {
-      min-width: 90px;
-      font-size: 1.2rem;
-      color: var(--primary-grey-clr);
-    }
-
-    input,
-    .upload {
-      height: 27px;
-      width: 350px;
-      max-width: 350px;
-      padding: 0 0.5rem;
-      border: none;
-      outline: none;
-      font-size: 1.25rem;
-      border-radius: 2px;
-
-      &[type="file"] {
-        display: none;
-      }
-      &[type="email"] {
-        -webkit-animation: ${(props) => props.emailError && shake};
-        -moz-animation: ${(props) => props.emailError && shake};
-        -o-animation: ${(props) => props.emailError && shake};
-        animation: ${(props) => props.emailError && shake};
-        animation-duration: 5.72s;
-      }
-    }
-
-    .upload {
-      position: relative;
-      padding: 0;
-      display: flex;
-
-      label {
-        display: block;
-        text-align: center;
-        height: 100%;
-        min-width: 80px;
-        max-width: 80px;
-        transition: 0.3s linear;
-        color: #fff;
-        font-weight: bold;
-        text-transform: capitalize;
-        border: 1px solid #f12535;
-        border-radius: 2px;
-        cursor: pointer;
-        opacity: 0.75;
-        background-color: rgba(241, 37, 53, 0.3);
-
-        &:hover {
-          background-color: #f12535;
-        }
-        &:active {
-          transform: scale(0.9);
-        }
-      }
-      p {
-        margin-left: 1rem;
-        font-style: italic;
-      }
-    }
-  }
-`;
-
-const StyledBtn = styled(StyledButton)`
-  position: relative;
-`;
 
 export default DataSection;

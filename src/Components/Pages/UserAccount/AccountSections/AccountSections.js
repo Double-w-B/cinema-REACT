@@ -1,9 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import * as Styles from "../../UnlimitedPage/UnlimitedPage";
-import DataSection from "./DataSection";
-import OrdersSection from "./OrdersSection";
-import PaymentMethodSection from "./PaymentMethodSection";
+import * as Component from "./index";
+import StyledAccountSections from "./style";
 
 const AccountSections = (props) => {
   const sections = ["Orders", "Edit Account", "Payment Method"];
@@ -20,60 +17,28 @@ const AccountSections = (props) => {
   };
 
   const showSection = (sectionName) => {
-    if (sectionName === "Orders") return <OrdersSection {...props} />;
-    if (sectionName === "Edit Account") return <DataSection />;
-    if (sectionName === "Payment Method") return <PaymentMethodSection />;
+    if (sectionName === "Orders") return <Component.OrdersSection {...props} />;
+    if (sectionName === "Edit Account") return <Component.DataSection />;
+    if (sectionName === "Payment Method")
+      return <Component.PaymentMethodSection />;
   };
 
   return (
-    <StyledContainer>
-      <StyledSectionsContainer>
+    <StyledAccountSections>
+      <StyledAccountSections.Container>
         {sections.map((section, index) => {
           return (
-            <StyledSingleSection key={index} className={setActive(index)}>
+            <StyledAccountSections.SingleSection
+              key={index}
+              className={setActive(index)}
+            >
               {showSection(section)}
-            </StyledSingleSection>
+            </StyledAccountSections.SingleSection>
           );
         })}
-      </StyledSectionsContainer>
-    </StyledContainer>
+      </StyledAccountSections.Container>
+    </StyledAccountSections>
   );
 };
 
-const StyledContainer = styled(Styles.StyledContentContainer)`
-  height: 40vh;
-  margin-top: 1rem;
-  padding-bottom: 0;
-`;
-
-const StyledSectionsContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-`;
-
-const StyledSingleSection = styled.div`
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  visibility: hidden;
-  position: absolute;
-  transition: all 0.4s linear;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: rgba(43, 52, 68, 0.2);
-
-  &.active {
-    visibility: visible;
-    transform: translateX(0);
-  }
-  &.last {
-    transform: translateX(-100%);
-  }
-  &.next {
-    transform: translateX(100%);
-  }
-`;
 export default AccountSections;
