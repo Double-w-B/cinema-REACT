@@ -2,7 +2,7 @@ import React from "react";
 import StyledSinglePoster from "./style/SingleMoviePoster.style";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import * as SingleMovieModule from "../../features/movies/singleMovieSlice";
+import * as SingleMovieModule from "../../redux/features/movies/singleMovieSlice";
 import spinnerImg from "../../Images/spinner.gif";
 
 const SingleMoviePoster = (props) => {

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import * as Styled from "../../../style/shared";
-import * as SingleMovie from "../../../features/movies/singleMovieSlice";
-import * as Booking from "../../../features/booking/bookingSlice";
+import * as SingleMovie from "../../../redux/features/movies/singleMovieSlice";
+import * as Booking from "../../../redux/features/booking/bookingSlice";
 
 const NowPlayingSlider = () => {
   const [index, setIndex] = React.useState(0);
