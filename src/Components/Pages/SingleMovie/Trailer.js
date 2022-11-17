@@ -1,7 +1,7 @@
 import React from "react";
 import StyledSingleMovie from "./style";
 import { useSelector } from "react-redux";
-import spinnerImg from "../../../Images/spinner.gif";
+import spinnerImg from "../../../assets/spinner.gif";
 
 const Trailer = ({ title }) => {
   const [showLoadingImg, setShowLoadingImg] = React.useState(true);

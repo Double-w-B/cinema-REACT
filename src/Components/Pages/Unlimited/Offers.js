@@ -1,7 +1,7 @@
 import React from "react";
 import StyledUnlimited from "./style";
 import SingleOffer from "./SingleOffer";
-import { unlimitedOffers } from "../../../data";
+import { unlimitedOffers } from "../../../data/projectData";
 import { FaChevronCircleRight } from "react-icons/fa";
 
 const Offers = () => {

@@ -3,8 +3,7 @@ import StyledContactUs from "./style";
 import { Link } from "react-router-dom";
 import Navigation from "../../shared/Navigation";
 import ContactForm from "./ContactForm";
-
-import { FAQsTopics } from "../../../data";
+import { FAQsTopics } from "../../../data/projectData";
 
 const ContactUsPage = (props) => {
   React.useEffect(() => {

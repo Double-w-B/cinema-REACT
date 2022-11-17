@@ -1,6 +1,6 @@
 import React from "react";
 import StyledTickets from "./style";
-import { promoCodes } from "../../../../data";
+import { promoCodes } from "../../../../data/projectData";
 import { IoMdCloseCircle } from "react-icons/io";
 
 const Promo = (props) => {

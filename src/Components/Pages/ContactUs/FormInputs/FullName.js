@@ -1,5 +1,5 @@
 import React from "react";
-import { contactFormInputs } from "../../../../data";
+import { contactFormInputs } from "../../../../data/projectData";
 
 const FullName = (props) => {
   const [name, setName] = React.useState("");
@@ -38,11 +38,7 @@ const FullName = (props) => {
               <label
                 htmlFor={input.id}
                 className="no-select"
-                ref={
-                  input.id === "name"
-                    ? props.refName
-                    : props.refSurname
-                }
+                ref={input.id === "name" ? props.refName : props.refSurname}
               >
                 {input.label} <span>*</span>
               </label>

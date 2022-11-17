@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "./Modal";
-import spinner from "../../Images/spinner_loading.gif";
+import spinner from "../../assets/spinner_loading.gif";
 
 const LoadingModal = (props) => {
   const { isLoadingModal } = props;

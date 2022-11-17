@@ -1,7 +1,7 @@
 import React from "react";
 import StyledTickets from "./style";
-import { movieTickets } from "../../../../data";
 import { useDispatch } from "react-redux";
+import { movieTickets } from "../../../../data/projectData";
 import * as Booking from "../../../../redux/features/booking/bookingSlice";
 
 const Separator = (props) => {

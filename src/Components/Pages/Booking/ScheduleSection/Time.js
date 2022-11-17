@@ -1,7 +1,7 @@
 import React from "react";
 import StyledSchedule from "./style";
 import { useDispatch } from "react-redux";
-import { movieScreenings } from "../../../../data";
+import { movieScreenings } from "../../../../data/projectData";
 import * as BookingSlice from "../../../../redux/features/booking/bookingSlice";
 
 const Time = (props) => {

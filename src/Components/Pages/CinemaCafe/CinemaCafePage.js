@@ -1,7 +1,7 @@
 import React from "react";
 import StyledCinemaCafe from "./style";
 import Navigation from "../../shared/Navigation";
-import bannerImg from "../../../Images/cafeBanner.webp";
+import bannerImg from "../../../assets/cafeBanner.webp";
 import * as Component from "./index";
 
 const CinemaCafePage = () => {

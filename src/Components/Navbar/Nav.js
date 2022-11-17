@@ -1,6 +1,6 @@
 import React from "react";
 import StyledNavbar from "./style";
-import { navbarLinks } from "../../data";
+import { navbarLinks } from "../../data/projectData";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 

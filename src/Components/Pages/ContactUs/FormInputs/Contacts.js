@@ -1,5 +1,5 @@
 import React from "react";
-import { contactFormInputs } from "../../../../data";
+import { contactFormInputs } from "../../../../data/projectData";
 import { AiFillMinusCircle, AiFillCheckCircle } from "react-icons/ai";
 
 const Contacts = (props) => {

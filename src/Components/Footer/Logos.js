@@ -1,9 +1,9 @@
 import React from "react";
 import StyledFooter from "./style";
-import LogoImg1 from "../../Images/TechLogo1.webp";
-import LogoImg2 from "../../Images/TechLogo2.webp";
-import LogoImg3 from "../../Images/TechLogo3.webp";
-import LogoImg4 from "../../Images/TechLogo4.webp";
+import LogoImg1 from "../../assets/TechLogo1.webp";
+import LogoImg2 from "../../assets/TechLogo2.webp";
+import LogoImg3 from "../../assets/TechLogo3.webp";
+import LogoImg4 from "../../assets/TechLogo4.webp";
 
 const Logos = () => {
   return (

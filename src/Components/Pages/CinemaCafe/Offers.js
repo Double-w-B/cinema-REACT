@@ -1,6 +1,6 @@
 import React from "react";
 import StyledCinemaCafe from "./style";
-import { cafeOffers } from "../../../data";
+import { cafeOffers } from "../../../data/projectData";
 
 const Offers = (props) => {
   const { index, setIndex, setShowDesc } = props;

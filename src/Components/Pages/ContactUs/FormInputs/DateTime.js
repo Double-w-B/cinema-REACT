@@ -1,5 +1,5 @@
 import React from "react";
-import { contactFormInputs } from "../../../../data";
+import { contactFormInputs } from "../../../../data/projectData";
 
 const DateTime = (props) => {
   const [date, setDate] = React.useState("");

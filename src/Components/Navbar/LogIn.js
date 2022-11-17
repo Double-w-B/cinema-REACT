@@ -2,7 +2,7 @@ import React from "react";
 import StyledNavbar from "./style";
 import { VscAccount } from "react-icons/vsc";
 import { useAuth0 } from "@auth0/auth0-react";
-import spinnerImg from "../../../src/Images/spinner_2.gif";
+import spinnerImg from "../../../src/assets/spinner_2.gif";
 import { useDispatch, useSelector } from "react-redux";
 import * as userSlice from "../../redux/features/user/userSlice";
 

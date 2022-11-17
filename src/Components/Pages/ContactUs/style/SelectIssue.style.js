@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import sortIco from "../../../../Images/sort-down.svg";
+import sortIco from "../../../../assets/sort-down.svg";
 
 export const Select = styled.select`
   -moz-appearance: none;

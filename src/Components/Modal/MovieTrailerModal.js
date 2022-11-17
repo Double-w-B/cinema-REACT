@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "./Modal";
 import { useSelector } from "react-redux";
-import spinnerImg from "../../Images/spinner.gif";
+import spinnerImg from "../../assets/spinner.gif";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import StyledMovieTrailerModal from "./style/MovieTrailerModal.style";
 

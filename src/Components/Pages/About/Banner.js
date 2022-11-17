@@ -1,7 +1,7 @@
 import React from "react";
 import StyledAbout from "./style";
-import banner_1 from "../../../Images/about_banner_1.webp";
-import banner_2 from "../../../Images/about_banner_2.webp";
+import banner_1 from "../../../assets/about_banner_1.webp";
+import banner_2 from "../../../assets/about_banner_2.webp";
 
 const Banner = () => {
   const [index, setIndex] = React.useState(0);

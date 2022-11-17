@@ -1,7 +1,7 @@
 import React from "react";
 import StyledSummary from "./style";
 import { useDispatch, useSelector } from "react-redux";
-import { paymentMethods } from "../../../../data";
+import { paymentMethods } from "../../../../data/projectData";
 import { setOrder } from "../../../../redux/features/user/userSlice";
 
 const PaymentMethod = (props) => {

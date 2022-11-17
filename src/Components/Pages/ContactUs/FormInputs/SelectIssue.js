@@ -1,6 +1,6 @@
 import React from "react";
 import StyledContactUs from "../style";
-import { contactFormIssues } from "../../../../data";
+import { contactFormIssues } from "../../../../data/projectData";
 
 const SelectIssue = (props) => {
   const [issue, setIssue] = React.useState("");

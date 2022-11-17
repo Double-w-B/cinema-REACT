@@ -1,6 +1,6 @@
 import React from "react";
 import StyledTickets from "./style";
-import { movieTickets } from "../../../../data";
+import { movieTickets } from "../../../../data/projectData";
 import * as Component from "./index";
 
 const Tickets = (props) => {

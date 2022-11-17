@@ -2,7 +2,7 @@ import React from "react";
 import Offers from "./Offers";
 import StyledUnlimited from "./style";
 import Navigation from "../../shared/Navigation";
-import bannerImg from "../../../Images/unlim_banner.webp";
+import bannerImg from "../../../assets/unlim_banner.webp";
 import { SharedBanner, SharedSection } from "../../../style/shared";
 
 const UnlimitedPage = () => {

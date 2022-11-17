@@ -1,8 +1,8 @@
 import React from "react";
 import StyledFAQ from "./style";
-import Navigation from "../../shared/Navigation";
-import * as FAQmodule from "../../../data";
 import SingleQA from "./SingleQA";
+import Navigation from "../../shared/Navigation";
+import * as FAQmodule from "../../../data/projectData";
 
 const FAQpage = (props) => {
   React.useEffect(() => {

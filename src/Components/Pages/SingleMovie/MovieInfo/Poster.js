@@ -1,6 +1,6 @@
 import React from "react";
 import StyledMovieInfo from "./style";
-import spinnerImg from "../../../../Images/spinner.gif";
+import spinnerImg from "../../../../assets/spinner.gif";
 import { useSelector } from "react-redux";
 
 const Poster = () => {

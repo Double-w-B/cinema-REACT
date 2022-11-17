@@ -1,15 +1,15 @@
 import { GiTicket } from "react-icons/gi";
 import { BiMoviePlay } from "react-icons/bi";
 import { FaVirus } from "react-icons/fa";
-import drinksIco from "./Images/icons/drinks.png";
-import popcornIco from "./Images/icons/popcorn.png";
-import chipsIco from "./Images/icons/chips.png";
-import hotDogIco from "./Images/icons/hotDog.png";
-import pizzaIco from "./Images/icons/pizza.png";
-import payPalLogo from "./Images/payPal.webp";
-import visaLogo from "./Images/visa.webp";
-import gPayLogo from "./Images/gPay.webp";
-import applePayLogo from "./Images/applePay.webp";
+import drinksIco from "../assets/icons/drinks.png";
+import popcornIco from "../assets/icons/popcorn.png";
+import chipsIco from "../assets/icons/chips.png";
+import hotDogIco from "../assets/icons/hotDog.png";
+import pizzaIco from "../assets/icons/pizza.png";
+import payPalLogo from "../assets/payPal.webp";
+import visaLogo from "../assets/visa.webp";
+import gPayLogo from "../assets/gPay.webp";
+import applePayLogo from "../assets/applePay.webp";
 
 export const cafeOffers = [
   {

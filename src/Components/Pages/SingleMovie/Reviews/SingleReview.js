@@ -3,7 +3,7 @@ import StyledReviews from "./style";
 import MarkdownView from "react-showdown";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
-import logoImg from "../../../../Images/Logo.png";
+import logoImg from "../../../../assets/Logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUserReview } from "../../../../redux/features/movies/singleMovieSlice";
 

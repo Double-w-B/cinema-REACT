@@ -1,8 +1,8 @@
 import React from "react";
 import StyledReviews from "./style";
 import { AiFillStar } from "react-icons/ai";
-import { ratesTitle } from "../../../../data";
 import { useAuth0 } from "@auth0/auth0-react";
+import { ratesTitle } from "../../../../data/projectData";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { addUserReview } from "../../../../redux/features/movies/singleMovieSlice";
 

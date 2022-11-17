@@ -2,7 +2,7 @@ import React from "react";
 import SingleOrder from "./SingleOrder";
 import { useSelector } from "react-redux";
 import StyledAccountSections from "./style";
-import spinnerImg from "../../../../Images/spinner_3.gif";
+import spinnerImg from "../../../../assets/spinner_3.gif";
 
 const OrdersSection = (props) => {
   const storedData = JSON.parse(sessionStorage.getItem("bookings"));

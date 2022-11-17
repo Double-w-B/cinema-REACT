@@ -1,6 +1,6 @@
 import React from "react";
 import StyledError from "./style/Error.style";
-import errorImg from "../../Images/error.webp";
+import errorImg from "../../assets/error.webp";
 import { useNavigate } from "react-router-dom";
 
 const Error = () => {
