@@ -1,31 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const SingleOffer = (props) => {
-  const { title, id, price, offerNum, setOfferNum } = props;
-  const [active, setActive] = React.useState(false);
-
-  React.useEffect(() => {
-    if (offerNum === id) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
-  }, [offerNum, id]);
-
-  const handleClick = () => {
-    setOfferNum(id);
-  };
-
-  return (
-    <StyledContainer onClick={handleClick} className="no-select" active={active} id={id}>
-      <p>{title}</p>
-      <p>${price}/month</p>
-    </StyledContainer>
-  );
-};
-
-const StyledContainer = styled.div`
+export const SingleOffer = styled.div`
   width: calc(100% / 3);
   min-height: 180px;
   padding: 1rem 0.5rem;
@@ -66,5 +41,3 @@ const StyledContainer = styled.div`
     opacity: ${(props) => (props.active ? "1" : "0")};
   }
 `;
-
-export default SingleOffer;

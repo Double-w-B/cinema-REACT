@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import Navigation from "../../Navigation";
-import bannerImg from "../../../Images/unlim_banner.webp";
 import Offers from "./Offers";
-import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
+import StyledUnlimited from "./style";
+import Navigation from "../../shared/Navigation";
+import bannerImg from "../../../Images/unlim_banner.webp";
+import { SharedBanner, SharedSection } from "../../../style/shared";
 
 const UnlimitedPage = () => {
   React.useEffect(() => {
@@ -11,16 +11,16 @@ const UnlimitedPage = () => {
   }, []);
 
   return (
-    <StyledMain>
+    <StyledUnlimited>
       <Navigation pageTitle={"Unlimited"} />
       <h1>Unlimited Movies Card</h1>
 
-      <StyledContentContainer>
-        <StyledBannerImg>
+      <SharedSection>
+        <SharedBanner>
           <img src={bannerImg} alt="" />
-        </StyledBannerImg>
+        </SharedBanner>
 
-        <StyledInfoContainer>
+        <StyledUnlimited.InfoContainer>
           <p>
             With an Unlimited Movies Card, you can watch as many movies as you
             want, as many times as you want, whenever you want, wherever you
@@ -41,46 +41,10 @@ const UnlimitedPage = () => {
             To get more information call 04030 3030 0333 or ask for more details
             in CineMania.
           </p>
-        </StyledInfoContainer>
-      </StyledContentContainer>
-    </StyledMain>
+        </StyledUnlimited.InfoContainer>
+      </SharedSection>
+    </StyledUnlimited>
   );
 };
-
-const StyledMain = styled(StyledMainContainer)``;
-
-export const StyledContentContainer = styled.section`
-  width: 100%;
-  margin-top: 2rem;
-  padding-bottom: 1rem;
-  background-color: rgba(43, 52, 68, 0.2);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-`;
-
-export const StyledBannerImg = styled.div`
-  width: 100%;
-  min-height: 100px;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px,
-      inset rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-`;
-
-const StyledInfoContainer = styled.article`
-  width: 100%;
-  padding: 2rem 1rem 1rem 1rem;
-  font-size: 1.1rem;
-
-  p {
-    text-align: justify;
-    &:last-child {
-      margin-top: 1rem;
-    }
-  }
-`;
 
 export default UnlimitedPage;
