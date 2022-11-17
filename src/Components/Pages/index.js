@@ -1,14 +1,14 @@
-import AboutPage from "./AboutPage/AboutPage";
+import AboutPage from "./About/AboutPage";
 import BookingPage from "./Booking/BookingPage";
 import CinemaCafePage from "./CinemaCafe/CinemaCafePage";
-import ContactUsPage from "./ContactUsPage/ContactUsPage";
-import FAQpage from "./FAQpage/FAQpage";
-import HomePage from "./HomePage";
-import MoviesComingSoonPage from "./MoviesComingSoonPage";
-import SingleMoviePage from "./SingleMoviePage/SingleMoviePage";
-import UnlimitedPage from "./UnlimitedPage/UnlimitedPage";
+import ContactUsPage from "./ContactUs/ContactUsPage";
+import FAQpage from "./FAQ/FAQpage";
+import HomePage from "./Home/HomePage";
+import ComingSoonPage from "./ComingSoon/ComingSoonPage";
+import SingleMoviePage from "./SingleMovie/SingleMoviePage";
+import UnlimitedPage from "./Unlimited/UnlimitedPage";
 import UserAccountPage from "./UserAccount/UserAccountPage";
-import ErrorPage from "./ErrorPage/ErrorPage";
+import Error from "../shared/Error";
 
 export {
   AboutPage,
@@ -17,9 +17,9 @@ export {
   ContactUsPage,
   FAQpage,
   HomePage,
-  MoviesComingSoonPage,
+  ComingSoonPage,
   SingleMoviePage,
   UnlimitedPage,
   UserAccountPage,
-  ErrorPage,
+  Error,
 };

@@ -1,11 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import StyledContactUs from "./style";
 import { Link } from "react-router-dom";
-import Navigation from "../../Navigation";
+import Navigation from "../../shared/Navigation";
 import ContactForm from "./ContactForm";
-import { StyledMainContainer } from "../SingleMoviePage/SingleMoviePage";
-import { StyledContentContainer } from "../UnlimitedPage/UnlimitedPage";
-import { StyledButton } from "../../Sliders/MoviesNowPlayingSlider";
+
 import { FAQsTopics } from "../../../data";
 
 const ContactUsPage = (props) => {
@@ -33,10 +31,10 @@ const ContactUsPage = (props) => {
   };
 
   return (
-    <StyledMain>
+    <StyledContactUs>
       <Navigation pageTitle={"Contact"} />
       <h1>Contact Us</h1>
-      <StyledSection>
+      <StyledContactUs.Container>
         <div className="gaq-topics">
           <h2>Browse Help Topics (FAQs) first</h2>
           <div className="topics">
@@ -47,10 +45,10 @@ const ContactUsPage = (props) => {
                   onClick={() => handleClick(`${topic.ref}`)}
                   key={index}
                 >
-                  <StyledBtn>
+                  <StyledContactUs.Button>
                     {topic.icon}
                     {topic.title}
-                  </StyledBtn>
+                  </StyledContactUs.Button>
                 </Link>
               );
             })}
@@ -64,57 +62,9 @@ const ContactUsPage = (props) => {
         </h2>
 
         <ContactForm {...props} />
-      </StyledSection>
-    </StyledMain>
+      </StyledContactUs.Container>
+    </StyledContactUs>
   );
 };
 
-const StyledMain = styled(StyledMainContainer)`
-  width: 60%;
-`;
-const StyledSection = styled(StyledContentContainer)`
-  .gaq-topics {
-    width: 100%;
-    height: 20vh;
-    margin: 0 0 2rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-    h2 {
-      text-align: left;
-      margin-left: 2rem;
-    }
-
-    .topics {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
-  }
-
-  h2 {
-    text-align: left;
-    margin-left: 2rem;
-    span {
-      font-size: 0.9rem;
-      letter-spacing: 0.5px;
-      span {
-        color: var(--primary-red-clr);
-      }
-    }
-  }
-`;
-
-const StyledBtn = styled(StyledButton)`
-  position: relative;
-  text-transform: none;
-  display: flex;
-  align-items: center;
-
-  svg {
-    margin-right: 0.5rem;
-  }
-`;
 export default ContactUsPage;
