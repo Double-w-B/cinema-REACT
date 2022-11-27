@@ -11,6 +11,7 @@ export const IconsContainer = styled.div`
   height: 100%;
   margin: 0 auto;
   position: relative;
+  cursor: ${(props) => (props.mouseActive ? "grabbing" : "default")};
 
   && p {
     font-size: 1.6rem;
@@ -74,6 +75,7 @@ export const ImgContainer = styled.div`
   &.lastIcon {
     transform: translateX(-100%);
   }
+
   &.nextIcon {
     transform: translateX(200%);
   }
@@ -83,5 +85,6 @@ export const ImgContainer = styled.div`
     width: 25%;
     height: 100%;
     transform: translateX(200%);
+    cursor: default;
   }
 `;

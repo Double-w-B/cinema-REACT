@@ -5,6 +5,12 @@ import { cafeOffers } from "../../../data/projectData";
 const Offers = (props) => {
   const { index, setIndex, setShowDesc } = props;
   const [iconMove, setIconMove] = React.useState(false);
+  const iconContainer = React.useRef(null);
+
+  const [mouseActive, setMouseActive] = React.useState(false);
+  const [startX, setStartX] = React.useState(null);
+  const [scrollLeft, setScrollLeft] = React.useState(null);
+  const [moveEnd, setMoveEnd] = React.useState(0);
 
   React.useEffect(() => {
     const lastIndex = cafeOffers.length - 1;
@@ -17,29 +23,49 @@ const Offers = (props) => {
     return () => clearTimeout(checkIconMove);
   }, [index, setIndex]);
 
+  const changeMouseCoordinates = (e) => {
+    setMouseActive(true);
+    setStartX(e.pageX - iconContainer.current.offsetLeft);
+    setScrollLeft(iconContainer.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!mouseActive || iconMove) return;
+    e.preventDefault();
+    const x = e.pageX - iconContainer.current.offsetLeft;
+    const move = x - startX;
+    setMoveEnd(scrollLeft - move);
+  };
+
+  const scrollToRight = () => {
+    setIconMove(true);
+    setShowDesc(false);
+    setIndex(index - 1);
+  };
+
+  const scrollToLeft = () => {
+    setIconMove(true);
+    setShowDesc(false);
+    setIndex(index + 1);
+  };
+
+  const handleMouseUp = () => {
+    if (!mouseActive) return;
+    if (!iconMove && moveEnd > 0) scrollToLeft();
+    if (!iconMove && moveEnd < 0) scrollToRight();
+    setMoveEnd(0);
+    setMouseActive(false);
+  };
+
   const handleClick = (position) => {
-    if (position === "nextIcon") {
-      setIconMove(true);
-      setShowDesc(false);
-      setIndex(index + 1);
-    }
-    if (position === "lastIcon") {
-      setIconMove(true);
-      setShowDesc(false);
-      setIndex(index - 1);
-    }
+    if (!iconMove && position === "nextIcon") scrollToLeft();
+    if (!iconMove && position === "lastIcon") scrollToRight();
   };
 
   const handleWheel = (e) => {
-    if (!iconMove && e.deltaY < 0) {
-      setIconMove(true);
-      setShowDesc(false);
-      setIndex(index + 1);
-    }
-    if (!iconMove && e.deltaY > 0) {
-      setIconMove(true);
-      setShowDesc(false);
-      setIndex(index - 1);
+    if (!iconMove) {
+      e.deltaY < 0 && scrollToLeft();
+      e.deltaY > 0 && scrollToRight();
     }
   };
 
@@ -88,7 +114,15 @@ const Offers = (props) => {
       onMouseLeave={() => document.body.classList.remove("no-scrolling")}
       onWheel={(e) => handleWheel(e)}
     >
-      <StyledCinemaCafe.IconsContainer className="no-select">
+      <StyledCinemaCafe.IconsContainer
+        className="no-select"
+        ref={iconContainer}
+        onMouseDown={changeMouseCoordinates}
+        onMouseLeave={() => setMouseActive(false)}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        mouseActive={mouseActive}
+      >
         {setActiveIcon()}
         {cafeOffers.map((offer, offerIndex) => {
           let showItem = "";

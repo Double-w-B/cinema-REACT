@@ -16,5 +16,8 @@ export const Container = styled(SharedSection)`
 `;
 
 export const Banner = styled(SharedBanner)`
-  height: 30vh;
+  height: 35vh;
+  img {
+    object-position: 0 45%;
+  }
 `;
