@@ -14,6 +14,13 @@ const ComingSoonSlider = () => {
   const [startX, setStartX] = React.useState(null);
   const [scrollLeft, setScrollLeft] = React.useState(null);
 
+  const initialState = {
+    comingSoonClass: true,
+    mouseActive: mouseActive,
+    movieRelease: "coming",
+    pageTitle: "Coming Soon",
+  };
+
   const scrollSlider = (side) => {
     const sliderContainer = imgContainer.current;
     side === "left"
@@ -21,53 +28,22 @@ const ComingSoonSlider = () => {
       : sliderContainer.scrollBy(216, 0);
   };
 
-  React.useEffect(() => {
-    const dragContainer = imgContainer.current;
-    const changeMouseCoordinates = (e) => {
-      setMouseActive(true);
-      setStartX(e.pageX - dragContainer.offsetLeft);
-      setScrollLeft(dragContainer.scrollLeft);
-    };
+  const changeMouseCoordinates = (e) => {
+    setMouseActive(true);
+    setStartX(e.pageX - imgContainer.current.offsetLeft);
+    setScrollLeft(imgContainer.current.scrollLeft);
+  };
 
-    dragContainer.addEventListener("mousedown", changeMouseCoordinates);
-    return () =>
-      dragContainer.removeEventListener("mousedown", changeMouseCoordinates);
-  });
+  const handleMouseMove = (e) => {
+    if (!mouseActive) return;
 
-  React.useEffect(() => {
-    const dragContainer = imgContainer.current;
-    const changeMouseState = () => setMouseActive(false);
-
-    dragContainer.addEventListener("mouseleave", changeMouseState);
-    return () =>
-      dragContainer.removeEventListener("mouseleave", changeMouseState);
-  });
-
-  React.useEffect(() => {
-    const dragContainer = imgContainer.current;
-    const changeMouseState = () => setMouseActive(false);
-
-    dragContainer.addEventListener("mouseup", changeMouseState);
-    return () => dragContainer.removeEventListener("mouseup", changeMouseState);
-  });
-
-  React.useEffect(() => {
-    const dragContainer = imgContainer.current;
-
-    const mouseMoving = (e) => {
-      if (!mouseActive) return;
-
-      if (e.target.tagName === "DIV") {
-        e.preventDefault();
-        const x = e.pageX - imgContainer.current.offsetLeft;
-        const move = x - startX;
-        imgContainer.current.scrollLeft = scrollLeft - move;
-      }
-    };
-
-    dragContainer.addEventListener("mousemove", mouseMoving);
-    return () => dragContainer.removeEventListener("mousemove", mouseMoving);
-  });
+    if (e.target.tagName === "DIV") {
+      e.preventDefault();
+      const x = e.pageX - imgContainer.current.offsetLeft;
+      const move = x - startX;
+      imgContainer.current.scrollLeft = scrollLeft - move;
+    }
+  };
 
   return (
     <StyledHomePage.ComingSoonSlider className="no-select">
@@ -76,6 +52,10 @@ const ComingSoonSlider = () => {
       <StyledHomePage.ComingSoonSlider.Container
         ref={imgContainer}
         mouseActive={mouseActive}
+        onMouseDown={changeMouseCoordinates}
+        onMouseLeave={() => setMouseActive(false)}
+        onMouseUp={() => setMouseActive(false)}
+        onMouseMove={handleMouseMove}
       >
         <Styled.SharedArrowContainer
           className="left upComing"
@@ -95,10 +75,7 @@ const ComingSoonSlider = () => {
             <SingleMoviePoster
               key={movie.id}
               movieInfo={movie}
-              comingSoonClass={true}
-              mouseActive={mouseActive}
-              movieRelease={"coming"}
-              pageTitle={"Coming Soon"}
+              {...initialState}
             />
           );
         })}
