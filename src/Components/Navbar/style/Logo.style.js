@@ -7,6 +7,7 @@ export const Logo = styled.div`
   display: grid;
   align-content: center;
   justify-items: end;
+  transition: all 0.3s linear;
 
   a {
     width: 80px;
@@ -27,5 +28,27 @@ export const Logo = styled.div`
         transform: rotate(-15deg);
       }
     }
+  }
+
+  @media screen and (max-width: 1300px) {
+    width: 15%;
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 10%;
+    margin-left: 1rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    margin-left: 0;
+    padding-right: 0;
+    width: 15%;
+    a {
+      width: 70px;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 25%;
   }
 `;

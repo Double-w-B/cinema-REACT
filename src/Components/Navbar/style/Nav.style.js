@@ -6,12 +6,16 @@ export const Nav = styled.nav`
   display: grid;
   place-items: center;
   color: var(--primary-white-clr);
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s linear;
 
   ul {
     padding: 1.5rem;
     width: 100%;
     height: 100%;
     display: grid;
+
     grid-template-columns: repeat(5, 1fr);
 
     li {
@@ -41,4 +45,14 @@ export const Nav = styled.nav`
       }
     }
   }
+  @media screen and (max-width: 1300px) {
+    width: 65%;
+  }
+  @media screen and (max-width: 1100px) {
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+  }
+  /* @media screen and (max-width: 1099px) {
+  } */
 `;
