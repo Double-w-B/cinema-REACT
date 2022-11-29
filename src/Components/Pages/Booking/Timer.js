@@ -1,18 +1,17 @@
 import React from "react";
 import StyledBookingPage from "./style";
+import { useDispatch, useSelector } from "react-redux";
+import * as modalsSlice from "../../../redux/features/modals/modalsSlice";
 
-const Timer = (props) => {
+const Timer = () => {
+  const dispatch = useDispatch();
+
+  const { isAuthModal, isBookingSummaryModal, isLoadingModal } = useSelector(
+    (store) => store.modals
+  );
+
   const [minutes, setMinutes] = React.useState(5);
   const [seconds, setSeconds] = React.useState(59);
-  const {
-    setIsModal,
-    setIsAuthModal,
-    setIsBookingExpiredModal,
-    isBookingSummaryModal,
-    isLoadingModal,
-    isAuthModal,
-    setIsCardPaymentModal,
-  } = props;
 
   React.useEffect(() => {
     let interval = setInterval(() => {
@@ -28,10 +27,9 @@ const Timer = (props) => {
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(interval);
-          setIsAuthModal(false);
-          setIsCardPaymentModal(false);
-          setIsModal(true);
-          setIsBookingExpiredModal(true);
+          dispatch(modalsSlice.handleIsAuthModal(false));
+          dispatch(modalsSlice.handleIsCardPaymentModal(false));
+          dispatch(modalsSlice.handleIsBookingExpiredModal(true));
         } else {
           setMinutes(minutes - 1);
           setSeconds(59);

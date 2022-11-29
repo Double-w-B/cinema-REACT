@@ -3,14 +3,15 @@ import StyledNavbar from "./style";
 import { navbarLinks } from "../../data/projectData";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
+import * as modalsSlice from "../../redux/features/modals/modalsSlice";
 
 const Nav = (props) => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
-
-  const { setIsModal, setIsAuthModal } = props;
 
   const handleClick = () => {
     const timeout = setTimeout(() => {
@@ -20,8 +21,8 @@ const Nav = (props) => {
   };
 
   const handleAccountClick = () => {
-    setIsModal(true);
-    setIsAuthModal(true);
+    dispatch(modalsSlice.handleIsModal(true));
+    dispatch(modalsSlice.handleIsAuthModal(true));
   };
 
   const activeLink = (path) => {

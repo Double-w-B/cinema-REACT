@@ -1,28 +1,31 @@
 import React from "react";
-import Modal from "./Modal";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import StyledBookingExpiredModal from "./style/BookingExpiredModal.style";
+import * as modalsSlice from "../../redux/features/modals/modalsSlice";
 
 const BookingExpiredModal = (props) => {
-  const { setIsModal, setIsBookingExpiredModal } = props;
+  const dispatch = useDispatch();
+  const { isBookingExpiredModal } = useSelector((store) => store.modals);
 
   const handleClick = () => {
-    setIsModal(false);
-    setIsBookingExpiredModal(false);
+    dispatch(modalsSlice.handleIsModal(false));
+    dispatch(modalsSlice.handleIsBookingExpiredModal(false));
   };
 
   return (
-    <Modal>
-      <StyledBookingExpiredModal className="no-select">
-        <h1>Expired Booking</h1>
-        <p>Your booking has expired. Try again.</p>
-        <Link to="/">
-          <StyledBookingExpiredModal.Button onClick={handleClick}>
-            OK
-          </StyledBookingExpiredModal.Button>
-        </Link>
-      </StyledBookingExpiredModal>
-    </Modal>
+    <StyledBookingExpiredModal
+      className="no-select"
+      showModal={isBookingExpiredModal}
+    >
+      <h1>Expired Booking</h1>
+      <p>Your booking has expired. Try again.</p>
+      <Link to="/">
+        <StyledBookingExpiredModal.Button onClick={handleClick}>
+          OK
+        </StyledBookingExpiredModal.Button>
+      </Link>
+    </StyledBookingExpiredModal>
   );
 };
 

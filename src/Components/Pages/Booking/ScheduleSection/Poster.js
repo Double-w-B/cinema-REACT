@@ -1,9 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { BsPlayCircle } from "react-icons/bs";
 import StyledSchedule from "./style";
+import { BsPlayCircle } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import * as modalsSlice from "../../../../redux/features/modals/modalsSlice";
 
 const Poster = (props) => {
+  const dispatch = useDispatch();
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieVideo } = useSelector((store) => store.singleMovie);
   const { imgLowResUrl } = useSelector((store) => store.movies);
@@ -20,8 +22,8 @@ const Poster = (props) => {
   };
 
   const handleClick = () => {
-    props.setIsModal(true);
-    props.setIsMovieTrailer(true);
+    dispatch(modalsSlice.handleIsModal(true));
+    dispatch(modalsSlice.handleIsMovieTrailerModal(true));
   };
 
   return (
@@ -30,6 +32,7 @@ const Poster = (props) => {
         <img src={`${imgLowResUrl}${moviePoster}`} alt="" />
         {movieTrailer && <BsPlayCircle onClick={handleClick} />}
       </div>
+
       {movieGenres && (
         <div className="genres no-select">
           {movieGenres.slice(0, 3).map((genre) => {

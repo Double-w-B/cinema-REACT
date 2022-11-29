@@ -1,12 +1,14 @@
 import React from "react";
-import StyledBookingPage from "./style";
-import { useSelector } from "react-redux";
-import Navigation from "../../shared/Navigation";
 import * as Component from "./index";
-import { useAuth0 } from "@auth0/auth0-react";
+import StyledBookingPage from "./style";
 import { RiTimerLine } from "react-icons/ri";
+import { useAuth0 } from "@auth0/auth0-react";
+import Navigation from "../../shared/Navigation";
+import { useDispatch, useSelector } from "react-redux";
+import * as modalsSlice from "../../../redux/features/modals/modalsSlice";
 
 const BookingPage = (props) => {
+  const dispatch = useDispatch();
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { title } = singleMovieInfo;
@@ -28,8 +30,8 @@ const BookingPage = (props) => {
 
   React.useEffect(() => {
     if (!isLoading && !isUser) {
-      props.setIsModal(true);
-      props.setIsAuthModal(true);
+      dispatch(modalsSlice.handleIsModal(true));
+      dispatch(modalsSlice.handleIsAuthModal(true));
     }
     // eslint-disable-next-line
   }, []);
@@ -40,14 +42,7 @@ const BookingPage = (props) => {
 
   React.useEffect(() => {
     window.onpopstate = () => {
-      props.setIsModal(false);
-      props.setIsFormValid(false);
-      props.setIsAuthModal(false);
-      props.setIsMovieTrailer(false);
-      props.setIsCardPaymentModal(false);
-      props.setIsBookingSummaryModal(false);
-      props.setIsLoadingModal(false);
-      props.setIsBookingExpiredModal(false);
+      dispatch(modalsSlice.hideAllModals());
     };
   });
 

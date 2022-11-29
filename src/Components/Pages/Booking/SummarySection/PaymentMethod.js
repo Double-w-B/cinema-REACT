@@ -1,14 +1,17 @@
 import React from "react";
 import StyledSummary from "./style";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { paymentMethods } from "../../../../data/projectData";
 import { setOrder } from "../../../../redux/features/user/userSlice";
+import * as modalsSlice from "../../../../redux/features/modals/modalsSlice";
 
 const PaymentMethod = (props) => {
+  const dispatch = useDispatch();
+
   const storedBookingsData = JSON.parse(sessionStorage.getItem("bookings"));
   const storedMovieData = JSON.parse(sessionStorage.getItem("single_movie"));
 
-  const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = React.useState(null);
   const [isShakeMsg, setIsShakeMsg] = React.useState(false);
   const summaryContainer = React.useRef("");
@@ -31,6 +34,9 @@ const PaymentMethod = (props) => {
     bookingSeniorTickets,
   } = useSelector((store) => store.bookingTickets);
 
+  const { isAuthenticated, user } = useAuth0();
+  const isUser = isAuthenticated && user;
+
   const {
     scheduleContainer,
     ticketsContainer,
@@ -40,10 +46,6 @@ const PaymentMethod = (props) => {
     setIsShakeEmail,
     isSeatsEqTicketsAmount,
     setIsSeatsEqTicketsAmount,
-    setIsModal,
-    setIsCardPaymentModal,
-    setIsLoadingModal,
-    setIsBookingSummaryModal,
   } = props;
 
   /* check for stored data if booking page was refreshed */
@@ -82,6 +84,7 @@ const PaymentMethod = (props) => {
   /* Validation logic of the booking content */
   const handleClick = () => {
     const emailRegExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
     const showErrorContainer = (element) => {
       window.scrollTo({
         top: element.current.offsetTop - 10,
@@ -125,24 +128,27 @@ const PaymentMethod = (props) => {
     }
 
     if (paymentMethod === "VisaMastercard") {
-      setIsModal(true);
-      setIsCardPaymentModal(true);
+      dispatch(modalsSlice.handleIsModal(true));
+      dispatch(modalsSlice.handleIsCardPaymentModal(true));
     } else {
-      setIsModal(true);
-      setIsLoadingModal(true);
+      dispatch(modalsSlice.handleIsModal(true));
+      dispatch(modalsSlice.handleIsLoadingModal(true));
 
       const timer = setTimeout(() => {
         window.open(dynamicLink(), "_blank").focus();
-        setIsModal(true);
-        setIsBookingSummaryModal(true);
+        dispatch(modalsSlice.handleIsLoadingModal(false));
+        dispatch(modalsSlice.handleIsBookingSummaryModal(true));
         dispatch(setOrder(newOrder));
-        if (!storedBookingsData) {
-          sessionStorage.setItem("bookings", JSON.stringify([newOrder]));
-        } else {
-          sessionStorage.setItem(
-            "bookings",
-            JSON.stringify([...storedBookingsData, newOrder])
-          );
+
+        if (isUser) {
+          if (!storedBookingsData) {
+            return sessionStorage.setItem(
+              "bookings",
+              JSON.stringify([newOrder])
+            );
+          }
+          const ordersUpdate = [...storedBookingsData, newOrder];
+          sessionStorage.setItem("bookings", JSON.stringify(ordersUpdate));
         }
       }, 3600);
       return () => clearTimeout(timer);

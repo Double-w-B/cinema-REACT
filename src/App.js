@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import * as Pages from "./Components/Pages";
@@ -9,16 +9,7 @@ import * as moviesSlice from "./redux/features/movies/allMoviesSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const [isModal, setIsModal] = React.useState(false);
-  const [isFormValid, setIsFormValid] = React.useState(false);
-  const [isMovieTrailer, setIsMovieTrailer] = React.useState(false);
-  const [isAuthModal, setIsAuthModal] = React.useState(false);
-  const [isCardPaymentModal, setIsCardPaymentModal] = React.useState(false);
-  const [isLoadingModal, setIsLoadingModal] = React.useState(false);
-  const [isBookingSummaryModal, setIsBookingSummaryModal] =
-    React.useState(false);
-  const [isBookingExpiredModal, setIsBookingExpiredModal] =
-    React.useState(false);
+  const { isModal } = useSelector((store) => store.modals);
 
   const nowPlayingContainer = React.useRef(null);
   const FAQsTickets = React.useRef(null);
@@ -37,49 +28,24 @@ function App() {
     FAQsCovid,
   };
 
-  const modalsInitialState = {
-    setIsModal,
-    setIsFormValid,
-    isAuthModal,
-    setIsAuthModal,
-    isMovieTrailer,
-    setIsMovieTrailer,
-    setIsCardPaymentModal,
-    setIsLoadingModal,
-    isBookingSummaryModal,
-    setIsBookingSummaryModal,
-    setIsBookingExpiredModal,
-  };
-
   isModal
     ? document.body.classList.add("no-scrolling")
     : document.body.classList.remove("no-scrolling");
 
   return (
     <Router>
-      {/* Modals */}
+      <Modals.ModalOverlay>
+        <Modals.Menu nowPlayingContainer={nowPlayingContainer} />
+        <Modals.Auth />
+        <Modals.ContactUs />
+        <Modals.MovieTrailer />
+        <Modals.CardPayment />
+        <Modals.Loading />
+        <Modals.BookingSummary />
+        <Modals.BookingExpired />
+      </Modals.ModalOverlay>
 
-      {isModal && isFormValid && (
-        <Modals.ContactUsModal {...modalsInitialState} />
-      )}
-      {isModal && isMovieTrailer && (
-        <Modals.MovieTrailerModal {...modalsInitialState} />
-      )}
-      {isModal && isAuthModal && <Modals.AuthModal {...modalsInitialState} />}
-      {isModal && isCardPaymentModal && (
-        <Modals.CardPaymentModal {...modalsInitialState} />
-      )}
-      {isModal && isLoadingModal && (
-        <Modals.LoadingModal {...modalsInitialState} />
-      )}
-      {isModal && isBookingSummaryModal && (
-        <Modals.BookingSummaryModal {...modalsInitialState} />
-      )}
-      {isModal && isBookingExpiredModal && (
-        <Modals.BookingExpiredModal {...modalsInitialState} />
-      )}
-
-      <Navbar {...refs} {...modalsInitialState} />
+      <Navbar {...refs} />
       <Routes>
         <Route
           exact
@@ -94,7 +60,7 @@ function App() {
         <Route
           exact
           path="/nowPlaying/:title/booking"
-          element={<Pages.BookingPage {...modalsInitialState} />}
+          element={<Pages.BookingPage />}
         />
         <Route exact path="/comingSoon" element={<Pages.ComingSoonPage />} />
         <Route
@@ -106,7 +72,7 @@ function App() {
         <Route
           exact
           path="/contact_us"
-          element={<Pages.ContactUsPage {...refs} {...modalsInitialState} />}
+          element={<Pages.ContactUsPage {...refs} />}
         />
         <Route
           exact
@@ -120,11 +86,7 @@ function App() {
           }
         />
         <Route exact path="/unlimited" element={<Pages.UnlimitedPage />} />
-        <Route
-          exact
-          path="/myAccount"
-          element={<Pages.UserAccountPage {...modalsInitialState} />}
-        />
+        <Route exact path="/myAccount" element={<Pages.UserAccountPage />} />
         <Route exact path="/cinema_cafe" element={<Pages.CinemaCafePage />} />
         <Route path="*" element={<Pages.Error />} />
       </Routes>

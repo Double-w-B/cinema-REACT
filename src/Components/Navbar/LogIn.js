@@ -74,7 +74,7 @@ const LogIn = () => {
 
   const handleMenuClick = () => {
     dispatch(modalsSlice.handleIsModal(true));
-    dispatch(modalsSlice.handleIsNavbarModal(true));
+    dispatch(modalsSlice.handleIsMenuModal(true));
   };
 
   return (

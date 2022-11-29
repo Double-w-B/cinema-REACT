@@ -1,24 +1,15 @@
 import React from "react";
-import Modal from "./Modal";
 import spinner from "../../assets/spinner_loading.gif";
+import { useSelector } from "react-redux";
+import StyledLoadingModal from "./style/LoadingModal.style";
 
-const LoadingModal = (props) => {
-  const { isLoadingModal } = props;
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      props.setIsModal(false);
-      props.setIsLoadingModal(false);
-    }, 3500);
-    return () => clearTimeout(timer);
-
-    // eslint-disable-next-line
-  }, [isLoadingModal]);
+const LoadingModal = () => {
+  const { isLoadingModal } = useSelector((store) => store.modals);
 
   return (
-    <Modal>
+    <StyledLoadingModal showModal={isLoadingModal}>
       <img src={spinner} alt="" />
-    </Modal>
+    </StyledLoadingModal>
   );
 };
 

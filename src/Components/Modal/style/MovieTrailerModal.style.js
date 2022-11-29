@@ -5,6 +5,10 @@ const StyledMovieTrailerModal = styled.div`
   height: 70vh;
   background-color: black;
   position: relative;
+  visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
+  opacity: ${(props) => (props.showModal ? "1" : "0")};
+  transition: all 0.2s ease-out;
+
   &:hover {
     svg {
       top: 2rem;

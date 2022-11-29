@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SharedKeyframes } from "../../../style/shared";
 
 const StyledModalOverlay = styled.div`
   width: 100%;
@@ -9,12 +8,11 @@ const StyledModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  visibility: ${(props) => (props.isModal ? "visible" : "hidden")};
+  opacity: ${(props) => (props.isModal ? "1" : "0")};
+  z-index: ${(props) => (props.isModal ? "10" : "-10")};
   background-color: rgba(0, 0, 0, 0.65);
-  -webkit-animation: ${SharedKeyframes.slideDown} 350ms ease-out forwards;
-  -moz-animation: ${SharedKeyframes.slideDown} 350ms ease-out forwards;
-  -o-animation: ${SharedKeyframes.slideDown} 350ms ease-out forwards;
-  animation: ${SharedKeyframes.slideDown} 350ms ease-out forwards;
+  transition: all 0.3s linear;
 `;
 
 export default StyledModalOverlay;

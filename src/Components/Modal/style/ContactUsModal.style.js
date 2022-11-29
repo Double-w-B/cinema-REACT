@@ -6,6 +6,13 @@ const StyledContactUsModal = styled.div`
   height: 250px;
   border-radius: 2px;
   color: var(--primary-white-clr);
+  position: absolute;
+  left: 50%;
+  top: ${(props) => (props.showModal ? "50%" : "40%")};
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-out;
+  visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
+  opacity: ${(props) => (props.showModal ? "1" : "0")};
   background: #080c13;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #080c13, #2b3444, #080c13);

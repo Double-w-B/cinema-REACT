@@ -1,9 +1,12 @@
 import React from "react";
 import StyledContactUs from "./style";
 import * as Input from "./FormInputs";
+import { useDispatch } from "react-redux";
 import * as Validation from "./FormInputs/validation.js";
+import * as modalsSlice from "../../../redux/features/modals/modalsSlice";
 
 const ContactForm = (props) => {
+  const dispatch = useDispatch();
   const [isError, setIsError] = React.useState(true);
   const [form, setForm] = React.useState({
     issue: "",
@@ -27,7 +30,6 @@ const ContactForm = (props) => {
   const labelTime = React.useRef("");
   const labelMessage = React.useRef("");
 
-  const { setIsModal, setIsLoadingModal, setIsFormValid } = props;
   const refs = [
     labelIssue,
     labelName,
@@ -49,11 +51,12 @@ const ContactForm = (props) => {
     e.preventDefault();
 
     if (Validation.validateInputs(form, refs)) {
-      setIsModal(true);
-      setIsLoadingModal(true);
+      dispatch(modalsSlice.handleIsModal(true));
+      dispatch(modalsSlice.handleIsLoadingModal(true));
+
       const timer = setTimeout(() => {
-        setIsModal(true);
-        setIsFormValid(true);
+        dispatch(modalsSlice.handleIsLoadingModal(false));
+        dispatch(modalsSlice.handleIsContactUsModal(true));
       }, 3600);
       return () => clearTimeout(timer);
     }

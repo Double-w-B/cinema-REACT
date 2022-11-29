@@ -1,19 +1,23 @@
 import React from "react";
 import StyledContactUs from "./style";
 import { Link } from "react-router-dom";
-import Navigation from "../../shared/Navigation";
 import ContactForm from "./ContactForm";
+import { useDispatch } from "react-redux";
+import Navigation from "../../shared/Navigation";
 import { FAQsTopics } from "../../../data/projectData";
+import * as modalsSlice from "../../../redux/features/modals/modalsSlice";
 
 const ContactUsPage = (props) => {
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   React.useEffect(() => {
     window.onpopstate = () => {
-      props.setIsModal(false);
-      props.setIsFormValid(false);
+      dispatch(modalsSlice.handleIsModal(false));
+      dispatch(modalsSlice.handleIsContactUsModal(false));
     };
   });
 
