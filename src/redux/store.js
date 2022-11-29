@@ -3,6 +3,7 @@ import moviesReducer from "./features/movies/allMoviesSlice";
 import singleMovieReducer from "./features/movies/singleMovieSlice";
 import bookingTicketsReducer from "./features/booking/bookingSlice";
 import userSliceReducer from "./features/user/userSlice";
+import modalsSliceReducer from "./features/modals/modalsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     singleMovie: singleMovieReducer,
     bookingTickets: bookingTicketsReducer,
     userData: userSliceReducer,
+    modals: modalsSliceReducer,
   },
 });
