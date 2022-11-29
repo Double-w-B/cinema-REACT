@@ -1,10 +1,12 @@
 import React from "react";
 import StyledNavbar from "./style";
+import { HiMenuAlt3 } from "react-icons/hi";
 import { VscAccount } from "react-icons/vsc";
 import { useAuth0 } from "@auth0/auth0-react";
-import spinnerImg from "../../../src/assets/spinner_2.gif";
 import { useDispatch, useSelector } from "react-redux";
+import spinnerImg from "../../../src/assets/spinner_2.gif";
 import * as userSlice from "../../redux/features/user/userSlice";
+import * as modalsSlice from "../../redux/features/modals/modalsSlice";
 
 const LogIn = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const LogIn = () => {
 
   const { loginWithRedirect, isAuthenticated, logout, user, isLoading } =
     useAuth0();
+
   const isUser = isAuthenticated && user;
   const [storedName, setStoredName] = React.useState("");
   const [storedAvatar, setStoredAvatar] = React.useState("");
@@ -69,11 +72,17 @@ const LogIn = () => {
     logoutUser();
   };
 
+  const handleMenuClick = () => {
+    dispatch(modalsSlice.handleIsModal(true));
+    dispatch(modalsSlice.handleIsNavbarModal(true));
+  };
+
   return (
     <StyledNavbar.LogIn
       email={user?.email}
       avatar={userAvatar}
       className="no-select"
+      isUser={isUser}
     >
       {isUser && !isLoading ? (
         <div className="isLogged">
@@ -104,6 +113,10 @@ const LogIn = () => {
           <button onClick={loginWithRedirect}>Log in</button>
         </>
       )}
+
+      <p className="menu">
+        Menu <HiMenuAlt3 onClick={handleMenuClick} />
+      </p>
     </StyledNavbar.LogIn>
   );
 };

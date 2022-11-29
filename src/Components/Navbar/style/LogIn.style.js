@@ -11,6 +11,7 @@ export const LogIn = styled.div`
   color: var(--primary-grey-clr);
   opacity: 1;
   visibility: visible;
+  transition: all 0.3s linear;
 
   svg {
     font-size: 1.6rem;
@@ -43,15 +44,16 @@ export const LogIn = styled.div`
     display: none;
     opacity: 0;
     transition: all 0.3s linear;
+    font-size: 1.3rem;
 
     svg {
       margin: 0 0 0 1rem;
       font-size: 1.8rem;
       cursor: pointer;
       opacity: 0.8;
+      color: var(--primary-grey-clr);
 
       &:hover {
-        color: var(--primary-grey-clr);
         opacity: 1;
       }
 
@@ -110,14 +112,18 @@ export const LogIn = styled.div`
     }
   }
 
+  @media screen and (max-width: 1300px) {
+    width: ${(props) => !props.isUser && "15%"};
+  }
   @media screen and (max-width: 1200px) {
-    width: 25%;
-    transition: all 0.3s linear;
+    width: ${(props) => (props.isUser ? "25%" : "11%")};
+    padding: ${(props) => (props.isUser ? "0 0 0 0.5rem" : "0 1.5rem 0 0")};
   }
 
   @media screen and (max-width: 1100px) {
-    justify-content: flex-end;
+    width: 25%;
     padding: 0 1.5rem 0 0;
+    justify-content: flex-end;
 
     .isLogged,
     button,
@@ -128,7 +134,6 @@ export const LogIn = styled.div`
     }
 
     .menu {
-      font-size: 1.3rem;
       display: flex;
       opacity: 0.8;
     }
@@ -139,7 +144,6 @@ export const LogIn = styled.div`
       color: transparent;
 
       svg {
-        color: var(--primary-grey-clr);
         font-size: 2.2rem;
       }
     }
