@@ -2,7 +2,7 @@ import React from "react";
 import StyledSchedule from "./style";
 import { useDispatch } from "react-redux";
 import { movieScreenings } from "../../../../data/projectData";
-import * as BookingSlice from "../../../../redux/features/booking/bookingSlice";
+import * as bookingSlice from "../../../../redux/features/booking/bookingSlice";
 
 const Time = (props) => {
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
@@ -20,8 +20,8 @@ const Time = (props) => {
   }, [day]);
 
   React.useEffect(() => {
-    dispatch(BookingSlice.addBookingTime(screeningTime));
-    dispatch(BookingSlice.removeBookingSeats());
+    dispatch(bookingSlice.addBookingTime(screeningTime));
+    dispatch(bookingSlice.removeBookingSeats());
     // eslint-disable-next-line
   }, [screeningTime]);
 

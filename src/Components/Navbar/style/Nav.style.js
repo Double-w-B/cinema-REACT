@@ -15,7 +15,6 @@ export const Nav = styled.nav`
     width: 100%;
     height: 100%;
     display: grid;
-
     grid-template-columns: repeat(5, 1fr);
 
     li {
@@ -45,14 +44,14 @@ export const Nav = styled.nav`
       }
     }
   }
+
   @media screen and (max-width: 1300px) {
     width: 65%;
   }
+
   @media screen and (max-width: 1100px) {
     visibility: hidden;
     opacity: 0;
     display: none;
   }
-  /* @media screen and (max-width: 1099px) {
-  } */
 `;

@@ -40,6 +40,7 @@ export const Logo = styled.div`
   }
 
   @media screen and (max-width: 1100px) {
+    width: 25%;
     margin-left: 0;
     padding-right: 0;
     width: 15%;
@@ -49,6 +50,6 @@ export const Logo = styled.div`
   }
 
   @media screen and (max-width: 650px) {
-    width: 25%;
+    width: 20%;
   }
 `;

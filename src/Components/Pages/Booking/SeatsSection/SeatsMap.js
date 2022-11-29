@@ -2,7 +2,7 @@ import React from "react";
 import StyledSeats from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { BsArrowDown } from "react-icons/bs";
-import * as Booking from "../../../../redux/features/booking/bookingSlice";
+import * as bookingSlice from "../../../../redux/features/booking/bookingSlice";
 
 const SeatsMap = (props) => {
   const dispatch = useDispatch();
@@ -51,11 +51,11 @@ const SeatsMap = (props) => {
 
       if (tickets > 0) {
         if (bookingSeats.length < tickets && !bookingSeats.includes(seatId)) {
-          dispatch(Booking.addBookingSeats(seatId));
+          dispatch(bookingSlice.addBookingSeats(seatId));
         }
 
         if (bookingSeats.length === tickets && !bookingSeats.includes(seatId)) {
-          dispatch(Booking.replaceBookingSeat(seatId));
+          dispatch(bookingSlice.replaceBookingSeat(seatId));
         }
       } else {
         showErrorContainer(ticketsContainer);

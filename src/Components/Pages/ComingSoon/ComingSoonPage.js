@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import * as Styled from "../../../style/shared";
-import SingleMoviePoster from "../../shared/SingleMoviePoster";
 import Navigation from "../../shared/Navigation";
+import SingleMoviePoster from "../../shared/SingleMoviePoster";
 
 const ComingSoonPage = () => {
   const { moviesComingSoon } = useSelector((store) => store.movies);

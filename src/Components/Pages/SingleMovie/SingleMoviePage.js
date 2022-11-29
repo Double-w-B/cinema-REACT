@@ -13,6 +13,7 @@ const SingleMoviePage = () => {
   const { singleMovieInfo, singleMovieReviews, singleMovieVideo } = useSelector(
     (store) => store.singleMovie
   );
+
   const { title } = singleMovieInfo;
   const pageTitle = location.state?.pageTitle;
   const movieTitle = storedData?.title || title;

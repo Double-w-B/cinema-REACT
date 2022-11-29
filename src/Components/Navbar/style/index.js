@@ -7,6 +7,8 @@ const StyledNavbar = styled.header`
   height: 12vh;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
   background-color: rgba(43, 52, 68, 0.2);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: all 0.3s linear;
@@ -14,8 +16,6 @@ const StyledNavbar = styled.header`
   @media screen and (max-width: 1100px) {
     height: 10vh;
     min-height: 10vh;
-
-    justify-content: space-between;
   }
 `;
 

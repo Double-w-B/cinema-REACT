@@ -11,7 +11,7 @@ export const IconsContainer = styled.div`
   height: 100%;
   margin: 0 auto;
   position: relative;
-  cursor: ${(props) => (props.mouseActive ? "grabbing" : "default")};
+  cursor: ${(props) => (props.mouseMove ? "grabbing" : "default")};
 
   && p {
     font-size: 1.6rem;
@@ -63,7 +63,6 @@ export const ImgContainer = styled.div`
     img {
       width: 40%;
       height: 40%;
-      cursor: pointer;
     }
   }
 
@@ -74,10 +73,16 @@ export const ImgContainer = styled.div`
 
   &.lastIcon {
     transform: translateX(-100%);
+    img {
+      cursor: pointer;
+    }
   }
 
   &.nextIcon {
     transform: translateX(200%);
+    img {
+      cursor: pointer;
+    }
   }
 
   &.hideSlide {

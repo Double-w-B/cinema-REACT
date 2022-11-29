@@ -8,6 +8,7 @@ const Offers = (props) => {
   const iconContainer = React.useRef(null);
 
   const [mouseActive, setMouseActive] = React.useState(false);
+  const [mouseMove, setMouseMove] = React.useState(false);
   const [startX, setStartX] = React.useState(null);
   const [scrollLeft, setScrollLeft] = React.useState(null);
   const [moveEnd, setMoveEnd] = React.useState(0);
@@ -31,6 +32,9 @@ const Offers = (props) => {
 
   const handleMouseMove = (e) => {
     if (!mouseActive || iconMove) return;
+    setMouseActive(true);
+
+    setMouseMove(true);
     e.preventDefault();
     const x = e.pageX - iconContainer.current.offsetLeft;
     const move = x - startX;
@@ -51,6 +55,7 @@ const Offers = (props) => {
 
   const handleMouseUp = () => {
     if (!mouseActive) return;
+    setMouseMove(false);
     if (!iconMove && moveEnd > 0) scrollToLeft();
     if (!iconMove && moveEnd < 0) scrollToRight();
     setMoveEnd(0);
@@ -112,7 +117,7 @@ const Offers = (props) => {
     <StyledCinemaCafe.Offers
       onMouseOver={() => document.body.classList.add("no-scrolling")}
       onMouseLeave={() => document.body.classList.remove("no-scrolling")}
-      onWheel={(e) => handleWheel(e)}
+      onWheel={handleWheel}
     >
       <StyledCinemaCafe.IconsContainer
         className="no-select"
@@ -121,7 +126,8 @@ const Offers = (props) => {
         onMouseLeave={() => setMouseActive(false)}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        mouseActive={mouseActive}
+        mouseMove={mouseMove}
+        iconMove={iconMove}
       >
         {setActiveIcon()}
         {cafeOffers.map((offer, offerIndex) => {

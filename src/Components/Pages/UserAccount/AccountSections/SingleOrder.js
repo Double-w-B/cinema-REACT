@@ -4,8 +4,8 @@ import StyledAccountSections from "./style";
 import { BsPlayCircle } from "react-icons/bs";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import * as SingleMovie from "../../../../redux/features/movies/singleMovieSlice";
-import { setSingleMovieVideoKey } from "../../../../redux/features/movies/singleMovieSlice";
+import * as singleMovieSlice from "../../../../redux/features/movies/singleMovieSlice";
+import * as modalsSlice from "../../../../redux/features/modals/modalsSlice";
 
 const SingleOrder = (props) => {
   const dispatch = useDispatch();
@@ -31,9 +31,9 @@ const SingleOrder = (props) => {
     .concat(screeningDate, screeningTime, seats[0]);
 
   const handleIconClick = () => {
-    dispatch(setSingleMovieVideoKey({ key }));
-    props.setIsModal(true);
-    props.setIsMovieTrailer(true);
+    dispatch(singleMovieSlice.setSingleMovieVideoKey({ key }));
+    dispatch(modalsSlice.handleIsModal(true));
+    dispatch(modalsSlice.handleIsMovieTrailerModal(true));
   };
 
   const checkGroups = () => {
@@ -59,10 +59,10 @@ const SingleOrder = (props) => {
 
   const handleTitleClick = () => {
     sessionStorage.removeItem("single_movie");
-    dispatch(SingleMovie.removeSingleMovieData());
-    dispatch(SingleMovie.getSingleMovieInfo(movieId));
-    dispatch(SingleMovie.getSingleMovieVideos(movieId));
-    dispatch(SingleMovie.getSingleMovieReviews(movieId));
+    dispatch(singleMovieSlice.removeSingleMovieData());
+    dispatch(singleMovieSlice.getSingleMovieInfo(movieId));
+    dispatch(singleMovieSlice.getSingleMovieVideos(movieId));
+    dispatch(singleMovieSlice.getSingleMovieReviews(movieId));
   };
 
   const setPath = () => {

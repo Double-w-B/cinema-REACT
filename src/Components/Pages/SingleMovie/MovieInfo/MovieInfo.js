@@ -3,7 +3,7 @@ import StyledMovieInfo from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Link } from "react-router-dom";
 import * as Component from "./index";
-import * as BookingSlice from "../../../../redux/features/booking/bookingSlice";
+import * as bookingSlice from "../../../../redux/features/booking/bookingSlice";
 
 const MovieInfo = () => {
   const dispatch = useDispatch();
@@ -25,8 +25,8 @@ const MovieInfo = () => {
   };
 
   const handleClick = () => {
-    dispatch(BookingSlice.addBookingMovieId(movieId));
-    dispatch(BookingSlice.addBookingMovieTitle(movieTitle));
+    dispatch(bookingSlice.addBookingMovieId(movieId));
+    dispatch(bookingSlice.addBookingMovieTitle(movieTitle));
   };
 
   return (

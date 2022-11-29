@@ -1,7 +1,7 @@
 import React from "react";
 import StyledSchedule from "./style";
 import { useDispatch } from "react-redux";
-import * as BookingSlice from "../../../../redux/features/booking/bookingSlice";
+import * as bookingSlice from "../../../../redux/features/booking/bookingSlice";
 
 const Date = (props) => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const Date = (props) => {
   const [activeDay, setActiveDay] = React.useState(0);
 
   React.useEffect(() => {
-    dispatch(BookingSlice.addBookingDay(showFullDate(day)));
+    dispatch(bookingSlice.addBookingDay(showFullDate(day)));
     // eslint-disable-next-line
   }, [day]);
 
@@ -25,7 +25,7 @@ const Date = (props) => {
   const handleClick = (date, index) => {
     setDay(date);
     setActiveDay(index);
-    dispatch(BookingSlice.removeBookingSeats());
+    dispatch(bookingSlice.removeBookingSeats());
   };
 
   const getDays = () => {

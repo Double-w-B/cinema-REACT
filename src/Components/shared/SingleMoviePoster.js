@@ -1,9 +1,9 @@
 import React from "react";
-import StyledSinglePoster from "./style/SingleMoviePoster.style";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as SingleMovieModule from "../../redux/features/movies/singleMovieSlice";
 import spinnerImg from "../../assets/spinner.gif";
+import { useDispatch, useSelector } from "react-redux";
+import StyledSinglePoster from "./style/SingleMoviePoster.style";
+import * as singleMovieSlice from "../../redux/features/movies/singleMovieSlice";
 
 const SingleMoviePoster = (props) => {
   const [imgLoaded, setImgLoaded] = React.useState(false);
@@ -26,10 +26,14 @@ const SingleMoviePoster = (props) => {
 
   const getSingleMovieData = () => {
     sessionStorage.removeItem("single_movie");
-    dispatch(SingleMovieModule.removeSingleMovieData());
-    dispatch(SingleMovieModule.getSingleMovieInfo(id));
-    dispatch(SingleMovieModule.getSingleMovieVideos(id));
-    dispatch(SingleMovieModule.getSingleMovieReviews(id));
+    dispatch(singleMovieSlice.removeSingleMovieData());
+    dispatch(singleMovieSlice.getSingleMovieInfo(id));
+    dispatch(singleMovieSlice.getSingleMovieVideos(id));
+    dispatch(singleMovieSlice.getSingleMovieReviews(id));
+  };
+
+  const checkLength = (title) => {
+    if (title.length > 30) return { fontSize: "0.9rem" };
   };
 
   return (
@@ -44,7 +48,9 @@ const SingleMoviePoster = (props) => {
       </StyledSinglePoster.ImgLayer>
       <img src={imgLowResUrl + poster_path} alt="" />
       <Link to={setPath()} state={{ pageTitle }} draggable="false">
-        <p onClick={getSingleMovieData}>{title}</p>
+        <p onClick={getSingleMovieData} style={checkLength(title)}>
+          {title}
+        </p>
       </Link>
 
       {imgLoaded && (

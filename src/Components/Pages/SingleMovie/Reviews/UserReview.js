@@ -49,7 +49,7 @@ const UserReview = () => {
           },
           content: review,
           created_at: new Date().toISOString(),
-          id: singleMovieInfo.id,
+          id: singleMovieInfo?.id,
         })
       );
   };
@@ -59,7 +59,7 @@ const UserReview = () => {
       <div className="review">
         <div className="rating">
           <p>Your Review:</p>
-          <UserReview.Stars>
+          <StyledReviews.Stars>
             <p>Your Rating:</p>
             <span>
               {Array.from({ length: 10 }, (el, index) => (
@@ -75,14 +75,14 @@ const UserReview = () => {
                 />
               ))}
             </span>
-          </UserReview.Stars>
+          </StyledReviews.Stars>
         </div>
         <textarea
           value={review}
           onChange={(e) => setReview(e.target.value)}
         ></textarea>
       </div>
-      <UserReview.Button onClick={showDate}>add review</UserReview.Button>
+      <StyledReviews.Button onClick={showDate}>add review</StyledReviews.Button>
     </StyledReviews.UserReview>
   );
 };
