@@ -1,10 +1,10 @@
 import React from "react";
+import * as Component from "./index";
 import StyledSingleMovie from "./style";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { SharedUnderline } from "../../../style/shared";
-import * as Component from "./index";
 import Navigation from "../../shared/Navigation";
+import { SharedUnderline } from "../../../style/shared";
 
 const SingleMoviePage = () => {
   const location = useLocation();
@@ -19,6 +19,7 @@ const SingleMoviePage = () => {
   const movieTitle = storedData?.title || title;
   const movieReviews = storedData?.reviews || singleMovieReviews;
   const movieTrailer = storedData?.trailer || singleMovieVideo;
+  const isTrailer = Object.keys(movieTrailer).length > 0;
 
   React.useEffect(() => {
     window.scroll(0, 0);
@@ -31,8 +32,8 @@ const SingleMoviePage = () => {
         pageTitle={pageTitle ? pageTitle : undefined}
       />
       <Component.MainTitle />
-      {movieTrailer && <Component.Trailer title={title} />}
-      <StyledSingleMovie.InfoContainer trailer={movieTrailer}>
+      <Component.Trailer title={title} />
+      <StyledSingleMovie.InfoContainer trailer={isTrailer}>
         <Component.MovieInfo />
         <Component.Poster />
       </StyledSingleMovie.InfoContainer>

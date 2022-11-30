@@ -73,7 +73,7 @@ const SingleOrder = (props) => {
     <StyledAccountSections.SingleOrder id={orderId}>
       <StyledAccountSections.ImgContainer>
         <img src={imgLowResUrl + poster} alt="" />
-        <BsPlayCircle onClick={handleIconClick} />
+        {key && <BsPlayCircle onClick={handleIconClick} />}
       </StyledAccountSections.ImgContainer>
       <StyledAccountSections.OrderInfo status={payment}>
         <h2>

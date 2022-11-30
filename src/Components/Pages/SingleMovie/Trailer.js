@@ -7,7 +7,9 @@ const Trailer = ({ title }) => {
   const [showLoadingImg, setShowLoadingImg] = React.useState(true);
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
 
-  const { singleMovieVideo } = useSelector((store) => store.singleMovie);
+  const { singleMovieVideo, isMovieTrailerLoading } = useSelector(
+    (store) => store.singleMovie
+  );
 
   const trailerKey = storedData?.trailer?.key || singleMovieVideo?.key;
   const trailerTitle = storedData?.title || title;
@@ -21,8 +23,14 @@ const Trailer = ({ title }) => {
 
   return (
     <StyledSingleMovie.Trailer>
-      <StyledSingleMovie.Layer showLoadingImg={showLoadingImg}>
-        <img src={spinnerImg} alt="" />
+      <StyledSingleMovie.Layer
+        showLoadingImg={showLoadingImg}
+        isTrailer={trailerKey}
+      >
+        <img src={spinnerImg} alt="" draggable="false" />
+        {!isMovieTrailerLoading && (
+          <p>Sorry, the movie trailer is currently unavailable</p>
+        )}
       </StyledSingleMovie.Layer>
       {trailerKey && (
         <iframe

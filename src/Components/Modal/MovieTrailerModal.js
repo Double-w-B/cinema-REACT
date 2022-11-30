@@ -17,6 +17,7 @@ const TrailerModal = () => {
   const { singleMovieVideo, singleMovieInfo } = useSelector(
     (store) => store.singleMovie
   );
+
   const { key } = singleMovieVideo;
   const { title } = singleMovieInfo;
 

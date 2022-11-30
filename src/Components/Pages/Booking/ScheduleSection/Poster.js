@@ -15,6 +15,7 @@ const Poster = (props) => {
   const movieGenres = storedData?.genres || genres;
   const moviePoster = storedData?.poster_path || poster_path;
   const movieTrailer = storedData?.trailer?.key || key;
+  const isTrailer = Object.keys(movieTrailer).length > 0;
 
   const abbreviation = (title) => {
     if (title === "Science Fiction") return "Sci-Fi";
@@ -30,7 +31,7 @@ const Poster = (props) => {
     <StyledSchedule.Poster className="no-select">
       <div className="poster">
         <img src={`${imgLowResUrl}${moviePoster}`} alt="" />
-        {movieTrailer && <BsPlayCircle onClick={handleClick} />}
+        {isTrailer && <BsPlayCircle onClick={handleClick} />}
       </div>
 
       {movieGenres && (
