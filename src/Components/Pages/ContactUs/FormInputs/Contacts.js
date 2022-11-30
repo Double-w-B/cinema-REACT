@@ -1,10 +1,13 @@
 import React from "react";
 import { contactFormInputs } from "../../../../data/projectData";
 import { AiFillMinusCircle, AiFillCheckCircle } from "react-icons/ai";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Contacts = (props) => {
-  const [email, setEmail] = React.useState("");
-  const [emailConfirm, setEmailConfirm] = React.useState("");
+  const { user } = useAuth0();
+
+  const [email, setEmail] = React.useState(user?.email || "");
+  const [emailConfirm, setEmailConfirm] = React.useState(user?.email || "");
   const [phoneNum, setPhoneNum] = React.useState("");
   const [cardNum, setCardNum] = React.useState("");
 

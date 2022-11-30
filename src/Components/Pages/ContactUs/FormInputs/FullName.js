@@ -1,8 +1,11 @@
 import React from "react";
 import { contactFormInputs } from "../../../../data/projectData";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const FullName = (props) => {
-  const [name, setName] = React.useState("");
+  const { user } = useAuth0();
+
+  const [name, setName] = React.useState(user?.given_name || user?.name || "");
   const [surname, setSurname] = React.useState("");
   const values = [name, surname];
   const { form, setForm } = props;
