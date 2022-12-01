@@ -1,5 +1,5 @@
-import Info from "./Info";
+import Links from "./Links";
 import Copyright from "./Copyright";
 import Logos from "./Logos";
 
-export { Info, Copyright, Logos };
+export { Links, Copyright, Logos };

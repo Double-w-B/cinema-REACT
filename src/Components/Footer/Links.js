@@ -2,9 +2,9 @@ import React from "react";
 import StyledFooter from "./style";
 import { Link } from "react-router-dom";
 
-const Info = () => {
+const Links = () => {
   return (
-    <StyledFooter.Info>
+    <StyledFooter.Links>
       <Link to="/about">about</Link>
       <Link to="/contact_us">contact us</Link>
       <Link to="help/faq">FAQ</Link>
@@ -16,8 +16,8 @@ const Info = () => {
       <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
         <span className="ig">instagram</span>
       </a>
-    </StyledFooter.Info>
+    </StyledFooter.Links>
   );
 };
 
-export default Info;
+export default Links;

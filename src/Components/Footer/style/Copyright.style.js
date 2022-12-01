@@ -11,4 +11,8 @@ export const Copyright = styled.section`
   a {
     color: #fff;
   }
+
+  @media screen and (max-width: 900px) {
+    height: 20%;
+  }
 `;

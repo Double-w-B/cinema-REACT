@@ -5,7 +5,7 @@ import * as Component from "./index";
 const Footer = () => {
   return (
     <StyledFooter>
-      <Component.Info />
+      <Component.Links />
       <Component.Logos />
       <Component.Copyright />
     </StyledFooter>

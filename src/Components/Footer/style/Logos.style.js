@@ -9,6 +9,7 @@ export const Logos = styled.section`
   grid-template-columns: repeat(auto-fit, minmax(20px, 100px));
   align-items: center;
   justify-content: space-around;
+  transition: 0.2s linear;
 
   img {
     width: 100%;
@@ -42,5 +43,22 @@ export const Logos = styled.section`
     -moz-animation: ${Shared.fade4} 7.5s infinite linear;
     -o-animation: ${Shared.fade4} 7.5s infinite linear;
     animation: ${Shared.fade4} 7.5s infinite linear;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 90%;
+    height: 50%;
+    padding: 0.5rem 0;
+  }
+  @media screen and (max-width: 768px) {
+    width: 95%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 55%;
+    padding: 1.5rem 0;
+
+    div:nth-child(3) {
+      order: 4;
+    }
   }
 `;

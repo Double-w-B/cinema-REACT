@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Info = styled.section`
+export const Links = styled.section`
   width: 80%;
   height: 30%;
   margin: 0 auto;
@@ -36,5 +36,18 @@ export const Info = styled.section`
     &:hover {
       color: #fff;
     }
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 90%;
+  }
+  @media screen and (max-width: 900px) {
+    width: 95%;
+    a {
+      margin: 0 1rem;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    /* width: 70%; */
   }
 `;

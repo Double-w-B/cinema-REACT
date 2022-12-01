@@ -9,4 +9,8 @@ export const NowPlaying = styled.section`
     text-transform: capitalize;
     color: #fff;
   }
+
+  @media screen and (max-width: 500px) {
+    width: 95%;
+  }
 `;

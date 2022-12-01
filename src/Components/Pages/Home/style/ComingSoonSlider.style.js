@@ -25,8 +25,17 @@ export const Container = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
   cursor: ${(props) => props.mouseActive && "grabbing"};
+  transition: 0.3s linear;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 85%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 75%;
+    padding: 1rem 0;
   }
 `;
