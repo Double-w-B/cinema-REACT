@@ -27,4 +27,17 @@ export const SharedButton = styled.button`
       transform: scale(0.9);
     }
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    font-size: 1.1rem;
+
+    &.btn-slider {
+      bottom: 0.5rem;
+      right: 0.5rem;
+    }
+  }
 `;

@@ -8,13 +8,23 @@ import * as singleMovieSlice from "../../../redux/features/movies/singleMovieSli
 import * as bookingSlice from "../../../redux/features/booking/bookingSlice";
 
 const NowPlayingSlider = () => {
-  const [index, setIndex] = React.useState(0);
   const dispatch = useDispatch();
+
+  const [index, setIndex] = React.useState(0);
+  const [windowSize, setWindowSize] = React.useState(window.innerWidth);
 
   const { moviesNowPlaying, nowPlayingIsLoading, imgHiResUrl } = useSelector(
     (store) => store.movies
   );
   const firstSixMovies = moviesNowPlaying.slice(0, 6);
+
+  React.useEffect(() => {
+    const changeValue = () => {
+      setWindowSize(window.innerWidth);
+    };
+    window.addEventListener("resize", changeValue);
+    return () => window.removeEventListener("resize", changeValue);
+  });
 
   React.useEffect(() => {
     const lastIndex = firstSixMovies.length - 1;
@@ -61,6 +71,24 @@ const NowPlayingSlider = () => {
       )
         position = "lastSlide";
 
+      const checkTitleLength = () => {
+        if (title.length > 20 && windowSize < 1000) {
+          const tempTitle = title.split(" ");
+          const firstPartTitle = tempTitle.slice(0, 2).join(" ");
+          const secondPartTitle = tempTitle
+            .slice(2, tempTitle.length)
+            .join(" ");
+
+          return (
+            <>
+              <p>{firstPartTitle}</p>
+              <p>{secondPartTitle}</p>
+            </>
+          );
+        }
+        return <p>{title}</p>;
+      };
+
       return (
         <StyledHomePage.NowPlayingSlider.ImgContainer
           key={id}
@@ -69,7 +97,7 @@ const NowPlayingSlider = () => {
         >
           <img src={imgHiResUrl + backdrop_path} alt="" />
           <div className="layer"></div>
-          <div className="title">{title}</div>
+          <div className="title">{checkTitleLength()}</div>
           <Link to={setPath()} onClick={handleClick} draggable="false">
             <Styled.SharedButton className="btn-slider">
               book now

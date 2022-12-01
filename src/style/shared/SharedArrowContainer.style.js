@@ -14,16 +14,24 @@ export const SharedArrowContainer = styled.div`
   transform: translateY(-50%);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 1;
+  transition: 0.3s linear;
 
   &.upComing {
     background-color: rgba(43, 52, 68, 0.2);
+  }
+
+  &.left,
+  &.right {
+    &:active {
+      font-size: 1.5rem;
+    }
   }
 
   &.left {
     left: 1rem;
 
     &.upComing {
-      left: 0;
+      left: -0.5rem;
     }
 
     &:hover {
@@ -35,11 +43,29 @@ export const SharedArrowContainer = styled.div`
     right: 1rem;
 
     &.upComing {
-      right: 0;
+      right: -0.5rem;
     }
 
     &:hover {
       transform: translate(0.1rem, -50%);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    font-size: 1.5rem;
+    &.left {
+      &.upComing {
+        left: 0;
+      }
+    }
+    &.right {
+      &.upComing {
+        right: 0;
+      }
     }
   }
 `;

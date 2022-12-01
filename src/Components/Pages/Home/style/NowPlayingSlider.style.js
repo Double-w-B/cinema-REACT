@@ -7,6 +7,27 @@ export const NowPlayingSlider = styled.section`
   position: relative;
   overflow: hidden;
   display: flex;
+  transition: 0.3s linear;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  @media screen and (max-width: 1100px) {
+    height: 75vh;
+  }
+  @media screen and (max-width: 900px) {
+    height: 70vh;
+  }
+  @media screen and (max-width: 768px) {
+    height: 60vh;
+  }
+  @media screen and (max-width: 650px) {
+    height: 50vh;
+  }
+  @media screen and (max-width: 550px) {
+    height: 40vh;
+  }
+  @media screen and (max-width: 500px) {
+    height: 35vh;
+  }
 `;
 
 export const ImgContainer = styled.div`
@@ -18,7 +39,6 @@ export const ImgContainer = styled.div`
   position: absolute;
   transition: all 0.5s linear;
   z-index: 0;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   .layer {
     width: 100%;
@@ -44,7 +64,7 @@ export const ImgContainer = styled.div`
     transform: translateX(0);
 
     .title {
-      bottom: 0;
+      bottom: 0.5rem;
     }
   }
   &.lastSlide {
@@ -59,16 +79,44 @@ export const ImgContainer = styled.div`
     height: 100%;
     display: block;
     object-fit: cover;
+    object-position: top;
   }
 
   .title {
     color: #fff;
-    font-size: ${(props) => (props.title.length > 30 ? "3rem" : "3.5rem")};
+    font-size: ${(props) => (props.title.length > 25 ? "3rem" : "3.5rem")};
     position: absolute;
     transition: all 0.6s linear;
     letter-spacing: 1px;
     text-shadow: 2px 2px #000;
     bottom: -8rem;
     left: 1rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    .title {
+      font-size: ${(props) => (props.title.length > 25 ? "2.5rem" : "2.8rem")};
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .title {
+      font-size: ${(props) => (props.title.length > 25 ? "2.2rem" : "2.5rem")};
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .title {
+      font-size: ${(props) => (props.title.length > 25 ? "1.9rem" : "2.2rem")};
+    }
+  }
+  @media screen and (max-width: 650px) {
+    .title {
+      font-size: ${(props) => (props.title.length > 25 ? "1.5rem" : "1.8rem")};
+    }
+  }
+  @media screen and (max-width: 550px) {
+    .title {
+      font-size: ${(props) => (props.title.length > 25 ? "1.4rem" : "1.6rem")};
+    }
   }
 `;
