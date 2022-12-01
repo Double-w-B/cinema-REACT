@@ -51,10 +51,14 @@ const Nav = (props) => {
     }
   };
 
+  const filteredNavLinks = navbarLinks.filter(
+    (link) => link.title !== "log out"
+  );
+
   return (
     <StyledNavbar.Nav className="no-select">
       <ul>
-        {navbarLinks.map((link, index) => {
+        {filteredNavLinks.map((link, index) => {
           const { title, path } = link;
           return (
             <li key={index}>

@@ -12,7 +12,7 @@ const MenuModal = (props) => {
   const location = useLocation();
   const { isMenuModal } = useSelector((store) => store.modals);
 
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, logout } = useAuth0();
   const isUser = isAuthenticated && user;
 
   React.useEffect(() => {
@@ -26,6 +26,17 @@ const MenuModal = (props) => {
     return () => window.removeEventListener("resize", checkWindowWidth);
   });
 
+  const { name: storedName } = useSelector((store) => store.userData);
+
+  const checkName = () => {
+    if (storedName) return storedName;
+    if (user?.given_name) {
+      return user?.given_name;
+    } else {
+      return user?.name.split(" ")[0];
+    }
+  };
+
   const closeNavbarModal = () => {
     dispatch(modalsSlice.handleIsModal(false));
     dispatch(modalsSlice.handleIsMenuModal(false));
@@ -36,7 +47,10 @@ const MenuModal = (props) => {
     dispatch(modalsSlice.handleIsAuthModal(true));
   };
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e) => {
+    if (e.target.textContent === "log out") {
+      logout({ returnTo: window.location.origin });
+    }
     closeNavbarModal();
   };
 
@@ -50,12 +64,15 @@ const MenuModal = (props) => {
   };
 
   const activeLink = (path) => {
+    if (!path) return "#fff";
+
     if (
       (path !== "/" && location.pathname.slice(0, path.length) === path) ||
       (path === "/" && location.pathname.slice(0, 11) === "/nowPlaying")
-    )
+    ) {
       return "var(--primary-red-clr)";
-    else return "#fff";
+    }
+    return "#fff";
   };
 
   const myAccountLink = (path, title) => {
@@ -63,22 +80,20 @@ const MenuModal = (props) => {
       return (
         <Link
           to={path}
-          style={{
-            color: activeLink(path),
-          }}
+          style={{ color: activeLink(path) }}
           onClick={handleLinkClick}
         >
           {title}
         </Link>
       );
-    } else {
-      return <p onClick={handleAccountClick}>{title}</p>;
     }
+
+    return <p onClick={handleAccountClick}>{title}</p>;
   };
 
   return (
-    <StyledMenuModal isMenuModal={isMenuModal}>
-      <div className="menu">
+    <StyledMenuModal showModal={isMenuModal} isUser={isUser}>
+      <div className="heading">
         <p>Menu</p>
         <RiCloseCircleLine onClick={closeNavbarModal} />
       </div>
@@ -92,9 +107,7 @@ const MenuModal = (props) => {
                 <Link
                   to={path}
                   onClick={path === "/" ? scrollToNowPlaying : handleLinkClick}
-                  style={{
-                    color: activeLink(path),
-                  }}
+                  style={{ color: activeLink(path) }}
                 >
                   {title}
                 </Link>
@@ -105,6 +118,19 @@ const MenuModal = (props) => {
           );
         })}
       </ul>
+      <div className="greeting">
+        {isUser ? (
+          <p>
+            Nice to See you,
+            <br />
+            {checkName()}
+          </p>
+        ) : (
+          <p>
+            See all the movies you want <br /> in CineMania
+          </p>
+        )}
+      </div>
     </StyledMenuModal>
   );
 };

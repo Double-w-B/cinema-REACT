@@ -6,12 +6,13 @@ const StyledMenuModal = styled.div`
   padding: 0 1.5rem 1rem 1.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   top: 0;
-  right: ${(props) => (props.isMenuModal ? "0" : "-100%")};
+  right: ${(props) => (props.showModal ? "0" : "-100%")};
   background-color: var(--primary-white-clr);
-  visibility: ${(props) => (props.isMenuModal ? "visible" : "hidden")};
-  opacity: ${(props) => (props.isMenuModal ? "1" : "0")};
+  visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
+  opacity: ${(props) => (props.showModal ? "1" : "0")};
   transition: all 0.5s ease-out;
   z-index: 11;
   background: #080c13;
@@ -22,7 +23,7 @@ const StyledMenuModal = styled.div`
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 3px;
 
-  .menu {
+  .heading {
     width: 100%;
     height: 10vh;
     font-size: 1.3rem;
@@ -69,6 +70,10 @@ const StyledMenuModal = styled.div`
       font-weight: 500;
       transition: 0.3s linear;
 
+      &:last-child {
+        visibility: ${(props) => (props.isUser ? "visible" : "hidden")};
+      }
+
       &:hover {
         width: 50%;
         transition: 0.5s linear;
@@ -91,6 +96,20 @@ const StyledMenuModal = styled.div`
     }
   }
 
+  .greeting {
+    width: 100%;
+    min-height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-grey-clr);
+    p {
+      font-size: 1.1rem;
+      text-align: center;
+    }
+  }
+
   @media screen and (max-width: 900px) {
     width: 60%;
   }
@@ -102,7 +121,7 @@ const StyledMenuModal = styled.div`
   @media screen and (max-width: 600px) {
     width: 76%;
 
-    .menu {
+    .heading {
       font-size: 1.4rem;
       svg {
         font-size: 2.2rem;

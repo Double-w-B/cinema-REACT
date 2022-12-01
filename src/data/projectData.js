@@ -63,6 +63,7 @@ export const navbarLinks = [
   { title: "unlimited", path: "/unlimited" },
   { title: "cinema cafe", path: "/cinema_cafe" },
   { title: "my account", path: "/myAccount" },
+  { title: "log out", path: "" },
 ];
 
 export const FAQsTopics = [
