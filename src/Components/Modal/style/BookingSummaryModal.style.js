@@ -3,7 +3,11 @@ import { SharedButton } from "../../../style/shared/SharedButton.style";
 
 const StyledBookingSummaryModal = styled.div`
   width: 30vw;
+  min-width: 450px;
+  max-width: 460px;
   height: 50vh;
+  min-height: 380px;
+  max-height: 400px;
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
@@ -24,21 +28,45 @@ const StyledBookingSummaryModal = styled.div`
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 3px;
 
-  h2 {
+  h1 {
     text-align: center;
   }
 
   p {
     font-size: 1.1rem;
     word-break: break-word;
+    hyphens: auto;
+    text-align: justify;
+
     span {
       color: var(--primary-red-clr);
+      hyphens: none;
     }
   }
   a {
     width: 100%;
     display: grid;
     place-items: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 45vh;
+    min-height: 400px;
+    min-width: 380px;
+    h1 {
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    min-width: 340px;
+
+    h1 {
+      font-size: 1.6rem;
+    }
   }
 `;
 

@@ -17,7 +17,7 @@ const ContactUsModal = () => {
   return (
     <StyledContactUsModal showModal={isContactUsModal}>
       <div className="content">
-        <h2>Thank you for contacting CineMania!</h2>
+        <h1>Thank you for contacting CineMania!</h1>
         <p>
           Inquiries are responded to within 24-48 business hours. Additionally,
           you can reach out to us on Facebook or Instagram.

@@ -25,7 +25,7 @@ const BookingSummaryModal = (props) => {
       className="no-select"
       showModal={isBookingSummaryModal}
     >
-      <h2>Booking Completed</h2>
+      <h1>Booking Completed</h1>
 
       <p>
         Your booking has been submitted successfully! Please check the status of
