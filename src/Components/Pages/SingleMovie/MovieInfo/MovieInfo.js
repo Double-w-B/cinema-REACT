@@ -8,8 +8,9 @@ import * as bookingSlice from "../../../../redux/features/booking/bookingSlice";
 const MovieInfo = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const nowPlaying = location.pathname.slice(0, 11) === "/nowPlaying";
+  const nowPlaying = location.pathname.split("/")[1] === "nowPlaying";
 
+  const { windowWidth } = useSelector((store) => store.app);
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { tagline, overview, title, id } = singleMovieInfo;
@@ -37,7 +38,7 @@ const MovieInfo = () => {
       <p className="overview">{movieOverview}</p>
 
       {slogan && <p className="tagline">"{slogan}"</p>}
-      {nowPlaying && (
+      {nowPlaying && windowWidth > 940 && (
         <StyledMovieInfo.ButtonContainer>
           <Link to={`/nowPlaying/${setTitle()}/booking`} onClick={handleClick}>
             <StyledMovieInfo.Button>book now</StyledMovieInfo.Button>

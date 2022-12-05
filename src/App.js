@@ -6,6 +6,7 @@ import Footer from "./Components/Footer/Footer";
 import * as Pages from "./Components/Pages";
 import * as Modals from "./Components/Modal";
 import * as moviesSlice from "./redux/features/movies/allMoviesSlice";
+import { changeWindowWidth } from "./redux/features/functional/appSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,15 @@ function App() {
   React.useEffect(() => {
     dispatch(moviesSlice.getMoviesNowPlaying());
     dispatch(moviesSlice.getMoviesComingSoon());
+  });
+
+  React.useEffect(() => {
+    const setWindowWidth = () => {
+      dispatch(changeWindowWidth(window.innerWidth));
+    };
+
+    window.addEventListener("resize", setWindowWidth);
+    return () => window.removeEventListener("resize", setWindowWidth);
   });
 
   const refs = {

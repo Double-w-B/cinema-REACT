@@ -11,20 +11,17 @@ const MenuModal = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { isMenuModal } = useSelector((store) => store.modals);
+  const { windowWidth } = useSelector((store) => store.app);
 
   const { isAuthenticated, user, logout } = useAuth0();
   const isUser = isAuthenticated && user;
 
   React.useEffect(() => {
-    const checkWindowWidth = () => {
-      if (window.innerWidth > 1100) {
-        closeNavbarModal();
-      }
-    };
-
-    window.addEventListener("resize", checkWindowWidth);
-    return () => window.removeEventListener("resize", checkWindowWidth);
-  });
+    if (windowWidth > 1100) {
+      closeNavbarModal();
+    }
+    // eslint-disable-next-line
+  }, [windowWidth]);
 
   const { name: storedName } = useSelector((store) => store.userData);
 

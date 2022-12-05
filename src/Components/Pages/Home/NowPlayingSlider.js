@@ -11,20 +11,12 @@ const NowPlayingSlider = () => {
   const dispatch = useDispatch();
 
   const [index, setIndex] = React.useState(0);
-  const [windowSize, setWindowSize] = React.useState(window.innerWidth);
+  const { windowWidth } = useSelector((store) => store.app);
 
   const { moviesNowPlaying, nowPlayingIsLoading, imgHiResUrl } = useSelector(
     (store) => store.movies
   );
   const firstSixMovies = moviesNowPlaying.slice(0, 6);
-
-  React.useEffect(() => {
-    const changeValue = () => {
-      setWindowSize(window.innerWidth);
-    };
-    window.addEventListener("resize", changeValue);
-    return () => window.removeEventListener("resize", changeValue);
-  });
 
   React.useEffect(() => {
     const lastIndex = firstSixMovies.length - 1;
@@ -72,7 +64,7 @@ const NowPlayingSlider = () => {
         position = "lastSlide";
 
       const checkTitleLength = () => {
-        if (title.length > 20 && windowSize < 1000) {
+        if (title.length > 20 && windowWidth < 1000) {
           const tempTitle = title.split(" ");
           const firstPartTitle = tempTitle.slice(0, 2).join(" ");
           const secondPartTitle = tempTitle
