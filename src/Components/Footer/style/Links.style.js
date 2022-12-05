@@ -47,7 +47,4 @@ export const Links = styled.section`
       margin: 0 1rem;
     }
   }
-  @media screen and (max-width: 900px) {
-    /* width: 70%; */
-  }
 `;

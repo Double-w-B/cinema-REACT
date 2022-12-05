@@ -50,15 +50,13 @@ export const Logos = styled.section`
     height: 50%;
     padding: 0.5rem 0;
   }
+
   @media screen and (max-width: 768px) {
     width: 95%;
   }
-  @media screen and (max-width: 500px) {
-    width: 55%;
-    padding: 1.5rem 0;
 
-    div:nth-child(3) {
-      order: 4;
-    }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(20px, 75px));
+    padding: 1.5rem 0;
   }
 `;

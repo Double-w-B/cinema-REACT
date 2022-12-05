@@ -14,11 +14,13 @@ const StyledFooter = styled.footer`
   @media screen and (max-width: 900px) {
     height: 45vh;
   }
+
   @media screen and (max-width: 768px) {
     height: 50vh;
   }
+
   @media screen and (max-width: 500px) {
-    height: 55vh;
+    height: 45vh;
   }
 `;
 
