@@ -15,12 +15,22 @@ const MainTitle = () => {
   const movieTitle = storedData?.title || title;
   const isTrailer = Object.keys(movieTrailer).length > 0;
 
+  const movieTitleLength = movieTitle?.length;
+
+  const abbreviation = (title) => {
+    if (title === "Science Fiction") return "Sci-Fi";
+    return title;
+  };
+
   return (
-    <StyledSingleMovie.MainTitle trailer={isTrailer}>
+    <StyledSingleMovie.MainTitle
+      trailer={isTrailer}
+      titleLength={movieTitleLength}
+    >
       {isTrailer && <h1>{movieTitle}</h1>}
       <div className="genres no-select">
-        {movieGenres?.map((genre, index) => {
-          return <div key={index}>{genre.name}</div>;
+        {movieGenres?.slice(0, 3).map((genre, index) => {
+          return <div key={index}>{abbreviation(genre.name)}</div>;
         })}
       </div>
     </StyledSingleMovie.MainTitle>

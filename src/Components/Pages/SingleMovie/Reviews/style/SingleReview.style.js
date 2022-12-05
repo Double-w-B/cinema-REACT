@@ -7,6 +7,10 @@ export const SingleReview = styled.article`
   color: #fff;
   display: flex;
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Author = styled.div`
@@ -23,7 +27,9 @@ export const Author = styled.div`
       width: 100%;
       height: 100%;
       max-width: 70px;
+      min-width: 70px;
       max-height: 70px;
+      min-height: 70px;
       border-radius: 50%;
       object-fit: cover;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -63,6 +69,39 @@ export const Author = styled.div`
 
     p:last-child {
       color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .avatar {
+      width: 40%;
+    }
+    .review-info {
+      width: 60%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .avatar {
+      width: 30%;
+      min-width: 90px;
+      max-width: 90px;
+      justify-content: start;
+    }
+
+    .review-info {
+      width: calc(100% - 90px);
+      padding-left: 0;
+      position: relative;
+
+      p:not(.name-rating p) {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     }
   }
 `;
@@ -107,6 +146,13 @@ export const Review = styled.div`
       &:active {
         transform: scale(0.9);
       }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+
+    .content_buttons {
+      margin-top: 1rem;
     }
   }
 `;

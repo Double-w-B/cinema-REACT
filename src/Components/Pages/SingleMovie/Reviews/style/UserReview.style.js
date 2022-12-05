@@ -11,11 +11,11 @@ export const UserReview = styled.div`
     padding-right: 0.5rem;
 
     .rating {
+      width: 30%;
       font-size: 1.2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      width: 30%;
       text-align: center;
       font-style: italic;
       margin: 0 auto;
@@ -34,6 +34,35 @@ export const UserReview = styled.div`
       border: 2px solid rgba(255, 255, 255, 0.3);
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       cursor: text;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 1rem auto 3rem auto;
+
+    .review {
+      flex-direction: column;
+
+      .rating {
+        width: 100%;
+        flex-direction: row;
+
+        p:first-child:not(.stars) {
+          width: 180px;
+          text-align: left;
+        }
+      }
+      textarea {
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .rating {
+      p:first-child:not(.stars) {
+        font-size: 1.1rem;
+      }
     }
   }
 `;
@@ -61,6 +90,29 @@ export const Stars = styled.div`
 
     * {
       cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-bottom: 0.5rem;
+
+    p {
+      text-align: right;
+    }
+    svg {
+      margin-left: 0.5rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    p {
+      font-size: 1.1rem;
+    }
+    svg {
+      margin-left: 0.3rem;
     }
   }
 `;

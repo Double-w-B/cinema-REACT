@@ -12,8 +12,10 @@ const Title = () => {
   const votesAverage = storedData?.vote_average || vote_average;
   const votesTotal = storedData?.vote_count || vote_count;
 
+  const movieTitleLength = movieTitle?.length;
+
   return (
-    <StyledMovieInfo.Title>
+    <StyledMovieInfo.Title titleLength={movieTitleLength}>
       <h2>{movieTitle}</h2>
       <div className="rate no-select">
         {votesAverage && votesAverage !== 0 ? (

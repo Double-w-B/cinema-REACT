@@ -60,7 +60,7 @@ const UserReview = () => {
         <div className="rating">
           <p>Your Review:</p>
           <StyledReviews.Stars>
-            <p>Your Rating:</p>
+            <p className="stars">Your Rating:</p>
             <span>
               {Array.from({ length: 10 }, (el, index) => (
                 <AiFillStar

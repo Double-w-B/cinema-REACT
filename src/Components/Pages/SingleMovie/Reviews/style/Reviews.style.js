@@ -17,6 +17,7 @@ export const LogInInfo = styled(SharedReviewsInfo)`
     &:hover {
       opacity: 1;
     }
+
     &:active {
       transform: scale(0.8);
     }

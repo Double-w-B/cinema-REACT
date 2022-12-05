@@ -8,6 +8,7 @@ export const MainTitle = styled.div`
     letter-spacing: 1px;
     margin-bottom: 1rem;
     color: #fff;
+    transition: 0.3s linear;
   }
 
   .genres {
@@ -27,6 +28,33 @@ export const MainTitle = styled.div`
 
       &:first-child {
         border-left: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    .genres {
+      justify-content: end;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 3rem;
+
+    h1 {
+      font-size: ${(props) => (props.titleLength > 20 ? "1.6rem" : "1.8rem")};
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    h1 {
+      font-size: ${(props) => (props.titleLength > 20 ? "1.3rem" : "1.5rem")};
+      margin-right: 1rem;
+    }
+    .genres {
+      div {
+        font-size: 1rem;
       }
     }
   }

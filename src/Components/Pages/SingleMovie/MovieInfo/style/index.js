@@ -21,6 +21,15 @@ const StyledMovieInfo = styled.article`
     text-align: center;
     font-style: italic;
   }
+
+  @media screen and (max-width: 940px) {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    .overview,
+    .tagline {
+      margin: 1rem 0;
+    }
+  }
 `;
 
 StyledMovieInfo.ButtonContainer = ButtonContainer;

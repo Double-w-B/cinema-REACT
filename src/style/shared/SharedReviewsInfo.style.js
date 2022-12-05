@@ -10,4 +10,10 @@ export const SharedReviewsInfo = styled.div`
     font-style: italic;
     color: rgba(255, 255, 255, 0.3);
   }
+
+  @media screen and (max-width: 600px) {
+    p {
+      font-size: 1.1rem;
+    }
+  }
 `;

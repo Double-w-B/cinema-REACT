@@ -9,6 +9,8 @@ export const ShortInfo = styled.div`
 
   .orig_title,
   .lang,
+  .date,
+  .time,
   .prod_countries,
   .web,
   .prod_companies {
@@ -26,6 +28,18 @@ export const ShortInfo = styled.div`
 
     a {
       color: #fff;
+    }
+  }
+
+  @media screen and (max-width: 940px) {
+    margin-bottom: 1rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding-left: 0;
+    p {
+      &:first-child {
+        min-width: 35%;
+      }
     }
   }
 `;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Poster = styled.div`
   width: 35%;
+  min-width: 330px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,6 +24,10 @@ export const Poster = styled.div`
     .time p {
       text-align: right;
     }
+  }
+
+  @media screen and (max-width: 940px) {
+    width: 100%;
   }
 `;
 
@@ -47,6 +52,9 @@ export const ImgContainer = styled.div`
     img {
       width: 30%;
       height: 30%;
+      opacity: 1;
+      filter: none;
+      transition: none;
     }
   }
 
@@ -55,7 +63,9 @@ export const ImgContainer = styled.div`
     height: 100%;
     display: block;
     object-fit: cover;
+    opacity: ${(props) => (props.imgLoaded ? "1" : "0")};
     z-index: 1;
     filter: drop-shadow(0px 3px 10px #0a0f18);
+    transition: 0.3s linear;
   }
 `;
