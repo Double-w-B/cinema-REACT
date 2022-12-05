@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 const StyledMovieTrailerModal = styled.div`
   width: 60vw;
+  min-width: 900px;
   height: 70vh;
+  min-height: 520px;
   background-color: black;
   position: relative;
   visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
   opacity: ${(props) => (props.showModal ? "1" : "0")};
   transition: all 0.2s ease-out;
+  border: solid 4px #37474f;
 
   &:hover {
     svg {
@@ -37,6 +40,28 @@ const StyledMovieTrailerModal = styled.div`
     &:active {
       font-size: 2rem;
     }
+  }
+
+  @media screen and (max-width: 1000px) {
+    height: 60vh;
+    min-width: 700px;
+    min-height: 420px;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 30vh;
+    min-width: 600px;
+    min-height: 360px;
+  }
+
+  @media screen and (max-width: 650px) {
+    min-width: 500px;
+    min-height: 300px;
+  }
+
+  @media screen and (max-width: 530px) {
+    min-width: 410px;
+    min-height: 250px;
   }
 `;
 

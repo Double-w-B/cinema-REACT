@@ -180,7 +180,7 @@ const CardPaymentModal = () => {
       {...errorsInitialState}
       showModal={isCardPaymentModal}
     >
-      <h2>Debit Card Payment</h2>
+      <h1>Debit Card Payment</h1>
       <form>
         <div className="cardholder">
           <input

@@ -3,7 +3,11 @@ import { SharedButton } from "../../../style/shared/SharedButton.style";
 
 const StyledCardPaymentModal = styled.div`
   width: 30vw;
+  min-width: 450px;
+  max-width: 460px;
   height: 50vh;
+  min-height: 380px;
+  max-height: 400px;
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
@@ -24,7 +28,7 @@ const StyledCardPaymentModal = styled.div`
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 3px;
 
-  h2 {
+  h1 {
     text-align: center;
   }
 
@@ -169,6 +173,31 @@ const StyledCardPaymentModal = styled.div`
       &:active {
         transform: scale(0.9);
       }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    min-height: 400px;
+    min-width: 380px;
+    h1 {
+      font-size: 1.8rem;
+    }
+    form input {
+      font-size: 1.15rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    height: 45vh;
+    min-height: 360px;
+    min-width: 340px;
+
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    form input {
+      font-size: 1.05rem;
     }
   }
 `;
