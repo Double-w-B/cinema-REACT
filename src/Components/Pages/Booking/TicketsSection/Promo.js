@@ -1,7 +1,7 @@
 import React from "react";
 import StyledTickets from "./style";
-import { promoCodes } from "../../../../data/projectData";
 import { IoMdCloseCircle } from "react-icons/io";
+import { promoCodes } from "../../../../data/projectData";
 
 const Promo = (props) => {
   const { inputValue, setInputValue, setIsPromoCode, isPromoCode } = props;
@@ -11,7 +11,7 @@ const Promo = (props) => {
     if (promoCodes.includes(inputValue)) setIsPromoCode(true);
   };
 
-  const handlePromoClick = () => {
+  const handleDeletePromo = () => {
     setIsPromoCode(false);
     setInputValue("");
   };
@@ -19,12 +19,10 @@ const Promo = (props) => {
   return (
     <StyledTickets.Promo isPromoCode={isPromoCode}>
       {isPromoCode ? (
-        <>
-          <p>
-            Promo code: <span> {inputValue}</span>
-            <IoMdCloseCircle onClick={handlePromoClick} />
-          </p>
-        </>
+        <p>
+          Promo code: <span> {inputValue}</span>
+          <IoMdCloseCircle onClick={handleDeletePromo} />
+        </p>
       ) : (
         <form>
           <input
@@ -35,7 +33,9 @@ const Promo = (props) => {
             onBlur={(e) => (e.target.placeholder = "Promo Code")}
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <button onClick={(e) => handleBtnClick(e)}>Add</button>
+          <StyledTickets.Button onClick={(e) => handleBtnClick(e)}>
+            Add
+          </StyledTickets.Button>
         </form>
       )}
     </StyledTickets.Promo>

@@ -25,7 +25,7 @@ const Total = (props) => {
 
   return (
     <StyledTickets.Total>
-      <h2>Total</h2>
+      <p>Total</p>
       <p>${countTotal()}</p>
     </StyledTickets.Total>
   );

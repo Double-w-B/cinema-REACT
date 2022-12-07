@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { SharedButton } from "../../../../../style/shared";
 
 export const Promo = styled.div`
-  width: 60%;
+  width: 65%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -23,6 +24,11 @@ export const Promo = styled.div`
       margin-left: 1rem;
       color: var(--primary-red-clr);
       cursor: pointer;
+      transition: 0.3s linear;
+
+      &:active {
+        transform: scale(0.8);
+      }
     }
   }
 
@@ -53,28 +59,51 @@ export const Promo = styled.div`
         border-color: var(--primary-white-clr);
       }
     }
+  }
 
-    button {
-      min-width: 60px;
-      min-height: 30px;
-      cursor: pointer;
-      border-radius: 0.3rem;
-      outline: none;
-      font-size: 1.3rem;
-      color: #fff;
-      border: 1px solid #f12535;
-      background-color: rgba(241, 37, 53, 0.3);
-      opacity: 0.75;
-      transition: all 0.3s linear;
+  @media screen and (max-width: 768px) {
+    align-self: start;
+    margin-left: 1rem;
 
-      &:hover {
-        opacity: 1;
-        background-color: var(--primary-red-clr);
-      }
+    p {
+      font-size: 1.2rem;
+      margin-left: 0;
+    }
 
-      &:active {
-        transform: scale(0.7);
+    form {
+      width: 100%;
+      input {
+        font-size: 1.2rem;
       }
     }
+  }
+
+  @media screen and (max-width: 650px) {
+    p {
+      font-size: 1.1rem;
+    }
+    form input {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    margin-left: 0;
+    width: 100%;
+
+    form input {
+      width: calc(100% - 90px);
+    }
+  }
+`;
+
+export const Button = styled(SharedButton)`
+  position: relative;
+  padding: 0.2rem 0.5rem;
+  font-size: 1.3rem;
+  border-radius: 0.3rem;
+
+  &:active {
+    transform: scale(0.7);
   }
 `;
