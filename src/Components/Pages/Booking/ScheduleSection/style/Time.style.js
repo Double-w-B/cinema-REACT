@@ -7,9 +7,28 @@ export const TimeContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  h3 {
+  p {
     text-align: center;
     margin: 0 auto;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    p {
+      font-size: 1.1rem;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    p {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -50,6 +69,72 @@ export const Screenings = styled.div`
     &.inactive {
       opacity: 0.4;
       pointer-events: none;
+    }
+  }
+
+  @media screen and (max-width: 1150px) {
+    div {
+      width: 70px;
+      height: 70px;
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    div {
+      width: 80px;
+      height: 80px;
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    div {
+      width: 70px;
+      height: 70px;
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    div {
+      width: 65px;
+      height: 65px;
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    div {
+      width: 55px;
+      height: 55px;
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    div {
+      width: 45px;
+      height: 45px;
+
+      p {
+        font-size: 0.9rem;
+      }
     }
   }
 `;

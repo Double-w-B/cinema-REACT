@@ -82,10 +82,10 @@ const Time = (props) => {
 
   return (
     <StyledSchedule.TimeContainer className="no-select">
-      <h3>
+      <p>
         Available <br />
         movie screenings:
-      </h3>
+      </p>
       <StyledSchedule.Screenings>
         {movieGenres && showMovieScreenings()}
       </StyledSchedule.Screenings>

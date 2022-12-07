@@ -8,6 +8,24 @@ import { TimeContainer, Screenings } from "./Time.style";
 
 const StyledSchedule = styled(SharedSection)`
   padding: 1rem 0 1rem 1rem;
+
+  @media screen and (max-width: 900px) {
+    padding: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
 `;
 
 StyledSchedule.Container = Container;

@@ -8,12 +8,14 @@ const Poster = (props) => {
   const dispatch = useDispatch();
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
   const { singleMovieVideo } = useSelector((store) => store.singleMovie);
-  const { imgLowResUrl } = useSelector((store) => store.movies);
-  const { poster_path, genres } = props;
+  const { imgLowResUrl, imgHiResUrl } = useSelector((store) => store.movies);
+  const { windowWidth } = useSelector((store) => store.app);
+  const { poster_path, genres, backdrop_path } = props;
   const { key } = singleMovieVideo;
 
+  const posterImage = imgLowResUrl + (storedData?.poster_path || poster_path);
+  const backdropImage = imgHiResUrl + backdrop_path;
   const movieGenres = storedData?.genres || genres;
-  const moviePoster = storedData?.poster_path || poster_path;
   const movieTrailer = storedData?.trailer?.key || key;
 
   const abbreviation = (title) => {
@@ -29,7 +31,11 @@ const Poster = (props) => {
   return (
     <StyledSchedule.Poster className="no-select">
       <div className="poster">
-        <img src={`${imgLowResUrl}${moviePoster}`} alt="" />
+        {windowWidth <= 900 ? (
+          <img src={backdropImage} alt="" />
+        ) : (
+          <img src={posterImage} alt="" />
+        )}
         {movieTrailer && <BsPlayCircle onClick={handleClick} />}
       </div>
 

@@ -29,6 +29,7 @@ const Timer = () => {
           clearInterval(interval);
           dispatch(modalsSlice.handleIsAuthModal(false));
           dispatch(modalsSlice.handleIsCardPaymentModal(false));
+          dispatch(modalsSlice.handleIsModal(true));
           dispatch(modalsSlice.handleIsBookingExpiredModal(true));
         } else {
           setMinutes(minutes - 1);

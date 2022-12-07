@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 export const Poster = styled.div`
   width: 35%;
-  height: 60vh;
+  transition: 0.3s linear;
 
   .poster {
     width: 76%;
-    height: 92.5%;
-    margin: 0 auto;
+    margin: 0 auto 1rem auto;
     position: relative;
     transition: 0.5s linear;
 
@@ -45,9 +44,9 @@ export const Poster = styled.div`
 
     img {
       width: 100%;
-      height: 100%;
       display: block;
       object-fit: contain;
+      object-position: top;
       transition-property: -moz-filter, -ms-filter, -o-filter, -webkit-filter,
         filter;
       transition-duration: 0.3s;
@@ -77,6 +76,38 @@ export const Poster = styled.div`
 
       &:first-child {
         border-left: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 30%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    .poster {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    margin-top: 1rem;
+
+    .genres div {
+      font-size: 1rem;
+    }
+    .poster {
+      &:hover {
+        & svg {
+          font-size: 4rem;
+        }
+      }
+      svg {
+        font-size: 3rem;
+        &:hover {
+          font-size: 4rem;
+        }
       }
     }
   }

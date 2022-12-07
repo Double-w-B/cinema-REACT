@@ -13,4 +13,8 @@ export const Timer = styled.span`
     css`
       ${scale1} 1.2s infinite linear
     `};
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.1rem;
+  }
 `;

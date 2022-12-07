@@ -44,10 +44,89 @@ export const Date = styled.div`
       }
     }
   }
-  & p:not(.days p) {
+  p:not(.days p) {
     font-size: 1.3rem;
     font-weight: bold;
     margin-left: 3rem;
     color: var(--primary-red-clr);
+  }
+
+  @media screen and (max-width: 1150px) {
+    .days div {
+      width: 70px;
+      height: 70px;
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .days div {
+      width: 80px;
+      height: 80px;
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .days div {
+      width: 70px;
+      height: 70px;
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+    p:not(.days p) {
+      font-size: 1.2rem;
+      margin-left: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .days div {
+      width: 65px;
+      height: 65px;
+
+      p {
+        font-size: 1.1rem;
+      }
+    }
+    p:not(.days p) {
+      font-size: 1.1rem;
+      margin-left: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .days div {
+      width: 55px;
+      height: 55px;
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .days div {
+      width: 45px;
+      height: 45px;
+
+      &:first-child {
+        p {
+          font-size: 0.8rem;
+        }
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
   }
 `;
