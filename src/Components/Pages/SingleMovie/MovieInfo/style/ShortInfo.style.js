@@ -36,9 +36,11 @@ export const ShortInfo = styled.div`
   }
   @media screen and (max-width: 600px) {
     padding-left: 0;
+
     p {
       &:first-child {
         min-width: 35%;
+        margin-right: 0.5rem;
       }
     }
   }

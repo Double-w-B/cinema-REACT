@@ -8,6 +8,9 @@ export const SingleReview = styled.article`
   display: flex;
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 
+  @media screen and (max-width: 900px) {
+    padding: 0 0.5rem;
+  }
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
@@ -78,6 +81,12 @@ export const Author = styled.div`
     }
     .review-info {
       width: 60%;
+
+      .name-rating {
+        p:first-child {
+          font-size: 1.1rem;
+        }
+      }
     }
   }
 
@@ -101,6 +110,11 @@ export const Author = styled.div`
         position: absolute;
         top: 0;
         right: 0;
+      }
+      .name-rating {
+        p:first-child {
+          font-size: 1.05rem;
+        }
       }
     }
   }
@@ -148,8 +162,12 @@ export const Review = styled.div`
       }
     }
   }
+  @media screen and (max-width: 900px) {
+    padding-top: 1.6rem;
+  }
   @media screen and (max-width: 768px) {
     width: 100%;
+    padding-top: 0;
 
     .content_buttons {
       margin-top: 1rem;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SharedButton } from "../../../../../style/shared";
+import { SharedButton, SharedKeyframes } from "../../../../../style/shared";
 
 export const UserReview = styled.div`
   width: 96%;
@@ -34,6 +34,19 @@ export const UserReview = styled.div`
       border: 2px solid rgba(255, 255, 255, 0.3);
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       cursor: text;
+      -webkit-animation: ${(props) =>
+        props.isShakeTextarea && SharedKeyframes.shake};
+      -moz-animation: ${(props) =>
+        props.isShakeTextarea && SharedKeyframes.shake};
+      -o-animation: ${(props) =>
+        props.isShakeTextarea && SharedKeyframes.shake};
+      animation: ${(props) => props.isShakeTextarea && SharedKeyframes.shake};
+      animation-duration: 5.72s;
+
+      &::placeholder {
+        font-style: italic;
+        color: var(--primary-grey-clr);
+      }
     }
   }
 
@@ -42,10 +55,12 @@ export const UserReview = styled.div`
 
     .review {
       flex-direction: column;
+      padding-right: 0;
 
       .rating {
         width: 100%;
         flex-direction: row;
+        padding: 0 0.5rem;
 
         p:first-child:not(.stars) {
           width: 180px;
@@ -61,7 +76,7 @@ export const UserReview = styled.div`
   @media screen and (max-width: 600px) {
     .rating {
       p:first-child:not(.stars) {
-        font-size: 1.1rem;
+        display: none;
       }
     }
   }
@@ -112,7 +127,7 @@ export const Stars = styled.div`
       font-size: 1.1rem;
     }
     svg {
-      margin-left: 0.3rem;
+      margin-left: 0.4rem;
     }
   }
 `;

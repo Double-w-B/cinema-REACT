@@ -14,13 +14,13 @@ const Poster = () => {
 
   const { singleMovieInfo } = useSelector((store) => store.singleMovie);
   const { windowWidth } = useSelector((store) => store.app);
+  const { imgHiResUrl } = useSelector((store) => store.movies);
   const { release_date, runtime, poster_path, backdrop_path, title, id } =
     singleMovieInfo;
   const storedData = JSON.parse(sessionStorage.getItem("single_movie"));
 
-  const posterUrl = "https://image.tmdb.org/t/p/original";
-  const posterImage = posterUrl + (storedData?.poster_path || poster_path);
-  const backdropImage = posterUrl + backdrop_path;
+  const posterImage = imgHiResUrl + (storedData?.poster_path || poster_path);
+  const backdropImage = imgHiResUrl + backdrop_path;
 
   const date = storedData?.release_date || release_date;
   const time = storedData?.runtime || runtime;

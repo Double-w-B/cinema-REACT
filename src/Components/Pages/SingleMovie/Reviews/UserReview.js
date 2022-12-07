@@ -16,9 +16,17 @@ const UserReview = () => {
   const [rating, setRating] = React.useState("-");
   const [hover, setHover] = React.useState(0);
   const [review, setReview] = React.useState("");
+  const [isShakeTextarea, setIsShakeTextarea] = React.useState(false);
 
   const { user } = useAuth0();
   const { picture, given_name, name, sub: id } = user;
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsShakeTextarea(false);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [isShakeTextarea]);
 
   const checkAvatar = () => {
     if (userName) {
@@ -37,25 +45,33 @@ const UserReview = () => {
     }
   };
 
-  const showDate = () => {
-    review.trim() &&
-      dispatch(
-        addUserReview({
-          author: checkName(),
-          author_details: {
-            avatar_path: checkAvatar(),
-            rating: rating === "-" ? null : rating + 1,
-            id: id.split("|")[1],
-          },
-          content: review,
-          created_at: new Date().toISOString(),
-          id: singleMovieInfo?.id,
-        })
-      );
+  const handleRatingClass = (index) => {
+    if (index <= ((rating && hover) || rating)) {
+      return "mark";
+    }
+    return "";
+  };
+
+  const handleClick = () => {
+    const userReview = {
+      author: checkName(),
+      author_details: {
+        avatar_path: checkAvatar(),
+        rating: rating === "-" ? null : rating + 1,
+        id: id.split("|")[1],
+      },
+      content: review,
+      created_at: new Date().toISOString(),
+      id: singleMovieInfo?.id,
+    };
+    if (review.trim()) {
+      return dispatch(addUserReview(userReview));
+    }
+    setIsShakeTextarea(true);
   };
 
   return (
-    <StyledReviews.UserReview>
+    <StyledReviews.UserReview isShakeTextarea={isShakeTextarea}>
       <div className="review">
         <div className="rating">
           <p>Your Review:</p>
@@ -66,9 +82,7 @@ const UserReview = () => {
                 <AiFillStar
                   key={index}
                   title={ratesTitle[index]}
-                  className={
-                    index <= ((rating && hover) || rating) ? "mark" : ""
-                  }
+                  className={handleRatingClass(index)}
                   onClick={() => setRating(index)}
                   onMouseEnter={() => setHover(index)}
                   onMouseLeave={() => setHover(rating)}
@@ -80,9 +94,16 @@ const UserReview = () => {
         <textarea
           value={review}
           onChange={(e) => setReview(e.target.value)}
+          placeholder="I don't know about you, but ..."
+          onFocus={(e) => (e.target.placeholder = "")}
+          onBlur={(e) =>
+            (e.target.placeholder = "I don't know about you, but ...")
+          }
         ></textarea>
       </div>
-      <StyledReviews.Button onClick={showDate}>add review</StyledReviews.Button>
+      <StyledReviews.Button onClick={handleClick}>
+        add review
+      </StyledReviews.Button>
     </StyledReviews.UserReview>
   );
 };
