@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Total } from "./Total.style";
-import { Promo, Button } from "./Promo.style";
-import { Separator, Section } from "./Separator.style";
+import { Promo, PromoButton } from "./Promo.style";
+import { Separator, Section, SeparatorButton } from "./Separator.style";
 import { SharedSection } from "../../../../../style/shared";
 
 const StyledTickets = styled(SharedSection)`
@@ -11,7 +11,7 @@ const StyledTickets = styled(SharedSection)`
     width: 80%;
     min-height: 10vh;
     margin: 1rem auto 1rem auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
   }
@@ -25,6 +25,7 @@ const StyledTickets = styled(SharedSection)`
   @media screen and (max-width: 768px) {
     .summary {
       width: 100%;
+      padding: 0;
       flex-direction: column;
     }
     h2 {
@@ -33,6 +34,8 @@ const StyledTickets = styled(SharedSection)`
   }
 
   @media screen and (max-width: 650px) {
+    padding: 0.5rem;
+
     .summary {
       padding: 0;
     }
@@ -46,6 +49,7 @@ StyledTickets.Promo = Promo;
 StyledTickets.Separator = Separator;
 StyledTickets.Section = Section;
 StyledTickets.Total = Total;
-StyledTickets.Button = Button;
+StyledTickets.PromoButton = PromoButton;
+StyledTickets.SeparatorButton = SeparatorButton;
 
 export default StyledTickets;

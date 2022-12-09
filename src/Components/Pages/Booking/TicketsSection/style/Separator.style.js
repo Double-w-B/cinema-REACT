@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SharedButton } from "../../../../../style/shared";
 
 export const Separator = styled.div`
   width: 100%;
@@ -12,6 +13,7 @@ export const Separator = styled.div`
   @media screen and (max-width: 768px) {
     padding: 0 1rem;
   }
+
   @media screen and (max-width: 550px) {
     padding: 0;
   }
@@ -45,7 +47,6 @@ export const Section = styled.div`
 
     p {
       font-size: 1.2rem;
-      color: var(--primary-red-clr);
     }
   }
 
@@ -60,29 +61,6 @@ export const Section = styled.div`
       font-size: 1.2rem;
       width: 2rem;
       text-align: center;
-    }
-
-    button {
-      min-width: 40px;
-      min-height: 30px;
-      cursor: pointer;
-      border-radius: 0.3rem;
-      outline: none;
-      font-size: 1.5rem;
-      color: #fff;
-      border: 1px solid #f12535;
-      background-color: rgba(241, 37, 53, 0.3);
-      opacity: 0.75;
-      transition: all 0.3s linear;
-
-      &:hover {
-        opacity: 1;
-        background-color: var(--primary-red-clr);
-      }
-
-      &:active {
-        transform: scale(0.7);
-      }
     }
   }
 
@@ -118,5 +96,23 @@ export const Section = styled.div`
 
   @media screen and (max-width: 550px) {
     padding: 0 0.5rem;
+
+    .number {
+      justify-content: space-between;
+    }
+  }
+`;
+
+export const SeparatorButton = styled(SharedButton)`
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    transform: scale(0.7);
   }
 `;

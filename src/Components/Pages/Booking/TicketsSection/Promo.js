@@ -20,8 +20,8 @@ const Promo = (props) => {
     <StyledTickets.Promo isPromoCode={isPromoCode}>
       {isPromoCode ? (
         <p>
-          Promo code: <span> {inputValue}</span>
           <IoMdCloseCircle onClick={handleDeletePromo} />
+          <span>{inputValue}</span> -15% discount
         </p>
       ) : (
         <form>
@@ -33,9 +33,9 @@ const Promo = (props) => {
             onBlur={(e) => (e.target.placeholder = "Promo Code")}
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <StyledTickets.Button onClick={(e) => handleBtnClick(e)}>
+          <StyledTickets.PromoButton onClick={(e) => handleBtnClick(e)}>
             Add
-          </StyledTickets.Button>
+          </StyledTickets.PromoButton>
         </form>
       )}
     </StyledTickets.Promo>

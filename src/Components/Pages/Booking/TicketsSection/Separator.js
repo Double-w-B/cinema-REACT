@@ -66,16 +66,19 @@ const Separator = (props) => {
               <p>${price}</p>
             </div>
             <div className="number">
-              <button
+              <StyledTickets.SeparatorButton
                 className="minus"
                 onClick={() => handleMinusBtn(category)}
               >
                 -
-              </button>
+              </StyledTickets.SeparatorButton>
               <p>{categories[index]}</p>
-              <button className="plus" onClick={() => handlePlusBtn(category)}>
+              <StyledTickets.SeparatorButton
+                className="plus"
+                onClick={() => handlePlusBtn(category)}
+              >
                 +
-              </button>
+              </StyledTickets.SeparatorButton>
             </div>
           </StyledTickets.Section>
         );

@@ -25,6 +25,23 @@ export const Total = styled.div`
     padding-right: 1.5rem;
     margin-top: 2rem;
     align-self: end;
+
+    p {
+      font-size: 1.2rem;
+      &:last-child {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    p {
+      font-size: 1.1rem;
+
+      &:last-child {
+        font-size: 1.05rem;
+      }
+    }
   }
 
   @media screen and (max-width: 550px) {

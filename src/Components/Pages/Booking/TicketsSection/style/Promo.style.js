@@ -6,22 +6,25 @@ export const Promo = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: ${(props) => (props.isPromoCode ? " flex-start" : "center")};
+  justify-content: ${(props) => (props.isPromoCode ? "flex-start" : "center")};
+  justify-content: flex-start;
 
   p {
-    margin-left: 2rem;
-    font-size: 1.4rem;
+    padding: 0 0.5rem;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
+    color: var(--primary-red-clr);
 
     span {
-      margin-left: 2rem;
-      color: green;
+      color: var(--primary-white-clr);
+      margin-right: 1rem;
+      font-size: 1.3rem;
     }
 
     svg {
       font-size: 1.2rem;
-      margin-left: 1rem;
+      margin-right: 1rem;
       color: var(--primary-red-clr);
       cursor: pointer;
       transition: 0.3s linear;
@@ -61,6 +64,12 @@ export const Promo = styled.div`
     }
   }
 
+  @media screen and (max-width: 1000px) {
+    p {
+      padding: 0 0.5rem 0 0;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     align-self: start;
     margin-left: 1rem;
@@ -68,6 +77,9 @@ export const Promo = styled.div`
     p {
       font-size: 1.2rem;
       margin-left: 0;
+      span {
+        font-size: 1.2rem;
+      }
     }
 
     form {
@@ -81,6 +93,9 @@ export const Promo = styled.div`
   @media screen and (max-width: 650px) {
     p {
       font-size: 1.1rem;
+      span {
+        font-size: 1.1rem;
+      }
     }
     form input {
       font-size: 1.1rem;
@@ -91,19 +106,34 @@ export const Promo = styled.div`
     margin-left: 0;
     width: 100%;
 
-    form input {
-      width: calc(100% - 90px);
+    form {
+      justify-content: space-between;
+      padding-right: 0.5rem;
+      input {
+        width: calc(100% - 90px);
+        margin-right: 0;
+      }
     }
   }
 `;
 
-export const Button = styled(SharedButton)`
+export const PromoButton = styled(SharedButton)`
+  min-width: 45px;
+  min-height: 35px;
   position: relative;
-  padding: 0.2rem 0.5rem;
+  padding: 0 0.5rem;
   font-size: 1.3rem;
   border-radius: 0.3rem;
 
   &:active {
     transform: scale(0.7);
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    font-size: 1.1rem;
   }
 `;
