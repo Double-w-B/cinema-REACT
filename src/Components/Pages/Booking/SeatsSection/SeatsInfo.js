@@ -4,15 +4,15 @@ import StyledSeats from "./style";
 const SeatsInfo = () => {
   return (
     <StyledSeats.SeatsInfo>
-      <div className="available">
+      <div className="example">
         <p>5</p>
         <p>available</p>
       </div>
-      <div className="selected">
+      <div className="example">
         <p>5</p>
         <p>selected</p>
       </div>
-      <div className="booked">
+      <div className="example">
         <p>booked</p>
       </div>
     </StyledSeats.SeatsInfo>

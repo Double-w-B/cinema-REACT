@@ -5,6 +5,20 @@ import { SeatsMap, Screen, Seats } from "./SeatsMap.style";
 
 const StyledSeats = styled(SharedSection)`
   padding: 1rem;
+
+  @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 0.5rem;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
 `;
 
 StyledSeats.SeatsInfo = SeatsInfo;

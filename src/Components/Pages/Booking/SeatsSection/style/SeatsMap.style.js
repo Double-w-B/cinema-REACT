@@ -1,9 +1,29 @@
 import styled from "styled-components";
 
 export const SeatsMap = styled.div`
-  width: 55vw;
+  width: 80%;
   height: 70vh;
-  margin: 0 auto;
+  margin: 2rem auto 0 auto;
+
+  @media screen and (max-width: 1000px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 650px) {
+    height: 60vh;
+  }
+
+  @media screen and (max-width: 550px) {
+    height: 50vh;
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 45vh;
+  }
 `;
 
 export const Screen = styled.div`
@@ -41,6 +61,24 @@ export const Screen = styled.div`
   p {
     color: var(--primary-red-clr);
     opacity: 0.5;
+  }
+
+  @media screen and (max-width: 1150px) {
+    p {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    p {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .shadow {
+      top: -0.15rem;
+    }
   }
 `;
 
@@ -136,6 +174,28 @@ export const Seats = styled.div`
           }
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 1150px) {
+    .seat,
+    .row {
+      font-size: 0.95rem;
+    }
+  }
+  @media screen and (max-width: 650px) {
+    .seat,
+    .row {
+      font-size: 0.8rem;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    .seat,
+    .row {
+      font-size: 0.7rem;
+    }
+    .row .seat.exit .direction {
+      font-size: 0.6rem;
     }
   }
 `;

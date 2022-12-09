@@ -1,16 +1,15 @@
 import styled from "styled-components";
 
 export const SeatsInfo = styled.div`
-  width: 81%;
+  width: 80%;
   height: 70px;
   margin: 3rem auto 0 auto;
+  padding: 0 1.5em;
   display: flex;
   justify-content: center;
 
-  .available,
-  .booked,
-  .selected {
-    width: 8.5%;
+  .example {
+    width: calc(100% / 11);
     height: 50%;
     margin: 0 1.2rem;
     display: flex;
@@ -21,6 +20,14 @@ export const SeatsInfo = styled.div`
     background-color: var(--primary-grey-clr);
     opacity: 0.7;
     box-shadow: 0px 0px 8px #0a0f18;
+
+    &:nth-child(2) {
+      background-color: var(--primary-red-clr);
+      opacity: 0.7;
+    }
+    &:last-child {
+      background-color: #343c4a;
+    }
 
     p {
       color: var(--primary-white-clr);
@@ -34,12 +41,38 @@ export const SeatsInfo = styled.div`
     }
   }
 
-  .selected {
-    background-color: var(--primary-red-clr);
-    opacity: 0.7;
+  @media screen and (max-width: 1150px) {
+    .example {
+      font-size: 0.95rem;
+    }
   }
 
-  .booked {
-    background-color: #343c4a;
+  @media screen and (max-width: 1000px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 650px) {
+    height: 60px;
+    margin-bottom: 1rem;
+
+    .example {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    height: 50px;
+
+    .example {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    height: 45px;
   }
 `;
