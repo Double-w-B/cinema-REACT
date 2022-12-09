@@ -1,6 +1,14 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { SharedButton } from "../../../../../style/shared";
 import { SharedKeyframes } from "../../../../../style/shared";
+
+const isShakeMsg = css`
+  -webkit-animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
+  -moz-animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
+  -o-animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
+  animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
+  animation-duration: 5.72s;
+`;
 
 export const PaymentMethod = styled.div`
   width: 35%;
@@ -14,11 +22,7 @@ export const PaymentMethod = styled.div`
     text-align: center;
     font-style: italic;
     color: var(--primary-grey-clr);
-    -webkit-animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
-    -moz-animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
-    -o-animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
-    animation: ${(props) => props.isShakeMsg && SharedKeyframes.shake};
-    animation-duration: 5.72s;
+    ${isShakeMsg}
   }
 
   .summary-payment-method {
@@ -26,7 +30,7 @@ export const PaymentMethod = styled.div`
     height: 60%;
     display: grid;
     grid-template-columns: repeat(2, 48%);
-    grid-template-rows: repeat(2, 48%);
+    grid-template-rows: repeat(2, 46%);
     justify-content: space-between;
     gap: 0.5rem;
 
@@ -37,6 +41,7 @@ export const PaymentMethod = styled.div`
       transition: 0.3s linear;
       opacity: 0.7;
       cursor: pointer;
+      padding: 0.8rem;
 
       &:hover {
         opacity: 1;
@@ -52,7 +57,6 @@ export const PaymentMethod = styled.div`
       img {
         width: 100%;
         height: 100%;
-        padding: 0.8rem;
         object-fit: contain;
         color: transparent;
       }
@@ -62,6 +66,41 @@ export const PaymentMethod = styled.div`
   a {
     width: 100%;
   }
+
+  @media screen and (max-width: 1000px) {
+    .summary-payment-method {
+      div {
+        &:nth-child(1),
+        &:nth-child(2) {
+          padding: 0.5rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 45%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 100%;
+    height: 40%;
+    margin-top: 1.5rem;
+    padding-left: 0;
+
+    .summary-payment-method {
+      height: 40%;
+      grid-template-columns: repeat(4, 23%);
+      grid-template-rows: repeat(1, 100%);
+
+      div {
+        &:nth-child(1),
+        &:nth-child(2) {
+          padding: 0.2rem;
+        }
+      }
+    }
+  }
 `;
 
 export const Button = styled(SharedButton)`
@@ -70,5 +109,10 @@ export const Button = styled(SharedButton)`
 
   &:active {
     transform: scale(0.9);
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 60%;
+    margin: 0 auto;
   }
 `;

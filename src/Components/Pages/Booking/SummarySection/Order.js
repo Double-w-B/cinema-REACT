@@ -24,6 +24,8 @@ const Order = (props) => {
 
   const movieTitle = storedData?.title || bookingMovieTitle;
 
+  const isEmail = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(props.userEmail);
+
   const numberOfTickets = () => {
     const allGroups = [adultTickets, childTickets, seniorTickets];
     const filteredGroup = allGroups
@@ -48,38 +50,42 @@ const Order = (props) => {
   return (
     <StyledSummary.Order
       shakeEmail={props.isShakeEmail}
-      userEmail={props.userEmail}
+      isEmail={isEmail}
       shakeSeatsAndTickets={props.isSeatsEqTicketsAmount}
     >
-      <h2>{movieTitle}</h2>
+      <h3>{movieTitle}</h3>
 
       <div className="info">
-        <div className="info__labels">
-          <p>Date:</p>
-          <p>Time:</p>
+        <p>
+          <span>Date:</span>
+          {bookingDay}
+        </p>
+        <p>
+          <span>Time:</span>
+          {bookingTime ? bookingTime : "-"}
+        </p>
+        <div className="seats-container">
           <p>Seats:</p>
-          <p>Total:</p>
-          <p>Tickets:</p>
-          {(!isUser || !storedUserEmail) && <p>Email:</p>}
-        </div>
-
-        <div className="info__details">
-          <p>{bookingDay}</p>
-          <p>{bookingTime ? bookingTime : "-"}</p>
           <p>{bookingSeats.length > 0 ? bookingSeats.join(", ") : "-"}</p>
-          <p>${bookingTotalPrice}</p>
-          <p>
-            {allTickets ? allTickets + ` (${numberOfTickets()})` : allTickets}
-          </p>
-          {(!isUser || !storedUserEmail) && (
+        </div>
+        <p>
+          <span>Total:</span>${bookingTotalPrice}
+        </p>
+        <p>
+          <span>Tickets:</span>
+          {allTickets ? allTickets + ` (${numberOfTickets()})` : allTickets}
+        </p>
+        {(!isUser || !storedUserEmail) && (
+          <div className="email-container">
+            <p>Email:</p>
             <input
               type="email"
               required
               value={props.userEmail || ""}
               onChange={(e) => props.setUserEmail(e.target.value.toLowerCase())}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </StyledSummary.Order>
   );
