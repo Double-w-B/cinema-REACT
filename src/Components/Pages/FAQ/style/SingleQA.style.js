@@ -18,25 +18,34 @@ export const SingleQA = styled.article`
       color: ${(props) => props.isOpen && "var(--primary-red-clr)"};
       transition: all 0.3s linear;
       transition-delay: 0.1s;
+      margin-right: 0.5rem;
     }
 
-    svg {
-      font-size: 1.5rem;
-      color: ${(props) => props.isOpen && "var(--primary-red-clr)"};
-      transform: ${(props) => props.isOpen && "rotate(90deg)"};
-      transition: all 0.3s linear;
-      transition-delay: 0.1s;
-      cursor: pointer;
+    .title__icon {
+      min-width: 35px;
+      min-height: 30px;
+      display: grid;
+      place-items: center;
+      align-self: flex-start;
 
-      &:hover {
-        color: var(--primary-red-clr);
+      svg {
+        font-size: 1.5rem;
+        color: ${(props) => props.isOpen && "var(--primary-red-clr)"};
+        transform: ${(props) => props.isOpen && "rotate(90deg)"};
+        transition: all 0.3s linear;
+        transition-delay: 0.1s;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--primary-red-clr);
+        }
       }
     }
   }
 
   .answer {
     width: 100%;
-    padding: 0 2rem 0.2rem 2rem;
+    padding: 0 2rem 0.5rem 2rem;
     overflow: hidden;
     transition: all 0.3s linear;
     height: ${(props) => (!props.isOpen ? "0" : "100%")};
@@ -44,10 +53,31 @@ export const SingleQA = styled.article`
     p {
       width: 100%;
       font-size: 1.05rem;
+      margin-top: 0.5rem;
       text-align: justify;
       opacity: ${(props) => (props.isOpen ? "1" : "0")};
       transition: all 0.3s linear;
       transition-delay: 0.1s;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .answer {
+      padding: 0 1rem 0.5rem 1rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .answer {
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .answer {
+      padding: 0;
     }
   }
 `;

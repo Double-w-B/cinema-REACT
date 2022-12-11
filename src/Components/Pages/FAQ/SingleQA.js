@@ -10,7 +10,9 @@ const SingleQA = (props) => {
     <StyledFAQ.SingleQA isOpen={isOpen} isCloseAll={props.isCloseAll}>
       <div className="title">
         <h3>{question}</h3>
-        <FaChevronCircleDown onClick={() => setIsOpen(!isOpen)} />
+        <div className="title__icon">
+          <FaChevronCircleDown onClick={() => setIsOpen(!isOpen)} />
+        </div>
       </div>
       <div className="answer">
         <p>{answer}</p>
