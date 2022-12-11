@@ -22,6 +22,14 @@ export const Banner = styled.div`
       rgba(0, 0, 0, 0.1)
     );
   }
+
+  @media screen and (max-width: 700px) {
+    height: 50vh;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 40vh;
+  }
 `;
 
 export const Title = styled.div`
@@ -42,6 +50,7 @@ export const Title = styled.div`
     border-radius: 0.1rem;
     background-color: var(--primary-red-clr);
   }
+
   p {
     font-size: 2rem;
     text-align: ${(props) => (props.index === 0 ? "left" : "right")};
@@ -61,6 +70,18 @@ export const Title = styled.div`
     transform: ${(props) =>
       props.index === 1 ? "translateY(0)" : "translateY(-100%)"};
     opacity: ${(props) => (props.index === 1 ? "1" : "0")};
+  }
+
+  @media screen and (max-width: 768px) {
+    p {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    p {
+      font-size: 1.5rem;
+    }
   }
 `;
 
