@@ -4,6 +4,10 @@ export const Offers = styled.section`
   width: 100%;
   height: 30vh;
   margin: 2rem auto;
+
+  @media screen and (max-width: 650px) {
+    height: 20vh;
+  }
 `;
 
 export const IconsContainer = styled.div`
@@ -13,7 +17,9 @@ export const IconsContainer = styled.div`
   position: relative;
   cursor: ${(props) => (props.mouseMove ? "grabbing" : "default")};
 
-  && p {
+  p {
+    width: 100%;
+    text-align: center;
     font-size: 1.6rem;
     letter-spacing: 0.5px;
     bottom: -3rem;
@@ -32,6 +38,12 @@ export const IconsContainer = styled.div`
       opacity: 1;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    p {
+      font-size: 1.4rem;
+    }
+  }
 `;
 
 export const ImgContainer = styled.div`
@@ -48,8 +60,8 @@ export const ImgContainer = styled.div`
   background-color: transparent;
 
   img {
-    width: 90%;
-    height: 90%;
+    width: 85%;
+    height: 85%;
     display: block;
     object-fit: contain;
     transition: 0.7s linear;
@@ -91,5 +103,43 @@ export const ImgContainer = styled.div`
     height: 100%;
     transform: translateX(200%);
     cursor: default;
+  }
+
+  @media screen and (max-width: 1150px) {
+    img {
+      width: 70%;
+      height: 70%;
+    }
+
+    &.lastIcon,
+    &.nextIcon,
+    &.hideSlide {
+      img {
+        width: 45%;
+        height: 45%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    img {
+      width: 60%;
+      height: 60%;
+    }
+    &.lastIcon,
+    &.nextIcon,
+    &.hideSlide {
+      img {
+        width: 50%;
+        height: 50%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    img {
+      width: 65%;
+      height: 65%;
+    }
   }
 `;
