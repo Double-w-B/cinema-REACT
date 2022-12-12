@@ -37,4 +37,11 @@ export const Select = styled.select`
   &:hover {
     opacity: 0.9;
   }
+
+  @media screen and (max-width: 900px) {
+    font-size: 1.15rem;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;

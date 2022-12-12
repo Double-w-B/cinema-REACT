@@ -6,6 +6,14 @@ export const FormContainer = styled.div`
   height: 100vh;
   margin: 2rem auto 1rem auto;
   padding: 0.5rem 1rem;
+  /* background-color: tomato; */
+
+  @media screen and (max-width: 700px) {
+    width: 95%;
+  }
+  @media screen and (max-width: 650px) {
+    width: 100%;
+  }
 `;
 
 export const Form = styled.form`
@@ -40,6 +48,7 @@ export const Form = styled.form`
     border-radius: 2px;
     opacity: 0.7;
     transition: 0.25s linear;
+
     &:focus,
     &:valid {
       opacity: 1;
@@ -107,7 +116,7 @@ export const Form = styled.form`
   #date,
   #time {
     width: 100%;
-    height: 60px;
+    height: 35px;
   }
 
   .customer,
@@ -135,6 +144,34 @@ export const Form = styled.form`
   .time input {
     font-size: 1.1rem;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 900px) {
+    select,
+    #name,
+    #surname,
+    #email,
+    #email-confirm,
+    #phone,
+    #unlimited,
+    #date,
+    #time {
+      height: 30px;
+    }
+
+    input {
+      font-size: 1.15rem;
+    }
+    .date input,
+    .time input {
+      font-size: 1.05rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    label {
+      font-size: 1rem;
+    }
   }
 `;
 

@@ -31,10 +31,17 @@ export const Message = styled.div`
     &:focus,
     &:valid {
       opacity: 1;
+
       & + label,
       & + label {
         opacity: 1;
       }
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    textarea {
+      font-size: 1.15rem;
     }
   }
 `;

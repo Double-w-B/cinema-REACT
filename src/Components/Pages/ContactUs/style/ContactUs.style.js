@@ -34,6 +34,25 @@ export const Container = styled(SharedSection)`
       }
     }
   }
+
+  @media screen and (max-width: 768px) {
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .gaq-topics h2,
+    h2 {
+      margin-left: 1rem;
+    }
+  }
 `;
 
 export const Button = styled(SharedButton)`
