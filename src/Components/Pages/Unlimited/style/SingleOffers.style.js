@@ -19,25 +19,73 @@ export const SingleOffer = styled.div`
   transition: 0.3s linear;
   position: relative;
 
-  p:first-child {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    z-index: 1;
-    white-space: pre-wrap;
+  p {
+    &:first-child {
+      font-size: 2.3rem;
+      font-weight: bold;
+      text-align: center;
+      z-index: 1;
+      white-space: pre-wrap;
+    }
+
+    &:last-child {
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--primary-red-clr);
+      transition: 0.3s linear;
+      opacity: ${(props) => (props.active ? "1" : "0")};
+    }
   }
 
-  p:last-child {
-    font-size: 1.3rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--primary-red-clr);
-    transition: 0.3s linear;
+  @media screen and (max-width: 900px) {
+    p {
+      &:first-child {
+        font-size: 2.2rem;
+      }
+    }
+  }
 
-    opacity: ${(props) => (props.active ? "1" : "0")};
+  @media screen and (max-width: 768px) {
+    min-height: 160px;
+
+    p {
+      &:first-child {
+        font-size: 1.8rem;
+      }
+      &:last-child {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    min-height: 140px;
+
+    p {
+      &:first-child {
+        font-size: 1.5rem;
+      }
+      &:last-child {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    min-height: 110px;
+
+    p {
+      &:first-child {
+        font-size: 1.3rem;
+      }
+      &:last-child {
+        font-size: 0.9rem;
+      }
+    }
   }
 `;

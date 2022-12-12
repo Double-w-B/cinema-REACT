@@ -26,10 +26,12 @@ const Offers = () => {
       <StyledUnlimited.Benefits>
         {selectedOffer.benefits.map((benefit, index) => {
           return (
-            <p key={index}>
-              <FaChevronCircleRight />
-              {benefit}
-            </p>
+            <div className="benefit">
+              <div className="icon">
+                <FaChevronCircleRight />
+              </div>
+              <p key={index}>{benefit}</p>
+            </div>
           );
         })}
       </StyledUnlimited.Benefits>
