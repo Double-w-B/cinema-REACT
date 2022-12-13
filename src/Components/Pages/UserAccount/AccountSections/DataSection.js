@@ -11,6 +11,7 @@ const DataSection = () => {
     email: storedEmail,
     avatar: storedAvatar,
   } = useSelector((store) => store.userData);
+  const { windowWidth } = useSelector((store) => store.app);
   const emailCheckRexExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
   const checkName = () => {
@@ -72,6 +73,7 @@ const DataSection = () => {
 
       const timer = setTimeout(() => {
         setImageName("No image selected");
+        setUserAvatar("");
       }, 3500);
 
       return () => clearTimeout(timer);
@@ -86,6 +88,13 @@ const DataSection = () => {
     reader.addEventListener("load", loadImage);
     reader.readAsDataURL(imageFile);
     setImageName(imageFile.name);
+    return () => reader.removeEventListener("load", loadImage);
+  };
+
+  const handleAllChanges = () => {
+    handleNameChange();
+    handleEmailChange();
+    handleAvatarChange();
   };
 
   return (
@@ -103,11 +112,13 @@ const DataSection = () => {
                   : setUserEmail(e.target.value)
               }
             />
-            <StyledAccountSections.DataButton
-              onClick={index === 0 ? handleNameChange : handleEmailChange}
-            >
-              Change
-            </StyledAccountSections.DataButton>
+            {windowWidth >= 550 && (
+              <StyledAccountSections.DataButton
+                onClick={index === 0 ? handleNameChange : handleEmailChange}
+              >
+                Save
+              </StyledAccountSections.DataButton>
+            )}
           </div>
         );
       })}
@@ -130,10 +141,17 @@ const DataSection = () => {
           </p>
         </div>
 
-        <StyledAccountSections.DataButton onClick={handleAvatarChange}>
-          Change
-        </StyledAccountSections.DataButton>
+        {windowWidth >= 550 && (
+          <StyledAccountSections.DataButton onClick={handleAvatarChange}>
+            Save
+          </StyledAccountSections.DataButton>
+        )}
       </div>
+      {windowWidth <= 550 && (
+        <StyledAccountSections.DataButton onClick={handleAllChanges}>
+          Save
+        </StyledAccountSections.DataButton>
+      )}
     </StyledAccountSections.DataSection>
   );
 };

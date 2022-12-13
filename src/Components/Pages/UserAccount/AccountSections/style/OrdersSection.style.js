@@ -17,6 +17,7 @@ export const OrdersSection = styled.div`
       color: var(--primary-grey-clr);
       font-size: 1.2rem;
       font-style: italic;
+      text-align: center;
       margin-top: 2rem;
     }
   }
@@ -31,5 +32,35 @@ export const OrdersSection = styled.div`
 
   &::-webkit-scrollbar-thumb {
     background-color: #434343;
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 1.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 1.5rem 0.5rem;
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    &.center {
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    &.center {
+      p {
+        font-size: 1rem;
+      }
+    }
   }
 `;

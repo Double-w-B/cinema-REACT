@@ -23,6 +23,7 @@ const PaymentMethodSection = () => {
   const [isCardNumberError, setIsCardNumberError] = React.useState(false);
   const [isValidThruError, setIsValidThruError] = React.useState(false);
   const [isCvvError, setIsCvvError] = React.useState(false);
+  const container = React.useRef(null);
 
   const errorsInitialState = {
     isValidThruError,
@@ -30,6 +31,15 @@ const PaymentMethodSection = () => {
     isCardholderName,
     isCvvError,
   };
+
+  React.useEffect(() => {
+    if (container) {
+      const timer = setTimeout(() => {
+        container.current?.scrollTo(0, 0);
+      }, 350);
+      return () => clearTimeout(timer);
+    }
+  });
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -114,7 +124,7 @@ const PaymentMethodSection = () => {
   };
 
   return (
-    <StyledAccountSections.PaymentMethod className="no-select">
+    <StyledAccountSections.PaymentMethod className="no-select" ref={container}>
       <StyledAccountSections.Credentials {...errorsInitialState}>
         <h2>Debit Card Credentials</h2>
         <form>

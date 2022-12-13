@@ -52,6 +52,7 @@ const UserData = () => {
       return "no email";
     }
   };
+
   const setEmailClass = () => {
     if ((!email || email) && !storedEmail) return "empty";
     return "";
@@ -69,18 +70,22 @@ const UserData = () => {
         </div>
       </StyledUserAccount.ImgContainer>
       <StyledUserAccount.DataContainer>
-        <div className="structure no-select">
-          <p>Name:</p>
-          <p>Email:</p>
-          <p>User id:</p>
-          <p>Orders:</p>
-        </div>
-        <div className="user-data">
-          <p>{checkName()}</p>
-          <p className={setEmailClass()}>{checkEmail()}</p>
-          <p>{id.split("|")[1]}</p>
-          <p>{userOrders.length}</p>
-        </div>
+        <p>
+          <span>Name:</span>
+          {checkName()}
+        </p>
+        <p className={setEmailClass()}>
+          <span>Email:</span>
+          {checkEmail()}
+        </p>
+        <p>
+          <span>User id:</span>
+          {id.split("|")[1]}
+        </p>
+        <p>
+          <span>Orders:</span>
+          {userOrders.length}
+        </p>
       </StyledUserAccount.DataContainer>
     </StyledUserAccount.UserData>
   );

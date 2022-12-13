@@ -5,6 +5,11 @@ export const PaymentMethod = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
 `;
 
 export const Credentials = styled.div`
@@ -151,6 +156,30 @@ export const Credentials = styled.div`
     pointer-events: none;
     transition: 0.25s linear;
   }
+
+  @media screen and (max-width: 900px) {
+    padding: 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    form input {
+      font-size: 1.1rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 100%;
+    padding: 1rem 2rem 0.5rem 2rem;
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+  }
 `;
 
 export const Confirmation = styled.div`
@@ -174,9 +203,54 @@ export const Confirmation = styled.div`
     display: flex;
     justify-content: space-between;
   }
+
+  @media screen and (max-width: 1150px) {
+    padding: 2rem 2rem 2rem 1rem;
+    justify-content: space-between;
+
+    .buttons {
+      width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    padding: 2rem 1rem;
+
+    .buttons {
+      width: 90%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    p {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 100%;
+    padding: 0 2rem 1rem 2rem;
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .buttons {
+      width: 70%;
+    }
+  }
 `;
 
 export const PaymentMethodButton = styled(SharedButton)`
-  width: 120px;
   position: relative;
+  width: 120px;
+
+  @media screen and (max-width: 768px) {
+    width: 100px;
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 90px;
+  }
 `;

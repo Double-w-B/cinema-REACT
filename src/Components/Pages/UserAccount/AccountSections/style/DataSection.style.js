@@ -53,6 +53,7 @@ export const DataSection = styled.div`
       position: relative;
       padding: 0;
       display: flex;
+      align-items: center;
 
       label {
         display: block;
@@ -84,8 +85,80 @@ export const DataSection = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 1150px) {
+    .name,
+    .email,
+    .avatar {
+      width: 90%;
+    }
+  }
+  @media screen and (max-width: 900px) {
+    .name,
+    .email,
+    .avatar {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 2rem 0;
+
+    .name,
+    .email,
+    .avatar {
+      label,
+      p,
+      input,
+      .upload {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .name,
+    .email,
+    .avatar {
+      label,
+      p {
+        min-width: 75px;
+      }
+
+      input,
+      .upload {
+        width: 280px;
+
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .name,
+    .email,
+    .avatar {
+      height: calc(100% / 4);
+    }
+  }
 `;
 
 export const DataButton = styled(SharedButton)`
   position: relative;
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 41%;
+    display: block;
+    margin: 0 auto;
+  }
 `;

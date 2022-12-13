@@ -10,6 +10,7 @@ import * as modalsSlice from "../../../../redux/features/modals/modalsSlice";
 const SingleOrder = (props) => {
   const dispatch = useDispatch();
   const { imgLowResUrl } = useSelector((store) => store.movies);
+  const { windowWidth } = useSelector((store) => store.app);
   const {
     title,
     movieId,
@@ -84,20 +85,34 @@ const SingleOrder = (props) => {
 
         <div className="info">
           <div className="info__details">
-            <div className="info__details_labels">
-              <p>Date:</p>
-              <p>Time:</p>
-              <p>Seats:</p>
-              <p>Tickets:</p>
-            </div>
-            <div className="info__details_data">
-              <p>{date}</p>
-              <p>{time}</p>
-              <p>{seats.join(", ")}</p>
-              <p>
-                {total} ({checkGroups()})
-              </p>
-            </div>
+            <p>
+              <span>Date:</span>
+              {date}
+            </p>
+            <p>
+              <span>Time:</span>
+              {time}
+            </p>
+            <p>
+              <span>Seats:</span>
+              {seats.join(", ")}
+            </p>
+            <p>
+              <span>Tickets:</span>
+              {total} ({checkGroups()})
+            </p>
+
+            {windowWidth <= 768 && (
+              <>
+                <p>
+                  <span>Status:</span> {payment ? "Paid" : "Unpaid"}{" "}
+                  <GrStatusGoodSmall />
+                </p>
+                <p>
+                  <span>Order ID:</span> #{orderId}
+                </p>
+              </>
+            )}
           </div>
           <div className="info__payment">
             <div className="info__payment_order">

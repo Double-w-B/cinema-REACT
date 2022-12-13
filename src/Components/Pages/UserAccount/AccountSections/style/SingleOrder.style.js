@@ -15,6 +15,10 @@ export const SingleOrder = styled.div`
     transform: scale(1);
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
   }
+
+  @media screen and (max-width: 768px) {
+    min-height: 200px;
+  }
 `;
 
 export const ImgContainer = styled.div`
@@ -27,6 +31,7 @@ export const ImgContainer = styled.div`
       filter: brightness(70%);
       box-shadow: 0px 5px 10px black;
     }
+
     & svg {
       font-size: 3rem;
       opacity: 1;
@@ -98,26 +103,29 @@ export const OrderInfo = styled.div`
       width: 65%;
       height: 100%;
       display: flex;
+      flex-direction: column;
+      justify-content: space-around;
 
-      .info__details_labels {
-        width: 100px;
-        height: 100%;
-        padding-left: 0.5rem;
+      p {
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        align-items: center;
 
-        p {
+        span {
+          width: 100px;
+          min-width: 100px;
+          height: 100%;
+          display: inline-block;
+          padding-left: 0.5rem;
           color: var(--primary-grey-clr);
         }
-      }
 
-      .info__details_data {
-        width: 230px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        svg {
+          width: 1rem;
+          margin-left: 0.5rem;
+          color: ${(props) =>
+            props.status ? "green" : "var(--primary-red-clr)"};
+          filter: drop-shadow(0px 0px 2px black);
+        }
       }
     }
 
@@ -169,6 +177,36 @@ export const OrderInfo = styled.div`
       -ms-user-select: none;
       /* Internet Explorer/Edge */
       user-select: none;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .info .info__payment {
+      width: 55%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    h2 {
+      margin-bottom: 0.3rem;
+    }
+
+    .info {
+      .info__details {
+        width: 100%;
+        min-width: unset;
+
+        p {
+          span {
+            width: 85px;
+            min-width: 85px;
+          }
+        }
+      }
+
+      .info__payment {
+        display: none;
+      }
     }
   }
 `;
