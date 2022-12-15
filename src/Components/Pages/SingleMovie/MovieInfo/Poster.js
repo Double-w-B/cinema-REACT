@@ -1,9 +1,10 @@
 import React from "react";
 import StyledMovieInfo from "./style";
-import spinnerImg from "../../../../assets/spinner.gif";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import spinnerImg from "../../../../assets/spinner.gif";
 import * as bookingSlice from "../../../../redux/features/booking/bookingSlice";
+
 const Poster = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -26,11 +27,10 @@ const Poster = () => {
   const time = storedData?.runtime || runtime;
   const movieTitle = storedData?.title || title;
   const movieId = storedData?.id || id;
-
+  const isMovieDataLoaded = Object.keys(singleMovieInfo).length > 0;
   const changedTitle = movieTitle?.split(" ").join("_");
 
   const handleImageOnLoad = () => {
-    console.log("load");
     const timer = setTimeout(() => setImgLoaded(true), 500);
     return () => clearTimeout(timer);
   };
@@ -59,11 +59,13 @@ const Poster = () => {
         <div>
           <img src={spinnerImg} className="spinner" alt="" />
         </div>
-        {windowWidth <= 940 ? (
-          <img src={backdropImage} alt="" onLoad={handleImageOnLoad} />
-        ) : (
-          <img src={posterImage} alt="" onLoad={handleImageOnLoad} />
-        )}
+        {windowWidth <= 940
+          ? isMovieDataLoaded && (
+              <img src={backdropImage} alt="" onLoad={handleImageOnLoad} />
+            )
+          : isMovieDataLoaded && (
+              <img src={posterImage} alt="" onLoad={handleImageOnLoad} />
+            )}
       </StyledMovieInfo.ImgContainer>
 
       {nowPlaying && windowWidth < 940 && (

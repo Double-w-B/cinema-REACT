@@ -20,6 +20,7 @@ const SingleMoviePage = () => {
   const movieReviews = storedData?.reviews || singleMovieReviews;
   const movieTrailer = storedData?.trailer || singleMovieVideo;
   const isTrailer = Object.keys(movieTrailer).length > 0;
+  const isMovieDataLoaded = Object.keys(singleMovieInfo).length > 0;
 
   React.useEffect(() => {
     window.scroll(0, 0);
@@ -34,8 +35,8 @@ const SingleMoviePage = () => {
       <Component.MainTitle />
       <Component.Trailer title={title} />
       <StyledSingleMovie.InfoContainer trailer={isTrailer}>
-        <Component.MovieInfo />
-        <Component.Poster />
+        {isMovieDataLoaded && <Component.MovieInfo />}
+        {isMovieDataLoaded && <Component.Poster />}
       </StyledSingleMovie.InfoContainer>
       <StyledSingleMovie.ReviewTitle>
         <h1>
