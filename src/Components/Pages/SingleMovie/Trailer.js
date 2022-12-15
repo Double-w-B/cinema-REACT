@@ -43,7 +43,7 @@ const Trailer = ({ title }) => {
             zIndex: "1",
             position: "relative",
           }}
-          src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0&controls=1&modestbranding=1`}
+          src={`https://www.youtube-nocookie.com/embed/${trailerKey}?autoplay=0&controls=1&modestbranding=1`}
           title={`${trailerTitle} trailer`}
           frameBorder="0"
           allowFullScreen

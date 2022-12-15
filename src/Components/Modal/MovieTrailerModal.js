@@ -52,9 +52,8 @@ const TrailerModal = () => {
             zIndex: "1",
             position: "relative",
           }}
-          src={`https://www.youtube.com/embed/${trailerKey}?autoplay=0&controls=1&modestbranding=1`}
+          src={`https://www.youtube-nocookie.com/embed/${trailerKey}?autoplay=0&controls=1&modestbranding=1 `}
           title={`${movieTitle} trailer`}
-          frameBorder="0"
           allowFullScreen
           onLoad={handleOnLoad}
         ></iframe>
