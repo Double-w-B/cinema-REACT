@@ -20,7 +20,7 @@ const StyledSchedule = styled(SharedSection)`
   }
 
   @media screen and (max-width: 650px) {
-    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem;
 
     h2 {
       font-size: 1.3rem;

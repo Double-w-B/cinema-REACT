@@ -6,10 +6,10 @@ const Links = () => {
   return (
     <StyledFooter.Links>
       <Link to="/about">about</Link>
-      <Link to="/contact_us">contact us</Link>
       <Link to="help/faq">FAQ</Link>
-      <Link to="/unlimited">unlimited</Link>
+      <Link to="/contact_us">contact us</Link>
       <Link to="/cinema_cafe">cinema cafe</Link>
+      <Link to="/unlimited">unlimited</Link>
       <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
         <span className="fb">facebook</span>
       </a>

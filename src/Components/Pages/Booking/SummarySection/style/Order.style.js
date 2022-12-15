@@ -117,8 +117,15 @@ export const Order = styled.div`
     height: 60%;
     padding: 0;
 
+    h3 {
+      margin-left: 1rem;
+    }
+
     .info {
+      height: calc(100% - 48px);
       padding-left: 1rem;
+      justify-content: space-around;
+
       .email-container input {
         width: calc(100% - 250px);
       }

@@ -15,7 +15,7 @@ export const Cards = styled.div`
 
 export const Benefits = styled.div`
   width: 100%;
-  min-height: 270px;
+  min-height: 300px;
   margin: 2rem 0;
   padding-left: 4rem;
 
@@ -32,6 +32,7 @@ export const Benefits = styled.div`
         color: var(--primary-red-clr);
       }
     }
+
     p {
       &:hover {
         color: var(--primary-red-clr);

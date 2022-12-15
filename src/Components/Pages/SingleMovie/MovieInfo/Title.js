@@ -11,7 +11,6 @@ const Title = () => {
   const movieTitle = storedData?.title || title;
   const votesAverage = storedData?.vote_average || vote_average;
   const votesTotal = storedData?.vote_count || vote_count;
-
   const movieTitleLength = movieTitle?.length;
 
   return (
@@ -26,7 +25,9 @@ const Title = () => {
             <p>{votesTotal} votes</p>
           </>
         ) : (
-          <p>no votes yet</p>
+          <p>
+            <AiFillStar /> 0.0
+          </p>
         )}
       </div>
     </StyledMovieInfo.Title>

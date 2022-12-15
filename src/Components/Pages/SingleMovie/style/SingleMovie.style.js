@@ -34,8 +34,9 @@ export const ReviewTitle = styled.div`
   }
 
   @media screen and (max-width: 650px) {
-    h1 {
-      font-size: 1.5rem;
+    h1,
+    h1 span {
+      font-size: 1.3rem;
     }
   }
 `;

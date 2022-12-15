@@ -7,9 +7,7 @@ import { Select } from "./SelectIssue.style";
 
 const StyledContactUs = styled(SharedMain)`
   width: 60%;
-
   transition: 0.3s linear;
-  /* width: 1050px; */
 
   @media screen and (max-width: 1150px) {
     width: 950px;

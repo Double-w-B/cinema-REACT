@@ -6,11 +6,11 @@ export const FormContainer = styled.div`
   height: 100vh;
   margin: 2rem auto 1rem auto;
   padding: 0.5rem 1rem;
-  /* background-color: tomato; */
 
   @media screen and (max-width: 700px) {
     width: 95%;
   }
+
   @media screen and (max-width: 650px) {
     width: 100%;
   }

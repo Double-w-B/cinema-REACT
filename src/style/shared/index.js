@@ -1,21 +1,23 @@
-import { SharedButton } from "./SharedButton.style";
-import { SharedContainer } from "./SharedContainer.style";
 import { SharedMain } from "./SharedMain.style";
-import { SharedSection } from "./SharedSection.style";
-import { SharedUnderline } from "./SharedUnderline.style";
-import { SharedArrowContainer } from "./SharedArrowContainer.style";
 import { SharedBanner } from "./SharedBanner.style";
+import { SharedButton } from "./SharedButton.style";
+import { SharedSection } from "./SharedSection.style";
+import { SharedContainer } from "./SharedContainer.style";
+import { SharedUnderline } from "./SharedUnderline.style";
 import { SharedReviewsInfo } from "./SharedReviewsInfo.style";
+import { SharedModalOverlay } from "./SharedModalOverlay.style";
+import { SharedArrowContainer } from "./SharedArrowContainer.style";
 import * as SharedKeyframes from "./SharedKeyframes.style";
 
 export {
-  SharedButton,
-  SharedContainer,
   SharedMain,
+  SharedBanner,
+  SharedButton,
   SharedSection,
   SharedUnderline,
-  SharedArrowContainer,
-  SharedBanner,
-  SharedReviewsInfo,
+  SharedContainer,
   SharedKeyframes,
+  SharedReviewsInfo,
+  SharedModalOverlay,
+  SharedArrowContainer,
 };

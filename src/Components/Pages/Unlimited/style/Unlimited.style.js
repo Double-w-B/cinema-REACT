@@ -8,7 +8,7 @@ export const InfoContainer = styled.article`
     font-size: 1.1rem;
     text-align: justify;
 
-    &:last-child {
+    &:last-child:not(.benefit p) {
       margin-top: 1rem;
     }
   }

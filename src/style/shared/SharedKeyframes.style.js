@@ -139,14 +139,3 @@ export const scale2 = keyframes`
         transform: scale(1.0);
     }
 `;
-
-export const slideDown = keyframes`
-from {
-    opacity: 0;
-    transform: translateY(-10rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;

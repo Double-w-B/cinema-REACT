@@ -19,6 +19,10 @@ export const SharedButton = styled.button`
     background-color: #f12535;
   }
 
+  &:active {
+    transform: scale(0.9);
+  }
+
   &.btn-slider {
     bottom: 1rem;
     right: 1rem;

@@ -41,10 +41,33 @@ export const Links = styled.section`
   @media screen and (max-width: 1200px) {
     width: 90%;
   }
+
   @media screen and (max-width: 900px) {
     width: 95%;
     a {
       margin: 0 1rem;
+    }
+  }
+
+  @media screen and (max-width: 830px) {
+    height: 20%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 30%;
+    justify-content: flex-start;
+
+    a {
+      align-self: flex-start;
+      font-size: 1.1rem;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    a {
+      font-size: 1rem;
     }
   }
 `;
