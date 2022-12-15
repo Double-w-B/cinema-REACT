@@ -1,28 +1,19 @@
 import styled from "styled-components";
-import { SharedButton } from "../../../style/shared/SharedButton.style";
+import { SharedModalOverlay, SharedButton } from "../../../style/shared";
 
-const StyledContactUsModal = styled.div`
+const StyledContactUsModal = styled(SharedModalOverlay)`
   width: 30vw;
   min-width: 450px;
   max-width: 460px;
   height: 40vh;
   min-height: 290px;
   max-height: 300px;
-  color: var(--primary-white-clr);
-  position: absolute;
   left: 50%;
   top: ${(props) => (props.showModal ? "50%" : "40%")};
   transform: translate(-50%, -50%);
-  transition: all 0.3s ease-out;
   visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
   opacity: ${(props) => (props.showModal ? "1" : "0")};
-  background: #080c13;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #080c13, #2b3444, #080c13);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #080c13, #2b3444, #080c13);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 3px;
+  transition: all 0.3s ease-out;
 
   .content {
     width: 100%;
@@ -80,6 +71,10 @@ const Button = styled(SharedButton)`
   margin: 0 auto;
   width: 40%;
   padding: 0.4rem 0.5rem;
+
+  &:active {
+    transform: scale(0.9);
+  }
 `;
 
 StyledContactUsModal.Button = Button;

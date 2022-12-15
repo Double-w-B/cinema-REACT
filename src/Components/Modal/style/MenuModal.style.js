@@ -1,27 +1,19 @@
 import styled from "styled-components";
+import { SharedModalOverlay } from "../../../style/shared";
 
-const StyledMenuModal = styled.div`
+const StyledMenuModal = styled(SharedModalOverlay)`
   width: 50%;
   height: 100%;
   padding: 0 1.5rem 1rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
   top: 0;
   right: ${(props) => (props.showModal ? "0" : "-100%")};
-  background-color: var(--primary-white-clr);
   visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
   opacity: ${(props) => (props.showModal ? "1" : "0")};
   transition: all 0.5s ease-out;
   z-index: 11;
-  background: #080c13;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #080c13, #2b3444, #080c13);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #080c13, #2b3444, #080c13);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 3px;
 
   .heading {
     width: 100%;
@@ -69,6 +61,29 @@ const StyledMenuModal = styled.div`
       place-items: center;
       font-weight: 500;
       transition: 0.3s linear;
+      color: black;
+      color: var(--primary-grey-clr);
+      opacity: ${(props) => (props.showModal ? "1" : "0")};
+      visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
+
+      &:nth-child(1) {
+        transition-delay: ${(props) => props.showModal && "0.4s"};
+      }
+      &:nth-child(2) {
+        transition-delay: ${(props) => props.showModal && "0.55s"};
+      }
+      &:nth-child(3) {
+        transition-delay: ${(props) => props.showModal && "0.7s"};
+      }
+      &:nth-child(4) {
+        transition-delay: ${(props) => props.showModal && "0.85s"};
+      }
+      &:nth-child(5) {
+        transition-delay: ${(props) => props.showModal && "1s"};
+      }
+      &:nth-child(6) {
+        transition-delay: ${(props) => props.showModal && "1.15s"};
+      }
 
       &:last-child {
         visibility: ${(props) => (props.isUser ? "visible" : "hidden")};

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { SharedButton } from "../../../style/shared/SharedButton.style";
+import { SharedModalOverlay, SharedButton } from "../../../style/shared";
 
-const StyledBookingSummaryModal = styled.div`
+const StyledBookingSummaryModal = styled(SharedModalOverlay)`
   width: 30vw;
   min-width: 450px;
   max-width: 460px;
@@ -12,21 +12,12 @@ const StyledBookingSummaryModal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--primary-white-clr);
-  position: absolute;
   left: 50%;
   top: ${(props) => (props.showModal ? "50%" : "40%")};
   transform: translate(-50%, -50%);
-  transition: all 0.3s ease-out;
   visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
   opacity: ${(props) => (props.showModal ? "1" : "0")};
-  background: #080c13;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #080c13, #2b3444, #080c13);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #080c13, #2b3444, #080c13);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 3px;
+  transition: all 0.3s ease-out;
 
   h1 {
     text-align: center;

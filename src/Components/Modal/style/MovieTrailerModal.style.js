@@ -10,7 +10,6 @@ const StyledMovieTrailerModal = styled.div`
   visibility: ${(props) => (props.showModal ? "visible" : "hidden")};
   opacity: ${(props) => (props.showModal ? "1" : "0")};
   transition: all 0.2s ease-out;
-  border: solid 4px #37474f;
 
   &:hover {
     svg {
@@ -60,8 +59,8 @@ const StyledMovieTrailerModal = styled.div`
   }
 
   @media screen and (max-width: 530px) {
-    min-width: 410px;
-    min-height: 250px;
+    min-width: 400px;
+    min-height: 240px;
   }
 `;
 

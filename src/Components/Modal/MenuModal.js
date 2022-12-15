@@ -10,7 +10,17 @@ import * as modalsSlice from "../../redux/features/modals/modalsSlice";
 const MenuModal = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { isMenuModal } = useSelector((store) => store.modals);
+
+  const {
+    isMenuModal,
+    isAuthModal,
+    isContactUsModal,
+    isMovieTrailerModal,
+    isCardPaymentModal,
+    isLoadingModal,
+    isBookingSummaryModal,
+    isBookingExpiredModal,
+  } = useSelector((store) => store.modals);
   const { windowWidth } = useSelector((store) => store.app);
 
   const { isAuthenticated, user, logout } = useAuth0();
@@ -35,8 +45,18 @@ const MenuModal = (props) => {
   };
 
   const closeNavbarModal = () => {
-    dispatch(modalsSlice.handleIsModal(false));
-    dispatch(modalsSlice.handleIsMenuModal(false));
+    if (
+      !isAuthModal &&
+      !isContactUsModal &&
+      !isMovieTrailerModal &&
+      !isCardPaymentModal &&
+      !isLoadingModal &&
+      !isBookingSummaryModal &&
+      !isBookingExpiredModal
+    ) {
+      dispatch(modalsSlice.handleIsModal(false));
+      dispatch(modalsSlice.handleIsMenuModal(false));
+    }
   };
 
   const handleAccountClick = () => {
@@ -89,7 +109,11 @@ const MenuModal = (props) => {
   };
 
   return (
-    <StyledMenuModal showModal={isMenuModal} isUser={isUser}>
+    <StyledMenuModal
+      className="no-select"
+      showModal={isMenuModal}
+      isUser={isUser}
+    >
       <div className="heading">
         <p>Menu</p>
         <RiCloseCircleLine onClick={closeNavbarModal} />
