@@ -33,6 +33,30 @@ const StyledError = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 768px) {
+    div {
+      img {
+        width: 130px;
+        height: 130px;
+      }
+      p {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    div {
+      img {
+        width: 120px;
+        height: 120px;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
 `;
 
 export default StyledError;
