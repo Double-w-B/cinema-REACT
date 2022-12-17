@@ -7,6 +7,7 @@
 - [Booking process](#booking-process)
 - [Personal account](#personal-account)
 - [Other pages](#other-pages)
+- [RWD](#rwd)
 
 ## General info
 
@@ -14,7 +15,7 @@ The CineMania web application is the realization of the features that the user e
 
 The main feature is to make a reservation for a selected movie screening by choosing the date, tickets and seats. The application provides the user with all the necessary information and movie trailers for ongoing or upcoming movies and also reviews of other people if there are any. All movies data comes from the TMDb API (The Movie Database API - https://www.themoviedb.org) and all other information was made up for project purposes. There is additional functionality that allows access to a personal account - authentication and authorization using Auth0 (https://auth0.com). After logging in user would be able to manage his personal data and leave movie reviews.
 
-#### Technology: <React.js + Redux + styled-components + REST API>
+#### Technology: <React.js + Redux + styled-components + REST API + RWD>
 
 ![1](https://user-images.githubusercontent.com/105418561/206018730-1c63e90a-18bb-435c-9cb2-f8868f440258.jpg)
 
@@ -59,3 +60,9 @@ Apart from pages Contact Us and FAQ, there are also About, Unlimited and Cinema 
 ![11](https://user-images.githubusercontent.com/105418561/206027805-317c9243-9989-452d-bf12-f7b91b581475.jpg)
 
 ![12](https://user-images.githubusercontent.com/105418561/206027812-01f2c122-fdfb-47f3-8b7f-42c1e5ca7194.jpg)
+
+## RWD
+
+Responsive web design approach gives the possibility to use the app on the devices with a different screen sizes.
+
+![13](https://user-images.githubusercontent.com/75247773/208236651-7fb55465-25b8-44e5-9b01-0ce8f2f12f41.png)
