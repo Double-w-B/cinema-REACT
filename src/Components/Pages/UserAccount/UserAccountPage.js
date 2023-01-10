@@ -1,10 +1,8 @@
 import React from "react";
 import * as Component from "./index";
-import Error from "../../shared/Error";
+import * as Shared from "../../shared";
 import StyledUserAccount from "./style";
-import Loading from "../../shared/Loading";
 import { useAuth0 } from "@auth0/auth0-react";
-import Navigation from "../../shared/Navigation";
 
 const UserAccountPage = (props) => {
   const [activeSection, setActiveSection] = React.useState(0);
@@ -17,18 +15,18 @@ const UserAccountPage = (props) => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <Shared.Loading />;
   }
 
   if (!isLoading && !isUser) {
-    return <Error />;
+    return <Shared.Error />;
   }
 
   sessionStorage.removeItem("single_movie");
 
   return (
     <StyledUserAccount>
-      <Navigation pageTitle={"Account"} />
+      <Shared.Navigation pageTitle={"Account"} />
       <h1>Nice to See you </h1>
       <StyledUserAccount.Container>
         <Component.UserData />

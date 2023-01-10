@@ -1,16 +1,22 @@
 import React from "react";
+import * as Shared from "../../shared";
 import { useSelector } from "react-redux";
 import * as Styled from "../../../style/shared";
-import Navigation from "../../shared/Navigation";
 import StyledComingSoon from "./style/ComingSoon.style";
 import SingleMoviePoster from "../../shared/SingleMoviePoster";
 
 const ComingSoonPage = () => {
-  const { moviesComingSoon } = useSelector((store) => store.movies);
+  const { moviesComingSoon, comingSoonIsLoading } = useSelector(
+    (store) => store.movies
+  );
+
+  if (comingSoonIsLoading) {
+    return <Shared.Loading />;
+  }
 
   return (
     <StyledComingSoon>
-      <Navigation pageTitle={"Coming Soon"} />
+      <Shared.Navigation pageTitle={"Coming Soon"} />
       <h1>Coming soon</h1>
       <Styled.SharedUnderline />
       <StyledComingSoon.PostersContainer>

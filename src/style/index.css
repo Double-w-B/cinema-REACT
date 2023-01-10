@@ -9,6 +9,7 @@ html {
   width: 100vw;
   scrollbar-width: thin;
   scrollbar-color: #434343 #0a0f18;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html::-webkit-scrollbar {

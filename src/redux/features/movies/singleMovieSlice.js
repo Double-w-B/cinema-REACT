@@ -82,7 +82,6 @@ const singleMovieSlice = createSlice({
       state.singleMovieInfo = {};
       state.singleMovieVideo = {};
     },
-
     setSingleMovieVideoKey: (state, action) => {
       state.singleMovieVideo = action.payload;
     },
@@ -126,7 +125,6 @@ const singleMovieSlice = createSlice({
     [getSingleMovieVideos.fulfilled]: (state, action) => {
       state.singleMovieVideo = action.payload;
       state.isMovieTrailerLoading = false;
-
       saveDataToStorage("trailer", action.payload);
     },
 
