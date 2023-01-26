@@ -15,52 +15,67 @@ const SingleMoviePage = () => {
   const { singleMovieInfo, singleMovieReviews, singleMovieVideo } = useSelector(
     (store) => store.singleMovie
   );
-  const { moviesNowPlaying, nowPlayingIsLoading } = useSelector(
-    (store) => store.movies
-  );
+  const {
+    moviesNowPlaying,
+    nowPlayingIsLoading,
+    moviesComingSoon,
+    comingSoonIsLoading,
+  } = useSelector((store) => store.movies);
 
   const [isError, setIsError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-
+  const [pageTitle, setPageTitle] = React.useState(location.state?.pageTitle);
   const { title } = singleMovieInfo;
-  const pageTitle = location.state?.pageTitle;
   const movieTitle = storedData?.title || title;
   const movieReviews = storedData?.reviews || singleMovieReviews;
   const movieTrailer = storedData?.trailer || singleMovieVideo;
   const isTrailer = Object.keys(movieTrailer).length > 0;
   const isMovieData = Object.keys(singleMovieInfo).length > 0;
+  const currentRoute = location.pathname;
+  const endpoint = currentRoute.split("/").at(-1).split("_").join(" ");
+
+  const checkMoviesNowPlaying = moviesNowPlaying.find(
+    (movie) => movie.title === endpoint
+  );
+  const checkMoviesComingSoon = moviesComingSoon.find(
+    (movie) => movie.title === endpoint
+  );
 
   React.useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
   React.useEffect(() => {
-    if (nowPlayingIsLoading && !isMovieData) {
+    if (checkMoviesComingSoon && !pageTitle) {
+      setPageTitle("Coming Soon");
+    }
+    // eslint-disable-next-line
+  }, [isMovieData]);
+
+  React.useEffect(() => {
+    if (nowPlayingIsLoading && comingSoonIsLoading && !isMovieData) {
       setIsLoading(true);
     }
+    // eslint-disable-next-line
+  }, [nowPlayingIsLoading, comingSoonIsLoading]);
 
-    if (!nowPlayingIsLoading && !isMovieData) {
-      const currentRoute = location.pathname;
-      const endpoint = currentRoute.split("/").at(-1).split("_").join(" ");
-      const foundMovie = moviesNowPlaying.find(
-        (movie) => movie.title === endpoint
-      );
+  React.useEffect(() => {
+    if (!nowPlayingIsLoading && !comingSoonIsLoading && !isMovieData) {
+      const foundMovie = checkMoviesNowPlaying || checkMoviesComingSoon;
+
       if (foundMovie) {
         dispatch(singleMovieSlice.getSingleMovieInfo(foundMovie.id));
         dispatch(singleMovieSlice.getSingleMovieVideos(foundMovie.id));
         dispatch(singleMovieSlice.getSingleMovieReviews(foundMovie.id));
         setIsLoading(false);
-        console.log(singleMovieInfo);
       } else {
         setIsError(true);
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
-        return () => clearTimeout(timer);
+        setIsLoading(false);
       }
     }
+
     // eslint-disable-next-line
-  }, [nowPlayingIsLoading]);
+  }, [nowPlayingIsLoading, comingSoonIsLoading]);
 
   if ((nowPlayingIsLoading || isLoading) && !isError) {
     return <Shared.Loading />;
